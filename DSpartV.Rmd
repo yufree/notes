@@ -1,0 +1,72 @@
+Data Science(part V)
+========================================================
+
+# Regression Models
+
+## 导论
+
+- Francis Galton 1885年用父母身高预测子女身高的案例
+- 考虑单变量的数据代表：最小二乘值
+  - 最小二乘值物理意义为质心
+  - 最小二乘统计学意义是平均值
+  - 可用不等式解 也可用求导方法解
+
+$$ 
+\begin{align} 
+\sum_{i=1}^n (Y_i - \mu)^2 & = \
+\sum_{i=1}^n (Y_i - \bar Y + \bar Y - \mu)^2 \\ 
+& = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
+2 \sum_{i=1}^n (Y_i - \bar Y)  (\bar Y - \mu) +\
+\sum_{i=1}^n (\bar Y - \mu)^2 \\
+& = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
+2 (\bar Y - \mu) \sum_{i=1}^n (Y_i - \bar Y)  +\
+\sum_{i=1}^n (\bar Y - \mu)^2 \\
+& = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
+2 (\bar Y - \mu)  (\sum_{i=1}^n Y_i - n \bar Y) +\
+\sum_{i=1}^n (\bar Y - \mu)^2 \\
+& = \sum_{i=1}^n (Y_i - \bar Y)^2 + \sum_{i=1}^n (\bar Y - \mu)^2\\ 
+& \geq \sum_{i=1}^n (Y_i - \bar Y)^2 \
+\end{align} 
+$$
+
+- 通过原点的回归
+  - 最小化$\sum_{i=1}^n (Y_i - X_i \beta)^2$
+  - 两变量关系用回归线解释
+  
+## 术语
+
+- $X_1, X_2, \ldots, X_n$ 表示 $n$ 个数据点
+- $Y_1, \ldots , Y_n$ 表示另外 $n$ 个数据点
+- 用希腊字母表示不知道的东西 如 $\mu$
+- 大写字母表示概念值 小写字母表示真实值 如 $P(X_i > x)$
+- $\bar X = \frac{1}{n}\sum_{i=1}^n X_i$ 表示均值 数据的中心趋向
+- $\tilde X_i = X_i - \bar X$ 表示对数据中心化 均值为0
+- 均值为数据的最小二乘估计
+- $S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar X)^2 
+= \frac{1}{n-1} \left( \sum_{i=1}^n X_i^2 - n \bar X ^ 2 \right)$ 表示方差
+- $S$ 为标准差 数据的离散程度
+- $X_i / s$ 表示数据缩放  方差为1
+- $Z_i = \frac{X_i - \bar X}{s}$ 表示数据的标准化 先中心化再标准化
+- $Cov(X, Y) = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X) (Y_i - \bar Y)= \frac{1}{n-1}\left( \sum_{i=1}^n X_i Y_i - n \bar X \bar Y\right)$ 表示协方差
+- $Cor(X, Y) = \frac{Cov(X, Y)}{S_x S_y}$ 表示相关性
+  - $Cor(X, Y) = Cor(Y, X)$
+  - $-1 \leq Cor(X, Y) \leq 1$
+  - $Cor(X, Y)$ 度量线性关系强度
+  - $Cor(X, Y) = 0$ 表示无线性关系
+
+## 回归线的最小二乘回归
+
+- 用最小二乘法寻找回归线 最小化 $\sum_{i=1}^n \{Y_i - (\beta_0 + \beta_1 X_i)\}^2$
+- 如果定义 $\mu_i = \beta_0$ $\hat \beta_0 = \bar Y$ 不考虑其他变量 $Y$ 的均值就是最小二乘估计
+- 如果定义 $\mu_i = X_i \beta_1$ $\hat \beta_1 = \frac{\sum_{i=1^n} Y_i X_i}{\sum_{i=1}^n X_i^2}$ 如果考虑过原点线的回归 斜率如上
+- 如果考虑 $\mu_i = \beta_0 + \beta_1 X_i$ 
+
+$$\begin{align} \
+\sum_{i=1}^n (Y_i - \hat \mu_i) (\hat \mu_i - \mu_i) 
+= & \sum_{i=1}^n (Y_i - \hat\beta_0 - \hat\beta_1 X_i) (\hat \beta_0 + \hat \beta_1 X_i - \beta_0 - \beta_1 X_i) \\
+= & (\hat \beta_0 - \beta_0) \sum_{i=1}^n (Y_i - \hat\beta_0 - \hat \beta_1 X_i) + (\beta_1 - \beta_1)\sum_{i=1}^n (Y_i - \hat\beta_0 - \hat \beta_1 X_i)X_i\\
+\end{align} $$
+
+- 解为$\hat \beta_1 = Cor(Y, X) \frac{Sd(Y)}{Sd(X)} ~~~ \hat \beta_0 = \bar Y - \hat \beta_1 \bar X$
+- 如果标准化数据 $\{ \frac{X_i - \bar X}{Sd(X)}, \frac{Y_i - \bar Y}{Sd(Y)}\}$ 解为$Cor(Y, X)$
+- 回归是因变量向自己均值回归与向自变量相关回归的平衡

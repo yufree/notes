@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Data Science(part V)</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+</head>
+
+<body>
+<h1>Data Science(part V)</h1>
+
+<h1>Regression Models</h1>
+
+<h2>导论</h2>
+
+<ul>
+<li>Francis Galton 1885年用父母身高预测子女身高的案例</li>
+<li>考虑单变量的数据代表：最小二乘值
+
+<ul>
+<li>最小二乘值物理意义为质心</li>
+<li>最小二乘统计学意义是平均值</li>
+<li>可用不等式解 也可用求导方法解</li>
+</ul></li>
+</ul>
+
+<p>\[  
+\begin{align} 
+\sum_{i=1}^n (Y_i - \mu)^2 & = \
+\sum_{i=1}^n (Y_i - \bar Y + \bar Y - \mu)^2 \\ 
+& = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
+2 \sum_{i=1}^n (Y_i - \bar Y)  (\bar Y - \mu) +\
+\sum_{i=1}^n (\bar Y - \mu)^2 \\
+& = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
+2 (\bar Y - \mu) \sum_{i=1}^n (Y_i - \bar Y)  +\
+\sum_{i=1}^n (\bar Y - \mu)^2 \\
+& = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
+2 (\bar Y - \mu)  (\sum_{i=1}^n Y_i - n \bar Y) +\
+\sum_{i=1}^n (\bar Y - \mu)^2 \\
+& = \sum_{i=1}^n (Y_i - \bar Y)^2 + \sum_{i=1}^n (\bar Y - \mu)^2\\ 
+& \geq \sum_{i=1}^n (Y_i - \bar Y)^2 \
+\end{align} 
+ \]</p>
+
+<ul>
+<li>通过原点的回归
+
+<ul>
+<li>最小化\( \sum_{i=1}^n (Y_i - X_i \beta)^2 \)</li>
+<li>两变量关系用回归线解释</li>
+</ul></li>
+</ul>
+
+<h2>术语</h2>
+
+<ul>
+<li>\( X_1, X_2, \ldots, X_n \) 表示 \( n \) 个数据点</li>
+<li>\( Y_1, \ldots , Y_n \) 表示另外 \( n \) 个数据点</li>
+<li>用希腊字母表示不知道的东西 如 \( \mu \)</li>
+<li>大写字母表示概念值 小写字母表示真实值 如 \( P(X_i > x) \)</li>
+<li>\( \bar X = \frac{1}{n}\sum_{i=1}^n X_i \) 表示均值 数据的中心趋向</li>
+<li>\( \tilde X_i = X_i - \bar X \) 表示对数据中心化 均值为0</li>
+<li>均值为数据的最小二乘估计</li>
+<li>\( S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar X)^2 
+= \frac{1}{n-1} \left( \sum_{i=1}^n X_i^2 - n \bar X ^ 2 \right) \) 表示方差</li>
+<li>\( S \) 为标准差 数据的离散程度</li>
+<li>\( X_i / s \) 表示数据缩放  方差为1</li>
+<li>\( Z_i = \frac{X_i - \bar X}{s} \) 表示数据的标准化 先中心化再标准化</li>
+<li>\( Cov(X, Y) = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X) (Y_i - \bar Y)= \frac{1}{n-1}\left( \sum_{i=1}^n X_i Y_i - n \bar X \bar Y\right) \) 表示协方差</li>
+<li>\( Cor(X, Y) = \frac{Cov(X, Y)}{S_x S_y} \) 表示相关性
+
+<ul>
+<li>\( Cor(X, Y) = Cor(Y, X) \)</li>
+<li>\( -1 \leq Cor(X, Y) \leq 1 \)</li>
+<li>\( Cor(X, Y) \) 度量线性关系强度</li>
+<li>\( Cor(X, Y) = 0 \) 表示无线性关系</li>
+</ul></li>
+</ul>
+
+<h2>回归线的最小二乘回归</h2>
+
+<ul>
+<li>用最小二乘法寻找回归线 最小化 \( \sum_{i=1}^n \{Y_i - (\beta_0 + \beta_1 X_i)\}^2 \)</li>
+<li>如果定义 \( \mu_i = \beta_0 \) \( \hat \beta_0 = \bar Y \) 不考虑其他变量 \( Y \) 的均值就是最小二乘估计</li>
+<li>如果定义 \( \mu_i = X_i \beta_1 \) \( \hat \beta_1 = \frac{\sum_{i=1^n} Y_i X_i}{\sum_{i=1}^n X_i^2} \) 如果考虑过原点线的回归 斜率如上</li>
+<li>如果考虑 \( \mu_i = \beta_0 + \beta_1 X_i \) </li>
+</ul>
+
+<p>\[ \begin{align} \
+\sum_{i=1}^n (Y_i - \hat \mu_i) (\hat \mu_i - \mu_i) 
+= & \sum_{i=1}^n (Y_i - \hat\beta_0 - \hat\beta_1 X_i) (\hat \beta_0 + \hat \beta_1 X_i - \beta_0 - \beta_1 X_i) \\
+= & (\hat \beta_0 - \beta_0) \sum_{i=1}^n (Y_i - \hat\beta_0 - \hat \beta_1 X_i) + (\beta_1 - \beta_1)\sum_{i=1}^n (Y_i - \hat\beta_0 - \hat \beta_1 X_i)X_i\\
+\end{align}  \]</p>
+
+<ul>
+<li>解为\( \hat \beta_1 = Cor(Y, X) \frac{Sd(Y)}{Sd(X)} ~~~ \hat \beta_0 = \bar Y - \hat \beta_1 \bar X \)</li>
+<li>如果标准化数据 \( \{ \frac{X_i - \bar X}{Sd(X)}, \frac{Y_i - \bar Y}{Sd(Y)}\} \) 解为\( Cor(Y, X) \)</li>
+<li>回归是因变量向自己均值回归与向自变量相关回归的平衡</li>
+</ul>
+
+</body>
+
+</html>
+
