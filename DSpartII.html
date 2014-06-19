@@ -53,596 +53,389 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 
 
-<div id="data-sciencepart-v" class="section level1">
-<h1>Data Science(part V)</h1>
+<div id="data-sciencepart-ii" class="section level1">
+<h1>Data Science(part II)</h1>
 </div>
-<div id="regression-models" class="section level1">
-<h1>Regression Models</h1>
+<div id="getting-and-cleaning-data" class="section level1">
+<h1>Getting and Cleaning Data</h1>
 <div class="section level2">
-<h2>导论</h2>
-<ul>
-<li>Francis Galton 1885年用父母身高预测子女身高的案例</li>
-<li>考虑单变量的数据代表：最小二乘值</li>
-<li>最小二乘值物理意义为质心</li>
-<li>最小二乘统计学意义是平均值</li>
-<li>可用不等式解 也可用求导方法解</li>
-</ul>
-<p><span class="math">\[ 
-\begin{align} 
-\sum_{i=1}^n (Y_i - \mu)^2 &amp; = \
-\sum_{i=1}^n (Y_i - \bar Y + \bar Y - \mu)^2 \\ 
-&amp; = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
-2 \sum_{i=1}^n (Y_i - \bar Y)  (\bar Y - \mu) +\
-\sum_{i=1}^n (\bar Y - \mu)^2 \\
-&amp; = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
-2 (\bar Y - \mu) \sum_{i=1}^n (Y_i - \bar Y)  +\
-\sum_{i=1}^n (\bar Y - \mu)^2 \\
-&amp; = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
-2 (\bar Y - \mu)  (\sum_{i=1}^n Y_i - n \bar Y) +\
-\sum_{i=1}^n (\bar Y - \mu)^2 \\
-&amp; = \sum_{i=1}^n (Y_i - \bar Y)^2 + \sum_{i=1}^n (\bar Y - \mu)^2\\ 
-&amp; \geq \sum_{i=1}^n (Y_i - \bar Y)^2 \
-\end{align} 
-\]</span></p>
-<ul>
-<li>通过原点的回归</li>
-<li>最小化<span class="math">\(\sum_{i=1}^n (Y_i - X_i \beta)^2\)</span></li>
-<li>两变量关系用回归线解释</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>术语</h2>
-<ul>
-<li><span class="math">\(X_1, X_2, \ldots, X_n\)</span> 表示 <span class="math">\(n\)</span> 个数据点</li>
-<li><span class="math">\(Y_1, \ldots , Y_n\)</span> 表示另外 <span class="math">\(n\)</span> 个数据点</li>
-<li>用希腊字母表示不知道的东西 如 <span class="math">\(\mu\)</span></li>
-<li>大写字母表示概念值 小写字母表示真实值 如 <span class="math">\(P(X_i &gt; x)\)</span></li>
-<li><span class="math">\(\bar X = \frac{1}{n}\sum_{i=1}^n X_i\)</span> 表示均值 数据的中心趋向</li>
-<li><span class="math">\(\tilde X_i = X_i - \bar X\)</span> 表示对数据中心化 均值为0</li>
-<li>均值为数据的最小二乘估计</li>
-<li><span class="math">\(S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar X)^2  = \frac{1}{n-1} \left( \sum_{i=1}^n X_i^2 - n \bar X ^ 2 \right)\)</span> 表示方差</li>
-<li><span class="math">\(S\)</span> 为标准差 数据的离散程度</li>
-<li><span class="math">\(X_i / s\)</span> 表示数据缩放 方差为1</li>
-<li><span class="math">\(Z_i = \frac{X_i - \bar X}{s}\)</span> 表示数据的标准化 先中心化再标准化</li>
-<li><span class="math">\(Cov(X, Y) = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X) (Y_i - \bar Y)= \frac{1}{n-1}\left( \sum_{i=1}^n X_i Y_i - n \bar X \bar Y\right)\)</span> 表示协方差</li>
-<li><span class="math">\(Cor(X, Y) = \frac{Cov(X, Y)}{S_x S_y}\)</span> 表示相关性</li>
-<li><span class="math">\(Cor(X, Y) = Cor(Y, X)\)</span></li>
-<li><span class="math">\(-1 \leq Cor(X, Y) \leq 1\)</span></li>
-<li><span class="math">\(Cor(X, Y)\)</span> 度量线性关系强度</li>
-<li><span class="math">\(Cor(X, Y) = 0\)</span> 表示无线性关系</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>回归线的最小二乘回归</h2>
-<ul>
-<li>用最小二乘法寻找回归线 最小化 <span class="math">\(\sum_{i=1}^n \{Y_i - (\beta_0 + \beta_1 X_i)\}^2\)</span></li>
-<li>如果定义 <span class="math">\(\mu_i = \beta_0\)</span> <span class="math">\(\hat \beta_0 = \bar Y\)</span> 不考虑其他变量 <span class="math">\(Y\)</span> 的均值就是最小二乘估计</li>
-<li>如果定义 <span class="math">\(\mu_i = X_i \beta_1\)</span> <span class="math">\(\hat \beta_1 = \frac{\sum_{i=1^n} Y_i X_i}{\sum_{i=1}^n X_i^2}\)</span> 如果考虑过原点线的回归 斜率如上</li>
-<li>如果考虑 <span class="math">\(\mu_i = \beta_0 + \beta_1 X_i\)</span></li>
-</ul>
-<p><span class="math">\[\begin{align} \
-\sum_{i=1}^n (Y_i - \hat \mu_i) (\hat \mu_i - \mu_i) 
-= &amp; \sum_{i=1}^n (Y_i - \hat\beta_0 - \hat\beta_1 X_i) (\hat \beta_0 + \hat \beta_1 X_i - \beta_0 - \beta_1 X_i) \\
-= &amp; (\hat \beta_0 - \beta_0) \sum_{i=1}^n (Y_i - \hat\beta_0 - \hat \beta_1 X_i) + (\beta_1 - \beta_1)\sum_{i=1}^n (Y_i - \hat\beta_0 - \hat \beta_1 X_i)X_i\\
-\end{align} \]</span></p>
-<ul>
-<li>解为<span class="math">\(\hat \beta_1 = Cor(Y, X) \frac{Sd(Y)}{Sd(X)} ~~~ \hat \beta_0 = \bar Y - \hat \beta_1 \bar X\)</span></li>
-<li>如果标准化数据 <span class="math">\(\{ \frac{X_i - \bar X}{Sd(X)}, \frac{Y_i - \bar Y}{Sd(Y)}\}\)</span> 解为<span class="math">\(Cor(Y, X)\)</span></li>
-<li>回归是因变量向自己均值回归与向自变量相关回归的平衡</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>统计线性回归模型</h2>
-<ul>
-<li>最小二乘是一种估计方法，做推断需要模型</li>
-<li>建立线性回归的概率模型<span class="math">\(Y_i = \beta_0 + \beta_1 X_i + \epsilon_{i}\)</span></li>
-<li><span class="math">\(\epsilon_{i}\)</span> 为 iid <span class="math">\(N(0, \sigma^2)\)</span></li>
-<li><span class="math">\(E[Y_i ~|~ X_i = x_i] = \mu_i = \beta_0 + \beta_1 x_i\)</span></li>
-<li><span class="math">\(Var(Y_i ~|~ X_i = x_i) = \sigma^2\)</span></li>
-<li>对<span class="math">\(N(\mu_i, \sigma^2)\)</span>独立变量 <span class="math">\(Y\)</span> 进行极大似然估计</li>
-<li><span class="math">\({\cal L}(\beta, \sigma) = \prod_{i=1}^n \left\{(2 \pi \sigma^2)^{-1/2}\exp\left(-\frac{1}{2\sigma^2}(y_i - \mu_i)^2 \right) \right\}\)</span></li>
-<li>取对数有 <span class="math">\(-2 \log\{ {\cal L}(\beta, \sigma) \} = \frac{1}{\sigma^2} \sum_{i=1}^n (y_i - \mu_i)^2 + n\log(\sigma^2)\)</span></li>
-<li>最小二乘估计就是极大似然估计</li>
-<li><span class="math">\(\hat \beta_1 = Cor(Y, X) \frac{Sd(Y)}{Sd(X)} ~~~ \hat \beta_0 = \bar Y - \hat \beta_1 \bar X\)</span></li>
-<li>截距是自变量为0时 <span class="math">\(Y\)</span> 的期望 斜率是自变量变化一个单位对 <span class="math">\(Y\)</span> 的影响</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>残差</h2>
-<ul>
-<li>模型 <span class="math">\(Y_i = \beta_0 + \beta_1 X_i + \epsilon_i\)</span></li>
-<li>预测值 <span class="math">\(\hat Y_i = \hat \beta_0 + \hat \beta_1 X_i\)</span></li>
-<li><span class="math">\(e_i = Y_i - \hat Y_i\)</span> 观察数据与回归线的垂直距离</li>
-<li>最小二乘估计最小化残差 <span class="math">\(\sum_{i=1}^n e_i^2\)</span></li>
-<li>残差 <span class="math">\(e_i\)</span> 可看作 <span class="math">\(\epsilon_i\)</span> 的估计</li>
-<li>可证 <span class="math">\(E[e_i] = 0\)</span> 模型中考虑截距 <span class="math">\(\sum_{i=1}^n e_i = 0\)</span> 考虑自变量 <span class="math">\(\sum_{i=1}^n e_i X_i = 0\)</span></li>
-<li>残差可用来评价模型效果</li>
-<li>残差波动不同于模型波动</li>
-<li>残差波动 <span class="math">\(\sigma^2\)</span> 的极大似然估计为 <span class="math">\(\frac{1}{n}\sum_{i=1}^n e_i^2\)</span></li>
-<li><span class="math">\(\hat \sigma^2 = \frac{1}{n-2}\sum_{i=1}^n e_i^2\)</span> 为无偏估计</li>
-</ul>
-<p><span class="math">\[
-\begin{align}
-\sum_{i=1}^n (Y_i - \bar Y)^2 
-&amp; = \sum_{i=1}^n (Y_i - \hat Y_i + \hat Y_i - \bar Y)^2 \\
-&amp; = \sum_{i=1}^n (Y_i - \hat Y_i)^2 + 
-2 \sum_{i=1}^n  (Y_i - \hat Y_i)(\hat Y_i - \bar Y) + 
-\sum_{i=1}^n  (\hat Y_i - \bar Y)^2 \\
-\end{align}
-\]</span></p>
-<ul>
-<li>其中 <span class="math">\((Y_i - \hat Y_i) = \{Y_i - (\bar Y - \hat \beta_1 \bar X) - \hat \beta_1 X_i\} = (Y_i - \bar Y) - \hat \beta_1 (X_i - \bar X)\)</span></li>
-<li><span class="math">\((\hat Y_i - \bar Y) = (\bar Y - \hat \beta_1 \bar X - \hat \beta_1 X_i - \bar Y )= \hat \beta_1  (X_i - \bar X)\)</span></li>
-<li>有<span class="math">\(\sum_{i=1}^n  (Y_i - \hat Y_i)(\hat Y_i - \bar Y) = \sum_{i=1}^n  \{(Y_i - \bar Y) - \hat \beta_1 (X_i - \bar X))\}\{\hat \beta_1  (X_i - \bar X)\}=\hat \beta_1 \sum_{i=1}^n (Y_i - \bar Y)(X_i - \bar X) -\hat\beta_1^2\sum_{i=1}^n (X_i - \bar X)^2= \hat \beta_1^2 \sum_{i=1}^n (X_i - \bar X)^2-\hat\beta_1^2\sum_{i=1}^n (X_i - \bar X)^2 = 0\)</span></li>
-<li>综上 <span class="math">\(\sum_{i=1}^n (Y_i - \bar Y)^2 = \sum_{i=1}^n (Y_i - \hat Y_i)^2 + \sum_{i=1}^n  (\hat Y_i - \bar Y)^2\)</span></li>
-<li>有 Total Variation = Residual Variation + Regression Variation</li>
-<li>模型解释部分<span class="math">\(R^2 = \frac{\sum_{i=1}^n  (\hat Y_i - \bar Y)^2}{\sum_{i=1}^n (Y_i - \bar Y)^2} = 1 - \frac{\sum_{i=1}^n  (Y_i - \hat Y_i)^2}{\sum_{i=1}^n (Y_i - \bar Y)^2}\)</span></li>
-<li>已知 <span class="math">\((\hat Y_i - \bar Y) = \hat \beta_1  (X_i - \bar X)\)</span> <span class="math">\(\hat \beta_1 = Cor(Y, X)\frac{Sd(Y)}{Sd(X)}\)</span> 有 <span class="math">\(R^2 = \frac{\sum_{i=1}^n  (\hat Y_i - \bar Y)^2}{\sum_{i=1}^n (Y_i - \bar Y)^2}= \hat \beta_1^2  \frac{\sum_{i=1}^n(X_i - \bar X)^2}{\sum_{i=1}^n (Y_i - \bar Y)^2}= Cor(Y, X)^2\)</span></li>
-<li><span class="math">\(R^2\)</span> 实际上是相关性 <span class="math">\(r\)</span> 的平方 &lt;- 线性模型的可解释性</li>
-<li><span class="math">\(R^2\)</span> 会伴随样本数增加而增加 会因删除异常值而增加</li>
-<li><code>data(anscombe);example(anscombe)</code></li>
-</ul>
-</div>
-<div class="section level2">
-<h2>回归推断</h2>
-<ul>
-<li><span class="math">\(\frac{\hat \theta - \theta}{\hat \sigma_{\hat \theta}}\)</span> 总符合正态分布或<span class="math">\(t\)</span>分布</li>
-<li>假设检验 <span class="math">\(H_0 : \theta = \theta_0\)</span> 与 <span class="math">\(H_a : \theta &gt;, &lt;, \neq \theta_0\)</span></li>
-<li>置信区间 <span class="math">\(\theta\)</span> 通过 <span class="math">\(\hat \theta \pm Q_{1-\alpha/2} \hat \sigma_{\hat \theta}\)</span> 构建</li>
-</ul>
-<p><span class="math">\[
-\begin{align}
-Var(\hat \beta_1) &amp; =
-Var\left(\frac{\sum_{i=1}^n (Y_i - \bar Y) (X_i - \bar X)}{\sum_{i=1}^n (X_i - \bar X)^2}\right) \\
-&amp; = \frac{Var\left(\sum_{i=1}^n Y_i (X_i - \bar X) \right) }{\left(\sum_{i=1}^n (X_i - \bar X)^2 \right)^2} \\
-&amp; = \frac{\sum_{i=1}^n \sigma^2(X_i - \bar X)^2}{\left(\sum_{i=1}^n (X_i - \bar X)^2 \right)^2} \\
-&amp; = \frac{\sigma^2}{\sum_{i=1}^n (X_i - \bar X)^2} \\
-\end{align}
-\]</span></p>
-<ul>
-<li><span class="math">\(\sigma_{\hat \beta_1}^2 = Var(\hat \beta_1) = \sigma^2 / \sum_{i=1}^n (X_i - \bar X)^2\)</span></li>
-<li><span class="math">\(\sigma_{\hat \beta_0}^2 = Var(\hat \beta_0)  = \left(\frac{1}{n} + \frac{\bar X^2}{\sum_{i=1}^n (X_i - \bar X)^2 }\right)\sigma^2\)</span></li>
-<li>这样 <span class="math">\(\frac{\hat \beta_j - \beta_j}{\hat \sigma_{\hat \beta_j}}\)</span> 遵守自由度为<span class="math">\(n-2\)</span>的<span class="math">\(t\)</span>分布或正态分布</li>
-<li>在<span class="math">\(x_0\)</span> 回归线的标准误 <span class="math">\(\hat \sigma\sqrt{\frac{1}{n} +  \frac{(x_0 - \bar X)^2}{\sum_{i=1}^n (X_i - \bar X)^2}}\)</span></li>
-<li>在<span class="math">\(x_0\)</span> 预测值的标准误 <span class="math">\(\hat \sigma\sqrt{1 + \frac{1}{n} + \frac{(x_0 - \bar X)^2}{\sum_{i=1}^n (X_i - \bar X)^2}}\)</span></li>
-<li>CI代表回归线在特定<span class="math">\(x\)</span>处的变动 PI代表预测值在此处的变动 前者在回归线固定时不变 后者还要考虑预测值围绕回归线的变动</li>
-</ul>
+<h2>概述</h2>
 <blockquote>
-<p>The prediction interval is the range in which future observation can be thought most likely to occur, whereas the confidence interval is where the mean of future observation is most likely to reside. From <a href="http://stackoverflow.com/questions/9406139/r-programming-predict-prediction-vs-confidence/9406534#9406534">here</a></p>
-</blockquote>
-</div>
-<div class="section level2">
-<h2>多元回归</h2>
-<ul>
-<li>线性模型 <span class="math">\(Y_i =  \beta_1 X_{1i} + \beta_2 X_{2i} + \ldots + \beta_{p} X_{pi} + \epsilon_{i} = \sum_{k=1}^p X_{ik} \beta_j + \epsilon_{i}\)</span></li>
-<li>最小化 <span class="math">\(\sum_{i=1}^n \left(Y_i - \sum_{k=1}^p X_{ki} \beta_j\right)^2\)</span> 最小二乘估计也是误差正态化的极大似然估计</li>
-<li>最小二乘估计等价于 <span class="math">\(\sum_{i=1}^n (Y_i - X_{1i}\hat \beta_1 - \ldots - X_{ip}\hat \beta_p) X_k = 0\)</span> 本质上使其他参数固定解出一个 然后逐级代入 最后全部解出参数值 参考线性代数</li>
-<li>参数代表固定其他参数后变动一个单位引发的变化</li>
-<li>方差估计 <span class="math">\(\hat \sigma^2 = \frac{1}{n-p} \sum_{i=1}^n e_i ^2\)</span></li>
-<li>参数标准误<span class="math">\(\hat \sigma_{\hat \beta_k}\)</span> <span class="math">\(\frac{\hat \beta_k - \beta_k}{\hat \sigma_{\hat \beta_k}}\)</span> 符合自由度 <span class="math">\(n-p\)</span> 的 <span class="math">\(T\)</span> 分布</li>
-<li>多元模型中加入变量会导致原有变量的参数估计发生变化 甚至方向相反 一般是由于加入变量与原有变量存在共相关 导致两者参数估计都不准</li>
-</ul>
-<pre><code>n &lt;- 100; x2 &lt;- 1 : n; x1 &lt;- .01 * x2 + runif(n, -.1, .1); y = -x1 + x2 + rnorm(n, sd = .01)
-summary(lm(y ~ x1))$coef
-summary(lm(y ~ x1 + x2))$coef</code></pre>
-<ul>
-<li><code>R</code> 会自动检测并消除变量生成的变量 如上面 <code>x2</code> 中需要加入 <code>runif(n,-.1,.1)</code> 才能得到结果</li>
-<li>多元模型中包括分类变量考虑加入虚拟变量 <span class="math">\(Y_i = \beta_0 + X_{i1} \beta_1 + \epsilon_{i}\)</span> 属于该分类时 <span class="math">\(E[Y_i] = \beta_0 + \beta_1\)</span> 否则为<span class="math">\(E[Y_i] = \beta_0\)</span></li>
-<li>分类变量截距有意义 代表其中一个分类 等同于其他分类与该分类进行 <code>t</code> 检验 如果模型中去掉截距 等同于所有分类与零进行 <code>t</code> 检验 参数系数为均值差 可用 <code>relevel(data,'name')</code> 来指定比对对象</li>
-<li>两变量均值差的标准误通过 <span class="math">\(Var(\hat \beta_B - \hat \beta_C) = Var(\hat \beta_B) + Var(\hat \beta_C) - 2 Cov(\hat \beta_B, \hat \beta_C)\)</span> 来计算进行推断</li>
-<li>交互作用 <span class="math">\(E[Y_i | X_{1i}=x_1, X_{2i}=x_2] = \beta_0 + \beta_1 x_{1} + \beta_2 x_{2} + \beta_3 x_{1}x_{2}\)</span> 中交互作用参数实际表示 <span class="math">\(E[Y_i | X_{1i}=x_1+1, X_{2i}=x_2+1]-E[Y_i | X_{1i}=x_1, X_{2i}=x_2+1]-E[Y_i | X_{1i}=x_1+1, X_{2i}=x_2]-E[Y_i | X_{1i}=x_1, X_{2i}=x_2] =\beta_3\)</span> 各交互参数变化一单位响应变化</li>
-<li>多元回归的参数解释需要考虑清楚变量类型与交互作用</li>
-<li>多元回归中变量与响应 变量与变量间的相关性要全盘考虑 通过模拟观察决定</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>模型诊断与选择</h2>
-<ul>
-<li>通过残差诊断 最小二乘决定均值为零 方差通过 <span class="math">\(\hat \sigma^2 = \frac{\sum_{i=1}^n e_i^2}{n-p}\)</span> 进行无偏估计</li>
-<li>异常值判断 对回归关系包括系数与其标准误的影响 残差的分布检验等 <code>?influence.measures</code></li>
-</ul>
-<blockquote>
-<p>There are known knowns. These are things we know that we know. There are known unknowns. That is to say, there are things that we know we don’t know. But there are also unknown unknowns. There are things we don’t know we don’t know. Donald Rumsfeld</p>
+<p>Raw data -&gt; Processing script -&gt; tidy data</p>
 </blockquote>
 <ul>
-<li>随机化有助于平衡未知变量</li>
-<li>参数方差膨胀 共相关或随机相关 <code>vif</code>来检验 协变量在欠拟合下有偏</li>
-<li>协变量的选择需要专业知识与经验</li>
+<li>前期需求</li>
+<li>原始数据</li>
+<li>干净数据</li>
+<li>code book</li>
+<li>详尽的处理步骤记录</li>
+<li>原始数据要求</li>
+<li>未经处理</li>
+<li>未经修改</li>
+<li>未经去除异常值</li>
+<li>未经总结</li>
+<li>干净数据</li>
+<li>每个变量一列</li>
+<li>同一变量不同样本不在一行</li>
+<li>一种变量一个表</li>
+<li>多张表要有一列可以相互链接</li>
+<li>有表头</li>
+<li>变量名要有意义</li>
+<li>一个文件一张表</li>
+<li>code book</li>
+<li>变量信息</li>
+<li>总结方式</li>
+<li>实验设计</li>
+<li>文本文件</li>
+<li>包含研究设计与变量信息的章节</li>
+<li>处理步骤记录</li>
+<li>脚本文件</li>
+<li>输入为原始数据</li>
+<li>输出为处理过数据</li>
+<li>脚本中无特定参数</li>
 </ul>
 </div>
 <div class="section level2">
-<h2>广义线性模型</h2>
+<h2>下载</h2>
 <ul>
-<li>Nelder 与 Wedderburn 1972年提出</li>
-<li>响应是指数家族模型 模型组成部分是线性的 线性预测变量与响应通过连接函数联系</li>
-<li>线性模型</li>
-<li><span class="math">\(Y_i \sim N(\mu_i, \sigma^2)\)</span></li>
-<li><span class="math">\(\eta_i = \sum_{k=1}^p X_{ik} \beta_k\)</span></li>
-<li><span class="math">\(g(\mu) = \eta\)</span></li>
-<li>似然模型为 <span class="math">\(Y_i = \sum_{k=1}^p X_{ik} \beta_k + \epsilon_{i}\)</span> <span class="math">\(\epsilon_i \stackrel{iid}{\sim} N(0, \sigma^2)\)</span></li>
-<li>logistic 模型</li>
-<li><span class="math">\(Y_i \sim Bernoulli(\mu_i)\)</span></li>
-<li><span class="math">\(\eta_i = \sum_{k=1}^p X_{ik} \beta_k\)</span></li>
-<li><span class="math">\(g(\mu) = \eta = \log\left( \frac{\mu}{1 - \mu}\right)\)</span> <span class="math">\(g\)</span>为logit函数</li>
-<li>似然函数为 <span class="math">\(\prod_{i=1}^n \mu_i^{y_i} (1 - \mu_i)^{1-y_i} = \exp\left(\sum_{i=1}^n y_i \eta_i \right) \prod_{i=1}^n (1 + \eta_i)^{-1}\)</span></li>
-<li>泊松模型</li>
-<li><span class="math">\(Y_i \sim Poisson(\mu_i)\)</span></li>
-<li><span class="math">\(\eta_i = \sum_{k=1}^p X_{ik} \beta_k\)</span></li>
-<li><span class="math">\(g(\mu) = \eta = \log(\mu)\)</span></li>
-<li>似然函数为 <span class="math">\(\prod_{i=1}^n (y_i !)^{-1} \mu_i^{y_i}e^{-\mu_i}\propto \exp\left(\sum_{i=1}^n y_i \eta_i - \sum_{i=1}^n \mu_i\right)\)</span></li>
-<li>似然函数与数据的联系 <span class="math">\(\sum_{i=1}^n y_i \eta_i = \sum_{i=1}^n y_i\sum_{k=1}^p X_{ik} \beta_k = \sum_{k=1}^p \beta_k\sum_{i=1}^n X_{ik} y_i\)</span> 只有<span class="math">\(\sum_{i=1}^n X_{ik} y_i\)</span></li>
-<li>极大似然估计的解 <span class="math">\(0=\sum_{i=1}^n \frac{(Y_i - \mu_i)}{Var(Y_i)}W_i\)</span> <span class="math">\(W_i\)</span>是连接函数的反函数的微分</li>
-<li>响应的方差中线性模型 <span class="math">\(Var(Y_i) = \sigma^2\)</span> 是常数 logistic 模型 <span class="math">\(Var(Y_i) = \mu_i (1 - \mu_i)\)</span> 泊松模型 <span class="math">\(Var(Y_i) = \mu_i\)</span></li>
-<li>可通过对模型方差增加调谐参数 <span class="math">\(\phi\)</span> 使模型更灵活 quasi-likelihood</li>
-<li>模型求解为 <span class="math">\(\hat \beta_k\)</span> 及可能的 <span class="math">\(\hat \phi\)</span></li>
-<li>线性预测变量关系 <span class="math">\(\hat \eta = \sum_{k=1}^p X_k \hat \beta_k\)</span></li>
-<li>平均响应 <span class="math">\(\hat \mu = g^{-1}(\hat \eta)\)</span></li>
-<li>系数解释 <span class="math">\(g(E[Y | X_k = x_k + 1, X_{\sim k} = x_{\sim k}]) - g(E[Y | X_k = x_k, X_{\sim k}=x_{\sim k}]) = \beta_k\)</span></li>
+<li>设定工作目录与数据存储目录</li>
+</ul>
+<pre class="r"><code>if (!file.exists(&quot;data&quot;)) {
+    dir.create(&quot;data&quot;)
+}</code></pre>
+<ul>
+<li>url下载与时间记录</li>
+</ul>
+<pre class="r"><code>fileUrl &lt;- &quot;yoururl&quot;
+download.file(fileUrl, destfile = &quot;./data/XXX.csv&quot;, method = &quot;curl&quot;)
+list.files(&quot;./data&quot;)
+dateDownloaded &lt;- date()</code></pre>
+</div>
+<div class="section level2">
+<h2>读取本地文件</h2>
+<ul>
+<li><code>read.table</code></li>
+<li><code>read.csv</code> 默认<code>sep=&quot;,&quot;, header=TRUE</code></li>
+<li><code>quote</code> 设定引用</li>
+<li><code>na.strings</code> 设定缺失值字符</li>
+<li><code>nrows</code> 设定读取字段</li>
+<li><code>skip</code> 跳过开始行数</li>
+</ul>
+</div>
+<div id="excle" class="section level2">
+<h2>读取excle文件</h2>
+<ul>
+<li>xlsx包</li>
+</ul>
+<pre class="r"><code>library(xlsx)
+cameraData &lt;- read.xlsx(&quot;./data/cameras.xlsx&quot;,sheetIndex=1,header=TRUE)
+head(cameraData)
+# read.xlsx2更快不过选行读取时会不稳定
+# 支持底层读取 如字体等</code></pre>
+<ul>
+<li>XLConnect包</li>
+</ul>
+<pre class="r"><code>library(XLConnect)
+wb &lt;- loadWorkbook(&quot;XLConnectExample1.xlsx&quot;, create = TRUE)
+createSheet(wb, name = &quot;chickSheet&quot;)
+writeWorksheet(wb, ChickWeight, sheet = &quot;chickSheet&quot;, startRow = 3, startCol = 4)
+saveWorkbook(wb)
+# 支持区域操作 生成报告 图片等</code></pre>
+</div>
+<div id="xml" class="section level2">
+<h2>读取XML文件</h2>
+<ul>
+<li>网页常用格式</li>
+<li>形式与内容分开</li>
+<li>形式包括标签 元素 属性等</li>
+<li>XML包</li>
+</ul>
+<pre class="r"><code>library(XML)
+fileUrl &lt;- &quot;http://www.w3schools.com/xml/simple.xml&quot;
+# 读取xml结构
+doc &lt;- xmlTreeParse(fileUrl,useInternal=TRUE)
+# 提取节点
+rootNode &lt;- xmlRoot(doc)
+# 提取根节点名
+xmlName(rootNode)
+# 提取子节点名
+names(rootNode) 
+# 提取节点数值
+xmlSApply(rootNode,xmlValue)</code></pre>
+<ul>
+<li>XPath XML的一种查询语法</li>
+<li>/node 顶级节点</li>
+<li>//node 所有子节点</li>
+<li>node<span class="citation">[@attr-name]</span> 带属性名的节点</li>
+<li>node<span class="citation">[@attr-name='bob']</span> 属性名为bob的节点</li>
+</ul>
+<pre class="r"><code># 提取节点下属性名为name的数值
+xpathSApply(rootNode,&quot;//name&quot;,xmlValue)</code></pre>
+</div>
+<div id="json" class="section level2">
+<h2>读取json文件</h2>
+<ul>
+<li>js对象符号 结构化 常作为API输出格式</li>
+<li>jsonlite包</li>
+</ul>
+<pre class="r"><code>library(jsonlite)
+# 读取json文件
+jsonData &lt;- fromJSON(&quot;https://api.github.com/users/jtleek/repos&quot;)
+# 列出文件名
+names(jsonData)
+# 可嵌套截取
+jsonData$owner$login
+# 可将R对象写成json文件
+myjson &lt;- toJSON(iris, pretty=TRUE)</code></pre>
+</div>
+<div id="mysql" class="section level2">
+<h2>读取MySQL数据库</h2>
+<ul>
+<li>网络应用常见数据库软件</li>
+<li>一行一记录</li>
+<li>数据库表间有index向量</li>
+<li><a href="http://www.pantz.org/software/mysql/mysqlcommands.html">常见命令</a></li>
+<li><a href="http://www.r-bloggers.com/mysql-and-r/">指南</a></li>
+<li>RMySQL包</li>
+</ul>
+<pre class="r"><code>library(RMySQL)
+# 读取数据库
+ucscDb &lt;- dbConnect(MySQL(),user=&quot;genome&quot;, 
+                    host=&quot;genome-mysql.cse.ucsc.edu&quot;)
+result &lt;- dbGetQuery(ucscDb,&quot;show databases;&quot;); 
+# 断开链接
+dbDisconnect(ucscDb);
+# 读取指定数据库
+hg19 &lt;- dbConnect(MySQL(),user=&quot;genome&quot;, db=&quot;hg19&quot;,
+                    host=&quot;genome-mysql.cse.ucsc.edu&quot;)
+allTables &lt;- dbListTables(hg19)
+length(allTables)
+# mysql语句查询
+dbGetQuery(hg19, &quot;select count(*) from affyU133Plus2&quot;)
+# 选择子集
+query &lt;- dbSendQuery(hg19, &quot;select * from affyU133Plus2 where misMatches between 1 and 3&quot;)
+affyMis &lt;- fetch(query); quantile(affyMis$misMatches)</code></pre>
+</div>
+<div id="hdf5" class="section level2">
+<h2>读取HDF5数据</h2>
+<ul>
+<li>分层分组读取大量数据的格式</li>
+<li>rhdf5包</li>
+</ul>
+<pre class="r"><code>library(rhdf5)
+created = h5createFile(&quot;example.h5&quot;)
+created = h5createGroup(&quot;example.h5&quot;,&quot;foo&quot;)
+created = h5createGroup(&quot;example.h5&quot;,&quot;baa&quot;)
+created = h5createGroup(&quot;example.h5&quot;,&quot;foo/foobaa&quot;)
+h5ls(&quot;example.h5&quot;)
+A = matrix(1:10,nr=5,nc=2)
+h5write(A, &quot;example.h5&quot;,&quot;foo/A&quot;)
+B = array(seq(0.1,2.0,by=0.1),dim=c(5,2,2))
+attr(B, &quot;scale&quot;) &lt;- &quot;liter&quot;
+h5write(B, &quot;example.h5&quot;,&quot;foo/foobaa/B&quot;)
+h5ls(&quot;example.h5&quot;)
+df = data.frame(1L:5L,seq(0,1,length.out=5),
+  c(&quot;ab&quot;,&quot;cde&quot;,&quot;fghi&quot;,&quot;a&quot;,&quot;s&quot;), stringsAsFactors=FALSE)
+h5write(df, &quot;example.h5&quot;,&quot;df&quot;)
+h5ls(&quot;example.h5&quot;)
+readA = h5read(&quot;example.h5&quot;,&quot;foo/A&quot;)
+readB = h5read(&quot;example.h5&quot;,&quot;foo/foobaa/B&quot;)
+readdf= h5read(&quot;example.h5&quot;,&quot;df&quot;)</code></pre>
+</div>
+<div class="section level2">
+<h2>读取网页数据</h2>
+<ul>
+<li>网页抓取HTML数据</li>
+<li>读完了一定关链接</li>
+<li>httr包</li>
+</ul>
+<pre class="r"><code>con = url(&quot;http://scholar.google.com/citations?user=HI-I6C0AAAAJ&amp;hl=en&quot;)
+htmlCode = readLines(con)
+close(con)
+htmlCode
+library(XML)
+url &lt;- &quot;http://scholar.google.com/citations?user=HI-I6C0AAAAJ&amp;hl=en&quot;
+html &lt;- htmlTreeParse(url, useInternalNodes=T)
+xpathSApply(html, &quot;//title&quot;, xmlValue)
+library(httr)
+html2 = GET(url)
+content2 = content(html2,as=&quot;text&quot;)
+parsedHtml = htmlParse(content2,asText=TRUE)
+xpathSApply(parsedHtml, &quot;//title&quot;, xmlValue)
+GET(&quot;http://httpbin.org/basic-auth/user/passwd&quot;)
+GET(&quot;http://httpbin.org/basic-auth/user/passwd&quot;,
+    authenticate(&quot;user&quot;,&quot;passwd&quot;))
+google = handle(&quot;http://google.com&quot;)
+pg1 = GET(handle=google,path=&quot;/&quot;)
+pg2 = GET(handle=google,path=&quot;search&quot;)</code></pre>
+</div>
+<div id="api" class="section level2">
+<h2>读取API</h2>
+<ul>
+<li>通过接口授权后调用数据</li>
+<li>httr包</li>
+</ul>
+<pre class="r"><code>myapp = oauth_app(&quot;twitter&quot;,
+                   key=&quot;yourConsumerKeyHere&quot;,secret=&quot;yourConsumerSecretHere&quot;)
+sig = sign_oauth1.0(myapp,
+                     token = &quot;yourTokenHere&quot;,
+                      token_secret = &quot;yourTokenSecretHere&quot;)
+homeTL = GET(&quot;https://api.twitter.com/1.1/statuses/home_timeline.json&quot;, sig)
+json1 = content(homeTL)
+json2 = jsonlite::fromJSON(toJSON(json1))</code></pre>
+</div>
+<div class="section level2">
+<h2>读取其他资源</h2>
+<ul>
+<li>图片</li>
+<li><a href="http://cran.r-project.org/web/packages/jpeg/index.html">jpeg</a></li>
+<li><a href="http://cran.r-project.org/web/packages/readbitmap/index.html">readbitmap</a></li>
+<li><a href="http://cran.r-project.org/web/packages/png/index.html">png</a></li>
+<li><p><a href="http://www.bioconductor.org/packages/2.13/bioc/html/EBImage.html">EBImage (Bioconductor)</a></p></li>
+<li>GIS</li>
+<li><a href="http://cran.r-project.org/web/packages/rgdal/index.html">rdgal</a></li>
+<li><a href="http://cran.r-project.org/web/packages/rgeos/index.html">rgeos</a></li>
+<li><p><a href="http://cran.r-project.org/web/packages/raster/index.html">raster</a></p></li>
+<li>声音</li>
+<li><a href="http://cran.r-project.org/web/packages/tuneR/">tuneR</a></li>
+<li><p><a href="http://rug.mnhn.fr/seewave/">seewave</a></p></li>
 </ul>
 </div>
 <div class="section level2">
-<h2>二元响应</h2>
+<h2>数据截取与排序</h2>
 <ul>
-<li><span class="math">\(\log\left(\frac{\rm{Pr}(RW_i | RS_i, b_0, b_1 )}{1-\rm{Pr}(RW_i | RS_i, b_0, b_1)}\right) = b_0 + b_1 RS_i\)</span></li>
-<li><span class="math">\(b_0\)</span> 预测变量为零时胜率对数</li>
-<li><span class="math">\(b_1\)</span> 预测变量变化一个单位胜率的改变对数</li>
-<li><span class="math">\(\exp(b_1)\)</span> 预测变量变化一个单位胜率的改变</li>
+<li>增加行直接<code>$</code></li>
+<li><code>seq</code>产生序列</li>
+<li>通过<code>[</code>按行 列或条件截取</li>
+<li><code>which</code>返回行号</li>
+<li>排序向量用<code>sort</code></li>
+<li>排序数据框(多向量)用<code>order</code></li>
+<li><a href="http://plyr.had.co.nz/09-user/">plyl包</a>排序</li>
+</ul>
+<pre class="r"><code>library(plyr)
+arrange(X,var1)
+arrange(X,desc(var1))</code></pre>
+</div>
+<div class="section level2">
+<h2>数据总结</h2>
+<ul>
+<li><code>head</code> <code>tail</code>查看数据</li>
+<li><code>summary</code> <code>str</code>总结数据</li>
+<li><code>quantile</code> 按分位数总结向量</li>
+<li><code>table</code> 按向量元素频数总结</li>
+<li><code>sum(is.na(data))</code> <code>any(is.na(data))</code> <code>all(data$x &gt; 0)</code> 异常值总结</li>
+<li><code>colSums(is.na(data))</code> 行列求和</li>
+<li><code>table(data$x %in% c(&quot;21212&quot;))</code>特定数值计数总结</li>
+<li><code>xtabs</code> <code>ftable</code> 创建列联表</li>
+<li><code>print(object.size(fakeData),units=&quot;Mb&quot;)</code> 现实数据大小</li>
+<li><code>cut</code> 通过设置<code>breaks</code>产生分类变量</li>
+<li>Hmisc包</li>
+</ul>
+<pre class="r"><code>library(Hmisc)
+data$zipGroups = cut2(data$zipCode,g=4)
+table(data$zipGroups)
+library(plyr)
+# mutate进行数据替换或生成
+data2 = mutate(data,zipGroups=cut2(zipCode,g=4))
+table(data2$zipGroups)</code></pre>
+</div>
+<div class="section level2">
+<h2>数据整理</h2>
+<ul>
+<li>每一列一个变量</li>
+<li>每一行一个样本</li>
+<li>每个文件存储一类样本</li>
+<li><code>melt</code>进行数据融合</li>
+<li><a href="http://www.slideshare.net/jeffreybreen/reshaping-data-in-r"><code>reshape2</code>包</a></li>
+<li><code>dcast</code>分组汇总数据框</li>
+<li><code>acast</code>分组汇总向量数组</li>
+<li><code>arrange</code>指定变量名排序</li>
+<li><code>merge</code>按照指定向量合并数据</li>
+<li>plyr包的<code>join</code>函数也可实现合并</li>
+</ul>
+</div>
+<div id="data.table" class="section level2">
+<h2><a href="https://github.com/raphg/Biostat-578/blob/master/Advanced_data_manipulation.Rpres"><em>数据操作data.table包</em></a></h2>
+<ul>
+<li>基本兼容<code>data.frame</code></li>
+<li>速度更快</li>
+<li>通过<code>key</code>可指定因子变量并快速提取分组的行</li>
+<li>可在第二个参数是R表达式</li>
+</ul>
+<pre class="r"><code>DT[,list(mean(x),sum(z))]
+DT[,table(y)]</code></pre>
+<ul>
+<li>可用<code>:</code>生成新变量 进行简单计算</li>
+</ul>
+<pre class="r"><code>DT[,w:=z^2]
+DT[,m:= {tmp &lt;- (x+z); log2(tmp+5)}]</code></pre>
+<ul>
+<li>进行数据条件截取</li>
+</ul>
+<pre class="r"><code>DT[,a:=x&gt;0]
+DT[,b:= mean(x+w),by=a]</code></pre>
+<ul>
+<li>进行计数</li>
+</ul>
+<pre class="r"><code>DT &lt;- data.table(x=sample(letters[1:3], 1E5, TRUE))
+DT[, .N, by=x]</code></pre>
+</div>
+<div class="section level2">
+<h2>文本处理</h2>
+<ul>
+<li>处理大小写<code>tolower</code> <code>toupper</code></li>
+<li>处理变量名<code>strsplit</code></li>
+</ul>
+<pre class="r"><code>firstElement &lt;- function(x){x[1]}
+sapply(splitNames,firstElement)</code></pre>
+<ul>
+<li>字符替换<code>sub</code> <code>gsub</code></li>
+<li>寻找变量<code>grep</code>(返回行号) <code>grepl</code>(返回逻辑值)</li>
+<li>stringr包 <code>stringr</code></li>
+<li><code>paste0</code> 不带空格</li>
+<li><code>str_trim</code> 去除空格</li>
+<li>命名原则</li>
+<li>变量名小写</li>
+<li>描述性</li>
+<li>无重复</li>
+<li>变量名不要符号分割</li>
+<li>Names of variables should be</li>
+<li>正则表达式</li>
+<li>文字处理格式</li>
+<li><code>^</code> 匹配开头</li>
+<li><code>$</code> 匹配结尾</li>
+<li><code>[]</code> 匹配大小写 <code>^</code>在开头表示非</li>
+<li><code>.</code> 匹配任意字符</li>
+<li><code>|</code> 匹配或</li>
+<li><code>()</code> 匹配与</li>
+<li><code>?</code> 匹配可选择</li>
+<li><code>*</code> 匹配任意</li>
+<li><code>+</code> 匹配至少一个</li>
+<li><code>{}</code> 匹配其中最小最大 一个值表示精确匹配 <code>m,</code>表示至少m次匹配</li>
+<li><code>\1</code> 匹配前面指代</li>
 </ul>
 </div>
 <div class="section level2">
-<h2>计数或速率响应</h2>
+<h2>日期处理</h2>
 <ul>
-<li><span class="math">\(\log\left(E[NH_i | JD_i, b_0, b_1]\right) = b_0 + b_1 JD_i\)</span></li>
-<li><span class="math">\(e^{E[\log(Y)]}\)</span> <span class="math">\(Y\)</span> 的几何平均值</li>
-<li><span class="math">\(e^{\beta_0}\)</span> 第零天的几何平均值</li>
-<li><span class="math">\(e^{\beta_1}\)</span> 每天相对增加或减少的几何平均值</li>
-<li>通过设置 <code>offset</code> 可用来估计增长率</li>
-<li>注意方差膨胀与<a href="http://cran.r-project.org/web/packages/pscl/index.html">零膨胀</a>问题</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>分段平滑</h2>
-<ul>
-<li>可用线性回归拟合曲线 原理是分段拟合连接</li>
-<li>断点平滑可用二次项</li>
-<li>分段项可看作基进行组合</li>
-</ul>
-</div>
-</div>
-<div id="practical-machine-learning" class="section level1">
-<h1>Practical Machine Learning</h1>
-<ul>
-<li>问题 -&gt; 数据 -&gt; 特征 -&gt; 算法 -&gt; 参数 -&gt; 评价</li>
-</ul>
-<blockquote>
-<p>The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data. John Tukey</p>
-</blockquote>
-<ul>
-<li>数据质量优先于模型</li>
-<li>不要自动特征选择</li>
-<li>算法的可扩展性与计算性能要考虑</li>
-<li>数据过拟合问题 数据总是由信号与噪音组成 但会被算法无差别对待</li>
-<li>数据要与问题相关 低相关度的组合可能产生高相关度</li>
-</ul>
-<div class="section level2">
-<h2>研究设计</h2>
-<ul>
-<li>定义错误率</li>
-<li>将数据分割为训练集 预测集 验证集</li>
-<li>在训练集上使用交叉检验选择特征与预测算法</li>
-<li>在预测集或验证集上使用一次数据</li>
-<li>预测效果起码要优于瞎猜</li>
-<li>避免使用小样本</li>
-<li>比例为 60% 训练集 20% 预测集 20% 验证集 或 60% 训练集 40% 预测集 或小样本交叉检验</li>
-<li>注意数据结构 时序分析要对数据分段采样</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>错误率</h2>
-<ul>
-<li>真阳性 真的是对的 TP</li>
-<li>假阳性 真的是错的 FP Type I</li>
-<li>真阴性 假的是错的 TN</li>
-<li>假阴性 假的是对的 FN Type II</li>
-<li>灵敏度 TP/(TP+FP)</li>
-<li>特异性 TN/(TN+FN)</li>
-<li>均方差 MSE <span class="math">\(\frac{1}{n} \sum_{i=1}^n (Prediction_i - Truth_i)^2\)</span></li>
-<li>均方误 RMSE <span class="math">\(\sqrt{\frac{1}{n} \sum_{i=1}^n(Prediction_i - Truth_i)^2}\)</span></li>
-<li>中位差 Median absolute deviation</li>
-<li>准确性 (TP+TN)/(TP+FP+TN+FP)</li>
-<li>一致性 <a href="https://en.wikipedia.org/wiki/Cohen%27s_kappa">kappa值</a></li>
-</ul>
-</div>
-<div id="roc-" class="section level2">
-<h2>ROC 曲线</h2>
-<ul>
-<li>分类问题寻找判别阈值 满足一定TP下最小FP的模型</li>
-<li>FP v.s.TP 作图</li>
-<li>AUC 曲线下面积表示选择标准 一般超过80%</li>
-<li>对角线是随机猜的结果</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>交叉检验</h2>
-<ul>
-<li>训练集上的操作</li>
-<li>训练集上再分为训练集与测试集</li>
-<li>在测试集上评价 重复并平均化测试集错误</li>
-<li>用来进行变量 模型 参数选择</li>
-<li>随机 分组 留一</li>
-<li>分组多方差大 分组少有偏差</li>
-<li>有放回的为bootstrap 不建议用</li>
-</ul>
-</div>
-<div id="caret-" class="section level2">
-<h2><code>caret</code> 包</h2>
-<ul>
-<li>数据清洗 预处理</li>
-<li>数据分割 <code>createDataPartition</code> 数据比例 重采样 产生时间片段</li>
-<li>训练检验整合函数 <code>train</code> <code>predict</code></li>
-<li>模型对比</li>
-<li>算法整合为选项 线性判别 回归 朴素贝叶斯 支持向量机 分类与回归树 随机森林 Boosting 等</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>数据分割</h2>
-<ul>
-<li><code>train &lt;- createDataPartition(y=spam$type,p=0.75, list=FALSE)</code> 数据三一分 得到index</li>
-<li><code>folds &lt;- createFolds(y=spam$type,k=10,list=TRUE,returnTrain=TRUE)</code> 数据分10份 返回每一份列表</li>
-<li><code>folds &lt;- createResample(y=spam$type,times=10,list=TRUE)</code> 数据bootstrap重采样 返回每一份列表</li>
-<li><code>folds &lt;- createTimeSlices(y=tme,initialWindow=20,horizon=10)</code> 时序数据重采样 产生20为窗口时序片段的训练集与预测集</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>训练选项</h2>
-<ul>
-<li><code>args(train.default)</code> 通过 <code>method</code> 控制算法 <code>metric</code> 控制算法评价 <code>trainControl</code> 控制训练方法</li>
-<li><code>trainControl</code>中 <code>method</code>选择模型选择方法 如bootstrap 交叉检验 留一法 <code>number</code> 控制次数 <code>repeats</code> 控制重采样次数 <code>seed</code> 控制可重复性 总体设置一个 具体每一次用列表设置控制具体过程 特别是并行模型</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>预测变量作图</h2>
-<ul>
-<li><code>featurePlot</code></li>
-<li><code>ggplot2</code></li>
-</ul>
-</div>
-<div class="section level2">
-<h2>数据预处理</h2>
-<ul>
-<li><code>train</code> 中的 <code>preProcess=c(&quot;center&quot;,&quot;scale&quot;)</code> 标准化</li>
-<li><code>spatialSign</code> 该转化可提高计算效率 有偏</li>
-<li><code>preProcess(training[,-58],method=c(&quot;BoxCox&quot;))</code> 正态化转化</li>
-<li><code>method=&quot;knnImpute&quot;</code> 用最小邻近法填补缺失值</li>
-<li><code>nearZeroVar</code> 去除零方差变量</li>
-<li><code>findCorrelation</code> 去除相关变量</li>
-<li><code>findLinearCombos</code> 去除线性组合变量</li>
-<li><code>classDist</code> 测定分类变量的距离 生成新变量</li>
-<li>测试集也要预处理</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>协变量生成</h2>
-<ul>
-<li>原始数据提取特征</li>
-<li>提取特征后生成新变量</li>
-<li>因子变量要转为虚拟变量</li>
-<li>样条基变量 <code>splines</code> 包中的 <code>bs</code></li>
-<li>数据压缩 <code>preProcess</code> 中 <code>method</code> 设置为 <code>pca</code> <code>pcaComp</code> 指定主成分个数</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>线性回归&amp;多元线性回归</h2>
-<ul>
-<li><span class="math">\(ED_i = b_0 + b_1 WT_i + e_i\)</span> 基本模型</li>
-<li>参见前面回归部分</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>树</h2>
-<ul>
-<li>迭代分割变量</li>
-<li>在最大化预测时分割</li>
-<li>评估分支的同质性</li>
-<li>多个树的预测更好</li>
-<li>优点 容易解释应用 可用在神经网络上</li>
-<li>缺点 不容易交叉验证 不确定性不宜估计 结果可能变化 -算法</li>
-<li>先在一个组里用所有的变量计算</li>
-<li>寻找最容易分离结果的变量</li>
-<li>把数据按照该变量节点分为两组</li>
-<li>在每一个组中寻找最好的分离变量</li>
-<li>迭代直到过程结束<br /></li>
-<li>节点纯度用 Gini 系数或 交叉墒来衡量</li>
-<li><code>rattle</code> 包的 <code>fancyRpartPlot</code> 出图漂亮</li>
-<li>可用来处理非线性模型与变量选择</li>
-</ul>
-</div>
-<div id="bagging" class="section level2">
-<h2>Bagging</h2>
-<ul>
-<li>重采样 重新计算预测值</li>
-<li>平均或投票给出结果</li>
-<li>减少方差 偏差类似 适用于非线性过程</li>
-<li>bagged trees</li>
-<li>重采样</li>
-<li>重建树</li>
-<li>结果重评价</li>
-<li>更稳健 效果不如RF</li>
-<li>Bagged loess 可用来处理细节</li>
-</ul>
-</div>
-<div id="radom-forest" class="section level2">
-<h2>radom forest</h2>
-<ul>
-<li>bootstrap采样</li>
-<li>每一个节点bootstrap选取变量</li>
-<li>多棵树投票</li>
-<li>准确度高 速度慢 不好解释 容易过拟合</li>
-</ul>
-</div>
-<div id="boosting" class="section level2">
-<h2>boosting</h2>
-<ul>
-<li>弱预测变量加权后构建强预测变量</li>
-<li>从一组预测变量开始</li>
-<li>添加有惩罚项的预测变量来训练模型</li>
-<li>以降低训练集误差为目的</li>
-<li>通用方法</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>其他预测算法</h2>
-<ul>
-<li>参考<a href="https://github.com/yufree/ISLRchnotes">统计学习导论笔记</a></li>
-</ul>
-</div>
-<div class="section level2">
-<h2>模型联合</h2>
-<ul>
-<li>通过平均与投票结合模型</li>
-<li>联合分类器提高准确率</li>
-<li><code>caretEnsemble</code> 包</li>
-<li>案例 广义加性模型</li>
-</ul>
-<pre><code>library(ISLR); data(Wage); library(ggplot2); library(caret);
-Wage &lt;- subset(Wage,select=-c(logwage))
-# Create a building data set and validation set
-inBuild &lt;- createDataPartition(y=Wage$wage,p=0.7, list=FALSE)
-validation &lt;- Wage[-inBuild,]; buildData &lt;- Wage[inBuild,]
-inTrain &lt;- createDataPartition(y=buildData$wage,p=0.7, list=FALSE)
-training &lt;- buildData[inTrain,]; testing &lt;- buildData[-inTrain,]
-mod1 &lt;- train(wage ~.,method=&quot;glm&quot;,data=training)
-mod2 &lt;- train(wage ~.,method=&quot;rf&quot;,data=training,trControl = trainControl(method=&quot;cv&quot;),number=3)
-pred1 &lt;- predict(mod1,testing); pred2 &lt;- predict(mod2,testing)
-qplot(pred1,pred2,colour=wage,data=testing)
-predDF &lt;- data.frame(pred1,pred2,wage=testing$wage)
-combModFit &lt;- train(wage ~.,method=&quot;gam&quot;,data=predDF)
-combPred &lt;- predict(combModFit,predDF)
-sqrt(sum((pred1-testing$wage)^2))
-sqrt(sum((pred2-testing$wage)^2))
-sqrt(sum((combPred-testing$wage)^2))</code></pre>
-</div>
-<div class="section level2">
-<h2>无监督预测</h2>
-<ul>
-<li>先聚类 后预测</li>
-<li><code>clue</code> 包 <code>cl_predict</code> 函数</li>
-<li>推荐系统</li>
-</ul>
-</div>
-<div class="section level2">
-<h2>预测</h2>
-<ul>
-<li>时序数据 包含趋势 季节变化 循环</li>
-<li>效应分解 <code>decompose</code></li>
-<li><code>window</code> 窗口</li>
-<li><code>ma</code> 平滑</li>
-<li><code>ets</code> 指数平滑</li>
-<li><code>forecast</code> 预测</li>
-<li>空间数据同样有这种问题 临近依赖 地域效应</li>
-<li><code>quantmod</code> 包 或 <code>quandl</code> 包处理金融数据</li>
-<li>外推要谨慎</li>
-</ul>
-</div>
-</div>
-<div id="developing-data-products" class="section level1">
-<h1>Developing Data Products</h1>
-<div id="shiny" class="section level2">
-<h2>shiny</h2>
-<ul>
-<li>源自 R-studio</li>
-<li>动态网络应用</li>
-<li>入门版 <a href="https://www.opencpu.org/">OpenCPU</a></li>
-<li>高级版 <a href="https://support.rstudio.com/hc/en-us/articles/200551906-Interactive-Plotting-with-Manipulate">Manipulate</a></li>
-<li><code>install.packages(&quot;shiny&quot;);libray(shiny)</code></li>
-<li><code>ui.R</code> 控制外观 <code>sever.R</code> 控制计算</li>
-<li><code>runApp()</code> 启动应用</li>
-<li><code>sever.R</code> 中 <code>shinyServer</code> 之前的代码只在启动应用时执行一次 适合读入数据</li>
-<li><code>shinyServer(function(input, output){</code> 之内的非互动函数只被每个用户执行一次</li>
-<li><code>Render*</code> 为互动函数 数值改变就执行一次</li>
-<li><code>runApp(display.mode='showcase')</code> 可用来同时高亮显示执行代码</li>
-<li><code>reactive</code> 用来加速互动函数外的信息交换</li>
-<li><code>actionButton</code> 用来一次提交输入数据 <code>if (input$goButton == 1){ Conditional statements }</code> 用来定义条件语句</li>
-<li><code>cat</code> <code>browser()</code> 调试</li>
-<li><code>fluidRow</code> 产生表格</li>
-</ul>
-</div>
-<div id="rcharts" class="section level2">
-<h2>rCharts</h2>
-<ul>
-<li><a href="http://ramnathv.github.io/rCharts/">主页</a></li>
-<li>动态交互可视化工具</li>
-<li><code>require(devtools);install_github('rCharts', 'ramnathv')</code></li>
-</ul>
-</div>
-<div id="googlevis" class="section level2">
-<h2>GoogleVis</h2>
-<ul>
-<li><a href="https://developers.google.com/chart/interactive/docs/gallery">主页</a></li>
-<li>R 代码产生图表 生成html</li>
-<li><code>install.packages('googleVis');library(googleVis)</code></li>
-<li><a href="http://decastillo.github.io/googleVis_Tutorial/">教程</a></li>
-</ul>
-</div>
-<div id="slidify" class="section level2">
-<h2>Slidify</h2>
-<ul>
-<li><a href="slidify.org">主页</a></li>
-<li>html5 幻灯片</li>
-<li><code>install.packages(&quot;devtools&quot;);library(devtools);install_github('slidify', 'ramnathv');install_github('slidifyLibraries', 'ramnathv');library(slidify)</code></li>
-<li><code>author(&quot;yufree&quot;)</code></li>
-<li><code>YAML</code> 配置幻灯片结构</li>
-<li><code>##</code> 幻灯片开始 <code>---</code> 加空行表结束 <code>.class #id</code> 自定义css文件id</li>
-<li><code>slidify(&quot;index.Rmd&quot;)</code> 生成 <code>browseURL(&quot;index.html&quot;)</code> 观看</li>
-<li><code>publish_github(user, repo)</code> github发布</li>
-</ul>
-</div>
-<div id="rpresentation" class="section level2">
-<h2>Rpresentation</h2>
-<ul>
-<li>源自 R-studio</li>
-<li>轻量级幻灯片</li>
-<li><a href="ttps://support.rstudio.com/hc/en-us/articles/200486468-Authoring-R-Presentations">教程</a></li>
-</ul>
-</div>
-<div id="yhat" class="section level2">
-<h2>yhat</h2>
-<ul>
-<li><a href="https://yhathq.com/">主页</a></li>
-<li>本地提交算法或模型 生成可调用API 支持R与python</li>
-</ul>
-</div>
-<div id="r-" class="section level2">
-<h2>R 包开发</h2>
-<ul>
-<li><code>DESCRIPTION</code> 指明包内容</li>
-<li><code>Package</code> 包名字</li>
-<li><code>Title</code> 全名</li>
-<li><code>Description</code> 一句话描述</li>
-<li><code>Version</code> 版本号</li>
-<li><code>Author</code> 作者</li>
-<li><code>Maintainer</code> 维护者</li>
-<li><code>License</code> 许可协议</li>
-<li><code>Depends</code> 依赖</li>
-<li><code>Suggests</code> 建议</li>
-<li><code>Date</code> 发布日期 YYYY-MM-DD 格式</li>
-<li><code>URL</code> 项目主页</li>
-<li><code>R</code> 源码</li>
-<li><code>Documentation</code> 文档 <code>Rd</code>文件</li>
-<li><code>NAMESPACE</code> 关键词 输入输出的函数及类型</li>
-<li><code>R CMD build/check newpackage</code> 构建 检查包</li>
-<li><code>roxygen2</code> 源文件注释文档</li>
-</ul>
-</div>
-<div id="r-" class="section level2">
-<h2>R 中方法与类型</h2>
-<ul>
-<li>R 面向对象编程</li>
-<li>对象用<code>setClass</code>指定类型 用<code>setMethod</code>指定处理类型的方法</li>
-<li>对象一般指新的数据类型</li>
-<li>S3函数对象不算严格 <code>generic</code>处理对象 开放 没有指定类型就用通用方法</li>
-<li>S4函数对象定义严格 只处理指定类型对象 不可直接调用方法 针对性强</li>
-<li><code>stats4</code> 有很多针对性的极大似然估计的对象定义与方法</li>
+<li><code>formate</code>处理日期格式</li>
+<li><code>%d</code> 日</li>
+<li><code>%a</code> 周缩写</li>
+<li><code>%A</code> 周</li>
+<li><code>%m</code> 月</li>
+<li><code>%b</code> 月缩写</li>
+<li><code>%B</code> 月全名</li>
+<li><code>%y</code> 2位年</li>
+<li><code>%Y</code> 4位年</li>
+<li><code>weekdays</code> 显示星期</li>
+<li><code>months</code> 显示月份</li>
+<li><code>julian</code> 显示70年以来的日期</li>
+<li><a href="http://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html">lubridate包</a></li>
+<li><code>ymd</code></li>
+<li><code>mdy</code></li>
+<li><code>dmy</code></li>
+<li><code>ymd_hms</code></li>
+<li><code>Sys.timezone</code></li>
 </ul>
 </div>
 </div>
