@@ -1,0 +1,60 @@
+Save gasoline? try manual transmissions automobile
+========================================================
+
+Fuel consumption is always the first thing to be considered when one decided to own a car. So here data about 10 aspects of automobile design and performance for 32 automobiles were collected to show their influences on the fuel consumption. My final regression model shows that when you want to buy a automobile, holding a similar 1/4 mile time and displacement, a manual transmissions one may save the costs of fuel compared with an automatic one.
+
+Here is the list of the features and their abbreviation in the models:
+
+- `cyl` [Number of cylinders](https://en.wikipedia.org/wiki/Cylinder_(engine)) 
+- `disp` [Displacement (cu.in.)](https://en.wikipedia.org/wiki/Engine_displacement) 
+- `hp` [Gross horsepower](https://en.wikipedia.org/wiki/Horsepower) 
+- `drat` [Rear axle ratio](http://www.hardworkingtrucks.com/understanding-axle-ratios/)
+- `wt` Weight (lb/1000)
+- `qsec` 1/4 mile time
+- `vs` V/S
+- `am` Transmission
+- `gear` Number of forward gears
+- `carb` Number of carburetors
+
+## Exploratory data analyses
+
+I checked the relationship between the features to make an exploratory data analyses. I found some features were actually factor variables so we could use a dummy variable to stand for those variables to make a regression with the Miles per gallon (`mpg`), which stand for the Fuel consumption when needed. Then I calculated the correlations between the continuous variables and found some features may have a positive or negative relationship which may affect the regression such as the relationship between `disp` and `hp`, `disp` and `wt`, `drat` and `wt`, et. al.
+
+### Model selection
+
+For the cor relationship among the features, I checked the relationship between `mpg` and other single variables. For all of the variables, there are significant cor relationship and  `drat`, `qsec`, `vs`, `am`, `gear` have a positive relationship with `mpg` while the other negative. So I think a multiple (Linear) regression will be helpful when we want to know the relationship to one variable when we control the other variables.
+
+I fit a model with all of the 10 features as a predictor and only to find the relationship varied after a control for other variables and suddenly all of the coefficients variables are not have a significant relationship with the `mpg`. For example, `disp` even changed the relationship with `mpg` after a control for the other variables from negative to positive.
+
+So I need to make a variable selection when there are some cor relationship among the predictors in the full model. I keep the variables in the model such as the transmission because the customers care some issues about that. Then I simplified the model by using a principal components analysis. I found `disp`, `am`, `qsec` could be used to make a model because those variables might have little relationship from the biplot. So the final model is `mpg~disp+qsec+am`.
+
+### Model diagnose
+
+All of the three variables have a significant relationship(`p < 0.05`) with the outcome `mpg`, account for 76.81% variance. From the residual plot we can find `Pontiac Firebird`, `Lotus Europa` and `Toyota Corolla` might have a larger residual than the others. When we hold the `disp` and the `qsec`, the `am` has a positive relationship with the `mpg`. The `disp` has a negative relationship with outcome when we controlled the `qsec` and `am`. The `qsec` has a postie relationship with outcome when we controlled the `disp` and `am`. 
+
+### Uncertainty
+
+For I only use 3 features instead of 10 to build the regression model, some variation of `mpg` might be missed. However, with a $R^2$ 0.869 and no coefficients are signature(`p < 0.05`) in the full model and 0.768 in my model, the loss of the model might be small since the coefficients in my model were all signature. I just loss some features in my models which might correlated with each other to make a better inference of the coefficients. Anyway, the uncertainty of the final model might be bigger than a full model but estimate of the coefficients in the final model may be more interpretative.
+
+### Is an automatic or manual transmission better for MPG?
+
+The answer is manual is better for `mpg`. In detail, when we hold the `disp` and the `qsec`, automatic transmission means only 7.32 `mpg` while the manual one means 11.67 `mpg`. So those data showed if we want low fuel consumption, a better choice is automatic transmission automobile.
+
+### Quantifying how different is the MPG between automatic and manual transmissions?”
+
+The differences in my final model is 4.34, around 37% of the fuel consumption of the automatic transmissions could be save when choosing manual transmission holding the `qsec` and the `disp` fixed.
+
+## Appendix
+
+```{r}
+data(mtcars)
+## see the variables' relationship
+plot(mtcars)
+## principal components analysis
+fit <- princomp(mtcars[,-1], cor=TRUE)
+biplot(fit)
+## Final model
+finalfit <- lm(mpg~disp+qsec+as.factor(am)-1,data=mtcars)
+par(mfrow=c(2,2))
+plot(finalfit)
+```
