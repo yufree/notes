@@ -1,0 +1,44 @@
+---
+title: "Bioinformatics"
+author: "yufree"
+date: "2014年06月21日"
+output: html_document
+---
+
+# 生物学数据库
+
+## 数据结构
+
+- 列代表特征 行代表条目
+- 每个条目有一个唯一性特征
+- 数据表可通过列链接成为关系数据库
+
+## Pubmed 搜索
+
+- PubMed search tags
+    - [AD] – Affiliation (company or school)
+    - [ALL] – All fields (eliminates defaults)
+    - [AU] or [AUTH] – Author
+    - [1AU] – First author
+    - [ECNO] – Enzyme Commission Numbers
+    - [EDAT] – Entry date (YYYY/MM/DD)
+    - [ISS] - Issue # of journal
+    - [JOUR] - Journal (Title, Abbreviation , ISSN)
+    - [LA] – Language
+    - [PDAT] – Publication date (YYYY/MM/DD)
+    - [PT] – Publication type
+    - [SUBS] – Substance name
+    - [TIAB] – Title/Abstract
+    - [TW] – Text words
+    - [UID] – Unique identifiers (primary keys)
+    - [VOL] or [VI] – Volume of journal
+
+- MeSH terms [MH][MAJR][SH]
+    - 被 MeSH 索引的关系数据库
+    - 保守性检索 有层级关系
+- 时间段搜索 冒号分割 YYYY/MM/DD:YYYY/MM/DD
+- 序列长度搜索 [SLEN] 可以是蛋白 可以是核酸
+- 蛋白分子量搜索 [MOLWT]
+- 物种搜索 [ORGN]
+- `Nucleotide` 序列蛋白数据库
+- [MMDB](http://www.ncbi.nlm.nih.gov/structure/) 3D结构数据库
