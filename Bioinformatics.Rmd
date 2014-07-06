@@ -105,8 +105,20 @@ output: html_document
 - 蛋白定位 分泌 胞内 核内
     - MITOPRED 预测线粒体蛋白
 
+# 细菌基因组
 
+- 细菌是环形DNA 真核是线性染色体
+- 细菌不加工mRNA
+- 细菌一段mRNA上有多个顺反子 也就是多个编码DNA序列
+- 操纵子在mRNA编码的上游或下游调控转录
+- GLIMMER与FGENESB用来预测一段序列的转录情况
 
+# 病毒
+
+- 三种 RNA DNA 逆转录病毒 突变快
+- RNA病毒三种 双链 正链 负链
+- 逆转录基因组简单 Gag Pol Env
+- 凝集素等决定病毒亚型
 
 
 
