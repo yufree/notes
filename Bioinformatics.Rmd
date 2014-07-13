@@ -5,7 +5,7 @@ date: "2014年06月21日"
 output: html_document
 ---
 
-# 生物学数据库
+# 生物信息学数据库
 
 ## 数据结构
 
@@ -40,7 +40,7 @@ output: html_document
 - 序列长度搜索 [SLEN] 可以是蛋白 可以是核酸
 - 蛋白分子量搜索 [MOLWT]
 - 物种搜索 [ORGN]
-- `Nucleotide` 序列蛋白数据库
+- Nucleotide 序列蛋白数据库
 - [MMDB](http://www.ncbi.nlm.nih.gov/structure/) 3D结构数据库
 - [Genome](http://www.ncbi.nlm.nih.gov/genome/) 基因组数据库
 - [OMIM](http://omim.org/) 人类孟德尔遗传数据库 用来探索等位基因问题
@@ -111,7 +111,7 @@ output: html_document
 - 细菌不加工mRNA
 - 细菌一段mRNA上有多个顺反子 也就是多个编码DNA序列
 - 操纵子在mRNA编码的上游或下游调控转录
-- GLIMMER与FGENESB用来预测一段序列的转录情况
+- [GLIMMER](http://www.ncbi.nlm.nih.gov/genomes/MICROBES/glimmer_3.cgi)与[FGENESB](http://www.softberry.com/berry.phtml?topic=fgenesb&group=programs&subgroup=gfindb)用来预测一段序列的转录情况
 
 # 病毒
 
@@ -120,10 +120,38 @@ output: html_document
 - 逆转录基因组简单 Gag Pol Env
 - 凝集素等决定病毒亚型
 
+# 单核苷酸多态性（SNP）
 
+- 至少1%种群中存在的DNA单核苷酸变化
+- 后果
+    - 编码区改变影响表型
+    - 不改变蛋白序列的编码区可能影响mRNA加工
+    - 启动子或调控区可能影响表达
+    - 其他区没有影响 可作为染色体标记- 类型
+    - 不改变氨基酸
+    - 改变氨基酸
+    - 非编码区
+- 数据库
+    - [dbSNP](http://www.ncbi.nlm.nih.gov/SNP/)
+    - [SNPEffect](http://snpeffect.switchlab.org/) SNPs对蛋白的影响
+    - [SNPedia](http://www.snpedia.com/index.php/SNPedia) SNPs的临床效应
+    - [1000 基因组外显子计划](http://www.ncbi.nlm.nih.gov/pubmed/23128226) 第二代测序的发展
 
+# 真核基因预测
 
+- CDS是mRNA的子集
+- CDS可能比mRNA外显子少
+- 基因预测只能发现编码区外显子
+- 有些转录变化不改变蛋白序列：UTR区与同义密码子
 
+# DNA指纹
 
+- 重复 突变会影响限制性片段长度
+- VNTR 用来排除嫌犯
+- PCR 用来扩增相关片段
+- [CODIS](http://www.fbi.gov/about-us/lab/biometric-analysis/codis) 区域在美国用来鉴定身份
 
+# Ensembl
 
+- 外显子基因组学[数据库](ensembl.org)
+- 可选择人类 鼠 斑马鱼等常见物种
