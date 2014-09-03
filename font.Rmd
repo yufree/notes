@@ -1,0 +1,214 @@
+---
+title: "Font"
+author: "yufree"
+date: "2014年09月03日"
+output: html_document
+---
+
+# 字体的故事
+
+## font
+
+- 旧称fount
+- typeface的子集
+- 法语fonte 也就是「铸造」 指铅铸的字母
+- fund（数量）而来，也就是指一定数量的活字
+	
+## 衬线字体
+
+- 1977年 SanSerriffe 恶作剧
+- 113年 图拉真石柱
+
+## 衬线字体
+
+- 1816年 caslon Egyptian 用于海报
+- Akidenz Grotesk 德国 新无衬线字体
+- Univers Helvetica 瑞士 后现代 
+	
+## 字型分类
+
+- Vox系统 9类
+- 构造
+    - 字怀 counter 封闭或半封闭空间 o b n
+    - 字碗 bowl 字母弯曲 g b
+    - 主干 stem 
+- 弯衬线 直衬线 斜衬线
+- 基线 x高度
+- 升部 中线向上
+- 降部 基线向下
+- 连字 ligature fi ae 等
+		
+## 字体大小
+
+-报纸书籍 8-12够用
+- 1英寸 72点
+- 1点 0.351mm 或 0.376mm
+- pica 12点1派卡
+	
+## Letraset 干转印纸
+
+- 刮刮纸
+- 取代金属热转印
+- 被计算机取代
+	
+## 字体心理学
+		
+- 别用Courier字体，除非想要看起来像个书呆子。它是图书馆馆员和数据公司的最爱。
+- 使用Univers这样无衬线字体的人倾向于重视他们的安全和匿名身份。
+- comic sans 哗众取宠的人用的，有更多个性表达
+- 觉得自己可爱可以用Jhelley字体
+- 「如果你是在写那些将要改变人生的书信，确保字体要小，保持简约。此处少绝对就是多。大字体会揭示出一定的不安全感。
+- 人们会觉得字母O又大又圆而且还带有尾巴的字体更有人性也更友善，或许是因为这种字体看起来像是在模拟人的面孔。带有更多直线和交角的字体则具有严厉、技术、冷酷的言外之意……用心理学的术语来讲，它们是情感上被压抑的，或者说，肛门滞留的
+	
+## 易认性与易读性
+		
+- cooper black 易于辨认但不易于小尺寸阅读
+- 时装型字体
+- 字偶间距 kern 调整相邻字母不被影响
+- 易读性依赖品味与习惯
+- Albertus 易读字体
+	
+## &
+
+- et的组合缩写
+- ampersand = et, per se and
+- Coming Together 活动
+	
+## 例句
+
+- The quick brown fox jumps over the lazy dog.
+- Quick wafting zephyrs vex bold Jim.
+- Quick wafting zephyrs vex bold Jim.
+- Zany eskimo craves fixed job with quilting party.
+- Playing jazz vibe chords quickly exites my wife.
+- Mix Zapf withVeljovic and get quirky Beziers.
+- Typography isknown for two-dimensional architecture and requires extra zeal withinevery job.
+- Hamburgers | Hamburgerfont
+- LoremIpsum Dolor Letraset字体贴纸
+- Handgloves 目前最常用
+	
+## 常见字体
+
+### Textura
+    	
+- 古腾堡使用
+- 第一款字体
+- 第一套圣经现存48本 12本无缺
+- 更为流畅的威尼斯体打破了这种哥特式字体
+
+### Helvetica
+
+- 1957年诞生
+- 简洁 现代 无处不在
+	
+### Baskerville
+		
+- Q比较特殊
+- 活字天才
+- 夫人 MrsEave字体
+	
+### Gill sans
+
+- 经典无衬线字
+- 设计师乱伦
+- 正文字体
+
+### Comic Sans
+    	
+- 源于漫画
+- 类似幼圆
+- 抵制运动
+- 不像字体的字体
+
+### Futura vs Verdana
+    	
+- 宜家门
+- Verdana作者是少数靠字体发家的人
+- 德国人推出的字体
+	
+### Johnston Sans
+
+- 最早现代无衬线字体
+- 出现在中地铁
+	
+### Frutiger
+		
+- 更有人味的字体
+- Univers续作
+
+### Gotham
+
+- 影响选举
+- 质朴稳定
+	
+### Arial
+
+- 仿 Helvetica
+- 更圆滑
+- 来自微软
+- 因疑似抄袭而受质疑与鄙视
+	
+### Sabon
+		
+- 书籍最常用
+- 来自德国
+	
+### Vendome
+		
+- 触觉 雕塑感
+- 华丽
+- 来自法国
+	
+### Doves
+
+- 用来印刷圣经
+- 失传 扔到泰晤士河了
+	
+## 最差字体
+
+### Ecofont
+
+- 省墨
+- 网眼
+- 不影响识别
+		
+### Souvenir
+			
+- 设计师最恨
+- 真男人不用
+- 1914年制作
+		
+### Gill Sans Light Shadowed
+			
+- 让人头昏眼花
+- 三维效果
+- 埃舍尔版画
+
+### Brush Script
+
+- 仿手写
+- 单调 非企业风格
+		
+### papyrus
+
+- 卡梅隆在阿凡达里使用
+- 滥用
+- 贺卡专用
+- 埃及纸草书
+
+### Neuland inline
+
+- 非洲风格
+- 粗厚有棱角
+- 主题公园体
+		
+### Ransom Note
+			
+- 拼凑风格
+- 喜剧风格
+- 胶水恐吓感
+		
+### 2012奥运会字体
+
+- 做工粗劣
+- 街头涂鸦
