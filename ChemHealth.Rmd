@@ -1,0 +1,313 @@
+---
+title: "ChemHealth"
+author: "Miao YU"
+date: "2014/10/13"
+output:
+  html_document: default
+  pdf_document:
+    latex_engine: xelatex
+---
+
+# Chemicals in our environment: What is a chemical, and how are we exposed?
+
+## Chemical defination
+
+- A compound or substance that has been purified or prepared, especially artificially
+
+## How Populations Are Exposed to Chemicals
+
+![pic](http://www.atsdr.cdc.gov/hac/PHAManual/images/figure6_2.jpg)
+
+## How Chemicals Get into Our Bodies
+
+![pic](http://www.atsdr.cdc.gov/hac/PHAManual/images/figure6_3.jpg)
+![pic2](https://raw.githubusercontent.com/yufree/notes/master/pic/exposure.png
+)
+![assessment](https://raw.githubusercontent.com/yufree/notes/master/pic/assessment.png)
+
+## Database
+
+- [IRIS: Integrated Risk Information System (EPA)](http://www.epa.gov/iris/)
+
+- [HazDat Database and ToxFAQ (ATSDR)](http://www.atsdr.cdc.gov/)
+
+- [TOXNET: National Library of Medicine](http://toxnet.nlm.nih.gov/)
+
+- [MSDS: Materials Safety Data Sheets](http://www.ccohs.ca/oshanswers/legisl/msdss.html)
+
+## The Chemical Industry Work Environment
+
+## Occupational Health: Understanding and Assessing Exposures and Outcomes
+
+- Occupational Health Surveillance
+- Exposure Assessment
+- Occupational Epidemiology Study Designs
+
+    - Cohort: a designated group of individuals who are identified as eligible for the study, subject to further inclusion factors, in order to evaluate factors associated with adverse health outcomes
+    - no random selection of individuals into the cohort
+    - Cohort studies can be prospective or retrospective
+    
+- What Is the Healthy Worker Effect?
+
+    - Observation that workers exhibit lower mortality rates than the general population
+    - Selection of “healthier” persons into the workforce
+    - Retention of “healthier” persons in the workforce
+    - In appropriate comparison population that differs in terms of Vital status ascertainment Differential diagnoses Risk factors for mortality  Access to treatment
+    
+## Industrial Hygiene Practices
+
+## Regulatory Programs and Initiatives
+
+# Toxicology: What do chemicals do in our bodies?
+
+## Intro to Chemicals and Health
+
+- Toxicology: the study of poisons
+- Poisons: chemical or physical substances which produce adverse responses in biological organisms
+- Toxicants: toxic substances that are either manmade or result from human activity
+- Toxins: usually toxic substances produced by living organisms, such as reptiles, insects, plants, and microorganisms
+
+> “The dose makes the poison” — Paracelsus
+
+## Processes Involved in Chemical Toxicity
+
+- Exposure is outside the body
+- After absorption, you have an internal dose
+- Distribution mainly through blood
+    - Biotransformation
+    - Elimination
+    - Storage
+        - Fat (lipid-soluble)
+        - Bone (minerals)
+- The end result of these toxicokinetic processes is a biologically effective dose (BED) of the toxicant
+- The biologically effective dose is that portion of the internal dose that interacts with biological molecules (targets)
+    - Leads to changes in cells 
+        - Molecular
+        - Biochemical changes
+    - Cell toxicity
+    - Organ dysfunction/disease
+- The effect depends on the dose of the agent
+- Toxicokinetics: (movement) processes that the body subjects the chemical to
+    - Absorption: taking in of a chemical from a site(s) of exposure (i.e., gastrointestinal system) resulting in an internal dose
+    - Distribution: distributing a chemical from its site of absorption throughout the body
+    - Excretion/elimination: removing the chemical from the body
+    - Biotransformation/metabolism: modification of chemicals by enzymes in the body
+- Toxicodynamics: (changes) what the chemical does to the organism, Toxicodynamics refers to the effects of toxicants (or their metabolites) in biological systems
+    - Some interactions with target molecules result in an adverse biological effect, while others may not
+    - For some chemicals, the form that interacts with targets is the original chemical
+    - For other chemicals, the toxic form is a biotransformation product(s) of that chemical
+
+# Biomonitoring: How do we measure chemicals in our bodies and why?
+
+## Exposure Assessment Approaches
+
+- Questionnaire/historical information
+- Environmental monitoring
+- Personal monitoring
+- Biomonitoring
+- Combine these approaches with calibrated and validated models
+
+## Biomonitoring
+
+- A useful tool for exposure assessment
+- Defined as the assessment of internal dose by measuring the parent chemical (or its metabolite or reaction product) in human specimens (for example: blood, urine)
+- Measurement of concentrations, not exposures
+
+## Evaluation of Human Exposure Using Biomonitoring
+
+- Large–scale population surveys
+    - NHANES: provides a foundation for CDC’s National Biomonitoring Program
+- Epidemiological studies of specific populations
+    - Susceptible/vulnerable
+    - Highly exposed (for example: NICU infants, occupational settings)
+    
+## Considerations in Biomonitoring
+
+- What is the best chemical measure (analyte)?
+    - Parent chemical or metabolite or adduct
+- What is the best time to obtain the specimen?
+    - Measurement time windows
+- What is the best specimen (matrix)?
+    - Blood and urine
+- Analytical considerations
+    - Related to the specimen (for example: stability, contamination,
+interferences, etc.)
+    - Related to the method (for example: validated method, sensitivity, specificity, QA/QC, etc.)
+
+## NHANES: How We Assess Exposure of the US Population to Priority Environmental Chemicals
+
+- Began in 1971
+- Continuous survey since 1999 (survey cycle = two years)
+- Stratified, multistate national probability sample
+- About 10,000 participants in 30 locations every two years
+- method
+    - Face-to-face and computer-assisted interviews:Demographics, Socioeconomic, Dietary,Health-related topics
+    - Physical examination
+    - Biological specimen collection
+    - More at: http://www.cdc.gov/nchs/nhanes/about_nhanes.htm
+- Not all chemicals are measured in everyone, except:Blood Pb, Cd, and Hg: all persons one year and older, Serum cotinine: all persons three years and older
+- Most urinary chemical measurements are made in a 1/3 subsample of the participants, Ages six years and older,Subsamples are determined so they are representative of the US population
+- Biomonitoring results are presented in the National Report on Human Exposure to Environmental Chemicals
+- [DATA](http://www.cdc.gov/exposurereport/)
+- Chemical properties (for example: persistence in the body, metabolism, stability) and analytical considerations are factors in biomarker selection and specimen collection
+- Detection of a chemical does not mean that it causes disease
+
+## Biomonitoring at the state and local laboratories
+
+- CDC’s data can not be used at the state & local level
+- [APHL. Public health laboratories](http://www.aphl.org/aboutaphl/aboutphls/pages/default.aspx)
+
+# Health effects of chemicals: How do we figure out how chemicals affect our health?
+
+## Discuss different types of health effects
+
+- Acute vs latent
+- Transient vs chronic
+- Beneficial vs adverse
+
+## Describe various health endpoints
+
+- Acute toxicity
+    - Generally related to short-term exposure,severeeffects
+    - Example:carbonmonoxidepoisoning
+    - Can have short-term and long-term consequences
+- Repeated dose toxicity
+    -Depends on toxicokinetics(what happens to the toxin in the body, and how quickly) 
+    - Effects could be acute(threshold),subacute,orchronic
+    - Example: some medications build up effects(e.g.,acetaminophen)
+- Genotoxicity
+    - Some chemicals can damage DNA, causing mutations when the cells divide
+    - These mutations can lead to cancer if the cells are in not reproductive(eggorsperm) cells, or to some birth defects
+- Carcinogenicity
+    - Ability to cause cancer or make cancer more likely
+    - Can be director in direct effects
+    - Most chemicals that have been identified as likely carcinogens have been from animal studies; fewer from direct human epidemiology
+    - Occupational workers most likely to be exposed; examples are coke oven workers, asbestos workers
+- Reproductive toxicity
+    - Reproduction is complex, and process can be interrupted at many points
+    - Some effects from direct toxicity to egg or sperm cells, other effects on developing
+    - Difficult to identify in people; most identified in animal models
+fetus
+- Endocrine disruption
+    - Relatively recent findings of chemicals mimicking naturally occurring hormones such as sex hormones
+    - Possible links to development, maturation, sexual maturation
+    - Early in our understanding
+- Neurotoxicity: general,delayed
+    - Effect on developing or mature nervous system
+    - Effects on central nervous system including cognition(lead), peripheral nervous system
+- Other: immunotoxicity, allergenicity, intolerance
+- [Toxicity endpoints](www.efsa.europa.eu/en/efsajournal/doc/1518.pdf)
+- [National Environmental Health Tracking Network](http://ephtracking.cdc.gov)
+- Causal association: Hill’s Causal Criteria
+
+## Risk Assessment in Environmental Decision Making
+
+- Risk Assessment
+    - a policy tool designed to facilitate management of environmental health hazards
+    - Risk assessment is an integration of information from various scientific domains
+    - facilitate decision making, not science
+- Who Uses Risk Assessment
+    - Federal and international agencies
+    - State environmental/health agencies
+    - Industry
+    - Non-governmental groups
+## The Four Steps of Risk Assessment
+
+- Hazard Identification
+    - Identify chemicals of concern and potential associated health effects
+    - Evaluate evidence that exposure to a given chemical elicits an adverse response
+    - Qualitative evaluation of relationship between exposure and adverse effects
+    - Effects seen in one human population are predictive for others
+    - Average human may be as sensitive as most sensitive animal responder
+    - Site concordance (tumors) or effects concordance (non-cancer responses) do not necessarily hold
+- Dose-Response Assessment
+    - Quantitative characterization of the relationship between a chemical agent dose and the incidence of adverse health effects
+    - Where possible, quantitative toxicity metrics are presented
+- Exposure Assessment
+    - Quantitative characterization of human exposure/contact with chemical hazards
+    - Integrates information on  Chemical concentrations in environmental media, Human activity patterns and Population characteristics
+    - Predicts magnitude of human exposure in the form of external dose in milligrams per kilogram of body weight per day
+    - Estimation of intake of a chemical
+    - Key components Concentration of chemical in media of interest, Media intake rate, Time components(Frequency Duration Averaging time) and Body weight
+
+![exposure](https://raw.githubusercontent.com/yufree/notes/master/pic/exposureM.png)
+
+- Risk Characterization
+
+    - Integration of information from hazard identification, dose-response evaluation, and exposure assessment steps
+    - A risk characterization often includes ...
+        - Prediction of carcinogenic risks and potential for non-carcinogenic hazard
+        - Estimation of population burden (cancer)
+        - Uncertainty discussion
+    - Quantitative Risk Characterization
+        - Risk of 1 x 10e-6 is “one case per million persons exposed over a lifetime"
+    - Risk = exposed dose × effect unitless 
+    - No. cases = risk × population size
+    - The outputs of a risk assessment typically include an estimate of cancer risk, non- cancer hazard, population cancer burden, and an uncertainty discussion
+
+# Chemicals policy: What do we do about chemicals and health?
+
+## Toxic Substances Control Act
+
+- Covers most chemicals used in industry and in commercial/consumer products
+- Excludes:
+    - Uses in drugs, cosmetics, food, and food packaging regulated by FDA
+    - Uses in pesticides covered by EPA under FIFRA
+- Basic provisions have never been amended
+- Chemical Policy
+    - Legislation
+    - Regulation
+    - Court decisions (“case law”)
+
+## Drivers for Chemical Policy Reform
+
+- Chemicals Are Ubiquitous
+    - 10 trillion pounds produced per year in the US
+    - Used to make 96% of all materials and products
+    - Large but unknown number of chemicals in US commerce
+- Science Drivers: Connecting the Dots
+    - Certain chronic diseases are on the rise
+    - Certain chemicals are linked to those same chronic diseases
+    - Many of those same chemicals are in us
+- Diseases Linked to Chemical Exposures
+    - Cancer
+    - Learning and developmental disabilities 
+    - Parkinson’s and Alzheimer’s disease
+    - Reproductive health and fertility problems 
+    - Asthma
+    - Diabetes
+    - Obesity
+    - Immune disorders
+    - Cardiovascular disease
+- Understanding of extent and pathways of chemical exposures
+    - Long-range transport
+    - Migration of chemicals from products into environment
+    - Disproportionate exposures: environmental justice issues
+    - Advent of biomonitoring
+    - Early-life exposures
+- Risk assessment evolution and controversy
+- “RedBook”(1983),and a major update “SilverBook”(2009)
+- Key challenges: Human variability, Uncertainty, Cumulative effects and exposures(Multiple chemicals, Chemicals and other stressors)
+- Emerging high-throughput testing: Tox21
+
+## Why Legislative Reform?
+
+- New chemicals
+    - No data, no problem
+    - Guessing game
+    - Catch-22
+    - Anti-precaution
+- Why Now?
+    - State legislation and policy changes
+    - Top priority of last two EPA administrators
+    - Market demand, especially from downstream users
+    - Retail regulation 
+    - European Union’s REACH Regulation and Canadian Environmental Protection Act
+- REACH    
+    - “No data,no market”
+    - Shifting the burden of proof: Industry required to show safety
+    - Information flow in supply chains: Two-way flow between suppliers <--> customers
+    - Authorization required to use substances of very high concern
+- Action
+    - [EDF](http://www.edf.org/health/policy/chemicals-policy-reform)
+    - [EDF Health blog](http://blogs.edf.org/health/)
