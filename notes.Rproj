@@ -6,7 +6,11 @@ AlwaysSaveHistory: Default
 
 EnableCodeIndexing: Yes
 UseSpacesForTab: Yes
+<<<<<<< HEAD
 NumSpacesForTab: 4
+=======
+NumSpacesForTab: 2
+>>>>>>> origin/gh-pages
 Encoding: UTF-8
 
 RnwWeave: knitr

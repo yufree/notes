@@ -176,7 +176,10 @@ summary(lm(y ~ x1 + x2))$coef
 > There are known knowns. These are things we know that we know. There are known unknowns. That is to say, there are things that we know we don't know. But there are also unknown unknowns. There are things we don't know we don't know. Donald Rumsfeld
 
 - 随机化有助于平衡未知变量
+<<<<<<< HEAD
 - 杠杆点 加入前后与回归线距离差的比值
+=======
+>>>>>>> origin/gh-pages
 - 参数方差膨胀 共相关或随机相关 `vif`来检验 协变量在欠拟合下有偏
 - 协变量的选择需要专业知识与经验
 
