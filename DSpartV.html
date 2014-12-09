@@ -6,7 +6,6 @@
 
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
 <meta name="generator" content="pandoc" />
 
 
@@ -246,6 +245,7 @@ summary(lm(y ~ x1 + x2))$coef</code></pre>
 </blockquote>
 <ul>
 <li>随机化有助于平衡未知变量</li>
+<li>杠杆点 加入前后与回归线距离差的比值</li>
 <li>参数方差膨胀 共相关或随机相关 <code>vif</code>来检验 协变量在欠拟合下有偏</li>
 <li>协变量的选择需要专业知识与经验</li>
 </ul>
@@ -659,12 +659,12 @@ $(document).ready(function () {
 
 </script>
 
-<!-- dynamically load mathjax for compatibility with --self-contained -->
+<!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
