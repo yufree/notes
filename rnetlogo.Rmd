@@ -1,0 +1,84 @@
+---
+title: "RNetLogo 试用"
+author: "yufree"
+date: "2015年1月4日"
+output: slidy_presentation
+---
+
+## Agent-based models (ABM)
+
+- [个体为本模型](https://zh.wikipedia.org/wiki/%E4%B8%AA%E4%BD%93%E4%B8%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B)
+- 研究个体交互作用下整体规律现象的模型
+- 基于简单规律下的计算模拟
+- 自下而上
+
+## 应用
+
+- 社会科学： agent-based social simulation (ABSS)
+- 经济学：agent-based computational economics (ACE)
+- 生态学：种群模型
+- 计算机科学：distributed artificial intelligence (DAI)
+- 举例
+    - Schelling’s segregation model 
+    - Epstein and Axtell's Sugarscape model 
+
+## ABM中的统计学
+
+- 基于归纳 建模基础
+- 个体行为符合统计规律
+- 潜在变量分析
+- 应用中的不确定性分析与敏感度分析
+- 统计推断
+
+## NetLogo
+
+- Wilensky 开发
+- 开源ABM软件
+- 类Logo语法
+- GUI 操作简单 易上手
+
+## RNetLogo
+
+- 连接R与NetLogo的工具
+
+![](pic/rnetlogo.png)
+
+## 安装与启动
+
+``` r
+install.package('RNetLogo')
+library("RNetLogo")
+# 设定你NetLogo的位置
+nl.path <- "/Applications/NetLogo 5.1.0"
+# 启动界面 
+# 如果出现java.lang.UnsupportedClassVersionError: nlcon/Preprocess : Unsupported major.minor version 51.0 建议试用JGR作为IDE rJava与RStudio目前有点不配合
+NLStart(nl.path)
+```
+
+## 林火模型
+
+``` r
+model.path <- file.path("models", "Sample Models", "Earth Science","Fire.nlogo")
+NLLoadModel(file.path(nl.path, model.path))
+NLCommand("set density 70")    # 设定森林密度
+NLCommand("setup")             # 初始化 
+NLCommand("go")                # 运行模型一次
+# 模拟火灾的覆盖面积
+library(ggplot2)
+NLCommand("set density 70")
+NLCommand("setup")
+burned <- NLDoReportWhile("any? turtles", "go",
+                c("ticks", "(burned-trees / initial-trees) * 100"),
+                as.data.frame = TRUE, df.col.names = c("tick", "percent.burned"))
+# 用ggplot2对运行时间与模型覆盖度作图
+p <- ggplot(burned,aes(x=tick,y=percent.burned))
+p + geom_line() + ggtitle("Non-linear forest fire progression with density = 60")
+# 与控制台交互
+NLCommand("print \"Hello NetLogo, I called you from R.\"")
+# 退出
+NLQuit()
+```
+
+## 参考文献
+
+Thiele, Jan C. “R Marries NetLogo: Introduction to the RNetLogo Package.” Journal of Statistical, 2014. http://www.jstatsoft.org/v58/i02/paper.
