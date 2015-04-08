@@ -151,8 +151,8 @@ output: slidy_presentation
 
 ### 人群画像（年龄 性别 兴趣爱好）
 
-<center><img src="pic/human.png" height="450px" width="700px" /></center>
 <center><img src="pic/human2.png" height="450px" width="700px" /></center>
+<center><img src="pic/human.png" height="450px" width="700px" /></center>
 
 ###工具偏差与基线
 
