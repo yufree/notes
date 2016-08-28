@@ -188,13 +188,6 @@ output: html_document
 5）7月14日前入住亚太区喜达屋酒店和度假酒店两晚，并使用万事达卡付费，即可乐享八折。
 网址：http://www.spg-asiapacific.com/save20/cn/
 
-- 餐饮积分
-
-时间：3月15日~6月15日
-玩法：在参与活动的餐厅完成10美元或以上的餐饮消费，可获得双倍积分（挂房账也可以）。
-SPG会员出示会员卡（APP、报卡号）还可以免除15%的服务费，相当于八五折用餐。
-网址：http://spg.com/twiceasnice-cn
-
 - 卖分 
 
 最高75折，折扣应该历史最高了 
@@ -399,6 +392,7 @@ twitter跟ins关注@MarriottRewards 与@GaylordHotels 每次25分 共100分 用#
 ## 信用卡
 
 信用卡的成本核算
+
 ### 国内
 
 #### 招行
