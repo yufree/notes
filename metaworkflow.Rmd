@@ -2,7 +2,7 @@
 title: "Meta-Workflow"
 author: "Miao Yu"
 date: "August 16, 2016"
-output: html_document
+output: slidy_presentation
 ---
 
 ```{r setup, include=FALSE}
@@ -23,7 +23,7 @@ The workflow of the metabolomic study always began with data collection and ende
 
 ## Project Setup
 
-I suggest any group member to build their data analysis project in RStudio(Click File - New project - New dictionary - Empty project). Then assign a name for your project. I recommend the following tips if you are familiar with it.
+I suggest to build your data analysis project in RStudio(Click File - New project - New dictionary - Empty project). Then assign a name for your project. I recommend the following tips if you are familiar with it.
 
 - Use [git](https://git-scm.com/)/[github](https://github.com/) to make version control of your code and sync your project online.
 
@@ -60,7 +60,7 @@ Here is a demo:
 ```{r demo1,message=F,warning=FALSE}
 # install the packages for data analysis and 
 # source("https://bioconductor.org/biocLite.R")
-# biocLite(c("multtest","faahKO","xcms","qvalue","CAMERA"))
+# biocLite(c("multtest","faahKO","xcms","qvalue","CAMERA","ropls"))
 # load the functions and dataset for demo
 
 library(multtest)
@@ -222,3 +222,91 @@ Right now, it is hard to connect different omics databases such as gene, protein
 This is the offline metaboliomics data process workflow. For each study, details would be different and F1 is always your best friend. 
 
 Enjoy yourself in data mining!
+
+## Algorithm code for data analysis
+
+## K means
+
+```{r demo12}
+# get the ions for PCA
+pdreport <- dreport[,15:26]
+indx <- sapply(pdreport, is.factor)
+pdreport[indx] <- lapply(pdreport[indx], function(x) as.numeric(as.character(x)))
+tpdreport <- data.frame(t(pdreport))
+labels <- c(1,1,1,1,1,1,2,2,2,2,2,2)
+# get the cluster
+library(cluster)
+clus <- kmeans(tpdreport, centers=2)
+dissE <- daisy(tpdreport) 
+dE2   <- dissE^2
+sk2   <- silhouette(clus$cl, dE2)
+plot(sk2,main="1-6 for KO, 7-12 for WT")
+
+```
+
+## Hierarchical
+
+```{r demo13}
+# Ward Hierarchical Clustering
+d <- dist(tpdreport, method = "euclidean") 
+# distance matrix
+fit <- hclust(d, method="ward") 
+# display dendogram
+plot(fit)
+```
+
+
+## PCA
+
+```{r demo14}
+# run PCA
+pca <- prcomp(tpdreport, center=TRUE, scale=TRUE)
+# loading plot
+plot(pca, type = "l")
+CP <- (pca$sdev^2/sum(pca$sdev^2))
+x <- 1:12
+plot(CP~x,
+     cex = 2,
+     pch = 19,
+     type = "o",
+     xlab = "Principal Components",
+     ylab = "Proportion of Variance")
+# biplot
+biplot(pca)
+plot(pca$x[,1], 
+     pca$x[,2], 
+     xlab="PC1",
+     ylab="PC2",
+     pch=rownames(tpdreport),
+     cex=2)
+```
+
+## PLS-DA
+
+```{r demo15}
+library(ropls)
+dplsda <- opls(tpdreport, as.factor(labels))
+plot(dplsda)
+```
+
+## Tree
+
+```{r demo16}
+# install.packages('randomForest')
+library(randomForest)
+# grow tree
+fit <- randomForest(y=as.factor(labels),x = as.matrix(tpdreport), importance=TRUE,ntree=200000)
+varImpPlot(fit, n.var = 10)
+```
+
+## Useful links
+
+- [Workshop slides](https://docs.google.com/presentation/d/1wuOiLa6XMZcoM_IRirQgT3z3fhnoGy4SRZYDNPI2J2o/edit?usp=sharing)
+
+- [The Elements of Statistical Learning: Data Mining, Inference, and Prediction.](http://statweb.stanford.edu/~tibs/ElemStatLearn/)
+
+- [Multivariate Analysis in Metabolomics](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4465187/)
+
+- [Ropls packages](http://bioconductor.org/packages/release/bioc/html/ropls.html)
+
+- [A tutorial review: Metabolomics and partial least squares-discriminant analysis – a marriage of convenience or a shotgun wedding](http://www.sciencedirect.com/science/article/pii/S0003267015001889)
