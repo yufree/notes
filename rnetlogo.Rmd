@@ -82,3 +82,7 @@ NLQuit()
 ## 参考文献
 
 Thiele, Jan C. “R Marries NetLogo: Introduction to the RNetLogo Package.” Journal of Statistical, 2014. http://www.jstatsoft.org/v58/i02/paper.
+
+https://mitpress.mit.edu/index.php?q=books/introduction-agent-based-modeling
+
+http://www.r-bloggers.com/agent-based-models-and-rnetlogo/
