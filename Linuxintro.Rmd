@@ -1,0 +1,294 @@
+---
+title: "Linux Introduction"
+subtitle: "Summary from edx LFS101x.2 Introduction to Linux"
+author: "Miao Yu"
+date: "2015/1/24"
+output: slidy_presentation
+---
+
+## The Linux Foundation
+
+- The Linux Foundation is a nonprofit consortium dedicated to fostering the growth of Linux.
+- The Linux Foundation training is for the community and by the community. Linux training is distribution-flexible, technically advanced, and created with the leaders of the Linux development community.
+- There are three major distribution families within Linux: Fedora, SUSE and Debian. In this course we will work with representative members of all of these families throughout.
+
+## Linux Philosophy and Concepts
+
+- Linux borrows heavily from the UNIX operating system, with which its creators were well versed. 
+- Linux accesses many features and services through files and file-like objects.
+- Linux is a fully multitasking, multiuser operating system, with built-in networking and service processes known as daemons.
+- Linux is developed by a loose confederation of developers from all over the world, collaborating over the Internet, with Linus Torvalds at the head. Technical skill and a desire to contribute are the only qualifications for participating.
+- The Linux community is a far reaching ecosystem of developers, vendors, and users that supports and advances the Linux operating system.
+- Some of the common terms used in Linux are: Kernel, Distribution, Boot loader, Service, Filesystem, X Window system, desktop environment, and command line.
+- A full Linux distribution consists of the kernel plus a number of other software tools for file-related operations, user management, and software package management.
+
+## Linux Structure and Installation
+
+- A partition is a logical part of the disk.
+- A filesystem is a method of storing/finding files on a hard disk.
+- By dividing the hard disk into partitions, data can be grouped and separated as needed. When a failure or mistake occurs, only the data in the affected partition will be damaged, while the data on the other partitions will likely survive.
+- The boot process has multiple steps, starting with BIOS, which triggers the boot loader to start up the Linux kernel. From there the initramfs filesystem is invoked, which triggers the init program to complete the startup process.
+- Determining the appropriate distribution to deploy requires that you match your specific system needs to the capabilities of the different distributions.
+
+## Graphical Interface
+
+- GNOME is a popular desktop environment and graphical user interface that runs on top of the Linux operating system.
+- The default display manager for GNOME is called gdm.
+- The gdm display manager presents the user with the login screen which prompts for the login username and password.
+- Logging out through the desktop environment kills all processes in your current X session and returns to the display manager login screen.
+- Linux enables users to switch between logged in sessions.
+- Suspending puts the computer into sleep mode.
+- For each key task, there is generally a default application installed.
+- Every user created in the system will have a home directory.
+- The Places menu contains entries that allow you to access different parts of the computer and the network.
+- Nautilus gives three formats to view files.
+- Most text editors are located in the Accessories submenu.
+- Each Linux distribution comes with its own set of desktop backgrounds.
+- GNOME comes with a set of different themes which can change the way your applications look.
+
+## System Configuration from the Graphical Interface
+
+- You can control basic configuration options and desktop settings through the System Settings panel
+- Linux always uses Coordinated Universal Time (UTC) for its own internal time-keeping . You can set Date and Time Settings from the System Settings window.
+- The Network Time Protocol is the most popular and reliable protocol for setting the local time via Internet servers.
+The Displays panel allows you to change the resolution of your display and configure multiple screens.
+- Network Manager can present available wireless networks, allow the choice of a wireless or mobile broadband network, handle passwords, and set up VPNs.
+- dpkg and RPM are the most popular package management systems used on Linux distributions.
+- Debian distributions use dpkg and apt-based utilities for package management.
+- RPM was developed by Red Hat, and adopted by a number of other distributions, including the openSUSE, Mandriva, CentOS, Oracle Linux, and others.
+
+## Finding Linux Documentation
+
+- The main sources of Linux documentation are the man pages, GNU Info, the help options and command, and a rich variety of online documentation sources. 
+- The man utility searches, formats, and displays man pages.
+- The man pages provide in-depth documentation about programs and other topics about the system including configuration files, system calls, library routines, and the kernel.
+- The GNU Info System was created by the GNU project as its standard documentation. It is robust and is accessible via command line, web, and graphical tools using info.
+- Short descriptions for commands are usually displayed with the -h or --help argument.
+- You can type help at the command line to display a synopsis of built-in commands.
+- There are many other help resources both on your system and on the Internet.
+
+## Command Line Operations
+
+- Virtual terminals (VT) in Linux are consoles, or command line terminals that use the connected monitor and keyboard.
+- Different Linux distributions start and stop the graphical desktop in different ways.
+- A terminal emulator program on the graphical desktop works by emulating a terminal within a window on the desktop.
+- The Linux system allows you to either log in via text terminal or remotely via the console.
+- When typing your password, nothing is printed to the terminal, not even a generic symbol to indicate that you typed.
+- The preferred method to shut down or reboot the system is to use the shutdown command.
+- There are two types of pathnames: absolute and relative.
+- An absolute pathname begins with the root directory and follows the tree, branch by branch, until it reaches the desired directory or file.
+- A relative pathname starts from the present working directory.
+- Using hard and soft (symbolic) links is extremely useful in Linux.
+    - hard links: two files with one inode number
+    
+    > ln file1 file2
+    
+    - soft links: different inode numbers take no extra space unless their names are very long
+    
+    > ln -s file1 file2
+    
+- cd remembers where you were last, and lets you get back there with cd -.
+- use saved history
+    - use pushd . to push current dir to a cache
+    - use dirs to show the caches
+    - use popd to change the dir from recently to remote    
+- locate performs a database search to find all file names that match a given pattern.
+    - use ls av[a-s].txt to get avb.txt
+    - use ls as[!a-s].txt to get asz.txt
+- find locates files recursively from a given directory or set of directories.
+- find is able to run commands on the files that it lists, when used with the -exec option.
+    - If you want to find a linux program (or its source or documentation) use whereis. 
+    - If you want to find an often-used file or want to perform a quick but not too accurate first search for a file use locate. 
+    - If you want to find one of your personally created files use find if you know approximately where to look or have a lot of time (searching for a file by name using find from the root takes some time). If you do not, use locate first as it is quicker. If it did not find the file you can still use find afterwards.
+- touch is used to set the access, change, and edit times of files as well as to create empty files.
+    - create an empty file using touch:
+
+    > $ touch <filename>
+
+    - To set the time stamp to a specific time:
+    
+    > $ touch -t 03201600 myfile
+
+    - This sets the file, myfile's, time stamp to 4 p.m., March 20th (03 20 1600).
+- The Advanced Packaging Tool (apt) package management system is used to manage installed software on Debian-based systems.
+- You can use the Yellowdog Updater Modified (yum) open-source command-line package-management utility for RPM-compatible Linux operating systems.
+- The zypper package management system is based on RPM and used for openSUSE.
+
+## File Operations
+
+- The filesystem tree starts at what is often called the root directory (or trunk, or /).
+- The Filesystem Hierarchy Standard (FHS) provides Linux developers and system administrators a standard directory structure for the filesystem.
+- Partitions help to segregate files according to usage, ownership and type.
+- Filesystems can be mounted anywhere on the main filesystem tree at a mount point. Automatic filesystem mounting can be set up by editing /etc/fstab.
+- NFS (The Network Filesystem) is a useful method for sharing files and data through the network systems.
+- Filesystems like /proc are called pseudo filesystems because they exist only in memory.
+- /root (slash-root) is the home directory for the root user.
+- /var may be put in its own filesystem so that growth can be contained and not fatally affect the system.
+- /boot contains the basic files needed to boot the system
+- patch is a very useful tool in Linux. Many modifications to source code and configuration files are distributed with patch files as they contain the deltas or changes to go from an old version of a file to the new version of a file.
+- File extensions in Linux do not necessarily mean that a file is of a certain type.
+- cp is used to copy files on the local machine while rsync can also be used to copy files from one machine to another as well as synchronize contents.
+- rsync is a very powerful utility. For example, a very useful way to back up a project directory might be to use the following command:
+
+> $ rsync -r project-X archive-machine:archives/project-X
+
+- gzip, bzip2, xz and zip are used to compress files and gunzip, bunzip2 and xz -d are used to de-compress.
+- tar allows you to create or extract files from an archive file, often called a tarball. You can optionally compress while creating the archive, and decompress while extracting its contents
+- dd  can be used to make large exact copies even of entire disk partitions efficiently.
+
+> dd if=/dev/sda of=/dev/sdb
+
+
+## User Environment
+
+- Linux is a multiuser system.
+- To find the currently logged on users, you can use the who command.
+- To find the current user ID, you can use the whoami command.
+- The root account has full access to the system. It is never sensible to grant full root access to a user.
+- You can assign root privileges to regular user accounts on a temporary basis using the sudo command.
+- The shell program (bash) uses multiple startup files to create the user environment. Each file affects the interactive environment in a different way. /etc/profile provides the global settings.
+- Advantages of startup files include that they customize the user's prompt, set the user's terminal type, set the command-line shortcuts and aliases, and set the default text editor, etc.
+- An environment variable is a character string that contains data used by one or more applications. The built-in shell variables can be customized to suit your requirements.
+- The history command recalls a list of previous commands which can be edited and recycled.
+- In Linux, various keyboard shortcuts can be used at the command prompt instead of long actual commands.
+- You can customize commands by creating aliases. Adding an alias to ˜/.bashrc will make it available for other shells.
+- File permissions can be changed by typing chmod permissions filename.
+- File ownership is changed by typing chown owner filename.
+- File group ownership is changed by typing chgrp group filename.
+
+## Text Editors
+
+- Text editors (rather than word processing programs) are used quite often in Linux, for tasks such as for creating or modifying system configuration files, writing scripts, developing source code, etc.
+- nano is an easy-to-use text-based editor that utilizes on-screen prompts.
+- gedit is a graphical editor very similar to Notepad in Windows.
+- The vi editor is available on all Linux systems and is very widely used. Graphical extension versions of vi are widely available as well.
+- emacs is available on all Linux systems as a popular alternative to vi. emacs can support both a graphical user interface and a text mode interface.
+- To access the vi tutorial, type vimtutor at a command line window.
+- To access the emacs tutorial type Ctl-h and then t from within emacs.
+- vi has three modes: Command, Insert, and Line; emacs has only one but requires use of special keys such as Control and Escape.
+- Both editors use various combinations of keystrokes to accomplish tasks; the learning curve to master these can be long but once mastered using either editor is extremely efficient.
+
+## Local Security Principles
+
+- The root account has authority over the entire system.
+- root privileges may be required for tasks, such as restarting services, manually installing packages and managing parts of the filesystem that are outside your home directory.
+- In order to perform any privileged operations such as system-wide changes, you need to use either su or sudo.
+- Calls to sudo trigger a lookup in the /etc/sudoers file, or in the /etc/sudoers.d directory which first validates that the calling user is allowed to use sudo and that it is being used within permitted scope
+- One of the most powerful features of sudo is its ability to log unsuccessful attempts at gaining root access.  By default sudo commands and failures are logged in /var/log/auth.log under the Debian family and /var/log/messages in other distribution families.
+- One process cannot access another process’ resources, even when that process is running with the same user privileges.
+- Using the user credentials, the system verifies the authenticity and identity.
+- The SHA-512 algorithm is typically used to encode passwords. They can be encrypted but not decrypted.
+- Pluggable Authentication Modules (PAM) can be configured to automatically verify that passwords created or modified using the passwd utility are strong enough (what is considered strong enough can also be configured).
+- Your IT security policy should start with requirements on how to properly secure physical access to servers and workstations.
+- Keeping your systems updated is an important step in avoiding security attacks.
+
+## Network Operations
+
+- The IP (Internet Protocol) address is a unique logical network address that is assigned to a device on a network.
+- IPv4 uses 32-bits for addresses and IPv6 uses 128-bits for addresses.
+- Every IP address contains both a network and a host address field.
+- There are five classes of network addresses available: A, B, C, D & E.
+- DNS (Domain Name System) is used for converting Internet domain and host names to IP addresses.
+- The ifconfig program is used to display current active network interfaces.
+- The commands ip addr show and ip route show can be used to view IP address and routing information.
+- You can use ping to check if the remote host is alive and responding.
+- You can use the route utility program to manage IP routing.
+- You can monitor and debug network problems using networking tools.
+- Firefox, Google Chrome, Chromium, and Epiphany are the main graphical browsers used in Linux.
+- Non-graphical or text browsers used in Linux are Lynx, Links, and w3m.
+- You can use wget to download webpages.
+- You can use curl to obtain information about URL's.
+- FTP (File Transfer Protocol) is used to transfer files over a network.
+- ftp, sftp, ncftp, and yafc are command line FTP clients used in Linux.
+- You can use ssh to run commands on remote systems.
+
+## Manipulating Text
+
+- The command line often allows the users to perform tasks more efficiently than the GUI.
+- cat, short for concatenate, is used to read, print and combine files.
+- echo displays a line of text either on standard output or to place in a file.
+- sed is a popular stream editor often used to filter and perform substitutions on files and text data streams.
+- awk is a interpreted programming language typically used as a data extraction and reporting tool.
+- sort is used to sort text files and output streams in either ascending or descending order.
+- uniq eliminates duplicate entries in a text file.
+- paste combines fields from different files and can also extract and combine lines from multiple sources.
+- join combines lines from two files based on a common field. It works only if files share a common field.
+- split breaks up a large file into equal-sized segments.
+- Regular expressions are text strings used for pattern matching. The pattern can be used to search for a specific location, such as the start or end of a line or a word.
+- grep searches text files and data streams for patterns and can be used with regular expressions.
+- tr translates characters, copies standard input to standard output, and handles special characters.
+- tee accepts saves a copy of standard output to a file while still displaying at the terminal.
+- wc (word count) displays the number of lines, words and characters in a file or group of files.
+- cut extracts columns from a file.
+- less views files a page at a time and allows scrolling in both directions.
+- head displays the first few lines of a file or data stream on standard output. By default it displays 10 lines.
+- tail displays the last few lines of a file or data stream on standard output. By default it displays 10 lines.
+- strings extracts printable character strings from binary files.
+- The z command family is used to read and work with compressed files.
+
+## Printing
+
+- CUPS provides two command-line interfaces: the System V and BSD interfaces.
+- The CUPS interface is available at http://localhost:631
+- lp and lpr  are used to submit a document to CUPS directly from the command line.
+- lpoptions can be used to set printer options and defaults.
+- PostScript effectively manages scaling of fonts and vector graphics to provide quality prints.
+- enscript is used to convert a text file to PostScript and other formats.
+- Portable Document Format (PDF) is the standard format used to exchange documents while ensuring a certain level of consistency in the way the documents are viewed.
+- pdftk joins and splits PDFs; pulls single pages from a file; encrypts and decrypts PDF files; adds, updates, and exports a PDF’s metadata; exports bookmarks to a text file; adds or removes attachments to a PDF; fixes a damaged PDF; and fills out PDF forms.
+- pdfinfo can extract information about PDF documents.
+- flpsed can add data to a PostScript document.
+- pdfmod is a simple application with a graphical interface that you can use to modify PDF documents.
+
+## Bash Shell Scripting
+
+- Scripts are a sequence of statements and commands stored in a file that can be executed by a shell. The most commonly used shell in Linux is bash.
+- Command substitution allows you to substitute the result of a command as a portion of another command.
+- Functions or routines are a group of commands that are used for execution.
+- Environmental variables are quantities either pre-assigned by the shell or defined and modified by the user.
+- To make environment variables visible to child processes, they need to be exported.
+- Scripts can behave differently based on the parameters (values) passed to them.
+- The process of writing the output to a file is called output redirection.
+- The process of reading input from a file is called input redirection.
+- The if statement is used to select an action based on a condition.
+- Arithmetic expressions consist of numbers and arithmetic operators, such as +, -, and *.
+
+## Advanced Bash Scripting
+
+- You can manipulate strings to perform actions such as comparison, sorting, and finding length.
+- You can use Boolean expressions when working with multiple data types including strings or numbers as well as files.
+- The output of a Boolean expression is either true or false.
+- Operators used in Boolean expressions include the && (AND), ||(OR), and ! (NOT) operators.
+- We looked at the advantages of using case statement in scenarios where the value of a variable can lead to different execution paths.
+- Script debugging methods help troubleshoot and resolve errors.
+- The standard and error outputs from a script or shell commands can easily be redirected into the same file or separate files to aid in debugging and saving results
+- Linux allows you to create temporary files and directories, which store data for a short duration, both saving space and increasing security.
+- Linux provides several different ways of generating random numbers, which are widely used.
+
+## Processes
+
+- Processes are used to perform various tasks on the system.
+- Processes can be single-threaded or multi-threaded.
+- Processes can be of different types such as interactive and non-interactive.
+- Every process has a unique identifier (PID) to enable the operating system to keep track of it.
+- The nice value, or niceness, can be used to set priority.
+- ps provides information about the currently running processes.
+- You can use top to get constant real-time updates about overall system performance as well as information about the processes running on the system.
+- Load average indicates the amount of utilization the system is under at particular times.
+- Linux supports background and foreground processing for a job.
+- at executes any non-interactive command at a specified time.
+- cron is used to schedule tasks that need to be performed at regular intervals.
+
+## Common Applications
+
+- Linux offers a wide variety of Internet applications such as web browsers, email clients, online media applications, and others.
+- Web browsers supported by Linux can be either graphical or text-based such as Firefox, Google Chrome, Epiphany, w3m, lynx and others.
+- Linux supports graphical email clients, such as Thunderbird, Evolution, and Claws Mail, and text mode email clients, such as mutt and mail.
+- Linux systems provide many other applications for performing Internet-related tasks, such as Filezilla, XChat, Pidgin, and others.
+- Most Linux distributions offer LibreOffice to create and edit different kinds of documents.
+- Linux systems offer entire suites of development applications and tools, including compilers and debuggers.
+- Linux systems offer a number of sound players including Amarok, Audacity, and Rhythmbox.
+- Linux systems offer a number of movie players including VLC, MPlayer, Xine, and Totem.
+- Linux systems offer a number of movie editors including Kino, Cinepaint, Blender among others.
+- The GIMP (GNU Image Manipulation Program) utility is a feature-rich image retouching and editing tool available on all Linux distributions.
+- Other graphics utilities that help perform various image-related tasks are eog, Inkscape, convert, and Scribus.

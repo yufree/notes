@@ -1,0 +1,349 @@
+---
+title: "常旅客攻略"
+author: "Yufree"
+date: "2016年4月16日"
+output: html_document
+---
+
+> 本攻略是对我所了解的常旅客信息的一个汇总，一来方便形成体系，二来让更多人了解常旅客并过的更明白些或者说更生活化些。
+
+## 概述
+## 常旅客信息来源
+## 常旅客术语
+
+- [常见术语](http://www.veryers.com/creditcard/1741.html)
+
+- [北美常见术语](http://travelafterwork.com/2015/08/20/%E6%96%B0%E4%BA%BA%E5%BF%85%E8%AF%BB%EF%BC%9A%E8%96%85%E7%BE%8A%E6%AF%9B%E8%88%AA%E7%A9%BA%E9%85%92%E5%BA%97%E5%BF%85%E5%A4%87%E7%BC%A9%E5%86%99%E5%92%8C%E6%9C%AF%E8%AF%AD/)
+
+- [航空术语](http://www.3798.com/archives/89.html)
+
+## 返利专题
+## 匹配专题
+## 积分专题
+## 羊毛专题
+
+- [查询协议价 ](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=61653&fromuid=26550)
+- [Rocketmiles新用户首次预订得美联航里程](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=58444&fromuid=26550)
+- [sprint新用户活动0.004美元／1AA里程](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=69144&fromuid=26550) 
+- [choicehotel新用户潜在的1.1cpm买AS,AA,UA里程方法](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=46834&fromuid=26550)
+- [利用Sears降低差旅费用 注册后用打折的Gift Card付款](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=68052&fromuid=26550) 
+- [航班延误险大全](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=34714&fromuid=26550)
+- [Priceline实战经历](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=3517&fromuid=26550)
+- [信用卡卡号生成器](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=13049&fromuid=26550)
+-  [支付宝无限提款](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=7895&fromuid=26550)
+- [北美租车折扣码](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=542&fromuid=26550) 
+- [美签技巧](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=17550&fromuid=26550) 
+- [TCB UK 赌博羊毛](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=12005&fromuid=26550) 注意防沉迷
+- [礼品卡攻略](http://www.3798.com/bbs/thread-13441-1-1.html)
+
+## 第三方专题
+
+## 酒店常旅客
+
+### spg
+
+以下来自公众号[爱浪客](http://mp.weixin.qq.com/s?__biz=MzI3ODE3NzQ1Mw==&mid=2651658393&idx=1&sn=4b82aead86448e56d1ab4f5fcdd2b239#rd)
+
+- 新注册促销，如果你还不是SPG会员：
+
+被推荐后 30 天内、点击邮件中链接注册、60 天内完成一次符合条件的住宿，都可获得 1000 点积分。
+
+网址：https://www.spgpromos.com/dashboard/site/
+飞茶网址：http://www.flyertea.com/portal.php?mod=spginvitation&id=117323（过期）
+
+- 新人促销
+
+输入你的会员号看能拿到哪一种促销，包括不限预订渠道住二送二、APP预订的住二送二、住两次7500分、住两次4000分、住两次积10晚等。
+注意：下面链接的尾数6可以换成2、3、4、5试试：）
+
+网址：https://spgpromos.com/selectmemberexclusive6
+
+新人jumpstart抽奖
+
+需要注册，面向亚太区，给新人的，老用户是邀请，感兴趣可以去邮箱要一下时间：2016年4月15日~2016年9月15日
+活动内容：注册有机会200分，花10刀有机会拿1300分，下载spg手机应用有机会500分，预定一晚有机会2500分，注册keyless有机会500分，每个活动抽200人
+网址：https://www.spgpromos.com/jumpstart
+
+- 欢迎分
+
+每次入住，金卡250积分、白金卡500积分欢迎积分。Design Hotels设计酒店也有250、500欢迎积分。
+在有的酒店，欢迎积分、欧陆式早餐或当地礼品3选一。
+网址：http://www.starwoodhotels.com/preferredguest/about/index.html?categoryId=brand.benefits.overview
+
+- “Make A Green Choice(绿色之选)”计划：
+
+无论以何种价格（包括但不限于C+P、积分兑换）入住，只要酒店参加该活动，住2晚以上都可以选择参与。亚太区参与“Make A Green Choice”计划的SPG酒店统一调整为每晚250 Starpoints积分。鼓励续住房客选择“免除客房清洁”服务，只要房间内保持整洁，可自愿决定是否需要撤换床单、洗涤被套等服务，以节省大量的水资源和能源消耗。
+
+- 新开业促销：
+
+入住拉美地区指定9家新开业酒店，每一次住宿赠送早餐和1000积分。
+网址：http://www.latin-america.starwoodoffers.com/newhotelopenings
+
+入住亚太地区新开业酒店，可享受双倍积分、早餐等额外奖励和优惠。
+网址：http://starwoodpromos.com/openingoffers-new/cn
+
+- 套房促销
+
+在参与本活动的喜达屋酒店，入住套房将获得3000分的奖励。
+网址：http://www.discoverstarwoodsuites.com
+注意：3000分约价值600元，所有有时候直接定套房也很好。
+
+- 召唤神龙
+
+2016全年住满11个品牌，奖励11000分。
+
+- 地区促销
+
+1）入住下列Mexico, the Caribbean, USA 参与本活动的喜达屋酒店两晚及以上，每次住宿可获得1000里程。
+网址：http://latin-america.starwoodoffers.com/clubpremierbono/en
+
+2）万事达卡预订及支付参与计划的酒店和度假村，在欧洲/中东/非洲地区可买两晚、送第三晚。
+网址：http://www.eame.starwoodoffers.com/eamemastercard/cn/multibrand
+  
+3）在参与本活动的喜达屋酒店（北美/拉丁美洲地区），入住两晚及以上可享第2晚六折。
+网址：http://www.americas.starwoodoffers.com/bettertomorrows
+  
+4）在参与本活动的喜达屋酒店（欧洲/中东/非洲地区），入住不同房型将获双倍/三倍积分或3000分。
+网址：http://www.earnyourdreams.com
+
+5）7月14日前入住亚太区喜达屋酒店和度假酒店两晚，并使用万事达卡付费，即可乐享八折。
+网址：http://www.spg-asiapacific.com/save20/cn/
+
+- 卖分 
+
+最高75折，折扣应该历史最高了 
+
+网址：https://buy.points.com/marketing/spg/landing_page/#/en-US（4月15日截止）
+
+- 小秘书代订
+
+除了SPG，喜达屋还推出商务人士(企业)CLP叫SPG Pro（我们一直叫小秘书。一个简单方法就是：请酒店销售或熟人帮你申请，与你的SPG会员号一致，见https://www.starwoodhotels.com/preferredguest/about/index.html?directoryId=spgpro）。现在有两个面向SPG Pro会员的促销：
+  
+1）使用SPG Pro（旅行代理）为他人订房，在3月14日至6月30日期间完成的住宿，每三次符合条件的预订可获1500分奖励，最高可获15000分。
+网址：https://www.spgpromos.com/bonusexpedition
+  
+2）使用SPG Pro（行政助理）为他人订房，在1月1日至6月30日期间完成住宿，每次符合条件的预订可获得500分奖励，最高可获得10000分。
+每在一个城市预订一次符合条件的入住，还能额外获1000分奖励，最高可获10000分。两者叠加获20000分。
+网址：https://www.spgpromos.com/cityexplorer
+
+- 抽奖活动
+时间：4月30日
+玩法：输入SPG会员号，任选一张卡片可随机抽奖。
+奖励需在入住拉斯维加斯Tribute Portfolio后方可兑现（每位会员只有一次抽奖机会）。大奖是入住该酒店获得一晚免房，可用于兑换全球Cat1~Cat6的喜达屋酒店及度假村，需7月31日前使用。
+注意：各种其他抽奖还请随时关注。
+网址：https://www.spgpromos.com/slslasvegas
+
+- 1000分换5折
+
+其实就是SPG50优惠价格，请回忆巴厘岛瑞吉。
+支付1000点，在全球大部分酒店(无论CAT级别)的RACK rate给予50% 折扣，可享受最多连续5晚半价。
+只能电话预定，需要一个个问你想要订的酒店价格，可激活所有促销活动。
+第三方查询网址：http://www.awardpad.com/rate-lookup（输入SPG50）
+
+- Uber积分
+没错，乘坐Uber，是可以累计spg积分的。请去关联一下。
+网址：https://www.spgpromos.com/uber/
+
+- 购买积分
+
+时间：等下次
+玩法：每年几次75折买分促销（配合返利网、境外返利信用卡等），每人每年可买3万分，可以多账户购买后转分。
+注意：新会员要在注册后第15天才可以购买。
+网址：https://storefront.points.com/spg/en-US/buy 
+
+- 会籍
+
+一夜升金： http://www.spg-asiapacific.com/worldmastercardgold/cn/
+
+SPG商务客plus：https://spgpromos.com/spb
+
+白金挑战：90天入住18晚，需要发邮件去申请。
+
+终身金：250 晚和 5 年尊贵会籍，终身白金：500 晚和 10年白金会籍。预计2018与万豪礼赏合并后会有变化。
+
+礼赞卡
+金卡或白金卡保级后，每年有4张、8张礼赞卡，你可以送给酒店员工表示感谢，他们可以积250、500分。
+网址：https://spgpromos.com/elitethankyou/
+
+EDM美食卡
+Eat Drink and More餐饮计划会员卡，专为吃货准备，瓦力常年备有各酒店集团美食卡。各酒店套卡内容和价格不同。主要是餐饮2人5折，本城市通用。
+网址：https://www.eatdrinkandmore.com/
+
+[SPG会籍无限延期](http://www.3798.com/bbs/forum.php?mod=viewthread&tid=30012&fromuid=26550)
+
+
+- 花积分
+
+积分太多了，你要懂得花！积分有效期12个月，动一下再延12个月。
+积分转让、积分换房4送1、积分里程大礼包、积分即时换礼等大招以后再讲。瓦力主要谈谈：
+
+SPG moments 
+玩法：SPG提供给会员用积分来竞拍的各种票：演唱会、体育赛事、电影首映门票等等。
+SPG在全世界有几个签约的体育馆包厢，包括上海梅赛德斯奔驰文化中心、洛杉矶Staples Center、纽约Madison Square Garden 和伦敦的O2 Arena。同时其他赛事包括美国网球公开赛、迈阿密热火队比赛、有时候还有其他一些餐厅体验，包场给你和你的朋友看电影首映等。有时候非常划算，而且是独一无二的体验。
+网址：https://auction.starwoodhotels.com/（有中文版）
+
+积分价值
+按照10000分2000块计算
+
+### ihg
+
+- 积分精算 
+
+0.7美分买分，简单说就是先搞到5000分，然后选p＋c方式订房，然后退掉，现金部分就变成分，可以做到70刀10000分。下面链接这个可作为订房标准，对于白版用户，记住65刀cat1，97刀cat2，不过要考虑活动叠加回血
+
+网址：http://bbs.3798.com/forum.php?mod=viewthread&tid=17960&extra=page%3D1%26filter%3Ddigest%26digest%3D1
+
+- match hertz 
+
+Spire Elite级别可得到5星hertz会员
+
+网址：http://bbs.3798.com/forum.php?mod=viewthread&tid=61199
+
+- 亲友价 
+
+预付但没有snp，但就是便宜，定之前对比下第三方
+
+网址：http://bbs.3798.com/forum.php?mod=viewthread&tid=1737&extra=page%3D1%26filter%3Ddigest%26digest%3D1
+
+- 累计里程
+
+如果有多倍里程活动，那么可以考虑将累积积分改为累积里程，例如住HI或HIX，积分很少，但国航里程就可以拿800
+
+网址：http://www.ihg.com/hotels/gb/en/global/earn-rewards/miles?PID=7372891&cm_mmc=CJ-_-4015589-_-7372891-_-DeepLinkRedirect_Gen_IC_Text_ENG&glat=AFFI&icdv=99634975
+
+- pb活动 
+
+5000分预定，可以与上面活动叠加，实现35刀住ihg
+
+### hilton
+
+- MVP（20％） USteam（15%）优惠房价 
+
+- 其他希尔顿活动：http://bbs.3798.com/forum.php?mod=viewthread&tid=78204
+
+### marriott
+
+- 绑定sns 
+
+twitter跟ins关注@MarriottRewards 与@GaylordHotels 每次25分 共100分 用#MRpoints  #MRRedFest发twitter或ins 每次25分 最多10次 这样最多可以600分
+
+网址：https://mrpoints.chirpify.com/mrpoints/register
+
+### hyatt
+
+- match 
+
+只面对spg白金以上会员，发邮件到goldpassport@hyatt.com
+
+### Accor
+
+- 股东福利
+
+51欧持股得到永久金卡
+
+网址：http://bbs.3798.com/thread-56114-1-1.html
+
+## 航空常旅客
+
+### 星空联盟
+
+#### 国航
+
+- 休息室非常好，有沙发床
+
+#### 哥伦比亚航空
+
+- 积分兑换方便
+- 有问题可以改
+
+#### 加航
+
+- 态度恶劣
+
+### 天合联盟
+
+#### 南航
+#### 东航
+#### 达美
+
+- 积分永不过期
+
+#### 大韩航空
+
+- 驾驶技术不好，大飞机颠簸
+- 空乘年轻漂亮，会中文，英文听不懂
+- 发眼罩、水、拖鞋、毛毯
+- 紧急出口无窗，空间大可调
+
+### 其它航空
+
+#### 海航
+
+- 积分不过期
+
+#### 以色列航空
+
+- 多一次安检，通过对话安检，所以经常延误
+- 空乘年轻，有酒有娱乐系统，飞机餐是拉比认证的洁食
+- 降落后要鼓掌表示敬意
+- 不属于联盟
+
+#### 波特航空
+
+- 小螺旋桨飞机冲8 Q400，比较颠簸
+- 有小零食，候机的休息处都是免费的
+- 两个空乘，两个飞行员
+- 托运行李另外收费，随身行李可单独运输
+- 下午飞机一般会晚点
+
+### 机场
+
+#### 仁川机场
+
+- 转机免税店活动多
+- wifi覆盖好，中文友好
+
+#### 多伦多城市岛机场
+
+- 一个小岛，通过地下通道过去
+- 有一个小免税店
+- 饮料小吃都免费
+- 飞机跑道的终点是湖
+
+## 信用卡
+
+信用卡的成本核算
+
+### 国内
+
+#### 招行
+
+- 任意一笔境外星巴克
+
+#### 浦发
+
+- 8%返利封顶 visa master各一张
+- ae白$5返利
+
+#### 中行
+
+- 长城卡储蓄账户取现没有手续费
+
+### 加拿大
+
+#### CIBC dividend platinum visa card
+
+- 买菜加油4%，其余1%
+- 租车保险LDW／CDW
+
+## 优惠注册链接
+
+- [Dropbox500MB奖励邀请](https://db.tt/fkiWF5s)
+- [印象笔记邀请](https://app.yinxiang.com/referral/Registration.action?sig=109fa04a28ae4b5ce839f68df2627ee3&uid=6379) 国内版
+- [Evernote邀请](https://www.evernote.com/referral/Registration.action?sig=1619d3b0402bb3015b6f8141c3e8321a&uid=4305565) 国际版
+- [3798](http://www.3798.com/bbs/?fromuid=26550) 羊毛党
+- [返利网](http://passport.fanli.com/come?id=129593204&t=4&spm=b.invite.pcoldreg.copy) 注册奖励
+- [TCB中国](http://topcashback.cn/ref/Member115585738118) 海淘返利
+- [TCB美国](http://www.topcashback.com/ref/yufree) 美淘返利
+- [TCB英国](http://www.topcashback.co.uk/ref/yufree) 英淘返利
+- [Ebates](http://www.ebates.ca/referrer?referrerid=VXorju5nQU4%3D%0D%0A&src=Link)加拿大返利
