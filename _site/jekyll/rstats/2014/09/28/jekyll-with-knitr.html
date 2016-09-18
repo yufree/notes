@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    
+        <title>Serve Jekyll Websites with servr and knitr</title>
+    
+
+    <meta name="description" content="Yufree's ideas database">
+
+    
+
+    <link rel="icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" 
+href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="post">
+	<div class="post__back">
+    	<a href="/">&lt;-- home</a>
+    </div>
+    <div class="post__title">
+    	<h1>Serve Jekyll Websites with servr and knitr</h1>
+    </div>
+    <div class="post__date">
+    	<p>September 28, 2014</p>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content"?>
+        <p>The R package <a href="https://github.com/yihui/servr"><strong>servr</strong></a> can be used to set up an HTTP server to serve files under a directory. Since <strong>servr</strong> v0.2, it has added a function <code class="highlighter-rouge">servr::jekyll()</code> specifically designed for websites based on Jekyll and R Markdown. The main features of this function are:</p>
+
+<ol>
+  <li>R Markdown source files are re-compiled through <a href="http://yihui.name/knitr"><strong>knitr</strong></a> when their corresponding Markdown output files become older<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> than source files;</li>
+  <li>The web page will refresh itself automatically in the above case as well;</li>
+</ol>
+
+<p>As a result, all you need to do is write your blog posts (R Markdown documents), and you do not need to worry about re-building the website or calling <strong>knitr</strong> commands. Whenever you save a blog post in your text editor, the web page will be updated on the fly. This is particularly handy in the <a href="http://www.rstudio.com">RStudio IDE</a>, because after you run <code class="highlighter-rouge">servr::jekyll()</code> in the console, you can start writing or editing your R Markdown posts, and the HTML output, displayed in the RStudio viewer pane, will be in sync with your source post in the source panel (see the screenshot below).</p>
+
+<p><a href="http://i.imgur.com/gKVGhiP.png"><img src="http://i.imgur.com/gKVGhiP.png" alt="Jekyll with servr and knitr" /></a></p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>You must have installed the packages <strong>servr</strong> (&gt;= 0.2) and <strong>knitr</strong> (&gt;= 1.8).</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s1">'servr'</span><span class="p">,</span><span class="w"> </span><span class="s1">'knitr'</span><span class="p">),</span><span class="w"> </span><span class="n">repos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'http://cran.rstudio.com'</span><span class="p">)</span></code></pre></figure>
+
+<p>Of course, you have to install <a href="http://jekyllrb.com">Jekyll</a> as well. For Windows users, you have to make sure <code class="highlighter-rouge">jekyll</code> can be found from your environment variable <code class="highlighter-rouge">PATH</code>, i.e., R can call it via <code class="highlighter-rouge">system('jekyll')</code>. This is normally not an issue for Linux or Mac OS X users (<code class="highlighter-rouge">gem install jekyll</code> is enough).</p>
+
+<h2 id="r-code-chunks">R code chunks</h2>
+
+<p>Now we write some R code chunks in this post. For example,</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">options</span><span class="p">(</span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
+</span><span class="n">cat</span><span class="p">(</span><span class="s2">"hello world!"</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## hello world!</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span><span class="w">
+</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="m">40</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">10</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">##  [1]  9.44  9.77 11.56 10.07 10.13 11.72 10.46  8.73  9.31  9.55 11.22
+## [12] 10.36 10.40 10.11  9.44 11.79 10.50  8.03 10.70  9.53  8.93  9.78
+## [23]  8.97  9.27  9.37  8.31 10.84 10.15  8.86 11.25 10.43  9.70 10.90
+## [34] 10.88 10.82 10.69 10.55  9.94  9.69  9.62</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># generate a table
+</span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">mtcars</span><span class="p">))</span></code></pre></figure>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: right">mpg</th>
+      <th style="text-align: right">cyl</th>
+      <th style="text-align: right">disp</th>
+      <th style="text-align: right">hp</th>
+      <th style="text-align: right">drat</th>
+      <th style="text-align: right">wt</th>
+      <th style="text-align: right">qsec</th>
+      <th style="text-align: right">vs</th>
+      <th style="text-align: right">am</th>
+      <th style="text-align: right">gear</th>
+      <th style="text-align: right">carb</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Mazda RX4</td>
+      <td style="text-align: right">21.0</td>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">160</td>
+      <td style="text-align: right">110</td>
+      <td style="text-align: right">3.90</td>
+      <td style="text-align: right">2.62</td>
+      <td style="text-align: right">16.5</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">4</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Mazda RX4 Wag</td>
+      <td style="text-align: right">21.0</td>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">160</td>
+      <td style="text-align: right">110</td>
+      <td style="text-align: right">3.90</td>
+      <td style="text-align: right">2.88</td>
+      <td style="text-align: right">17.0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">4</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Datsun 710</td>
+      <td style="text-align: right">22.8</td>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">108</td>
+      <td style="text-align: right">93</td>
+      <td style="text-align: right">3.85</td>
+      <td style="text-align: right">2.32</td>
+      <td style="text-align: right">18.6</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Hornet 4 Drive</td>
+      <td style="text-align: right">21.4</td>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">258</td>
+      <td style="text-align: right">110</td>
+      <td style="text-align: right">3.08</td>
+      <td style="text-align: right">3.21</td>
+      <td style="text-align: right">19.4</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Hornet Sportabout</td>
+      <td style="text-align: right">18.7</td>
+      <td style="text-align: right">8</td>
+      <td style="text-align: right">360</td>
+      <td style="text-align: right">175</td>
+      <td style="text-align: right">3.15</td>
+      <td style="text-align: right">3.44</td>
+      <td style="text-align: right">17.0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Valiant</td>
+      <td style="text-align: right">18.1</td>
+      <td style="text-align: right">6</td>
+      <td style="text-align: right">225</td>
+      <td style="text-align: right">105</td>
+      <td style="text-align: right">2.76</td>
+      <td style="text-align: right">3.46</td>
+      <td style="text-align: right">20.2</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">1</td>
+    </tr>
+  </tbody>
+</table>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="p">(</span><span class="k">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="c1"># a boring comment
+</span><span class="p">})()</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] 2</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="nf">names</span><span class="p">(</span><span class="n">formals</span><span class="p">(</span><span class="n">servr</span><span class="o">::</span><span class="n">jekyll</span><span class="p">))</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="n">arguments</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">jekyll</span><span class="p">()</span><span class="w"> </span><span class="k">function</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] "dir"     "input"   "output"  "script"  "serve"   "command"
+## [7] "..."</code></pre></figure>
+
+<p>Just to test inline R expressions<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> in <strong>knitr</strong>, we know the first element in <code class="highlighter-rouge">x</code> (created in the code chunk above) is 9.44. You can certainly draw some graphs as well:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">.1</span><span class="p">,</span><span class="w"> </span><span class="m">.1</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">cars</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">19</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'red'</span><span class="p">)</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">scatterplot</span></code></pre></figure>
+
+<p><img src="http://yufree.cn/notes/figures/2014-09-28-jekyll-with-knitr/cars-1.png" alt="A scatterplot of the cars data" /></p>
+
+<h2 id="the-build-script">The build script</h2>
+
+<p>Zero-configuration is required for <code class="highlighter-rouge">servr::jekyll()</code> to work on your Jekyll website. However, there is always demand for more control over some options, which can be defined in a custom build script. Here are the arguments of <code class="highlighter-rouge">servr::jekyll()</code>:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">jekyll</span><span class="p">(</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"."</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span><span class="w"> </span><span class="s2">"_source"</span><span class="p">,</span><span class="w"> </span><span class="s2">"_posts"</span><span class="p">),</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"_posts"</span><span class="p">,</span><span class="w"> </span><span class="s2">"_posts"</span><span class="p">),</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Makefile"</span><span class="p">,</span><span class="w"> </span><span class="s2">"build.R"</span><span class="p">),</span><span class="w"> </span><span class="n">serve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> 
+    </span><span class="n">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"jekyll build"</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p">)</span></code></pre></figure>
+
+<p>By default, <code class="highlighter-rouge">jekyll()</code> looks for <code class="highlighter-rouge">.Rmd</code> files under the root directory, the <code class="highlighter-rouge">_source</code> directory, and the <code class="highlighter-rouge">_posts</code> directory of the Jekyll website. For example, if you put your R Markdown posts under <code class="highlighter-rouge">_source</code>, they will be compiled to the <code class="highlighter-rouge">_posts</code> directory<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>.</p>
+
+<p>The <code class="highlighter-rouge">script</code> argument specifies a Makefile or an R script to be used to compile your R Markdown files. If it is a Makefile, <code class="highlighter-rouge">jekyll()</code> will run <code class="highlighter-rouge">make -q</code> to see if the site needs to be recompiled, then <code class="highlighter-rouge">make</code> if it does. If the script is an R script, say, named <code class="highlighter-rouge">build.R</code>, it is called via command line of the form</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Rscript build.R arg1 arg2
+</code></pre>
+</div>
+
+<p>See <code class="highlighter-rouge">?servr::jekyll</code> for more details. You can define all your <strong>knitr</strong> options and any other options in this R script. See the script <a href="https://github.com/yihui/knitr-jekyll/blob/gh-pages/build.R">build.R</a> in the knitr-jekyll repository for an example: it will automatically set up the output renderers for <strong>knitr</strong>, e.g., when the Jekyll Markdown engine is <code class="highlighter-rouge">kramdown</code>, this script will call <code class="highlighter-rouge">knitr::render_jekyll()</code> so that the code chunk output will be put inside the Liquid tag <code class="highlighter-rouge"><span class="p">{</span><span class="err">%</span><span class="w"> </span><span class="err">highlight</span><span class="w"> </span><span class="err">lang</span><span class="w"> </span><span class="err">%</span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="err">%</span><span class="w"> </span><span class="err">endhighlight</span><span class="w"> </span><span class="err">%</span><span class="p">}</span></code>; it also sets up some <strong>knitr</strong> chunk and package options so that figures can be displayed correctly. For those who do not wish to store images in GIT (because normally they are binary files), you may check out how I host my images in Dropbox for this repository (see the code below <code class="highlighter-rouge">Sys.getenv('USER') == 'yihui'</code>).</p>
+
+<h2 id="on-the-markdown-renderers">On the Markdown renderers</h2>
+
+<p>Jekyll supports a number of Markdown renderers, such as kramdown, redcarpet, rdiscount, and so on. At the moment, it is a little annoying that kramdown supports LaTeX math expressions via <code class="highlighter-rouge">$$ math $$</code><sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup>, but does not support syntax highlighting of code blocks using the three backticks syntax (you must write the awkward Liquid tags); on the other hand, redcarpet does not support LaTeX math but does support three backticks. In my opinion, all the different flavors and implementations of Markdown is the biggest problem of Markdown, since there is not an unambiguous spec for Markdown. <a href="http://commonmark.org">CommonMark</a> looks like a promising project to set up a common spec for Markdown, and <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> is a great implementation that has brought almost all the features that you may ever need in Markdown. You may find some Pandoc plugins for Jekyll by searching online. However, GitHub Pages does not support arbitrary Jekyll plugins, so you cannot just use a Pandoc plugin there, but that does not mean you cannot use Pandoc locally, nor does it mean you cannot push locally compiled HTML pages to GitHub Pages<sup id="fnref:5"><a href="#fn:5" class="footnote">5</a></sup>.</p>
+
+<p>I’d love you to <a href="https://github.com/yihui/knitr-jekyll">fork</a> this repository, make some (hopefully minor) changes, and <a href="https://github.com/yihui/knitr-jekyll/issues">let me know</a> your success of using Pandoc with Jekyll. Happy hacking, and good luck!</p>
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Determined by the modification time of files, i.e., <code class="highlighter-rouge">file.info(x)[, 'mtime']</code>. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>The syntax in R Markdown for inline expressions is <code class="highlighter-rouge">`r code`</code>, where <code class="highlighter-rouge">code</code> is the R expression that you want to evaluate, e.g. <code class="highlighter-rouge">x[1]</code>. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>The reason that we may need to write R Markdown posts in <code class="highlighter-rouge">_source</code> instead of <code class="highlighter-rouge">_posts</code> is that Jekyll has <a href="https://github.com/jekyll/jekyll/pull/3147">a subtle bug</a> (fixed in v2.5.3): its variable <code class="highlighter-rouge">site.posts</code> will count <code class="highlighter-rouge">.Rmd</code> files under <code class="highlighter-rouge">_posts</code> as well. The consequence is, if you list all the posts of your website, the post <code class="highlighter-rouge">_posts/yyyy-mm-dd-foo.md</code> will show up twice due to the existence of <code class="highlighter-rouge">_posts/yyyy-mm-dd-foo.Rmd</code>, therefore I would recommend you to put your R Markdown posts in a separate directory, such as <code class="highlighter-rouge">_source</code>. <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p>Unfortunately, kramdown does not support math expressions in single dollars, e.g. <code class="highlighter-rouge">$ \alpha $</code>. <a href="#fnref:4" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:5">
+      <p>If you choose to generate your Jekyll website locally, and push the HTML files to GitHub, you will need the file <a href="https://help.github.com/articles/using-jekyll-with-pages"><code class="highlighter-rouge">.nojekyll</code></a> in the root directory of your website. <a href="#fnref:5" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+    </div>
+</div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+# Blog settings
+# permalink: /_posts/:title
+
+# My variables
+name: Yufree's notes
+description: Yufree's ideas database
+
+# File management
+exclude: ["LICENSE"]
+
+# Sass
+sass:
+  style: :compressed
+  sass_dir: _sass
+
+# Markdown
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+highlighter: rouge

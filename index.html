@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<div class="header">
+    <h1>{{ site.name }}</h1>
+</div>
+<div class="blog">
+    <h1>Notes:</h1>
+    <ul>
+        {% for post in site.posts %}
+        <li>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
