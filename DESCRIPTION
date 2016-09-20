@@ -2,3 +2,4 @@ Package: placeholder
 Title: Notes
 Version: 0.0.1
 Imports: bookdown, RColorBrewer
+Remotes: yufree/notes
