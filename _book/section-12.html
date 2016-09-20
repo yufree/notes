@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="This is notes from yufree">
+  <meta name="generator" content="bookdown 0.1.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is notes from yufree" />
+  <meta name="github-repo" content="yufree/notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes" />
+  
+  <meta name="twitter:description" content="This is notes from yufree" />
+  
+
+<meta name="author" content="Miao YU">
+
+<meta name="date" content="2016-09-20">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="section-11.html">
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 笔记目录</a></li>
+<li class="chapter" data-level="2" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>2</b> 数据科学家工具箱</a></li>
+<li class="chapter" data-level="3" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>3</b> R语言编程</a></li>
+<li class="chapter" data-level="4" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>4</b> 数据获取与整理</a></li>
+<li class="chapter" data-level="5" data-path="section-5.html"><a href="section-5.html"><i class="fa fa-check"></i><b>5</b> 探索性数据分析</a></li>
+<li class="chapter" data-level="6" data-path="section-6.html"><a href="section-6.html"><i class="fa fa-check"></i><b>6</b> 可复算性研究</a></li>
+<li class="chapter" data-level="7" data-path="section-7.html"><a href="section-7.html"><i class="fa fa-check"></i><b>7</b> 统计推断</a></li>
+<li class="chapter" data-level="8" data-path="section-8.html"><a href="section-8.html"><i class="fa fa-check"></i><b>8</b> 回归模型</a></li>
+<li class="chapter" data-level="9" data-path="section-9.html"><a href="section-9.html"><i class="fa fa-check"></i><b>9</b> 机器学习实战</a></li>
+<li class="chapter" data-level="10" data-path="section-10.html"><a href="section-10.html"><i class="fa fa-check"></i><b>10</b> 开发数据产品</a></li>
+<li class="chapter" data-level="11" data-path="section-11.html"><a href="section-11.html"><i class="fa fa-check"></i><b>11</b> 统计学习导论</a></li>
+<li class="chapter" data-level="12" data-path="section-12.html"><a href="section-12.html"><i class="fa fa-check"></i><b>12</b> 基因组学数据分析</a><ul>
+<li class="chapter" data-level="12.1" data-path="section-12.html"><a href="section-12.html#microarrays"><i class="fa fa-check"></i><b>12.1</b> microarrays</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="section-12.html"><a href="section-12.html#section-12.1.1"><i class="fa fa-check"></i><b>12.1.1</b> 原理</a></li>
+<li class="chapter" data-level="12.1.2" data-path="section-12.html"><a href="section-12.html#section-12.1.2"><i class="fa fa-check"></i><b>12.1.2</b> 应用</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="section-12.html"><a href="section-12.html#ngs"><i class="fa fa-check"></i><b>12.2</b> NGS</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="section-12.html"><a href="section-12.html#-1"><i class="fa fa-check"></i><b>12.2.1</b> 原理</a></li>
+<li class="chapter" data-level="12.2.2" data-path="section-12.html"><a href="section-12.html#-1"><i class="fa fa-check"></i><b>12.2.2</b> 应用</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="section-12.html"><a href="section-12.html#section-12.3"><i class="fa fa-check"></i><b>12.3</b> 数据分析应用背景</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="section-12.html"><a href="section-12.html#dna-"><i class="fa fa-check"></i><b>12.3.1</b> DNA 甲基化</a></li>
+<li class="chapter" data-level="12.3.2" data-path="section-12.html"><a href="section-12.html#chip-seq"><i class="fa fa-check"></i><b>12.3.2</b> CHIP-SEQ</a></li>
+<li class="chapter" data-level="12.3.3" data-path="section-12.html"><a href="section-12.html#rna-"><i class="fa fa-check"></i><b>12.3.3</b> RNA 测序</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="section-12.html"><a href="section-12.html#bioconductor"><i class="fa fa-check"></i><b>12.4</b> Bioconductor</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="section-12.html"><a href="section-12.html#section-12.4.1"><i class="fa fa-check"></i><b>12.4.1</b> 数据结构</a></li>
+<li class="chapter" data-level="12.4.2" data-path="section-12.html"><a href="section-12.html#section-12.4.2"><i class="fa fa-check"></i><b>12.4.2</b> 数据读取</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="section-12.html"><a href="section-12.html#section-12.5"><i class="fa fa-check"></i><b>12.5</b> 示例：甲基化数据分析</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="section-12.html"><a href="section-12.html#section-12.5.1"><i class="fa fa-check"></i><b>12.5.1</b> 读取数据</a></li>
+<li class="chapter" data-level="12.5.2" data-path="section-12.html"><a href="section-12.html#section-12.5.2"><i class="fa fa-check"></i><b>12.5.2</b> 数据说明</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/yufree/notes" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-12" class="section level1">
+<h1><span class="header-section-number">Notes 12</span> 基因组学数据分析</h1>
+<ul>
+<li><a href="http://genomicsclass.github.io/book/">主页</a></li>
+</ul>
+<div id="microarrays" class="section level2">
+<h2><span class="header-section-number">12.1</span> microarrays</h2>
+<div id="section-12.1.1" class="section level3">
+<h3><span class="header-section-number">12.1.1</span> 原理</h3>
+<ul>
+<li>生成互补DNA探针</li>
+<li>标记样品中的DNA单链 可以对不同样品标记不同颜色</li>
+<li>特异性互补反应</li>
+<li>测定标记物光信号</li>
+</ul>
+</div>
+<div id="section-12.1.2" class="section level3">
+<h3><span class="header-section-number">12.1.2</span> 应用</h3>
+<ul>
+<li><p>测定基因表达</p>
+<ul>
+<li>已知序列</li>
+<li>3’端（降解从5’端开始）选取11个片段作为探针</li>
+<li>样品对11个片段都是高表达则基因高表达</li>
+</ul></li>
+<li><p>寻找SNP</p>
+<ul>
+<li>SNP 单核苷酸多态性 用来探索基因型</li>
+<li>合成SNP探针</li>
+<li>测定对不同探针的响应判断AA AG GG类型</li>
+</ul></li>
+<li><p>寻找转录因子结合位点</p>
+<ul>
+<li>样品处理为含蛋白与不含蛋白两份 去除蛋白后扩增</li>
+<li>探针是基因组感兴趣的片段</li>
+<li>瓦片分析可知探针与含转录因子DNA结合位点</li>
+<li>总DNA作为对照</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="ngs" class="section level2">
+<h2><span class="header-section-number">12.2</span> NGS</h2>
+<div id="-1" class="section level3">
+<h3><span class="header-section-number">12.2.1</span> 原理</h3>
+<ul>
+<li>DNA打成50~70片段 一个样品片段上亿</li>
+<li>加上adaptor 固定在板上后原位扩增成束</li>
+<li>使用标记过的单核苷酸逐碱基对测光强 同时测序大量片段</li>
+<li>得到测序结果与强度</li>
+</ul>
+</div>
+<div id="-1" class="section level3">
+<h3><span class="header-section-number">12.2.2</span> 应用</h3>
+<ul>
+<li>寻找SNP</li>
+<li>RNA-seq 测定RNA表达量</li>
+<li>寻找结合位点 表达量</li>
+</ul>
+</div>
+</div>
+<div id="section-12.3" class="section level2">
+<h2><span class="header-section-number">12.3</span> 数据分析应用背景</h2>
+<div id="dna-" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> DNA 甲基化</h3>
+<ul>
+<li>CpG 5’端到3‘端 CG</li>
+<li>C上甲基化 复制时该特性会保留</li>
+<li>临近CpG位点的基因不会被表达</li>
+<li>CpG 成簇存在 称为CpG islands</li>
+<li>bisulfite treatment 可以用来测定CpG是否被甲基化 通过将未甲基化的CpG中的C改为T</li>
+<li>测序中测定改变率就可知CpG位点甲基化程度与位置</li>
+</ul>
+</div>
+<div id="chip-seq" class="section level3">
+<h3><span class="header-section-number">12.3.2</span> CHIP-SEQ</h3>
+<ul>
+<li>蛋白结合后固定，洗掉其余片段，然后洗掉蛋白，对序列片段测序得到结合位点</li>
+</ul>
+</div>
+<div id="rna-" class="section level3">
+<h3><span class="header-section-number">12.3.3</span> RNA 测序</h3>
+<ul>
+<li>RNA反转录为cDNA测序</li>
+<li>只有外显子</li>
+<li>同一基因多种RNA片段</li>
+<li>均值与方差有相关性 需要进行log变换后分析</li>
+</ul>
+</div>
+</div>
+<div id="bioconductor" class="section level2">
+<h2><span class="header-section-number">12.4</span> Bioconductor</h2>
+<ul>
+<li><a href="http://bioconductor.org/install/">官方说明</a></li>
+<li>使用<code>biocLite()</code>安装，安装后仍需要<code>library()</code>才能使用</li>
+</ul>
+<pre><code>source(&quot;http://bioconductor.org/biocLite.R&quot;)
+biocLite()</code></pre>
+<div id="section-12.4.1" class="section level3">
+<h3><span class="header-section-number">12.4.1</span> 数据结构</h3>
+<div id="section-12.4.1.1" class="section level4">
+<h4><span class="header-section-number">12.4.1.1</span> 分析数据</h4>
+<ul>
+<li>F 行 S 列 F代表芯片特征数，S代表样本数</li>
+</ul>
+</div>
+<div id="section-12.4.1.2" class="section level4">
+<h4><span class="header-section-number">12.4.1.2</span> 表型数据</h4>
+<ul>
+<li>S 行 V 列 V代表样本特征，为分类或连续变量</li>
+<li>如果表型数据解释不清，可以建立一个解释样本特征的labelDescription数据框，通过<code>phenoData &lt;- new(&quot;AnnotatedDataFrame&quot;,data=pData, varMetadata=metadata)</code> 建立AnnotatedDataFrame类型数据</li>
+</ul>
+</div>
+<div id="section-12.4.1.3" class="section level4">
+<h4><span class="header-section-number">12.4.1.3</span> 实验描述</h4>
+<ul>
+<li>MIAME 类型对象</li>
+<li>描述实验参数</li>
+</ul>
+</div>
+<div id="section-12.4.1.4" class="section level4">
+<h4><span class="header-section-number">12.4.1.4</span> 组装数据</h4>
+<ul>
+<li>将分析数据，表型数据，实验描述组装为一个ExpressionSet类型的对象</li>
+<li><code>exampleSet &lt;- ExpressionSet(assayData=exprs,phenoData=phenoData,experimentData=experimentData,annotation=&quot;hgu95av2&quot;)</code></li>
+<li>annotation代表了一组相似实验设计的芯片数据的代号，通过相关代号可以索引到芯片特征信息并将其与其他数据如基因型，染色体位置等连接以便于分析</li>
+<li>从ExpressionSet里可以按照表型数据提取子集，也就是对 S 截取 V 中特定子集 <code>exampleSet[ , exampleSet$gender == &quot;Male&quot;]</code></li>
+<li><code>esApply</code> 用来针对ExpressionSet应用函数</li>
+</ul>
+</div>
+<div id="section-12.4.1.5" class="section level4">
+<h4><span class="header-section-number">12.4.1.5</span> 数据集应用</h4>
+<ul>
+<li><code>library(Biobase)</code></li>
+<li><code>library(GEOquery)</code></li>
+<li><code>geoq &lt;- getGEO(&quot;GSE9514&quot;)</code> 从基因表达精选集（GEO）上得到数据表达集</li>
+<li><code>names(geoq)</code> 得到文件名</li>
+<li><code>e &lt;- geoq[[1]]</code> 得到数据集</li>
+<li><code>dim(e)</code> 查看表达集维度 给出样本数与特征值，也就是测定序列数</li>
+<li><code>dim(exprs(e))</code> 与上面等同，给出基因分析数据</li>
+<li><code>dim(pData(e))</code> 给出8个样本的信息，信息头用<code>names(pData(e))</code>给出</li>
+<li><code>dim(fData(e))</code> 给出特征与信息头列表</li>
+<li>exprs为特征数×样本数矩阵 pdata为样本数×信息头 fdata为特征数×信息</li>
+<li>experimentData(e) 给出实验信息</li>
+<li>annotation(e) 特征注释</li>
+<li>exptData(se)$MIAME 给出实验相关关键信息</li>
+<li>Y &lt;- log2(exprs(bottomly.eset) + 0.5) 对NGS数据加0.5取2为底的对数（防0）得-1，排除掉0后可得MAplot观察数值分布，一般为均值小差异大，均值大相对稳定</li>
+<li>formula 用来定义公式</li>
+<li>model.matrix 用定义的公式生成矩阵</li>
+<li>rowttests(y[, smallset], group[smallset]) 定义分组，设定模型可进行t-test，用火山图来表示</li>
+</ul>
+<div id="iranges" class="section level5">
+<h5><span class="header-section-number">12.4.1.5.1</span> Iranges</h5>
+<ul>
+<li><code>library(IRanges)</code> 序列范围</li>
+<li><code>ir &lt;- IRanges(start = c(3, 5, 17), end = c(10, 8, 20))</code> 定义序列</li>
+<li><code>IRanges(5, 10)</code> 表示5到10这6个碱基对，可以shift</li>
+<li><code>range(ir)</code> 表示存在ir中序列的起止范围</li>
+<li><code>gaps(ir)</code> 表示寻找ir中间隔片段</li>
+<li><code>disjoin(ir)</code> 表示将ir中序列碎片化后互不重叠的片段</li>
+</ul>
+</div>
+<div id="granges-and-grangeslist" class="section level5">
+<h5><span class="header-section-number">12.4.1.5.2</span> GRanges and GRangesList</h5>
+<ul>
+<li><code>library(GenomicRanges)</code> 基因范围</li>
+<li><code>gr &lt;- GRanges(&quot;chrZ&quot;, IRanges(start = c(5, 10), end = c(35, 45)), strand = &quot;+&quot;, seqlengths = c(chrZ = 100L))</code> 定义位于染色体chrZ上几个序列范围，认为这些范围共同定义一个基因</li>
+<li>可以shift，可以定义长度后trim</li>
+<li><code>mcols(gr)$value &lt;- c(-1, 4)</code> 定义该基因类型中的列并赋值</li>
+<li><code>grl &lt;- GRangesList(gr, gr2)</code> 多个Granges定义一个基因库</li>
+<li><code>length(grl)</code> 给出基因库里基因个数</li>
+<li><code>mcols(grl)$value &lt;- c(5, 7)</code> 定义该基因库类型中的列并赋值</li>
+</ul>
+</div>
+<div id="findoverlaps" class="section level5">
+<h5><span class="header-section-number">12.4.1.5.3</span> findOverlaps</h5>
+<ul>
+<li>gr1 gr2 为两个基因范围对象</li>
+<li><code>fo &lt;- findOverlaps(gr1, gr2)</code> 寻找两个基因重叠序列</li>
+<li><code>queryHits(fo)</code> 与 <code>subjectHits(fo)</code> 提取两个基因重叠序号 成对出现</li>
+<li><code>gr1[gr1 %over% gr2]</code> 提取对应序列范围</li>
+</ul>
+</div>
+<div id="rle" class="section level5">
+<h5><span class="header-section-number">12.4.1.5.4</span> Rle</h5>
+<ul>
+<li><code>Rle(c(1, 1, 1, 0, 0, -2, -2, -2, rep(-1, 20)))</code> 表示4组处理，每组各有 3 2 3 20 个重复</li>
+<li>Rle是一种压缩存储实验设计的方式，可以用<code>as.numeric()</code>提取原始数据</li>
+<li><code>Views(r, start = c(4, 2), end = c(7, 6)</code> 提取对应实验组</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="section-12.4.2" class="section level3">
+<h3><span class="header-section-number">12.4.2</span> 数据读取</h3>
+<ul>
+<li>microarray 或 NGS 数据由芯片厂商提供，常见读取原始信息的包有affyPLM、affy、 oligo、limma</li>
+<li>在Bioconductor里，这些原始数据要转为ExpressionSet格式</li>
+</ul>
+<div id="affymterix-cel-files" class="section level4">
+<h4><span class="header-section-number">12.4.2.1</span> Affymterix CEL files</h4>
+<ul>
+<li><code>library(affy)</code></li>
+<li><code>tab &lt;- read.delim(&quot;sampleinfo.txt&quot;, check.names = FALSE, as.is = TRUE)</code> 读取样本信息</li>
+<li><code>ab &lt;- ReadAffy(phenoData = tab)</code> 读取样本数据，探针层次</li>
+<li><code>ejust &lt;- justRMA(filenames = tab[, 1], phenoData = tab)</code> 直接读取为基因层数据</li>
+<li><code>e &lt;- rma(ab)</code> 对样本进行背景校正与正则化，从探针层转化为基因层数据</li>
+</ul>
+</div>
+<div id="section-12.4.2.2" class="section level4">
+<h4><span class="header-section-number">12.4.2.2</span> 背景干扰</h4>
+<ul>
+<li>spikein方法 梯度加入已知浓度的基因片段 阵列上进行shift 类似拉丁方设计</li>
+<li>可以看到同一基因不同片段大致符合先平后增模式 开始阶段是噪声主导 后面是浓度主导</li>
+<li>使用类似基因模拟噪声主导 相减后得到去干扰浓度效应 但低值部分会导致方差过大</li>
+<li>也可以使用统计建模方法模拟背景值与响应 得到还原度更高的信号</li>
+</ul>
+</div>
+<div id="section-12.4.2.3" class="section level4">
+<h4><span class="header-section-number">12.4.2.3</span> 正则化</h4>
+<ul>
+<li>基因组数据大多数为0 加标样品变化 正则化是为了还原这一结果</li>
+<li>分位数正则化</li>
+<li>局部回归正则化</li>
+<li>稳方差正则化</li>
+<li>当重复实验时 直接用分位数正则会掩盖样品差异 可以考虑只对加标基因正则化 然后推广到全局</li>
+</ul>
+</div>
+<div id="section-12.4.2.4" class="section level4">
+<h4><span class="header-section-number">12.4.2.4</span> 探索分析作图</h4>
+<div id="ma-plot" class="section level5">
+<h5><span class="header-section-number">12.4.2.4.1</span> MA-plot</h5>
+<ul>
+<li>x轴为两组基因组的均值，y轴为两组基因组的均值差</li>
+<li>用来表示两组平行间的差异</li>
+</ul>
+</div>
+<div id="volcano-plot" class="section level5">
+<h5><span class="header-section-number">12.4.2.4.2</span> Volcano plot</h5>
+<ul>
+<li>横坐标为处理间基因表达差异，纵坐标为差异的<code>-log10(p.value)</code></li>
+<li>一般为火山喷发状，差异越大，p值越小</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="section-12.5" class="section level2">
+<h2><span class="header-section-number">12.5</span> 示例：甲基化数据分析</h2>
+<div id="section-12.5.1" class="section level3">
+<h3><span class="header-section-number">12.5.1</span> 读取数据</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;coloncancermeth&quot;</span>,<span class="st">&quot;genomicsclass&quot;</span>)
+
+<span class="kw">library</span>(coloncancermeth)
+<span class="kw">data</span>(coloncancermeth)</code></pre></div>
+<p>该数据集为结肠癌病人与对照的DNA甲基化数据集。</p>
+</div>
+<div id="section-12.5.2" class="section level3">
+<h3><span class="header-section-number">12.5.2</span> 数据说明</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(meth)
+<span class="kw">dim</span>(pd)
+<span class="kw">length</span>(gr)</code></pre></div>
+<p>meth为测序数据，pd为样本信息，gr测序片段信息。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(pd)
+<span class="kw">table</span>(pd$Status)
+X =<span class="st"> </span><span class="kw">model.matrix</span>(~pd$Status)</code></pre></div>
+<p>查看病患与正常人的分组并构建模型。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chr =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">seqnames</span>(gr))
+pos =<span class="st"> </span><span class="kw">start</span>(gr)
+
+<span class="kw">library</span>(bumphunter)
+cl =<span class="st"> </span><span class="kw">clusterMaker</span>(chr,pos,<span class="dt">maxGap=</span><span class="dv">500</span>)
+res =<span class="st"> </span><span class="kw">bumphunter</span>(meth,X,<span class="dt">chr=</span>chr,<span class="dt">pos=</span>pos,<span class="dt">cluster=</span>cl,<span class="dt">cutoff=</span><span class="fl">0.1</span>,<span class="dt">B=</span><span class="dv">0</span>)</code></pre></div>
+<p>按染色体生成因子变量，找出基因起始位点，然后利用bumphunter包寻找甲基化数据中某个阈值（0.1）下甲基化基因聚类的后出现的位置，聚类号，聚类相关性等信息寻找问题基因，可从中提取相关信息</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cols=<span class="kw">ifelse</span>(pd$Status==<span class="st">&quot;normal&quot;</span>,<span class="dv">1</span>,<span class="dv">2</span>)
+Index=(res$table[<span class="dv">6</span>,<span class="dv">7</span>]-<span class="dv">3</span>):(res$table[<span class="dv">6</span>,<span class="dv">8</span>]+<span class="dv">3</span>)
+<span class="kw">matplot</span>(pos[Index],meth[Index,,<span class="dt">drop=</span><span class="ot">TRUE</span>],<span class="dt">col=</span>cols,<span class="dt">pch=</span><span class="dv">1</span>,<span class="dt">xlab=</span><span class="st">&quot;genomic location&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Methylation&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))
+
+Index=(res$table[<span class="dv">6</span>,<span class="dv">7</span>]):(res$table[<span class="dv">6</span>,<span class="dv">8</span>])
+
+test &lt;-<span class="st"> </span>meth[Index,,drop=T]
+<span class="kw">colnames</span>(test) &lt;-<span class="st"> </span>pd$bcr_patient_barcode
+test1 &lt;-<span class="st"> </span>test[,cols==<span class="dv">1</span>]
+test2 &lt;-<span class="st"> </span>test[,cols==<span class="dv">2</span>]
+
+test3 &lt;-<span class="st"> </span><span class="kw">apply</span>(test2, <span class="dv">2</span>, mean)
+<span class="kw">apply</span>(matrix, <span class="dv">1</span>, rank)</code></pre></div>
+<p>从上面可以得到有差异的甲基化数据所在的基因位置并提取相关样本数据信息。可根据差异作图，得到两组数据甲基化水平差异所在的基因位置。可对差异进行平滑操作，得到位置。这样就可以知道甲基化发生的序列位置与水平差异的信息了。</p>
+<hr />
+<p>下面的例子是用人类基因组数据探索潜在的CpG岛。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(BSgenome.Hsapiens.UCSC.hg19)
+
+Hsapiens[[<span class="st">&quot;chr1&quot;</span>]]
+
+<span class="co"># 计算某染色体上潜在位点个数</span>
+
+<span class="kw">countPattern</span>(<span class="st">&#39;CG&#39;</span>,Hsapiens[[<span class="st">&quot;chr1&quot;</span>]]) 
+
+<span class="co"># 计算某染色体上特定序列比例 观察与期望出现的比例</span>
+
+CG &lt;-<span class="st"> </span><span class="kw">countPattern</span>(<span class="st">&#39;CG&#39;</span>,Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])/<span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])
+GC &lt;-<span class="st"> </span><span class="kw">countPattern</span>(<span class="st">&#39;GC&#39;</span>,Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])/<span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])
+
+table &lt;-<span class="st"> </span><span class="kw">alphabetFrequency</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])
+expect &lt;-<span class="st"> </span>table[<span class="st">&#39;C&#39;</span>]%*%table[<span class="st">&#39;G&#39;</span>]/(<span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]]))^<span class="dv">2</span>
+
+CG/expect</code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="section-11.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/yufree/notes/edit/master/12-genomicsdataanalysis.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

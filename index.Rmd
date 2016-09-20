@@ -13,8 +13,9 @@ description: "This is notes from yufree"
 ---
 # 笔记目录
 
-- 02-10 数据科学相关
+- 02-10 数据科学系列课程
 - 11 统计学习导论
+- 12 基因组学数据分析
 
 
 <script>
