@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="This is notes from yufree">
+  <meta name="generator" content="bookdown 0.1.9 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is notes from yufree" />
+  <meta name="github-repo" content="yufree/notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes" />
+  
+  <meta name="twitter:description" content="This is notes from yufree" />
+  
+
+<meta name="author" content="Miao YU">
+
+<meta name="date" content="2016-09-20">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="-knitr.html">
+<link rel="next" href="statistical-inference.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 目录</a></li>
+<li class="chapter" data-level="2" data-path="the-data-scientists-toolbox.html"><a href="the-data-scientists-toolbox.html"><i class="fa fa-check"></i><b>2</b> The Data Scientist’s Toolbox</a><ul>
+<li class="chapter" data-level="2.1" data-path="the-data-scientists-toolbox.html"><a href="the-data-scientists-toolbox.html#section-2.1"><i class="fa fa-check"></i><b>2.1</b> 链接</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>3</b> R Programming</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-programming.html"><a href="r-programming.html#overview-and-history-of-r"><i class="fa fa-check"></i><b>3.1</b> Overview and History of R</a></li>
+<li class="chapter" data-level="3.2" data-path="r-programming.html"><a href="r-programming.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 获得帮助</a></li>
+<li class="chapter" data-level="3.3" data-path="r-programming.html"><a href="r-programming.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 数据类型及基本运算</a></li>
+<li class="chapter" data-level="3.4" data-path="r-programming.html"><a href="r-programming.html#section-3.4"><i class="fa fa-check"></i><b>3.4</b> 截取数据</a></li>
+<li class="chapter" data-level="3.5" data-path="r-programming.html"><a href="r-programming.html#section-3.5"><i class="fa fa-check"></i><b>3.5</b> 读取数据</a></li>
+<li class="chapter" data-level="3.6" data-path="r-programming.html"><a href="r-programming.html#section-3.6"><i class="fa fa-check"></i><b>3.6</b> 控制结构</a></li>
+<li class="chapter" data-level="3.7" data-path="r-programming.html"><a href="r-programming.html#section-3.7"><i class="fa fa-check"></i><b>3.7</b> 函数</a></li>
+<li class="chapter" data-level="3.8" data-path="r-programming.html"><a href="r-programming.html#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 编程标准</a></li>
+<li class="chapter" data-level="3.9" data-path="r-programming.html"><a href="r-programming.html#section-3.9"><i class="fa fa-check"></i><b>3.9</b> 范围规则</a></li>
+<li class="chapter" data-level="3.10" data-path="r-programming.html"><a href="r-programming.html#section-3.10"><i class="fa fa-check"></i><b>3.10</b> 向量化操作</a></li>
+<li class="chapter" data-level="3.11" data-path="r-programming.html"><a href="r-programming.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 日期与时间</a></li>
+<li class="chapter" data-level="3.12" data-path="r-programming.html"><a href="r-programming.html#section-3.12"><i class="fa fa-check"></i><b>3.12</b> 循环</a><ul>
+<li class="chapter" data-level="3.12.1" data-path="r-programming.html"><a href="r-programming.html#lapply"><i class="fa fa-check"></i><b>3.12.1</b> <code>lapply</code></a></li>
+<li class="chapter" data-level="3.12.2" data-path="r-programming.html"><a href="r-programming.html#sapply"><i class="fa fa-check"></i><b>3.12.2</b> <code>sapply</code></a></li>
+<li class="chapter" data-level="3.12.3" data-path="r-programming.html"><a href="r-programming.html#vapply"><i class="fa fa-check"></i><b>3.12.3</b> <code>vapply</code></a></li>
+<li class="chapter" data-level="3.12.4" data-path="r-programming.html"><a href="r-programming.html#replicate"><i class="fa fa-check"></i><b>3.12.4</b> <code>replicate</code></a></li>
+<li class="chapter" data-level="3.12.5" data-path="r-programming.html"><a href="r-programming.html#rapply"><i class="fa fa-check"></i><b>3.12.5</b> <code>rapply</code></a></li>
+<li class="chapter" data-level="3.12.6" data-path="r-programming.html"><a href="r-programming.html#apply"><i class="fa fa-check"></i><b>3.12.6</b> <code>apply</code></a></li>
+<li class="chapter" data-level="3.12.7" data-path="r-programming.html"><a href="r-programming.html#tapply"><i class="fa fa-check"></i><b>3.12.7</b> <code>tapply</code></a></li>
+<li class="chapter" data-level="3.12.8" data-path="r-programming.html"><a href="r-programming.html#by"><i class="fa fa-check"></i><b>3.12.8</b> <code>by</code></a></li>
+<li class="chapter" data-level="3.12.9" data-path="r-programming.html"><a href="r-programming.html#split"><i class="fa fa-check"></i><b>3.12.9</b> <code>split</code></a></li>
+<li class="chapter" data-level="3.12.10" data-path="r-programming.html"><a href="r-programming.html#mapply"><i class="fa fa-check"></i><b>3.12.10</b> <code>mapply</code></a></li>
+<li class="chapter" data-level="3.12.11" data-path="r-programming.html"><a href="r-programming.html#eapply"><i class="fa fa-check"></i><b>3.12.11</b> <code>eapply</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.13" data-path="r-programming.html"><a href="r-programming.html#section-3.13"><i class="fa fa-check"></i><b>3.13</b> 模拟</a></li>
+<li class="chapter" data-level="3.14" data-path="r-programming.html"><a href="r-programming.html#section-3.14"><i class="fa fa-check"></i><b>3.14</b> 调试</a></li>
+<li class="chapter" data-level="3.15" data-path="r-programming.html"><a href="r-programming.html#section-3.15"><i class="fa fa-check"></i><b>3.15</b> 分析代码</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html"><i class="fa fa-check"></i><b>4</b> Getting and Cleaning Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#section-4.1"><i class="fa fa-check"></i><b>4.1</b> 概述</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 下载</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 读取本地文件</a></li>
+<li class="chapter" data-level="4.4" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#excle"><i class="fa fa-check"></i><b>4.4</b> 读取excle文件</a></li>
+<li class="chapter" data-level="4.5" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#xml"><i class="fa fa-check"></i><b>4.5</b> 读取XML文件</a></li>
+<li class="chapter" data-level="4.6" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#json"><i class="fa fa-check"></i><b>4.6</b> 读取json文件</a></li>
+<li class="chapter" data-level="4.7" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#mysql"><i class="fa fa-check"></i><b>4.7</b> 读取MySQL数据库</a></li>
+<li class="chapter" data-level="4.8" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#hdf5"><i class="fa fa-check"></i><b>4.8</b> 读取HDF5数据</a></li>
+<li class="chapter" data-level="4.9" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#section-4.9"><i class="fa fa-check"></i><b>4.9</b> 读取网页数据</a></li>
+<li class="chapter" data-level="4.10" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#api"><i class="fa fa-check"></i><b>4.10</b> 读取API</a></li>
+<li class="chapter" data-level="4.11" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#section-4.11"><i class="fa fa-check"></i><b>4.11</b> 读取其他资源</a></li>
+<li class="chapter" data-level="4.12" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#section-4.12"><i class="fa fa-check"></i><b>4.12</b> 数据截取与排序</a></li>
+<li class="chapter" data-level="4.13" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#section-4.13"><i class="fa fa-check"></i><b>4.13</b> 数据总结</a></li>
+<li class="chapter" data-level="4.14" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#section-4.14"><i class="fa fa-check"></i><b>4.14</b> 数据整理</a></li>
+<li class="chapter" data-level="4.15" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#data.table"><i class="fa fa-check"></i><b>4.15</b> <a href="https://github.com/raphg/Biostat-578/blob/master/Advanced_data_manipulation.Rpres"><em>数据操作data.table包</em></a></a></li>
+<li class="chapter" data-level="4.16" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#section-4.16"><i class="fa fa-check"></i><b>4.16</b> 文本处理</a></li>
+<li class="chapter" data-level="4.17" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html#section-4.17"><i class="fa fa-check"></i><b>4.17</b> 日期处理</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>5</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-5.1"><i class="fa fa-check"></i><b>5.1</b> 探索绘图原则</a></li>
+<li class="chapter" data-level="5.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-5.2"><i class="fa fa-check"></i><b>5.2</b> 探索性绘图</a></li>
+<li class="chapter" data-level="5.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#r"><i class="fa fa-check"></i><b>5.3</b> R绘图系统</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-5.3.1"><i class="fa fa-check"></i><b>5.3.1</b> 基础包</a></li>
+<li class="chapter" data-level="5.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#lattice"><i class="fa fa-check"></i><b>5.3.2</b> lattice</a></li>
+<li class="chapter" data-level="5.3.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#ggplot2"><i class="fa fa-check"></i><b>5.3.3</b> ggplot2</a></li>
+<li class="chapter" data-level="5.3.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-5.3.4"><i class="fa fa-check"></i><b>5.3.4</b> 数学绘图</a></li>
+<li class="chapter" data-level="5.3.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-5.3.5"><i class="fa fa-check"></i><b>5.3.5</b> 色彩管理</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-5.4"><i class="fa fa-check"></i><b>5.4</b> 分层聚类</a></li>
+<li class="chapter" data-level="5.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#k-means"><i class="fa fa-check"></i><b>5.5</b> k-means聚类</a></li>
+<li class="chapter" data-level="5.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-5.6"><i class="fa fa-check"></i><b>5.6</b> 维度还原</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="reproducible-research.html"><a href="reproducible-research.html"><i class="fa fa-check"></i><b>6</b> Reproducible Research</a><ul>
+<li class="chapter" data-level="6.1" data-path="reproducible-research.html"><a href="reproducible-research.html#replication"><i class="fa fa-check"></i><b>6.1</b> Replication</a></li>
+<li class="chapter" data-level="6.2" data-path="reproducible-research.html"><a href="reproducible-research.html#reproducible"><i class="fa fa-check"></i><b>6.2</b> Reproducible</a></li>
+<li class="chapter" data-level="6.3" data-path="reproducible-research.html"><a href="reproducible-research.html#section-6.3"><i class="fa fa-check"></i><b>6.3</b> 研究流程</a></li>
+<li class="chapter" data-level="6.4" data-path="reproducible-research.html"><a href="reproducible-research.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 数据分析步骤</a></li>
+<li class="chapter" data-level="6.5" data-path="reproducible-research.html"><a href="reproducible-research.html#section-6.5"><i class="fa fa-check"></i><b>6.5</b> 数据分析文件结构</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="-knitr.html"><a href="-knitr.html"><i class="fa fa-check"></i><b>7</b> 文本化统计编程-Knitr</a></li>
+<li class="chapter" data-level="8" data-path="section-8.html"><a href="section-8.html"><i class="fa fa-check"></i><b>8</b> 结果通讯</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-8.html"><a href="section-8.html#section-8.1"><i class="fa fa-check"></i><b>8.1</b> 检查列表</a></li>
+<li class="chapter" data-level="8.2" data-path="section-8.html"><a href="section-8.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 基于证据的数据分析</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="statistical-inference.html"><a href="statistical-inference.html"><i class="fa fa-check"></i><b>9</b> Statistical Inference</a><ul>
+<li class="chapter" data-level="9.1" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.1"><i class="fa fa-check"></i><b>9.1</b> 导论</a></li>
+<li class="chapter" data-level="9.2" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.2"><i class="fa fa-check"></i><b>9.2</b> 概率</a></li>
+<li class="chapter" data-level="9.3" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.3"><i class="fa fa-check"></i><b>9.3</b> 期望</a></li>
+<li class="chapter" data-level="9.4" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.4"><i class="fa fa-check"></i><b>9.4</b> 方差</a></li>
+<li class="chapter" data-level="9.5" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.5"><i class="fa fa-check"></i><b>9.5</b> 独立性</a></li>
+<li class="chapter" data-level="9.6" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.6"><i class="fa fa-check"></i><b>9.6</b> 条件概率</a></li>
+<li class="chapter" data-level="9.7" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.7"><i class="fa fa-check"></i><b>9.7</b> 贝叶斯定理</a></li>
+<li class="chapter" data-level="9.8" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.8"><i class="fa fa-check"></i><b>9.8</b> 常见分布</a></li>
+<li class="chapter" data-level="9.9" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.9"><i class="fa fa-check"></i><b>9.9</b> 渐进</a></li>
+<li class="chapter" data-level="9.10" data-path="statistical-inference.html"><a href="statistical-inference.html#t-"><i class="fa fa-check"></i><b>9.10</b> T 置信区间</a></li>
+<li class="chapter" data-level="9.11" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.11"><i class="fa fa-check"></i><b>9.11</b> 似然函数</a></li>
+<li class="chapter" data-level="9.12" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.12"><i class="fa fa-check"></i><b>9.12</b> 贝叶斯推断</a></li>
+<li class="chapter" data-level="9.13" data-path="statistical-inference.html"><a href="statistical-inference.html#t"><i class="fa fa-check"></i><b>9.13</b> 两独立样本t检验</a></li>
+<li class="chapter" data-level="9.14" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.14"><i class="fa fa-check"></i><b>9.14</b> 假设检验</a></li>
+<li class="chapter" data-level="9.15" data-path="statistical-inference.html"><a href="statistical-inference.html#p-"><i class="fa fa-check"></i><b>9.15</b> P 值</a></li>
+<li class="chapter" data-level="9.16" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.16"><i class="fa fa-check"></i><b>9.16</b> 功效</a></li>
+<li class="chapter" data-level="9.17" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.17"><i class="fa fa-check"></i><b>9.17</b> 多重比较</a></li>
+<li class="chapter" data-level="9.18" data-path="statistical-inference.html"><a href="statistical-inference.html#section-9.18"><i class="fa fa-check"></i><b>9.18</b> 重采样推断</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/yufree/notes" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-8" class="section level1">
+<h1><span class="header-section-number">Notes 8</span> 结果通讯</h1>
+<ul>
+<li><p>研究论文的信息层级</p></li>
+<li>题目/作者名单</li>
+<li>摘要</li>
+<li>主体/结果</li>
+<li>支持材料/细节</li>
+<li><p>代码/数据</p></li>
+<li><p>邮件汇报的信息层级</p></li>
+<li>题目最好一行一句</li>
+<li>描述问题 如何实验 总结发现</li>
+<li>简明扼要</li>
+<li>如果有问题 写成yes/no形式</li>
+<li><p>附件齐全严谨</p></li>
+</ul>
+<div id="section-8.1" class="section level2">
+<h2><span class="header-section-number">8.1</span> 检查列表</h2>
+<ul>
+<li>数据选取得当</li>
+<li>问题简单专一</li>
+<li>队友靠谱</li>
+<li>兴趣驱动</li>
+<li>不要手动处理数据 全部交给计算机</li>
+<li>少用交互界面 用命令行界面并记录历史</li>
+<li>使用版本控制 处理降速而冷静</li>
+<li>记录软件操作环境 <code>sessionInfo()</code></li>
+<li>不保存结果保证数据可重复</li>
+<li>使用随机数要说明种子</li>
+<li>原始数据-处理数据-分析-报告</li>
+<li>考虑从哪一步开始数据重复性变差</li>
+</ul>
+</div>
+<div id="section-8.2" class="section level2">
+<h2><span class="header-section-number">8.2</span> 基于证据的数据分析</h2>
+<ul>
+<li>可重复性研究不保证结果是对的</li>
+<li>发表后研究存在动因 应关注数据生成前的过程</li>
+<li>设定基于证据研究的路线图</li>
+<li>减少研究人员的自由度</li>
+<li>提出区域研究范式</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="-knitr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistical-inference.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/yufree/notes/edit/master/03-DSpartIII.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
