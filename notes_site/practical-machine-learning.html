@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="This is notes from yufree">
+  <meta name="generator" content="bookdown 0.1.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is notes from yufree" />
+  <meta name="github-repo" content="yufree/notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes" />
+  
+  <meta name="twitter:description" content="This is notes from yufree" />
+  
+
+<meta name="author" content="Miao YU">
+
+<meta name="date" content="2016-09-20">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="regression-models.html">
+<link rel="next" href="developing-data-products.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 目录</a></li>
+<li class="chapter" data-level="2" data-path="the-data-scientists-toolbox.html"><a href="the-data-scientists-toolbox.html"><i class="fa fa-check"></i><b>2</b> The Data Scientist’s Toolbox</a></li>
+<li class="chapter" data-level="3" data-path="getting-and-cleaning-data.html"><a href="getting-and-cleaning-data.html"><i class="fa fa-check"></i><b>3</b> Getting and Cleaning Data</a></li>
+<li class="chapter" data-level="4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="5" data-path="statistical-inference.html"><a href="statistical-inference.html"><i class="fa fa-check"></i><b>5</b> Statistical Inference</a></li>
+<li class="chapter" data-level="6" data-path="regression-models.html"><a href="regression-models.html"><i class="fa fa-check"></i><b>6</b> Regression Models</a><ul>
+<li class="chapter" data-level="6.1" data-path="regression-models.html"><a href="regression-models.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> 导论</a></li>
+<li class="chapter" data-level="6.2" data-path="regression-models.html"><a href="regression-models.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> 术语</a></li>
+<li class="chapter" data-level="6.3" data-path="regression-models.html"><a href="regression-models.html#section-6.3"><i class="fa fa-check"></i><b>6.3</b> 回归线的最小二乘回归</a></li>
+<li class="chapter" data-level="6.4" data-path="regression-models.html"><a href="regression-models.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 统计线性回归模型</a></li>
+<li class="chapter" data-level="6.5" data-path="regression-models.html"><a href="regression-models.html#section-6.5"><i class="fa fa-check"></i><b>6.5</b> 残差</a></li>
+<li class="chapter" data-level="6.6" data-path="regression-models.html"><a href="regression-models.html#section-6.6"><i class="fa fa-check"></i><b>6.6</b> 回归推断</a></li>
+<li class="chapter" data-level="6.7" data-path="regression-models.html"><a href="regression-models.html#section-6.7"><i class="fa fa-check"></i><b>6.7</b> 多元回归</a></li>
+<li class="chapter" data-level="6.8" data-path="regression-models.html"><a href="regression-models.html#section-6.8"><i class="fa fa-check"></i><b>6.8</b> 模型诊断与选择</a></li>
+<li class="chapter" data-level="6.9" data-path="regression-models.html"><a href="regression-models.html#section-6.9"><i class="fa fa-check"></i><b>6.9</b> 广义线性模型</a></li>
+<li class="chapter" data-level="6.10" data-path="regression-models.html"><a href="regression-models.html#section-6.10"><i class="fa fa-check"></i><b>6.10</b> 二元响应</a></li>
+<li class="chapter" data-level="6.11" data-path="regression-models.html"><a href="regression-models.html#section-6.11"><i class="fa fa-check"></i><b>6.11</b> 计数或速率响应</a></li>
+<li class="chapter" data-level="6.12" data-path="regression-models.html"><a href="regression-models.html#section-6.12"><i class="fa fa-check"></i><b>6.12</b> 分段平滑</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html"><i class="fa fa-check"></i><b>7</b> Practical Machine Learning</a><ul>
+<li class="chapter" data-level="7.1" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 研究设计</a></li>
+<li class="chapter" data-level="7.2" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 错误率</a></li>
+<li class="chapter" data-level="7.3" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#roc-"><i class="fa fa-check"></i><b>7.3</b> ROC 曲线</a></li>
+<li class="chapter" data-level="7.4" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.4"><i class="fa fa-check"></i><b>7.4</b> 交叉检验</a></li>
+<li class="chapter" data-level="7.5" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#caret-"><i class="fa fa-check"></i><b>7.5</b> <code>caret</code> 包</a></li>
+<li class="chapter" data-level="7.6" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.6"><i class="fa fa-check"></i><b>7.6</b> 数据分割</a></li>
+<li class="chapter" data-level="7.7" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.7"><i class="fa fa-check"></i><b>7.7</b> 训练选项</a></li>
+<li class="chapter" data-level="7.8" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.8"><i class="fa fa-check"></i><b>7.8</b> 预测变量作图</a></li>
+<li class="chapter" data-level="7.9" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.9"><i class="fa fa-check"></i><b>7.9</b> 数据预处理</a></li>
+<li class="chapter" data-level="7.10" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.10"><i class="fa fa-check"></i><b>7.10</b> 协变量生成</a></li>
+<li class="chapter" data-level="7.11" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.11"><i class="fa fa-check"></i><b>7.11</b> 线性回归&amp;多元线性回归</a></li>
+<li class="chapter" data-level="7.12" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.12"><i class="fa fa-check"></i><b>7.12</b> 树</a></li>
+<li class="chapter" data-level="7.13" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#bagging"><i class="fa fa-check"></i><b>7.13</b> Bagging</a></li>
+<li class="chapter" data-level="7.14" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#radom-forest"><i class="fa fa-check"></i><b>7.14</b> radom forest</a></li>
+<li class="chapter" data-level="7.15" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#boosting"><i class="fa fa-check"></i><b>7.15</b> boosting</a></li>
+<li class="chapter" data-level="7.16" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.16"><i class="fa fa-check"></i><b>7.16</b> 其他预测算法</a></li>
+<li class="chapter" data-level="7.17" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.17"><i class="fa fa-check"></i><b>7.17</b> 模型联合</a></li>
+<li class="chapter" data-level="7.18" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.18"><i class="fa fa-check"></i><b>7.18</b> 无监督预测</a></li>
+<li class="chapter" data-level="7.19" data-path="practical-machine-learning.html"><a href="practical-machine-learning.html#section-7.19"><i class="fa fa-check"></i><b>7.19</b> 预测</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="developing-data-products.html"><a href="developing-data-products.html"><i class="fa fa-check"></i><b>8</b> Developing Data Products</a><ul>
+<li class="chapter" data-level="8.1" data-path="developing-data-products.html"><a href="developing-data-products.html#shiny"><i class="fa fa-check"></i><b>8.1</b> shiny</a></li>
+<li class="chapter" data-level="8.2" data-path="developing-data-products.html"><a href="developing-data-products.html#rcharts"><i class="fa fa-check"></i><b>8.2</b> rCharts</a></li>
+<li class="chapter" data-level="8.3" data-path="developing-data-products.html"><a href="developing-data-products.html#googlevis"><i class="fa fa-check"></i><b>8.3</b> GoogleVis</a></li>
+<li class="chapter" data-level="8.4" data-path="developing-data-products.html"><a href="developing-data-products.html#slidify"><i class="fa fa-check"></i><b>8.4</b> Slidify</a></li>
+<li class="chapter" data-level="8.5" data-path="developing-data-products.html"><a href="developing-data-products.html#rpresentation"><i class="fa fa-check"></i><b>8.5</b> Rpresentation</a></li>
+<li class="chapter" data-level="8.6" data-path="developing-data-products.html"><a href="developing-data-products.html#yhat"><i class="fa fa-check"></i><b>8.6</b> yhat</a></li>
+<li class="chapter" data-level="8.7" data-path="developing-data-products.html"><a href="developing-data-products.html#r-"><i class="fa fa-check"></i><b>8.7</b> R 包开发</a></li>
+<li class="chapter" data-level="8.8" data-path="developing-data-products.html"><a href="developing-data-products.html#r-"><i class="fa fa-check"></i><b>8.8</b> R 中方法与类型</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/yufree/notes" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="practical-machine-learning" class="section level1">
+<h1><span class="header-section-number">Notes 7</span> Practical Machine Learning</h1>
+<ul>
+<li>问题 -&gt; 数据 -&gt; 特征 -&gt; 算法 -&gt; 参数 -&gt; 评价</li>
+</ul>
+<blockquote>
+<p>The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data. John Tukey</p>
+</blockquote>
+<ul>
+<li>数据质量优先于模型</li>
+<li>不要自动特征选择</li>
+<li>算法的可扩展性与计算性能要考虑</li>
+<li>数据过拟合问题 数据总是由信号与噪音组成 但会被算法无差别对待</li>
+<li>数据要与问题相关 低相关度的组合可能产生高相关度</li>
+</ul>
+<div id="section-7.1" class="section level2">
+<h2><span class="header-section-number">7.1</span> 研究设计</h2>
+<ul>
+<li>定义错误率</li>
+<li>将数据分割为训练集 预测集 验证集</li>
+<li>在训练集上使用交叉检验选择特征与预测算法</li>
+<li>在预测集或验证集上使用一次数据</li>
+<li>预测效果起码要优于瞎猜</li>
+<li>避免使用小样本</li>
+<li>比例为 60% 训练集 20% 预测集 20% 验证集 或 60% 训练集 40% 预测集 或小样本交叉检验</li>
+<li>注意数据结构 时序分析要对数据分段采样</li>
+</ul>
+</div>
+<div id="section-7.2" class="section level2">
+<h2><span class="header-section-number">7.2</span> 错误率</h2>
+<ul>
+<li>真阳性 真的是对的 TP</li>
+<li>假阳性 真的是错的 FP Type I</li>
+<li>真阴性 假的是错的 TN</li>
+<li>假阴性 假的是对的 FN Type II</li>
+<li>灵敏度 TP/(TP+FP)</li>
+<li>特异性 TN/(TN+FN)</li>
+<li>均方差 MSE <span class="math inline">\(\frac{1}{n} \sum_{i=1}^n (Prediction_i - Truth_i)^2\)</span></li>
+<li>均方误 RMSE <span class="math inline">\(\sqrt{\frac{1}{n} \sum_{i=1}^n(Prediction_i - Truth_i)^2}\)</span></li>
+<li>中位差 Median absolute deviation</li>
+<li>准确性 (TP+TN)/(TP+FP+TN+FP)</li>
+<li>一致性 <a href="https://en.wikipedia.org/wiki/Cohen%27s_kappa">kappa值</a></li>
+</ul>
+</div>
+<div id="roc-" class="section level2">
+<h2><span class="header-section-number">7.3</span> ROC 曲线</h2>
+<ul>
+<li>分类问题寻找判别阈值 满足一定TP下最小FP的模型</li>
+<li>FP v.s.TP 作图</li>
+<li>AUC 曲线下面积表示选择标准 一般超过80%</li>
+<li>对角线是随机猜的结果</li>
+</ul>
+</div>
+<div id="section-7.4" class="section level2">
+<h2><span class="header-section-number">7.4</span> 交叉检验</h2>
+<ul>
+<li>训练集上的操作</li>
+<li>训练集上再分为训练集与测试集</li>
+<li>在测试集上评价 重复并平均化测试集错误</li>
+<li>用来进行变量 模型 参数选择</li>
+<li>随机 分组 留一</li>
+<li>分组多方差大 分组少有偏差</li>
+<li>有放回的为bootstrap 不建议用</li>
+</ul>
+</div>
+<div id="caret-" class="section level2">
+<h2><span class="header-section-number">7.5</span> <code>caret</code> 包</h2>
+<ul>
+<li>数据清洗 预处理</li>
+<li>数据分割 <code>createDataPartition</code> 数据比例 重采样 产生时间片段</li>
+<li>训练检验整合函数 <code>train</code> <code>predict</code></li>
+<li>模型对比</li>
+<li>算法整合为选项 线性判别 回归 朴素贝叶斯 支持向量机 分类与回归树 随机森林 Boosting 等</li>
+</ul>
+</div>
+<div id="section-7.6" class="section level2">
+<h2><span class="header-section-number">7.6</span> 数据分割</h2>
+<ul>
+<li><code>train &lt;- createDataPartition(y=spam$type,p=0.75, list=FALSE)</code> 数据三一分 得到index</li>
+<li><code>folds &lt;- createFolds(y=spam$type,k=10,list=TRUE,returnTrain=TRUE)</code> 数据分10份 返回每一份列表</li>
+<li><code>folds &lt;- createResample(y=spam$type,times=10,list=TRUE)</code> 数据bootstrap重采样 返回每一份列表</li>
+<li><code>folds &lt;- createTimeSlices(y=tme,initialWindow=20,horizon=10)</code> 时序数据重采样 产生20为窗口时序片段的训练集与预测集</li>
+</ul>
+</div>
+<div id="section-7.7" class="section level2">
+<h2><span class="header-section-number">7.7</span> 训练选项</h2>
+<ul>
+<li><code>args(train.default)</code> 通过 <code>method</code> 控制算法 <code>metric</code> 控制算法评价 <code>trainControl</code> 控制训练方法</li>
+<li><code>trainControl</code>中 <code>method</code>选择模型选择方法 如bootstrap 交叉检验 留一法 <code>number</code> 控制次数 <code>repeats</code> 控制重采样次数 <code>seed</code> 控制可重复性 总体设置一个 具体每一次用列表设置控制具体过程 特别是并行模型</li>
+</ul>
+</div>
+<div id="section-7.8" class="section level2">
+<h2><span class="header-section-number">7.8</span> 预测变量作图</h2>
+<ul>
+<li><code>featurePlot</code></li>
+<li><code>ggplot2</code></li>
+</ul>
+</div>
+<div id="section-7.9" class="section level2">
+<h2><span class="header-section-number">7.9</span> 数据预处理</h2>
+<ul>
+<li><code>train</code> 中的 <code>preProcess=c(&quot;center&quot;,&quot;scale&quot;)</code> 标准化</li>
+<li><code>spatialSign</code> 该转化可提高计算效率 有偏</li>
+<li><code>preProcess(training[,-58],method=c(&quot;BoxCox&quot;))</code> 正态化转化</li>
+<li><code>method=&quot;knnImpute&quot;</code> 用最小邻近法填补缺失值</li>
+<li><code>nearZeroVar</code> 去除零方差变量</li>
+<li><code>findCorrelation</code> 去除相关变量</li>
+<li><code>findLinearCombos</code> 去除线性组合变量</li>
+<li><code>classDist</code> 测定分类变量的距离 生成新变量</li>
+<li>测试集也要预处理</li>
+</ul>
+</div>
+<div id="section-7.10" class="section level2">
+<h2><span class="header-section-number">7.10</span> 协变量生成</h2>
+<ul>
+<li>原始数据提取特征</li>
+<li>提取特征后生成新变量</li>
+<li>因子变量要转为虚拟变量</li>
+<li>样条基变量 <code>splines</code> 包中的 <code>bs</code></li>
+<li>数据压缩 <code>preProcess</code> 中 <code>method</code> 设置为 <code>pca</code> <code>pcaComp</code> 指定主成分个数</li>
+</ul>
+</div>
+<div id="section-7.11" class="section level2">
+<h2><span class="header-section-number">7.11</span> 线性回归&amp;多元线性回归</h2>
+<ul>
+<li><span class="math inline">\(ED_i = b_0 + b_1 WT_i + e_i\)</span> 基本模型</li>
+<li>参见前面回归部分</li>
+</ul>
+</div>
+<div id="section-7.12" class="section level2">
+<h2><span class="header-section-number">7.12</span> 树</h2>
+<ul>
+<li>迭代分割变量</li>
+<li>在最大化预测时分割</li>
+<li>评估分支的同质性</li>
+<li>多个树的预测更好</li>
+<li>优点 容易解释应用 可用在神经网络上</li>
+<li>缺点 不容易交叉验证 不确定性不宜估计 结果可能变化 -算法</li>
+<li>先在一个组里用所有的变量计算</li>
+<li>寻找最容易分离结果的变量</li>
+<li>把数据按照该变量节点分为两组</li>
+<li>在每一个组中寻找最好的分离变量</li>
+<li>迭代直到过程结束<br />
+</li>
+<li>节点纯度用 Gini 系数或 交叉墒来衡量</li>
+<li><code>rattle</code> 包的 <code>fancyRpartPlot</code> 出图漂亮</li>
+<li>可用来处理非线性模型与变量选择</li>
+</ul>
+</div>
+<div id="bagging" class="section level2">
+<h2><span class="header-section-number">7.13</span> Bagging</h2>
+<ul>
+<li>重采样 重新计算预测值</li>
+<li>平均或投票给出结果</li>
+<li>减少方差 偏差类似 适用于非线性过程</li>
+<li>bagged trees</li>
+<li>重采样</li>
+<li>重建树</li>
+<li>结果重评价</li>
+<li>更稳健 效果不如RF</li>
+<li>Bagged loess 可用来处理细节</li>
+</ul>
+</div>
+<div id="radom-forest" class="section level2">
+<h2><span class="header-section-number">7.14</span> radom forest</h2>
+<ul>
+<li>bootstrap采样</li>
+<li>每一个节点bootstrap选取变量</li>
+<li>多棵树投票</li>
+<li>准确度高 速度慢 不好解释 容易过拟合</li>
+</ul>
+</div>
+<div id="boosting" class="section level2">
+<h2><span class="header-section-number">7.15</span> boosting</h2>
+<ul>
+<li>弱预测变量加权后构建强预测变量</li>
+<li>从一组预测变量开始</li>
+<li>添加有惩罚项的预测变量来训练模型</li>
+<li>以降低训练集误差为目的</li>
+<li>通用方法</li>
+</ul>
+</div>
+<div id="section-7.16" class="section level2">
+<h2><span class="header-section-number">7.16</span> 其他预测算法</h2>
+<ul>
+<li>参考<a href="https://github.com/yufree/ISLRchnotes">统计学习导论笔记</a></li>
+</ul>
+</div>
+<div id="section-7.17" class="section level2">
+<h2><span class="header-section-number">7.17</span> 模型联合</h2>
+<ul>
+<li>通过平均与投票结合模型</li>
+<li>联合分类器提高准确率</li>
+<li><code>caretEnsemble</code> 包</li>
+<li>案例 广义加性模型</li>
+</ul>
+<pre><code>library(ISLR); data(Wage); library(ggplot2); library(caret);
+Wage &lt;- subset(Wage,select=-c(logwage))
+# Create a building data set and validation set
+inBuild &lt;- createDataPartition(y=Wage$wage,p=0.7, list=FALSE)
+validation &lt;- Wage[-inBuild,]; buildData &lt;- Wage[inBuild,]
+inTrain &lt;- createDataPartition(y=buildData$wage,p=0.7, list=FALSE)
+training &lt;- buildData[inTrain,]; testing &lt;- buildData[-inTrain,]
+mod1 &lt;- train(wage ~.,method=&quot;glm&quot;,data=training)
+mod2 &lt;- train(wage ~.,method=&quot;rf&quot;,data=training,trControl = trainControl(method=&quot;cv&quot;),number=3)
+pred1 &lt;- predict(mod1,testing); pred2 &lt;- predict(mod2,testing)
+qplot(pred1,pred2,colour=wage,data=testing)
+predDF &lt;- data.frame(pred1,pred2,wage=testing$wage)
+combModFit &lt;- train(wage ~.,method=&quot;gam&quot;,data=predDF)
+combPred &lt;- predict(combModFit,predDF)
+sqrt(sum((pred1-testing$wage)^2))
+sqrt(sum((pred2-testing$wage)^2))
+sqrt(sum((combPred-testing$wage)^2))</code></pre>
+</div>
+<div id="section-7.18" class="section level2">
+<h2><span class="header-section-number">7.18</span> 无监督预测</h2>
+<ul>
+<li>先聚类 后预测</li>
+<li><code>clue</code> 包 <code>cl_predict</code> 函数</li>
+<li>推荐系统</li>
+</ul>
+</div>
+<div id="section-7.19" class="section level2">
+<h2><span class="header-section-number">7.19</span> 预测</h2>
+<ul>
+<li>时序数据 包含趋势 季节变化 循环</li>
+<li>效应分解 <code>decompose</code></li>
+<li><code>window</code> 窗口</li>
+<li><code>ma</code> 平滑</li>
+<li><code>ets</code> 指数平滑</li>
+<li><code>forecast</code> 预测</li>
+<li>空间数据同样有这种问题 临近依赖 地域效应</li>
+<li><code>quantmod</code> 包 或 <code>quandl</code> 包处理金融数据</li>
+<li>外推要谨慎</li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regression-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="developing-data-products.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/yufree/notes/edit/master/05-DSpartV.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
