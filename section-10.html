@@ -38,8 +38,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="section-7.html">
-<link rel="next" href="section-9.html">
+<link rel="prev" href="section-9.html">
+
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -271,259 +271,109 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="section-8" class="section level1">
-<h1><span class="header-section-number">Notes 8</span> 回归模型</h1>
-<div id="-1" class="section level2">
-<h2><span class="header-section-number">8.1</span> 导论</h2>
+<div id="section-10" class="section level1">
+<h1><span class="header-section-number">Notes 10</span> 开发数据产品</h1>
+<div id="shiny" class="section level2">
+<h2><span class="header-section-number">10.1</span> shiny</h2>
 <ul>
-<li>Francis Galton 1885年用父母身高预测子女身高的案例</li>
-<li>考虑单变量的数据代表：最小二乘值</li>
-<li>最小二乘值物理意义为质心</li>
-<li>最小二乘统计学意义是平均值</li>
-<li>可用不等式解 也可用求导方法解</li>
-</ul>
-<p><span class="math display">\[ 
-\begin{align} 
-\sum_{i=1}^n (Y_i - \mu)^2 &amp; = \
-\sum_{i=1}^n (Y_i - \bar Y + \bar Y - \mu)^2 \\ 
-&amp; = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
-2 \sum_{i=1}^n (Y_i - \bar Y)  (\bar Y - \mu) +\
-\sum_{i=1}^n (\bar Y - \mu)^2 \\
-&amp; = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
-2 (\bar Y - \mu) \sum_{i=1}^n (Y_i - \bar Y)  +\
-\sum_{i=1}^n (\bar Y - \mu)^2 \\
-&amp; = \sum_{i=1}^n (Y_i - \bar Y)^2 + \
-2 (\bar Y - \mu)  (\sum_{i=1}^n Y_i - n \bar Y) +\
-\sum_{i=1}^n (\bar Y - \mu)^2 \\
-&amp; = \sum_{i=1}^n (Y_i - \bar Y)^2 + \sum_{i=1}^n (\bar Y - \mu)^2\\ 
-&amp; \geq \sum_{i=1}^n (Y_i - \bar Y)^2 \
-\end{align} 
-\]</span></p>
-<ul>
-<li>通过原点的回归</li>
-<li>最小化<span class="math inline">\(\sum_{i=1}^n (Y_i - X_i \beta)^2\)</span></li>
-<li>两变量关系用回归线解释</li>
+<li>源自 R-studio</li>
+<li>动态网络应用</li>
+<li>入门版 <a href="https://www.opencpu.org/">OpenCPU</a></li>
+<li>高级版 <a href="https://support.rstudio.com/hc/en-us/articles/200551906-Interactive-Plotting-with-Manipulate">Manipulate</a></li>
+<li><code>install.packages(&quot;shiny&quot;);libray(shiny)</code></li>
+<li><code>ui.R</code> 控制外观 <code>sever.R</code> 控制计算</li>
+<li><code>runApp()</code> 启动应用</li>
+<li><code>sever.R</code> 中 <code>shinyServer</code> 之前的代码只在启动应用时执行一次 适合读入数据</li>
+<li><code>shinyServer(function(input, output){</code> 之内的非互动函数只被每个用户执行一次</li>
+<li><code>Render*</code> 为互动函数 数值改变就执行一次</li>
+<li><code>runApp(display.mode='showcase')</code> 可用来同时高亮显示执行代码</li>
+<li><code>reactive</code> 用来加速互动函数外的信息交换</li>
+<li><code>actionButton</code> 用来一次提交输入数据 <code>if (input$goButton == 1){ Conditional statements }</code> 用来定义条件语句</li>
+<li><code>cat</code> <code>browser()</code> 调试</li>
+<li><code>fluidRow</code> 产生表格</li>
 </ul>
 </div>
-<div id="section-8.2" class="section level2">
-<h2><span class="header-section-number">8.2</span> 术语</h2>
+<div id="rcharts" class="section level2">
+<h2><span class="header-section-number">10.2</span> rCharts</h2>
 <ul>
-<li><span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> 表示 <span class="math inline">\(n\)</span> 个数据点</li>
-<li><span class="math inline">\(Y_1, \ldots , Y_n\)</span> 表示另外 <span class="math inline">\(n\)</span> 个数据点</li>
-<li>用希腊字母表示不知道的东西 如 <span class="math inline">\(\mu\)</span></li>
-<li>大写字母表示概念值 小写字母表示真实值 如 <span class="math inline">\(P(X_i &gt; x)\)</span></li>
-<li><span class="math inline">\(\bar X = \frac{1}{n}\sum_{i=1}^n X_i\)</span> 表示均值 数据的中心趋向</li>
-<li><span class="math inline">\(\tilde X_i = X_i - \bar X\)</span> 表示对数据中心化 均值为0</li>
-<li>均值为数据的最小二乘估计</li>
-<li><span class="math inline">\(S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar X)^2 = \frac{1}{n-1} \left( \sum_{i=1}^n X_i^2 - n \bar X ^ 2 \right)\)</span> 表示方差</li>
-<li><span class="math inline">\(S\)</span> 为标准差 数据的离散程度</li>
-<li><span class="math inline">\(X_i / s\)</span> 表示数据缩放 方差为1</li>
-<li><span class="math inline">\(Z_i = \frac{X_i - \bar X}{s}\)</span> 表示数据的标准化 先中心化再标准化</li>
-<li><span class="math inline">\(Cov(X, Y) = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X) (Y_i - \bar Y)= \frac{1}{n-1}\left( \sum_{i=1}^n X_i Y_i - n \bar X \bar Y\right)\)</span> 表示协方差</li>
-<li><span class="math inline">\(Cor(X, Y) = \frac{Cov(X, Y)}{S_x S_y}\)</span> 表示相关性</li>
-<li><span class="math inline">\(Cor(X, Y) = Cor(Y, X)\)</span></li>
-<li><span class="math inline">\(-1 \leq Cor(X, Y) \leq 1\)</span></li>
-<li><span class="math inline">\(Cor(X, Y)\)</span> 度量线性关系强度</li>
-<li><span class="math inline">\(Cor(X, Y) = 0\)</span> 表示无线性关系</li>
+<li><a href="http://ramnathv.github.io/rCharts/">主页</a></li>
+<li>动态交互可视化工具</li>
+<li><code>require(devtools);install_github('rCharts', 'ramnathv')</code></li>
 </ul>
 </div>
-<div id="section-8.3" class="section level2">
-<h2><span class="header-section-number">8.3</span> 回归线的最小二乘回归</h2>
+<div id="googlevis" class="section level2">
+<h2><span class="header-section-number">10.3</span> GoogleVis</h2>
 <ul>
-<li>用最小二乘法寻找回归线 最小化 <span class="math inline">\(\sum_{i=1}^n \{Y_i - (\beta_0 + \beta_1 X_i)\}^2\)</span></li>
-<li>如果定义 <span class="math inline">\(\mu_i = \beta_0\)</span> <span class="math inline">\(\hat \beta_0 = \bar Y\)</span> 不考虑其他变量 <span class="math inline">\(Y\)</span> 的均值就是最小二乘估计</li>
-<li>如果定义 <span class="math inline">\(\mu_i = X_i \beta_1\)</span> <span class="math inline">\(\hat \beta_1 = \frac{\sum_{i=1^n} Y_i X_i}{\sum_{i=1}^n X_i^2}\)</span> 如果考虑过原点线的回归 斜率如上</li>
-<li>如果考虑 <span class="math inline">\(\mu_i = \beta_0 + \beta_1 X_i\)</span></li>
-</ul>
-<p><span class="math display">\[\begin{align} \
-\sum_{i=1}^n (Y_i - \hat \mu_i) (\hat \mu_i - \mu_i) 
-= &amp; \sum_{i=1}^n (Y_i - \hat\beta_0 - \hat\beta_1 X_i) (\hat \beta_0 + \hat \beta_1 X_i - \beta_0 - \beta_1 X_i) \\
-= &amp; (\hat \beta_0 - \beta_0) \sum_{i=1}^n (Y_i - \hat\beta_0 - \hat \beta_1 X_i) + (\beta_1 - \beta_1)\sum_{i=1}^n (Y_i - \hat\beta_0 - \hat \beta_1 X_i)X_i\\
-\end{align} \]</span></p>
-<ul>
-<li>解为<span class="math inline">\(\hat \beta_1 = Cor(Y, X) \frac{Sd(Y)}{Sd(X)} ~~~ \hat \beta_0 = \bar Y - \hat \beta_1 \bar X\)</span></li>
-<li>如果标准化数据 <span class="math inline">\(\{ \frac{X_i - \bar X}{Sd(X)}, \frac{Y_i - \bar Y}{Sd(Y)}\}\)</span> 解为<span class="math inline">\(Cor(Y, X)\)</span></li>
-<li>回归是因变量向自己均值回归与向自变量相关回归的平衡</li>
+<li><a href="https://developers.google.com/chart/interactive/docs/gallery">主页</a></li>
+<li>R 代码产生图表 生成html</li>
+<li><code>install.packages('googleVis');library(googleVis)</code></li>
+<li><a href="http://decastillo.github.io/googleVis_Tutorial/">教程</a></li>
 </ul>
 </div>
-<div id="section-8.4" class="section level2">
-<h2><span class="header-section-number">8.4</span> 统计线性回归模型</h2>
+<div id="slidify" class="section level2">
+<h2><span class="header-section-number">10.4</span> Slidify</h2>
 <ul>
-<li>最小二乘是一种估计方法，做推断需要模型</li>
-<li>建立线性回归的概率模型<span class="math inline">\(Y_i = \beta_0 + \beta_1 X_i + \epsilon_{i}\)</span></li>
-<li><span class="math inline">\(\epsilon_{i}\)</span> 为 iid <span class="math inline">\(N(0, \sigma^2)\)</span></li>
-<li><span class="math inline">\(E[Y_i ~|~ X_i = x_i] = \mu_i = \beta_0 + \beta_1 x_i\)</span></li>
-<li><span class="math inline">\(Var(Y_i ~|~ X_i = x_i) = \sigma^2\)</span></li>
-<li>对<span class="math inline">\(N(\mu_i, \sigma^2)\)</span>独立变量 <span class="math inline">\(Y\)</span> 进行极大似然估计</li>
-<li><span class="math inline">\({\cal L}(\beta, \sigma) = \prod_{i=1}^n \left\{(2 \pi \sigma^2)^{-1/2}\exp\left(-\frac{1}{2\sigma^2}(y_i - \mu_i)^2 \right) \right\}\)</span></li>
-<li>取对数有 <span class="math inline">\(-2 \log\{ {\cal L}(\beta, \sigma) \} = \frac{1}{\sigma^2} \sum_{i=1}^n (y_i - \mu_i)^2 + n\log(\sigma^2)\)</span></li>
-<li>最小二乘估计就是极大似然估计</li>
-<li><span class="math inline">\(\hat \beta_1 = Cor(Y, X) \frac{Sd(Y)}{Sd(X)} ~~~ \hat \beta_0 = \bar Y - \hat \beta_1 \bar X\)</span></li>
-<li>截距是自变量为0时 <span class="math inline">\(Y\)</span> 的期望 斜率是自变量变化一个单位对 <span class="math inline">\(Y\)</span> 的影响</li>
+<li><a href="slidify.org">主页</a></li>
+<li>html5 幻灯片</li>
+<li><code>install.packages(&quot;devtools&quot;);library(devtools);install_github('slidify', 'ramnathv');install_github('slidifyLibraries', 'ramnathv');library(slidify)</code></li>
+<li><code>author(&quot;yufree&quot;)</code></li>
+<li><code>YAML</code> 配置幻灯片结构</li>
+<li><code>##</code> 幻灯片开始 <code>---</code> 加空行表结束 <code>.class #id</code> 自定义css文件id</li>
+<li><code>slidify(&quot;index.Rmd&quot;)</code> 生成 <code>browseURL(&quot;index.html&quot;)</code> 观看</li>
+<li><code>publish_github(user, repo)</code> github发布</li>
 </ul>
 </div>
-<div id="section-8.5" class="section level2">
-<h2><span class="header-section-number">8.5</span> 残差</h2>
+<div id="rpresentation" class="section level2">
+<h2><span class="header-section-number">10.5</span> Rpresentation</h2>
 <ul>
-<li>模型 <span class="math inline">\(Y_i = \beta_0 + \beta_1 X_i + \epsilon_i\)</span></li>
-<li>预测值 <span class="math inline">\(\hat Y_i = \hat \beta_0 + \hat \beta_1 X_i\)</span></li>
-<li><span class="math inline">\(e_i = Y_i - \hat Y_i\)</span> 观察数据与回归线的垂直距离</li>
-<li>最小二乘估计最小化残差 <span class="math inline">\(\sum_{i=1}^n e_i^2\)</span></li>
-<li>残差 <span class="math inline">\(e_i\)</span> 可看作 <span class="math inline">\(\epsilon_i\)</span> 的估计</li>
-<li>可证 <span class="math inline">\(E[e_i] = 0\)</span> 模型中考虑截距 <span class="math inline">\(\sum_{i=1}^n e_i = 0\)</span> 考虑自变量 <span class="math inline">\(\sum_{i=1}^n e_i X_i = 0\)</span></li>
-<li>残差可用来评价模型效果</li>
-<li>残差波动不同于模型波动</li>
-<li>残差波动 <span class="math inline">\(\sigma^2\)</span> 的极大似然估计为 <span class="math inline">\(\frac{1}{n}\sum_{i=1}^n e_i^2\)</span></li>
-<li><span class="math inline">\(\hat \sigma^2 = \frac{1}{n-2}\sum_{i=1}^n e_i^2\)</span> 为无偏估计</li>
-</ul>
-<p><span class="math display">\[
-\begin{align}
-\sum_{i=1}^n (Y_i - \bar Y)^2 
-&amp; = \sum_{i=1}^n (Y_i - \hat Y_i + \hat Y_i - \bar Y)^2 \\
-&amp; = \sum_{i=1}^n (Y_i - \hat Y_i)^2 + 
-2 \sum_{i=1}^n  (Y_i - \hat Y_i)(\hat Y_i - \bar Y) + 
-\sum_{i=1}^n  (\hat Y_i - \bar Y)^2 \\
-\end{align}
-\]</span></p>
-<ul>
-<li>其中 <span class="math inline">\((Y_i - \hat Y_i) = \{Y_i - (\bar Y - \hat \beta_1 \bar X) - \hat \beta_1 X_i\} = (Y_i - \bar Y) - \hat \beta_1 (X_i - \bar X)\)</span></li>
-<li><span class="math inline">\((\hat Y_i - \bar Y) = (\bar Y - \hat \beta_1 \bar X - \hat \beta_1 X_i - \bar Y )= \hat \beta_1 (X_i - \bar X)\)</span></li>
-<li>有<span class="math inline">\(\sum_{i=1}^n (Y_i - \hat Y_i)(\hat Y_i - \bar Y) = \sum_{i=1}^n \{(Y_i - \bar Y) - \hat \beta_1 (X_i - \bar X))\}\{\hat \beta_1 (X_i - \bar X)\}=\hat \beta_1 \sum_{i=1}^n (Y_i - \bar Y)(X_i - \bar X) -\hat\beta_1^2\sum_{i=1}^n (X_i - \bar X)^2= \hat \beta_1^2 \sum_{i=1}^n (X_i - \bar X)^2-\hat\beta_1^2\sum_{i=1}^n (X_i - \bar X)^2 = 0\)</span></li>
-<li>综上 <span class="math inline">\(\sum_{i=1}^n (Y_i - \bar Y)^2 = \sum_{i=1}^n (Y_i - \hat Y_i)^2 + \sum_{i=1}^n (\hat Y_i - \bar Y)^2\)</span></li>
-<li>有 Total Variation = Residual Variation + Regression Variation</li>
-<li>模型解释部分<span class="math inline">\(R^2 = \frac{\sum_{i=1}^n (\hat Y_i - \bar Y)^2}{\sum_{i=1}^n (Y_i - \bar Y)^2} = 1 - \frac{\sum_{i=1}^n (Y_i - \hat Y_i)^2}{\sum_{i=1}^n (Y_i - \bar Y)^2}\)</span></li>
-<li>已知 <span class="math inline">\((\hat Y_i - \bar Y) = \hat \beta_1 (X_i - \bar X)\)</span> <span class="math inline">\(\hat \beta_1 = Cor(Y, X)\frac{Sd(Y)}{Sd(X)}\)</span> 有 <span class="math inline">\(R^2 = \frac{\sum_{i=1}^n (\hat Y_i - \bar Y)^2}{\sum_{i=1}^n (Y_i - \bar Y)^2}= \hat \beta_1^2 \frac{\sum_{i=1}^n(X_i - \bar X)^2}{\sum_{i=1}^n (Y_i - \bar Y)^2}= Cor(Y, X)^2\)</span></li>
-<li><span class="math inline">\(R^2\)</span> 实际上是相关性 <span class="math inline">\(r\)</span> 的平方 &lt;- 线性模型的可解释性</li>
-<li><span class="math inline">\(R^2\)</span> 会伴随样本数增加而增加 会因删除异常值而增加</li>
-<li><code>data(anscombe);example(anscombe)</code></li>
+<li>源自 R-studio</li>
+<li>轻量级幻灯片</li>
+<li><a href="ttps://support.rstudio.com/hc/en-us/articles/200486468-Authoring-R-Presentations">教程</a></li>
 </ul>
 </div>
-<div id="section-8.6" class="section level2">
-<h2><span class="header-section-number">8.6</span> 回归推断</h2>
+<div id="yhat" class="section level2">
+<h2><span class="header-section-number">10.6</span> yhat</h2>
 <ul>
-<li><span class="math inline">\(\frac{\hat \theta - \theta}{\hat \sigma_{\hat \theta}}\)</span> 总符合正态分布或<span class="math inline">\(t\)</span>分布</li>
-<li>假设检验 <span class="math inline">\(H_0 : \theta = \theta_0\)</span> 与 <span class="math inline">\(H_a : \theta &gt;, &lt;, \neq \theta_0\)</span></li>
-<li>置信区间 <span class="math inline">\(\theta\)</span> 通过 <span class="math inline">\(\hat \theta \pm Q_{1-\alpha/2} \hat \sigma_{\hat \theta}\)</span> 构建</li>
-</ul>
-<p><span class="math display">\[
-\begin{align}
-Var(\hat \beta_1) &amp; =
-Var\left(\frac{\sum_{i=1}^n (Y_i - \bar Y) (X_i - \bar X)}{\sum_{i=1}^n (X_i - \bar X)^2}\right) \\
-&amp; = \frac{Var\left(\sum_{i=1}^n Y_i (X_i - \bar X) \right) }{\left(\sum_{i=1}^n (X_i - \bar X)^2 \right)^2} \\
-&amp; = \frac{\sum_{i=1}^n \sigma^2(X_i - \bar X)^2}{\left(\sum_{i=1}^n (X_i - \bar X)^2 \right)^2} \\
-&amp; = \frac{\sigma^2}{\sum_{i=1}^n (X_i - \bar X)^2} \\
-\end{align}
-\]</span></p>
-<ul>
-<li><span class="math inline">\(\sigma_{\hat \beta_1}^2 = Var(\hat \beta_1) = \sigma^2 / \sum_{i=1}^n (X_i - \bar X)^2\)</span></li>
-<li><span class="math inline">\(\sigma_{\hat \beta_0}^2 = Var(\hat \beta_0) = \left(\frac{1}{n} + \frac{\bar X^2}{\sum_{i=1}^n (X_i - \bar X)^2 }\right)\sigma^2\)</span></li>
-<li>这样 <span class="math inline">\(\frac{\hat \beta_j - \beta_j}{\hat \sigma_{\hat \beta_j}}\)</span> 遵守自由度为<span class="math inline">\(n-2\)</span>的<span class="math inline">\(t\)</span>分布或正态分布</li>
-<li>在<span class="math inline">\(x_0\)</span> 回归线的标准误 <span class="math inline">\(\hat \sigma\sqrt{\frac{1}{n} + \frac{(x_0 - \bar X)^2}{\sum_{i=1}^n (X_i - \bar X)^2}}\)</span></li>
-<li>在<span class="math inline">\(x_0\)</span> 预测值的标准误 <span class="math inline">\(\hat \sigma\sqrt{1 + \frac{1}{n} + \frac{(x_0 - \bar X)^2}{\sum_{i=1}^n (X_i - \bar X)^2}}\)</span></li>
-<li>CI代表回归线在特定<span class="math inline">\(x\)</span>处的变动 PI代表预测值在此处的变动 前者在回归线固定时不变 后者还要考虑预测值围绕回归线的变动</li>
-</ul>
-<blockquote>
-<p>The prediction interval is the range in which future observation can be thought most likely to occur, whereas the confidence interval is where the mean of future observation is most likely to reside. From <a href="http://stackoverflow.com/questions/9406139/r-programming-predict-prediction-vs-confidence/9406534#9406534">here</a></p>
-</blockquote>
-</div>
-<div id="section-8.7" class="section level2">
-<h2><span class="header-section-number">8.7</span> 多元回归</h2>
-<ul>
-<li>线性模型 <span class="math inline">\(Y_i = \beta_1 X_{1i} + \beta_2 X_{2i} + \ldots + \beta_{p} X_{pi} + \epsilon_{i} = \sum_{k=1}^p X_{ik} \beta_j + \epsilon_{i}\)</span></li>
-<li>最小化 <span class="math inline">\(\sum_{i=1}^n \left(Y_i - \sum_{k=1}^p X_{ki} \beta_j\right)^2\)</span> 最小二乘估计也是误差正态化的极大似然估计</li>
-<li>最小二乘估计等价于 <span class="math inline">\(\sum_{i=1}^n (Y_i - X_{1i}\hat \beta_1 - \ldots - X_{ip}\hat \beta_p) X_k = 0\)</span> 本质上使其他参数固定解出一个 然后逐级代入 最后全部解出参数值 参考线性代数</li>
-<li>参数代表固定其他参数后变动一个单位引发的变化</li>
-<li>方差估计 <span class="math inline">\(\hat \sigma^2 = \frac{1}{n-p} \sum_{i=1}^n e_i ^2\)</span></li>
-<li>参数标准误<span class="math inline">\(\hat \sigma_{\hat \beta_k}\)</span> <span class="math inline">\(\frac{\hat \beta_k - \beta_k}{\hat \sigma_{\hat \beta_k}}\)</span> 符合自由度 <span class="math inline">\(n-p\)</span> 的 <span class="math inline">\(T\)</span> 分布</li>
-<li>多元模型中加入变量会导致原有变量的参数估计发生变化 甚至方向相反 一般是由于加入变量与原有变量存在共相关 导致两者参数估计都不准</li>
-</ul>
-<pre><code>n &lt;- 100; x2 &lt;- 1 : n; x1 &lt;- .01 * x2 + runif(n, -.1, .1); y = -x1 + x2 + rnorm(n, sd = .01)
-summary(lm(y ~ x1))$coef
-summary(lm(y ~ x1 + x2))$coef</code></pre>
-<ul>
-<li><code>R</code> 会自动检测并消除变量生成的变量 如上面 <code>x2</code> 中需要加入 <code>runif(n,-.1,.1)</code> 才能得到结果</li>
-<li>多元模型中包括分类变量考虑加入虚拟变量 <span class="math inline">\(Y_i = \beta_0 + X_{i1} \beta_1 + \epsilon_{i}\)</span> 属于该分类时 <span class="math inline">\(E[Y_i] = \beta_0 + \beta_1\)</span> 否则为<span class="math inline">\(E[Y_i] = \beta_0\)</span></li>
-<li>分类变量截距有意义 代表其中一个分类 等同于其他分类与该分类进行 <code>t</code> 检验 如果模型中去掉截距 等同于所有分类与零进行 <code>t</code> 检验 参数系数为均值差 可用 <code>relevel(data,'name')</code> 来指定比对对象</li>
-<li>两变量均值差的标准误通过 <span class="math inline">\(Var(\hat \beta_B - \hat \beta_C) = Var(\hat \beta_B) + Var(\hat \beta_C) - 2 Cov(\hat \beta_B, \hat \beta_C)\)</span> 来计算进行推断</li>
-<li>交互作用 <span class="math inline">\(E[Y_i | X_{1i}=x_1, X_{2i}=x_2] = \beta_0 + \beta_1 x_{1} + \beta_2 x_{2} + \beta_3 x_{1}x_{2}\)</span> 中交互作用参数实际表示 <span class="math inline">\(E[Y_i | X_{1i}=x_1+1, X_{2i}=x_2+1]-E[Y_i | X_{1i}=x_1, X_{2i}=x_2+1]-E[Y_i | X_{1i}=x_1+1, X_{2i}=x_2]-E[Y_i | X_{1i}=x_1, X_{2i}=x_2] =\beta_3\)</span> 各交互参数变化一单位响应变化</li>
-<li>多元回归的参数解释需要考虑清楚变量类型与交互作用</li>
-<li>多元回归中变量与响应 变量与变量间的相关性要全盘考虑 通过模拟观察决定</li>
+<li><a href="https://yhathq.com/">主页</a></li>
+<li>本地提交算法或模型 生成可调用API 支持R与python</li>
 </ul>
 </div>
-<div id="section-8.8" class="section level2">
-<h2><span class="header-section-number">8.8</span> 模型诊断与选择</h2>
+<div id="r-" class="section level2">
+<h2><span class="header-section-number">10.7</span> R 包开发</h2>
 <ul>
-<li>通过残差诊断 最小二乘决定均值为零 方差通过 <span class="math inline">\(\hat \sigma^2 = \frac{\sum_{i=1}^n e_i^2}{n-p}\)</span> 进行无偏估计</li>
-<li>异常值判断 对回归关系包括系数与其标准误的影响 残差的分布检验等 <code>?influence.measures</code></li>
-</ul>
-<blockquote>
-<p>There are known knowns. These are things we know that we know. There are known unknowns. That is to say, there are things that we know we don’t know. But there are also unknown unknowns. There are things we don’t know we don’t know. Donald Rumsfeld</p>
-</blockquote>
-<ul>
-<li>随机化有助于平衡未知变量</li>
-<li>杠杆点 加入前后与回归线距离差的比值</li>
-<li>参数方差膨胀 共相关或随机相关 <code>vif</code>来检验 协变量在欠拟合下有偏</li>
-<li>协变量的选择需要专业知识与经验</li>
-</ul>
-</div>
-<div id="section-8.9" class="section level2">
-<h2><span class="header-section-number">8.9</span> 广义线性模型</h2>
-<ul>
-<li>Nelder 与 Wedderburn 1972年提出</li>
-<li>响应是指数家族模型 模型组成部分是线性的 线性预测变量与响应通过连接函数联系</li>
-<li>线性模型</li>
-<li><span class="math inline">\(Y_i \sim N(\mu_i, \sigma^2)\)</span></li>
-<li><span class="math inline">\(\eta_i = \sum_{k=1}^p X_{ik} \beta_k\)</span></li>
-<li><span class="math inline">\(g(\mu) = \eta\)</span></li>
-<li>似然模型为 <span class="math inline">\(Y_i = \sum_{k=1}^p X_{ik} \beta_k + \epsilon_{i}\)</span> <span class="math inline">\(\epsilon_i \stackrel{iid}{\sim} N(0, \sigma^2)\)</span></li>
-<li>logistic 模型</li>
-<li><span class="math inline">\(Y_i \sim Bernoulli(\mu_i)\)</span></li>
-<li><span class="math inline">\(\eta_i = \sum_{k=1}^p X_{ik} \beta_k\)</span></li>
-<li><span class="math inline">\(g(\mu) = \eta = \log\left( \frac{\mu}{1 - \mu}\right)\)</span> <span class="math inline">\(g\)</span>为logit函数</li>
-<li>似然函数为 <span class="math inline">\(\prod_{i=1}^n \mu_i^{y_i} (1 - \mu_i)^{1-y_i} = \exp\left(\sum_{i=1}^n y_i \eta_i \right) \prod_{i=1}^n (1 + \eta_i)^{-1}\)</span></li>
-<li>泊松模型</li>
-<li><span class="math inline">\(Y_i \sim Poisson(\mu_i)\)</span></li>
-<li><span class="math inline">\(\eta_i = \sum_{k=1}^p X_{ik} \beta_k\)</span></li>
-<li><span class="math inline">\(g(\mu) = \eta = \log(\mu)\)</span></li>
-<li>似然函数为 <span class="math inline">\(\prod_{i=1}^n (y_i !)^{-1} \mu_i^{y_i}e^{-\mu_i}\propto \exp\left(\sum_{i=1}^n y_i \eta_i - \sum_{i=1}^n \mu_i\right)\)</span></li>
-<li>似然函数与数据的联系 <span class="math inline">\(\sum_{i=1}^n y_i \eta_i = \sum_{i=1}^n y_i\sum_{k=1}^p X_{ik} \beta_k = \sum_{k=1}^p \beta_k\sum_{i=1}^n X_{ik} y_i\)</span> 只有<span class="math inline">\(\sum_{i=1}^n X_{ik} y_i\)</span></li>
-<li>极大似然估计的解 <span class="math inline">\(0=\sum_{i=1}^n \frac{(Y_i - \mu_i)}{Var(Y_i)}W_i\)</span> <span class="math inline">\(W_i\)</span>是连接函数的反函数的微分</li>
-<li>响应的方差中线性模型 <span class="math inline">\(Var(Y_i) = \sigma^2\)</span> 是常数 logistic 模型 <span class="math inline">\(Var(Y_i) = \mu_i (1 - \mu_i)\)</span> 泊松模型 <span class="math inline">\(Var(Y_i) = \mu_i\)</span></li>
-<li>可通过对模型方差增加调谐参数 <span class="math inline">\(\phi\)</span> 使模型更灵活 quasi-likelihood</li>
-<li>模型求解为 <span class="math inline">\(\hat \beta_k\)</span> 及可能的 <span class="math inline">\(\hat \phi\)</span></li>
-<li>线性预测变量关系 <span class="math inline">\(\hat \eta = \sum_{k=1}^p X_k \hat \beta_k\)</span></li>
-<li>平均响应 <span class="math inline">\(\hat \mu = g^{-1}(\hat \eta)\)</span></li>
-<li>系数解释 <span class="math inline">\(g(E[Y | X_k = x_k + 1, X_{\sim k} = x_{\sim k}]) - g(E[Y | X_k = x_k, X_{\sim k}=x_{\sim k}]) = \beta_k\)</span></li>
+<li><code>DESCRIPTION</code> 指明包内容</li>
+<li><code>Package</code> 包名字</li>
+<li><code>Title</code> 全名</li>
+<li><code>Description</code> 一句话描述</li>
+<li><code>Version</code> 版本号</li>
+<li><code>Author</code> 作者</li>
+<li><code>Maintainer</code> 维护者</li>
+<li><code>License</code> 许可协议</li>
+<li><code>Depends</code> 依赖</li>
+<li><code>Suggests</code> 建议</li>
+<li><code>Date</code> 发布日期 YYYY-MM-DD 格式</li>
+<li><code>URL</code> 项目主页</li>
+<li><code>R</code> 源码</li>
+<li><code>Documentation</code> 文档 <code>Rd</code>文件</li>
+<li><code>NAMESPACE</code> 关键词 输入输出的函数及类型</li>
+<li><code>R CMD build/check newpackage</code> 构建 检查包</li>
+<li><code>roxygen2</code> 源文件注释文档</li>
 </ul>
 </div>
-<div id="section-8.10" class="section level2">
-<h2><span class="header-section-number">8.10</span> 二元响应</h2>
+<div id="r-" class="section level2">
+<h2><span class="header-section-number">10.8</span> R 中方法与类型</h2>
 <ul>
-<li><span class="math inline">\(\log\left(\frac{\rm{Pr}(RW_i | RS_i, b_0, b_1 )}{1-\rm{Pr}(RW_i | RS_i, b_0, b_1)}\right) = b_0 + b_1 RS_i\)</span></li>
-<li><span class="math inline">\(b_0\)</span> 预测变量为零时胜率对数</li>
-<li><span class="math inline">\(b_1\)</span> 预测变量变化一个单位胜率的改变对数</li>
-<li><span class="math inline">\(\exp(b_1)\)</span> 预测变量变化一个单位胜率的改变</li>
-</ul>
-</div>
-<div id="section-8.11" class="section level2">
-<h2><span class="header-section-number">8.11</span> 计数或速率响应</h2>
-<ul>
-<li><span class="math inline">\(\log\left(E[NH_i | JD_i, b_0, b_1]\right) = b_0 + b_1 JD_i\)</span></li>
-<li><span class="math inline">\(e^{E[\log(Y)]}\)</span> <span class="math inline">\(Y\)</span> 的几何平均值</li>
-<li><span class="math inline">\(e^{\beta_0}\)</span> 第零天的几何平均值</li>
-<li><span class="math inline">\(e^{\beta_1}\)</span> 每天相对增加或减少的几何平均值</li>
-<li>通过设置 <code>offset</code> 可用来估计增长率</li>
-<li>注意方差膨胀与<a href="http://cran.r-project.org/web/packages/pscl/index.html">零膨胀</a>问题</li>
-</ul>
-</div>
-<div id="section-8.12" class="section level2">
-<h2><span class="header-section-number">8.12</span> 分段平滑</h2>
-<ul>
-<li>可用线性回归拟合曲线 原理是分段拟合连接</li>
-<li>断点平滑可用二次项</li>
-<li>分段项可看作基进行组合</li>
+<li>R 面向对象编程</li>
+<li>对象用<code>setClass</code>指定类型 用<code>setMethod</code>指定处理类型的方法</li>
+<li>对象一般指新的数据类型</li>
+<li>S3函数对象不算严格 <code>generic</code>处理对象 开放 没有指定类型就用通用方法</li>
+<li>S4函数对象定义严格 只处理指定类型对象 不可直接调用方法 针对性强</li>
+<li><code>stats4</code> 有很多针对性的极大似然估计的对象定义与方法</li>
 </ul>
 
+<div id="refs" class="references">
+
+</div>
 </div>
 </div>
             </section>
@@ -531,8 +381,8 @@ summary(lm(y ~ x1 + x2))$coef</code></pre>
           </div>
         </div>
       </div>
-<a href="section-7.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="section-9.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="section-9.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -559,7 +409,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/yufree/notes/edit/master/08-DSregressionmodels.Rmd",
+"link": "https://github.com/yufree/notes/edit/master/10-DSdevelopingdataproducts.Rmd",
 "text": null
 },
 "download": null,
