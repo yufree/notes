@@ -1,0 +1,198 @@
+# 机器学习实战
+
+- 问题 -> 数据 -> 特征 -> 算法 -> 参数 -> 评价
+
+> The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data. John Tukey
+
+- 数据质量优先于模型
+- 不要自动特征选择
+- 算法的可扩展性与计算性能要考虑
+- 数据过拟合问题 数据总是由信号与噪音组成 但会被算法无差别对待
+- 数据要与问题相关 低相关度的组合可能产生高相关度
+
+## 研究设计
+
+- 定义错误率
+- 将数据分割为训练集 预测集 验证集
+- 在训练集上使用交叉检验选择特征与预测算法
+- 在预测集或验证集上使用一次数据
+- 预测效果起码要优于瞎猜
+- 避免使用小样本
+- 比例为 60% 训练集 20% 预测集 20% 验证集 或 60% 训练集 40% 预测集 或小样本交叉检验
+- 注意数据结构 时序分析要对数据分段采样
+
+## 错误率
+
+- 真阳性 真的是对的 TP
+- 假阳性 真的是错的 FP Type I
+- 真阴性 假的是错的 TN
+- 假阴性 假的是对的 FN Type II
+- 灵敏度 TP/(TP+FP)
+- 特异性 TN/(TN+FN)
+- 均方差 MSE $\frac{1}{n} \sum_{i=1}^n (Prediction_i - Truth_i)^2$
+- 均方误 RMSE $\sqrt{\frac{1}{n} \sum_{i=1}^n(Prediction_i - Truth_i)^2}$
+- 中位差 Median absolute deviation
+- 准确性 (TP+TN)/(TP+FP+TN+FP)
+- 一致性 [kappa值](https://en.wikipedia.org/wiki/Cohen%27s_kappa)
+
+## ROC 曲线
+
+- 分类问题寻找判别阈值 满足一定TP下最小FP的模型
+- FP v.s.TP 作图
+- AUC 曲线下面积表示选择标准 一般超过80%
+- 对角线是随机猜的结果
+
+## 交叉检验
+
+- 训练集上的操作
+- 训练集上再分为训练集与测试集
+- 在测试集上评价 重复并平均化测试集错误
+- 用来进行变量 模型 参数选择
+- 随机 分组 留一
+- 分组多方差大 分组少有偏差
+- 有放回的为bootstrap 不建议用
+
+## `caret` 包
+
+- 数据清洗 预处理
+- 数据分割 `createDataPartition` 数据比例 重采样 产生时间片段
+- 训练检验整合函数 `train` `predict` 
+- 模型对比 
+- 算法整合为选项 线性判别 回归 朴素贝叶斯 支持向量机 分类与回归树 随机森林 Boosting 等
+
+## 数据分割
+
+- `train <- createDataPartition(y=spam$type,p=0.75, list=FALSE)` 数据三一分 得到index
+- `folds <- createFolds(y=spam$type,k=10,list=TRUE,returnTrain=TRUE)` 数据分10份 返回每一份列表
+- `folds <- createResample(y=spam$type,times=10,list=TRUE)` 数据bootstrap重采样 返回每一份列表
+- `folds <- createTimeSlices(y=tme,initialWindow=20,horizon=10)` 时序数据重采样 产生20为窗口时序片段的训练集与预测集
+
+## 训练选项
+
+- `args(train.default)` 通过 `method` 控制算法 `metric` 控制算法评价 `trainControl` 控制训练方法
+- `trainControl`中 `method`选择模型选择方法 如bootstrap 交叉检验 留一法 `number` 控制次数 `repeats` 控制重采样次数 `seed` 控制可重复性 总体设置一个 具体每一次用列表设置控制具体过程 特别是并行模型
+
+## 预测变量作图
+
+- `featurePlot` 
+- `ggplot2`
+
+## 数据预处理
+
+- `train` 中的 `preProcess=c("center","scale")` 标准化
+- `spatialSign` 该转化可提高计算效率 有偏
+- `preProcess(training[,-58],method=c("BoxCox"))` 正态化转化
+- `method="knnImpute"` 用最小邻近法填补缺失值
+- `nearZeroVar` 去除零方差变量
+- `findCorrelation` 去除相关变量
+- `findLinearCombos` 去除线性组合变量
+- `classDist` 测定分类变量的距离 生成新变量
+- 测试集也要预处理
+
+## 协变量生成
+
+- 原始数据提取特征
+- 提取特征后生成新变量
+- 因子变量要转为虚拟变量
+- 样条基变量 `splines` 包中的 `bs`
+- 数据压缩 `preProcess` 中 `method` 设置为 `pca` `pcaComp` 指定主成分个数
+
+## 线性回归&多元线性回归
+
+- $ED_i = b_0 + b_1 WT_i + e_i$ 基本模型
+- 参见前面回归部分
+
+## 树
+
+- 迭代分割变量
+- 在最大化预测时分割
+- 评估分支的同质性
+- 多个树的预测更好
+  - 优点 容易解释应用 可用在神经网络上
+  - 缺点 不容易交叉验证 不确定性不宜估计 结果可能变化
+-算法
+  - 先在一个组里用所有的变量计算
+  - 寻找最容易分离结果的变量
+  - 把数据按照该变量节点分为两组
+  - 在每一个组中寻找最好的分离变量
+  - 迭代直到过程结束    
+  - 节点纯度用 Gini 系数或 交叉墒来衡量
+- `rattle` 包的 `fancyRpartPlot` 出图漂亮
+- 可用来处理非线性模型与变量选择
+
+## Bagging
+
+- 重采样 重新计算预测值
+- 平均或投票给出结果
+- 减少方差 偏差类似 适用于非线性过程
+- bagged trees
+  - 重采样
+  - 重建树
+  - 结果重评价
+  - 更稳健 效果不如RF
+- Bagged loess 可用来处理细节
+
+## radom forest
+
+- bootstrap采样
+- 每一个节点bootstrap选取变量
+- 多棵树投票
+- 准确度高 速度慢 不好解释 容易过拟合
+
+## boosting
+
+- 弱预测变量加权后构建强预测变量
+- 从一组预测变量开始
+- 添加有惩罚项的预测变量来训练模型
+- 以降低训练集误差为目的
+- 通用方法
+
+## 其他预测算法
+
+- 参考[统计学习导论笔记](https://github.com/yufree/ISLRchnotes)
+
+## 模型联合
+
+- 通过平均与投票结合模型
+- 联合分类器提高准确率
+- `caretEnsemble` 包
+- 案例 广义加性模型
+
+```
+library(ISLR); data(Wage); library(ggplot2); library(caret);
+Wage <- subset(Wage,select=-c(logwage))
+# Create a building data set and validation set
+inBuild <- createDataPartition(y=Wage$wage,p=0.7, list=FALSE)
+validation <- Wage[-inBuild,]; buildData <- Wage[inBuild,]
+inTrain <- createDataPartition(y=buildData$wage,p=0.7, list=FALSE)
+training <- buildData[inTrain,]; testing <- buildData[-inTrain,]
+mod1 <- train(wage ~.,method="glm",data=training)
+mod2 <- train(wage ~.,method="rf",data=training,trControl = trainControl(method="cv"),number=3)
+pred1 <- predict(mod1,testing); pred2 <- predict(mod2,testing)
+qplot(pred1,pred2,colour=wage,data=testing)
+predDF <- data.frame(pred1,pred2,wage=testing$wage)
+combModFit <- train(wage ~.,method="gam",data=predDF)
+combPred <- predict(combModFit,predDF)
+sqrt(sum((pred1-testing$wage)^2))
+sqrt(sum((pred2-testing$wage)^2))
+sqrt(sum((combPred-testing$wage)^2))
+```
+
+## 无监督预测
+
+- 先聚类 后预测
+- `clue` 包 `cl_predict` 函数
+- 推荐系统
+
+## 预测
+
+- 时序数据 包含趋势 季节变化 循环
+  - 效应分解 `decompose`
+  - `window` 窗口
+  - `ma` 平滑
+  - `ets` 指数平滑
+  - `forecast` 预测
+- 空间数据同样有这种问题 临近依赖 地域效应
+- `quantmod` 包 或 `quandl` 包处理金融数据 
+- 外推要谨慎
+

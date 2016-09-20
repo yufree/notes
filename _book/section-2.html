@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="section-2.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="r.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -68,7 +68,9 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 笔记目录</a></li>
-<li class="chapter" data-level="2" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>2</b> 数据科学家工具箱</a></li>
+<li class="chapter" data-level="2" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>2</b> 数据科学家工具箱</a><ul>
+<li class="chapter" data-level="2.1" data-path="section-2.html"><a href="section-2.html#section-2.1"><i class="fa fa-check"></i><b>2.1</b> 链接</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>3</b> R语言编程</a></li>
 <li class="chapter" data-level="4" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>4</b> 数据获取与整理</a></li>
 <li class="chapter" data-level="5" data-path="section-5.html"><a href="section-5.html"><i class="fa fa-check"></i><b>5</b> 探索性数据分析</a></li>
@@ -97,35 +99,82 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Notes</h1>
-<h4 class="author"><em>Miao YU</em></h4>
-<h4 class="date"><em>2016-09-20</em></h4>
-</div>
-<div id="section-1" class="section level1">
-<h1><span class="header-section-number">Notes 1</span> 笔记目录</h1>
+<div id="section-2" class="section level1">
+<h1><span class="header-section-number">Notes 2</span> 数据科学家工具箱</h1>
 <ul>
-<li>01-09 数据科学相关</li>
+<li>CLT</li>
+<li>name of root is represented by a slash: /</li>
+<li>home directory is represented by a tilde: ~</li>
+<li>pwd print working directory</li>
+<li>recipe: command -flags arguments</li>
+<li>clear: clear out the commands in your current CLI window</li>
+<li><p>ls lists files and folders in the current directory</p>
+<p>-a lists hidden and unhidden files and folders</p>
+<p>-al lists details for hidden and unhidden files and folders</p></li>
+<li><p>cd stands for “change directory”</p>
+<p>cd takes as an argument the directory you want to visit</p>
+<p>cd with no argument takes you to your home directory</p>
+<p>cd .. allows you to chnage directory to one level above your current directory</p></li>
+<li>mkdir stands for “make directory”</li>
+<li>touch creates an empty file</li>
+<li><p>cp stands for “copy”</p>
+<p>cp takes as its first argument a file, and as its second argument the path to where you want the file to be copied</p>
+<p>cp can also be used for copying the contents of directories, but you must use the -r flag</p></li>
+<li><p>rm stands for “remove”</p>
+<p>use rm to delete entire directories and their contents by using the -r flag</p></li>
+<li><p>mv stands for “move”</p>
+<p>move files between directories</p>
+<p>use mv to rename files</p></li>
+<li>echo will print whatever arguments you provide</li>
+<li>date will print today’s date</li>
+<li><p>git</p></li>
 </ul>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<pre><code>$ git config --global user.name &quot;Your Name Here&quot; # 输入用户名
+$ git config --global user.email &quot;your_email@example.com&quot; # 输入邮箱
+$ git config --list # 检查
+$ git init # 初始化目录
+$ git add . # 添加新文件
+$ git add -u # 更新改名或删除的文件
+$ git add -A|git add --all # 添加所有改动
+$ git commit -m &quot;your message goes here&quot; # 描述并缓存本地工作区改动到上一次commit
+$ git log # 查看commit记录 用Q退出
+$ git status # 查看状态
+$ git remote add # 添加服务器端地址
+$ git remote -v # 查看远端状态
+$ git push # 将本地commit推送到github服务器端
+$ git pull|fetch|merge|clone # 本地获取远端repo
+$ exit # 退出</code></pre>
+<ul>
+<li>Git = Local (on your computer); GitHub = Remote (on the web)</li>
+<li>基本问题</li>
+<li>描述分析：对数据进行描述但不解释</li>
+<li>探索分析：寻找未知的变量间关系 （相关不代表因果）</li>
+<li>推断分析：用小样本推断总体 统计模型的目标 强依赖采样过程</li>
+<li>预测分析：用一组变量预测另一变量 不一定有因果关系</li>
+<li>因果分析：改变一个变量引发另一个变量变化的分析 随机实验 平均效果</li>
+<li>机理分析：对个体改变一个变量所导致另一个变量的精确变化 公式模拟与参数拟合</li>
+<li>数据次于问题</li>
+<li>大数据依赖科学而不是数据</li>
+<li>实验设计 重视可重复性随机与分组 预测与推断不同 不要选数据</li>
+</ul>
+<div id="section-2.1" class="section level2">
+<h2><span class="header-section-number">2.1</span> 链接</h2>
+<ul>
+<li><a href="https://stats.stackexchange.com/">统计问题</a></li>
+<li><a href="http://stackoverflow.com/">R问题</a></li>
+<li><a href="http://www.r-project.org/mail.html">R mailling ist</a></li>
+<li><a href="http://figshare.com/">数据分享</a></li>
+</ul>
 
-  ga('create', 'UA-43118729-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="section-2.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -152,7 +201,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/yufree/notes/edit/master/index.Rmd",
+"link": "https://github.com/yufree/notes/edit/master/02-DStools.Rmd",
 "text": null
 },
 "download": null,

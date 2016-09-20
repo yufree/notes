@@ -11,9 +11,9 @@ link-citations: yes
 github-repo: yufree/notes
 description: "This is notes from yufree"
 ---
-# 目录
+# 笔记目录
 
-01-09：数据科学相关
+- 01-09 数据科学相关
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
