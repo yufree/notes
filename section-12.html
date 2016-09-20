@@ -38,8 +38,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="section-8.html">
-<link rel="next" href="section-10.html">
+<link rel="prev" href="section-11.html">
+
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -354,242 +354,318 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="section-9" class="section level1">
-<h1><span class="header-section-number">Notes 9</span> 机器学习实战</h1>
+<div id="section-12" class="section level1">
+<h1><span class="header-section-number">Notes 12</span> 基因组学数据分析</h1>
 <ul>
-<li>问题 -&gt; 数据 -&gt; 特征 -&gt; 算法 -&gt; 参数 -&gt; 评价</li>
+<li><a href="http://genomicsclass.github.io/book/">主页</a></li>
 </ul>
-<blockquote>
-<p>The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data. John Tukey</p>
-</blockquote>
+<div id="microarrays" class="section level2">
+<h2><span class="header-section-number">12.1</span> microarrays</h2>
+<div id="section-12.1.1" class="section level3">
+<h3><span class="header-section-number">12.1.1</span> 原理</h3>
 <ul>
-<li>数据质量优先于模型</li>
-<li>不要自动特征选择</li>
-<li>算法的可扩展性与计算性能要考虑</li>
-<li>数据过拟合问题 数据总是由信号与噪音组成 但会被算法无差别对待</li>
-<li>数据要与问题相关 低相关度的组合可能产生高相关度</li>
-</ul>
-<div id="section-9.1" class="section level2">
-<h2><span class="header-section-number">9.1</span> 研究设计</h2>
-<ul>
-<li>定义错误率</li>
-<li>将数据分割为训练集 预测集 验证集</li>
-<li>在训练集上使用交叉检验选择特征与预测算法</li>
-<li>在预测集或验证集上使用一次数据</li>
-<li>预测效果起码要优于瞎猜</li>
-<li>避免使用小样本</li>
-<li>比例为 60% 训练集 20% 预测集 20% 验证集 或 60% 训练集 40% 预测集 或小样本交叉检验</li>
-<li>注意数据结构 时序分析要对数据分段采样</li>
+<li>生成互补DNA探针</li>
+<li>标记样品中的DNA单链 可以对不同样品标记不同颜色</li>
+<li>特异性互补反应</li>
+<li>测定标记物光信号</li>
 </ul>
 </div>
-<div id="section-9.2" class="section level2">
-<h2><span class="header-section-number">9.2</span> 错误率</h2>
+<div id="section-12.1.2" class="section level3">
+<h3><span class="header-section-number">12.1.2</span> 应用</h3>
 <ul>
-<li>真阳性 真的是对的 TP</li>
-<li>假阳性 真的是错的 FP Type I</li>
-<li>真阴性 假的是错的 TN</li>
-<li>假阴性 假的是对的 FN Type II</li>
-<li>灵敏度 TP/(TP+FP)</li>
-<li>特异性 TN/(TN+FN)</li>
-<li>均方差 MSE <span class="math inline">\(\frac{1}{n} \sum_{i=1}^n (Prediction_i - Truth_i)^2\)</span></li>
-<li>均方误 RMSE <span class="math inline">\(\sqrt{\frac{1}{n} \sum_{i=1}^n(Prediction_i - Truth_i)^2}\)</span></li>
-<li>中位差 Median absolute deviation</li>
-<li>准确性 (TP+TN)/(TP+FP+TN+FP)</li>
-<li>一致性 <a href="https://en.wikipedia.org/wiki/Cohen%27s_kappa">kappa值</a></li>
+<li><p>测定基因表达</p>
+<ul>
+<li>已知序列</li>
+<li>3’端（降解从5’端开始）选取11个片段作为探针</li>
+<li>样品对11个片段都是高表达则基因高表达</li>
+</ul></li>
+<li><p>寻找SNP</p>
+<ul>
+<li>SNP 单核苷酸多态性 用来探索基因型</li>
+<li>合成SNP探针</li>
+<li>测定对不同探针的响应判断AA AG GG类型</li>
+</ul></li>
+<li><p>寻找转录因子结合位点</p>
+<ul>
+<li>样品处理为含蛋白与不含蛋白两份 去除蛋白后扩增</li>
+<li>探针是基因组感兴趣的片段</li>
+<li>瓦片分析可知探针与含转录因子DNA结合位点</li>
+<li>总DNA作为对照</li>
+</ul></li>
 </ul>
 </div>
-<div id="roc-" class="section level2">
-<h2><span class="header-section-number">9.3</span> ROC 曲线</h2>
+</div>
+<div id="ngs" class="section level2">
+<h2><span class="header-section-number">12.2</span> NGS</h2>
+<div id="-1" class="section level3">
+<h3><span class="header-section-number">12.2.1</span> 原理</h3>
 <ul>
-<li>分类问题寻找判别阈值 满足一定TP下最小FP的模型</li>
-<li>FP v.s.TP 作图</li>
-<li>AUC 曲线下面积表示选择标准 一般超过80%</li>
-<li>对角线是随机猜的结果</li>
+<li>DNA打成50~70片段 一个样品片段上亿</li>
+<li>加上adaptor 固定在板上后原位扩增成束</li>
+<li>使用标记过的单核苷酸逐碱基对测光强 同时测序大量片段</li>
+<li>得到测序结果与强度</li>
 </ul>
 </div>
-<div id="section-9.4" class="section level2">
-<h2><span class="header-section-number">9.4</span> 交叉检验</h2>
+<div id="-1" class="section level3">
+<h3><span class="header-section-number">12.2.2</span> 应用</h3>
 <ul>
-<li>训练集上的操作</li>
-<li>训练集上再分为训练集与测试集</li>
-<li>在测试集上评价 重复并平均化测试集错误</li>
-<li>用来进行变量 模型 参数选择</li>
-<li>随机 分组 留一</li>
-<li>分组多方差大 分组少有偏差</li>
-<li>有放回的为bootstrap 不建议用</li>
+<li>寻找SNP</li>
+<li>RNA-seq 测定RNA表达量</li>
+<li>寻找结合位点 表达量</li>
 </ul>
 </div>
-<div id="caret-" class="section level2">
-<h2><span class="header-section-number">9.5</span> <code>caret</code> 包</h2>
+</div>
+<div id="section-12.3" class="section level2">
+<h2><span class="header-section-number">12.3</span> 数据分析应用背景</h2>
+<div id="dna-" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> DNA 甲基化</h3>
 <ul>
-<li>数据清洗 预处理</li>
-<li>数据分割 <code>createDataPartition</code> 数据比例 重采样 产生时间片段</li>
-<li>训练检验整合函数 <code>train</code> <code>predict</code></li>
-<li>模型对比</li>
-<li>算法整合为选项 线性判别 回归 朴素贝叶斯 支持向量机 分类与回归树 随机森林 Boosting 等</li>
+<li>CpG 5’端到3‘端 CG</li>
+<li>C上甲基化 复制时该特性会保留</li>
+<li>临近CpG位点的基因不会被表达</li>
+<li>CpG 成簇存在 称为CpG islands</li>
+<li>bisulfite treatment 可以用来测定CpG是否被甲基化 通过将未甲基化的CpG中的C改为T</li>
+<li>测序中测定改变率就可知CpG位点甲基化程度与位置</li>
 </ul>
 </div>
-<div id="section-9.6" class="section level2">
-<h2><span class="header-section-number">9.6</span> 数据分割</h2>
+<div id="chip-seq" class="section level3">
+<h3><span class="header-section-number">12.3.2</span> CHIP-SEQ</h3>
 <ul>
-<li><code>train &lt;- createDataPartition(y=spam$type,p=0.75, list=FALSE)</code> 数据三一分 得到index</li>
-<li><code>folds &lt;- createFolds(y=spam$type,k=10,list=TRUE,returnTrain=TRUE)</code> 数据分10份 返回每一份列表</li>
-<li><code>folds &lt;- createResample(y=spam$type,times=10,list=TRUE)</code> 数据bootstrap重采样 返回每一份列表</li>
-<li><code>folds &lt;- createTimeSlices(y=tme,initialWindow=20,horizon=10)</code> 时序数据重采样 产生20为窗口时序片段的训练集与预测集</li>
+<li>蛋白结合后固定，洗掉其余片段，然后洗掉蛋白，对序列片段测序得到结合位点</li>
 </ul>
 </div>
-<div id="section-9.7" class="section level2">
-<h2><span class="header-section-number">9.7</span> 训练选项</h2>
+<div id="rna-" class="section level3">
+<h3><span class="header-section-number">12.3.3</span> RNA 测序</h3>
 <ul>
-<li><code>args(train.default)</code> 通过 <code>method</code> 控制算法 <code>metric</code> 控制算法评价 <code>trainControl</code> 控制训练方法</li>
-<li><code>trainControl</code>中 <code>method</code>选择模型选择方法 如bootstrap 交叉检验 留一法 <code>number</code> 控制次数 <code>repeats</code> 控制重采样次数 <code>seed</code> 控制可重复性 总体设置一个 具体每一次用列表设置控制具体过程 特别是并行模型</li>
+<li>RNA反转录为cDNA测序</li>
+<li>只有外显子</li>
+<li>同一基因多种RNA片段</li>
+<li>均值与方差有相关性 需要进行log变换后分析</li>
 </ul>
 </div>
-<div id="section-9.8" class="section level2">
-<h2><span class="header-section-number">9.8</span> 预测变量作图</h2>
+</div>
+<div id="bioconductor" class="section level2">
+<h2><span class="header-section-number">12.4</span> Bioconductor</h2>
 <ul>
-<li><code>featurePlot</code></li>
-<li><code>ggplot2</code></li>
+<li><a href="http://bioconductor.org/install/">官方说明</a></li>
+<li>使用<code>biocLite()</code>安装，安装后仍需要<code>library()</code>才能使用</li>
+</ul>
+<pre><code>source(&quot;http://bioconductor.org/biocLite.R&quot;)
+biocLite()</code></pre>
+<div id="section-12.4.1" class="section level3">
+<h3><span class="header-section-number">12.4.1</span> 数据结构</h3>
+<div id="section-12.4.1.1" class="section level4">
+<h4><span class="header-section-number">12.4.1.1</span> 分析数据</h4>
+<ul>
+<li>F 行 S 列 F代表芯片特征数，S代表样本数</li>
 </ul>
 </div>
-<div id="section-9.9" class="section level2">
-<h2><span class="header-section-number">9.9</span> 数据预处理</h2>
+<div id="section-12.4.1.2" class="section level4">
+<h4><span class="header-section-number">12.4.1.2</span> 表型数据</h4>
 <ul>
-<li><code>train</code> 中的 <code>preProcess=c(&quot;center&quot;,&quot;scale&quot;)</code> 标准化</li>
-<li><code>spatialSign</code> 该转化可提高计算效率 有偏</li>
-<li><code>preProcess(training[,-58],method=c(&quot;BoxCox&quot;))</code> 正态化转化</li>
-<li><code>method=&quot;knnImpute&quot;</code> 用最小邻近法填补缺失值</li>
-<li><code>nearZeroVar</code> 去除零方差变量</li>
-<li><code>findCorrelation</code> 去除相关变量</li>
-<li><code>findLinearCombos</code> 去除线性组合变量</li>
-<li><code>classDist</code> 测定分类变量的距离 生成新变量</li>
-<li>测试集也要预处理</li>
+<li>S 行 V 列 V代表样本特征，为分类或连续变量</li>
+<li>如果表型数据解释不清，可以建立一个解释样本特征的labelDescription数据框，通过<code>phenoData &lt;- new(&quot;AnnotatedDataFrame&quot;,data=pData, varMetadata=metadata)</code> 建立AnnotatedDataFrame类型数据</li>
 </ul>
 </div>
-<div id="section-9.10" class="section level2">
-<h2><span class="header-section-number">9.10</span> 协变量生成</h2>
+<div id="section-12.4.1.3" class="section level4">
+<h4><span class="header-section-number">12.4.1.3</span> 实验描述</h4>
 <ul>
-<li>原始数据提取特征</li>
-<li>提取特征后生成新变量</li>
-<li>因子变量要转为虚拟变量</li>
-<li>样条基变量 <code>splines</code> 包中的 <code>bs</code></li>
-<li>数据压缩 <code>preProcess</code> 中 <code>method</code> 设置为 <code>pca</code> <code>pcaComp</code> 指定主成分个数</li>
+<li>MIAME 类型对象</li>
+<li>描述实验参数</li>
 </ul>
 </div>
-<div id="section-9.11" class="section level2">
-<h2><span class="header-section-number">9.11</span> 线性回归&amp;多元线性回归</h2>
+<div id="section-12.4.1.4" class="section level4">
+<h4><span class="header-section-number">12.4.1.4</span> 组装数据</h4>
 <ul>
-<li><span class="math inline">\(ED_i = b_0 + b_1 WT_i + e_i\)</span> 基本模型</li>
-<li>参见前面回归部分</li>
+<li>将分析数据，表型数据，实验描述组装为一个ExpressionSet类型的对象</li>
+<li><code>exampleSet &lt;- ExpressionSet(assayData=exprs,phenoData=phenoData,experimentData=experimentData,annotation=&quot;hgu95av2&quot;)</code></li>
+<li>annotation代表了一组相似实验设计的芯片数据的代号，通过相关代号可以索引到芯片特征信息并将其与其他数据如基因型，染色体位置等连接以便于分析</li>
+<li>从ExpressionSet里可以按照表型数据提取子集，也就是对 S 截取 V 中特定子集 <code>exampleSet[ , exampleSet$gender == &quot;Male&quot;]</code></li>
+<li><code>esApply</code> 用来针对ExpressionSet应用函数</li>
 </ul>
 </div>
-<div id="section-9.12" class="section level2">
-<h2><span class="header-section-number">9.12</span> 树</h2>
+<div id="section-12.4.1.5" class="section level4">
+<h4><span class="header-section-number">12.4.1.5</span> 数据集应用</h4>
 <ul>
-<li>迭代分割变量</li>
-<li>在最大化预测时分割</li>
-<li>评估分支的同质性</li>
-<li>多个树的预测更好</li>
-<li>优点 容易解释应用 可用在神经网络上</li>
-<li>缺点 不容易交叉验证 不确定性不宜估计 结果可能变化 -算法</li>
-<li>先在一个组里用所有的变量计算</li>
-<li>寻找最容易分离结果的变量</li>
-<li>把数据按照该变量节点分为两组</li>
-<li>在每一个组中寻找最好的分离变量</li>
-<li>迭代直到过程结束<br />
-</li>
-<li>节点纯度用 Gini 系数或 交叉墒来衡量</li>
-<li><code>rattle</code> 包的 <code>fancyRpartPlot</code> 出图漂亮</li>
-<li>可用来处理非线性模型与变量选择</li>
+<li><code>library(Biobase)</code></li>
+<li><code>library(GEOquery)</code></li>
+<li><code>geoq &lt;- getGEO(&quot;GSE9514&quot;)</code> 从基因表达精选集（GEO）上得到数据表达集</li>
+<li><code>names(geoq)</code> 得到文件名</li>
+<li><code>e &lt;- geoq[[1]]</code> 得到数据集</li>
+<li><code>dim(e)</code> 查看表达集维度 给出样本数与特征值，也就是测定序列数</li>
+<li><code>dim(exprs(e))</code> 与上面等同，给出基因分析数据</li>
+<li><code>dim(pData(e))</code> 给出8个样本的信息，信息头用<code>names(pData(e))</code>给出</li>
+<li><code>dim(fData(e))</code> 给出特征与信息头列表</li>
+<li>exprs为特征数×样本数矩阵 pdata为样本数×信息头 fdata为特征数×信息</li>
+<li>experimentData(e) 给出实验信息</li>
+<li>annotation(e) 特征注释</li>
+<li>exptData(se)$MIAME 给出实验相关关键信息</li>
+<li>Y &lt;- log2(exprs(bottomly.eset) + 0.5) 对NGS数据加0.5取2为底的对数（防0）得-1，排除掉0后可得MAplot观察数值分布，一般为均值小差异大，均值大相对稳定</li>
+<li>formula 用来定义公式</li>
+<li>model.matrix 用定义的公式生成矩阵</li>
+<li>rowttests(y[, smallset], group[smallset]) 定义分组，设定模型可进行t-test，用火山图来表示</li>
+</ul>
+<div id="iranges" class="section level5">
+<h5><span class="header-section-number">12.4.1.5.1</span> Iranges</h5>
+<ul>
+<li><code>library(IRanges)</code> 序列范围</li>
+<li><code>ir &lt;- IRanges(start = c(3, 5, 17), end = c(10, 8, 20))</code> 定义序列</li>
+<li><code>IRanges(5, 10)</code> 表示5到10这6个碱基对，可以shift</li>
+<li><code>range(ir)</code> 表示存在ir中序列的起止范围</li>
+<li><code>gaps(ir)</code> 表示寻找ir中间隔片段</li>
+<li><code>disjoin(ir)</code> 表示将ir中序列碎片化后互不重叠的片段</li>
 </ul>
 </div>
-<div id="bagging" class="section level2">
-<h2><span class="header-section-number">9.13</span> Bagging</h2>
+<div id="granges-and-grangeslist" class="section level5">
+<h5><span class="header-section-number">12.4.1.5.2</span> GRanges and GRangesList</h5>
 <ul>
-<li>重采样 重新计算预测值</li>
-<li>平均或投票给出结果</li>
-<li>减少方差 偏差类似 适用于非线性过程</li>
-<li>bagged trees</li>
-<li>重采样</li>
-<li>重建树</li>
-<li>结果重评价</li>
-<li>更稳健 效果不如RF</li>
-<li>Bagged loess 可用来处理细节</li>
+<li><code>library(GenomicRanges)</code> 基因范围</li>
+<li><code>gr &lt;- GRanges(&quot;chrZ&quot;, IRanges(start = c(5, 10), end = c(35, 45)), strand = &quot;+&quot;, seqlengths = c(chrZ = 100L))</code> 定义位于染色体chrZ上几个序列范围，认为这些范围共同定义一个基因</li>
+<li>可以shift，可以定义长度后trim</li>
+<li><code>mcols(gr)$value &lt;- c(-1, 4)</code> 定义该基因类型中的列并赋值</li>
+<li><code>grl &lt;- GRangesList(gr, gr2)</code> 多个Granges定义一个基因库</li>
+<li><code>length(grl)</code> 给出基因库里基因个数</li>
+<li><code>mcols(grl)$value &lt;- c(5, 7)</code> 定义该基因库类型中的列并赋值</li>
 </ul>
 </div>
-<div id="radom-forest" class="section level2">
-<h2><span class="header-section-number">9.14</span> radom forest</h2>
+<div id="findoverlaps" class="section level5">
+<h5><span class="header-section-number">12.4.1.5.3</span> findOverlaps</h5>
 <ul>
-<li>bootstrap采样</li>
-<li>每一个节点bootstrap选取变量</li>
-<li>多棵树投票</li>
-<li>准确度高 速度慢 不好解释 容易过拟合</li>
+<li>gr1 gr2 为两个基因范围对象</li>
+<li><code>fo &lt;- findOverlaps(gr1, gr2)</code> 寻找两个基因重叠序列</li>
+<li><code>queryHits(fo)</code> 与 <code>subjectHits(fo)</code> 提取两个基因重叠序号 成对出现</li>
+<li><code>gr1[gr1 %over% gr2]</code> 提取对应序列范围</li>
 </ul>
 </div>
-<div id="boosting" class="section level2">
-<h2><span class="header-section-number">9.15</span> boosting</h2>
+<div id="rle" class="section level5">
+<h5><span class="header-section-number">12.4.1.5.4</span> Rle</h5>
 <ul>
-<li>弱预测变量加权后构建强预测变量</li>
-<li>从一组预测变量开始</li>
-<li>添加有惩罚项的预测变量来训练模型</li>
-<li>以降低训练集误差为目的</li>
-<li>通用方法</li>
+<li><code>Rle(c(1, 1, 1, 0, 0, -2, -2, -2, rep(-1, 20)))</code> 表示4组处理，每组各有 3 2 3 20 个重复</li>
+<li>Rle是一种压缩存储实验设计的方式，可以用<code>as.numeric()</code>提取原始数据</li>
+<li><code>Views(r, start = c(4, 2), end = c(7, 6)</code> 提取对应实验组</li>
 </ul>
 </div>
-<div id="section-9.16" class="section level2">
-<h2><span class="header-section-number">9.16</span> 其他预测算法</h2>
+</div>
+</div>
+<div id="section-12.4.2" class="section level3">
+<h3><span class="header-section-number">12.4.2</span> 数据读取</h3>
 <ul>
-<li>参考<a href="https://github.com/yufree/ISLRchnotes">统计学习导论笔记</a></li>
+<li>microarray 或 NGS 数据由芯片厂商提供，常见读取原始信息的包有affyPLM、affy、 oligo、limma</li>
+<li>在Bioconductor里，这些原始数据要转为ExpressionSet格式</li>
+</ul>
+<div id="affymterix-cel-files" class="section level4">
+<h4><span class="header-section-number">12.4.2.1</span> Affymterix CEL files</h4>
+<ul>
+<li><code>library(affy)</code></li>
+<li><code>tab &lt;- read.delim(&quot;sampleinfo.txt&quot;, check.names = FALSE, as.is = TRUE)</code> 读取样本信息</li>
+<li><code>ab &lt;- ReadAffy(phenoData = tab)</code> 读取样本数据，探针层次</li>
+<li><code>ejust &lt;- justRMA(filenames = tab[, 1], phenoData = tab)</code> 直接读取为基因层数据</li>
+<li><code>e &lt;- rma(ab)</code> 对样本进行背景校正与正则化，从探针层转化为基因层数据</li>
 </ul>
 </div>
-<div id="section-9.17" class="section level2">
-<h2><span class="header-section-number">9.17</span> 模型联合</h2>
+<div id="section-12.4.2.2" class="section level4">
+<h4><span class="header-section-number">12.4.2.2</span> 背景干扰</h4>
 <ul>
-<li>通过平均与投票结合模型</li>
-<li>联合分类器提高准确率</li>
-<li><code>caretEnsemble</code> 包</li>
-<li>案例 广义加性模型</li>
-</ul>
-<pre><code>library(ISLR); data(Wage); library(ggplot2); library(caret);
-Wage &lt;- subset(Wage,select=-c(logwage))
-# Create a building data set and validation set
-inBuild &lt;- createDataPartition(y=Wage$wage,p=0.7, list=FALSE)
-validation &lt;- Wage[-inBuild,]; buildData &lt;- Wage[inBuild,]
-inTrain &lt;- createDataPartition(y=buildData$wage,p=0.7, list=FALSE)
-training &lt;- buildData[inTrain,]; testing &lt;- buildData[-inTrain,]
-mod1 &lt;- train(wage ~.,method=&quot;glm&quot;,data=training)
-mod2 &lt;- train(wage ~.,method=&quot;rf&quot;,data=training,trControl = trainControl(method=&quot;cv&quot;),number=3)
-pred1 &lt;- predict(mod1,testing); pred2 &lt;- predict(mod2,testing)
-qplot(pred1,pred2,colour=wage,data=testing)
-predDF &lt;- data.frame(pred1,pred2,wage=testing$wage)
-combModFit &lt;- train(wage ~.,method=&quot;gam&quot;,data=predDF)
-combPred &lt;- predict(combModFit,predDF)
-sqrt(sum((pred1-testing$wage)^2))
-sqrt(sum((pred2-testing$wage)^2))
-sqrt(sum((combPred-testing$wage)^2))</code></pre>
-</div>
-<div id="section-9.18" class="section level2">
-<h2><span class="header-section-number">9.18</span> 无监督预测</h2>
-<ul>
-<li>先聚类 后预测</li>
-<li><code>clue</code> 包 <code>cl_predict</code> 函数</li>
-<li>推荐系统</li>
+<li>spikein方法 梯度加入已知浓度的基因片段 阵列上进行shift 类似拉丁方设计</li>
+<li>可以看到同一基因不同片段大致符合先平后增模式 开始阶段是噪声主导 后面是浓度主导</li>
+<li>使用类似基因模拟噪声主导 相减后得到去干扰浓度效应 但低值部分会导致方差过大</li>
+<li>也可以使用统计建模方法模拟背景值与响应 得到还原度更高的信号</li>
 </ul>
 </div>
-<div id="section-9.19" class="section level2">
-<h2><span class="header-section-number">9.19</span> 预测</h2>
+<div id="section-12.4.2.3" class="section level4">
+<h4><span class="header-section-number">12.4.2.3</span> 正则化</h4>
 <ul>
-<li>时序数据 包含趋势 季节变化 循环</li>
-<li>效应分解 <code>decompose</code></li>
-<li><code>window</code> 窗口</li>
-<li><code>ma</code> 平滑</li>
-<li><code>ets</code> 指数平滑</li>
-<li><code>forecast</code> 预测</li>
-<li>空间数据同样有这种问题 临近依赖 地域效应</li>
-<li><code>quantmod</code> 包 或 <code>quandl</code> 包处理金融数据</li>
-<li>外推要谨慎</li>
+<li>基因组数据大多数为0 加标样品变化 正则化是为了还原这一结果</li>
+<li>分位数正则化</li>
+<li>局部回归正则化</li>
+<li>稳方差正则化</li>
+<li>当重复实验时 直接用分位数正则会掩盖样品差异 可以考虑只对加标基因正则化 然后推广到全局</li>
 </ul>
+</div>
+<div id="section-12.4.2.4" class="section level4">
+<h4><span class="header-section-number">12.4.2.4</span> 探索分析作图</h4>
+<div id="ma-plot" class="section level5">
+<h5><span class="header-section-number">12.4.2.4.1</span> MA-plot</h5>
+<ul>
+<li>x轴为两组基因组的均值，y轴为两组基因组的均值差</li>
+<li>用来表示两组平行间的差异</li>
+</ul>
+</div>
+<div id="volcano-plot" class="section level5">
+<h5><span class="header-section-number">12.4.2.4.2</span> Volcano plot</h5>
+<ul>
+<li>横坐标为处理间基因表达差异，纵坐标为差异的<code>-log10(p.value)</code></li>
+<li>一般为火山喷发状，差异越大，p值越小</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="section-12.5" class="section level2">
+<h2><span class="header-section-number">12.5</span> 示例：甲基化数据分析</h2>
+<div id="-1" class="section level3">
+<h3><span class="header-section-number">12.5.1</span> 读取数据</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;coloncancermeth&quot;</span>,<span class="st">&quot;genomicsclass&quot;</span>)
 
+<span class="kw">library</span>(coloncancermeth)
+<span class="kw">data</span>(coloncancermeth)</code></pre></div>
+<p>该数据集为结肠癌病人与对照的DNA甲基化数据集。</p>
+</div>
+<div id="section-12.5.2" class="section level3">
+<h3><span class="header-section-number">12.5.2</span> 数据说明</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(meth)
+<span class="kw">dim</span>(pd)
+<span class="kw">length</span>(gr)</code></pre></div>
+<p>meth为测序数据，pd为样本信息，gr测序片段信息。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(pd)
+<span class="kw">table</span>(pd$Status)
+X =<span class="st"> </span><span class="kw">model.matrix</span>(~pd$Status)</code></pre></div>
+<p>查看病患与正常人的分组并构建模型。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chr =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">seqnames</span>(gr))
+pos =<span class="st"> </span><span class="kw">start</span>(gr)
+
+<span class="kw">library</span>(bumphunter)
+cl =<span class="st"> </span><span class="kw">clusterMaker</span>(chr,pos,<span class="dt">maxGap=</span><span class="dv">500</span>)
+res =<span class="st"> </span><span class="kw">bumphunter</span>(meth,X,<span class="dt">chr=</span>chr,<span class="dt">pos=</span>pos,<span class="dt">cluster=</span>cl,<span class="dt">cutoff=</span><span class="fl">0.1</span>,<span class="dt">B=</span><span class="dv">0</span>)</code></pre></div>
+<p>按染色体生成因子变量，找出基因起始位点，然后利用bumphunter包寻找甲基化数据中某个阈值（0.1）下甲基化基因聚类的后出现的位置，聚类号，聚类相关性等信息寻找问题基因，可从中提取相关信息</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cols=<span class="kw">ifelse</span>(pd$Status==<span class="st">&quot;normal&quot;</span>,<span class="dv">1</span>,<span class="dv">2</span>)
+Index=(res$table[<span class="dv">6</span>,<span class="dv">7</span>]-<span class="dv">3</span>):(res$table[<span class="dv">6</span>,<span class="dv">8</span>]+<span class="dv">3</span>)
+<span class="kw">matplot</span>(pos[Index],meth[Index,,<span class="dt">drop=</span><span class="ot">TRUE</span>],<span class="dt">col=</span>cols,<span class="dt">pch=</span><span class="dv">1</span>,<span class="dt">xlab=</span><span class="st">&quot;genomic location&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Methylation&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))
+
+Index=(res$table[<span class="dv">6</span>,<span class="dv">7</span>]):(res$table[<span class="dv">6</span>,<span class="dv">8</span>])
+
+test &lt;-<span class="st"> </span>meth[Index,,drop=T]
+<span class="kw">colnames</span>(test) &lt;-<span class="st"> </span>pd$bcr_patient_barcode
+test1 &lt;-<span class="st"> </span>test[,cols==<span class="dv">1</span>]
+test2 &lt;-<span class="st"> </span>test[,cols==<span class="dv">2</span>]
+
+test3 &lt;-<span class="st"> </span><span class="kw">apply</span>(test2, <span class="dv">2</span>, mean)
+<span class="kw">apply</span>(matrix, <span class="dv">1</span>, rank)</code></pre></div>
+<p>从上面可以得到有差异的甲基化数据所在的基因位置并提取相关样本数据信息。可根据差异作图，得到两组数据甲基化水平差异所在的基因位置。可对差异进行平滑操作，得到位置。这样就可以知道甲基化发生的序列位置与水平差异的信息了。</p>
+<hr />
+<p>下面的例子是用人类基因组数据探索潜在的CpG岛。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(BSgenome.Hsapiens.UCSC.hg19)
+
+Hsapiens[[<span class="st">&quot;chr1&quot;</span>]]
+
+<span class="co"># 计算某染色体上潜在位点个数</span>
+
+<span class="kw">countPattern</span>(<span class="st">&#39;CG&#39;</span>,Hsapiens[[<span class="st">&quot;chr1&quot;</span>]]) 
+
+<span class="co"># 计算某染色体上特定序列比例 观察与期望出现的比例</span>
+
+CG &lt;-<span class="st"> </span><span class="kw">countPattern</span>(<span class="st">&#39;CG&#39;</span>,Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])/<span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])
+GC &lt;-<span class="st"> </span><span class="kw">countPattern</span>(<span class="st">&#39;GC&#39;</span>,Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])/<span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])
+
+table &lt;-<span class="st"> </span><span class="kw">alphabetFrequency</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])
+expect &lt;-<span class="st"> </span>table[<span class="st">&#39;C&#39;</span>]%*%table[<span class="st">&#39;G&#39;</span>]/(<span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]]))^<span class="dv">2</span>
+
+CG/expect</code></pre></div>
+
+<div id="refs" class="references">
+
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -597,8 +673,8 @@ sqrt(sum((combPred-testing$wage)^2))</code></pre>
           </div>
         </div>
       </div>
-<a href="section-8.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="section-10.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="section-11.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -625,7 +701,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/yufree/notes/edit/master/09-DSmachinelearning.Rmd",
+"link": "https://github.com/yufree/notes/edit/master/12-genomicsdataanalysis.Rmd",
 "text": null
 },
 "download": null,
