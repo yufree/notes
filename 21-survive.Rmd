@@ -2,7 +2,7 @@
 
 ```{r include=FALSE}
 library(knitr)
-opts_chunk$set(echo=T,cache = F, warning = FALSE, message = FALSE)
+opts_chunk$set(echo=T,cache = T, warning = FALSE, message = FALSE)
 library(survival)
 library(car)
 ```
@@ -114,7 +114,7 @@ modallison4
 
 - the coefficient for the interaction is negative and highly statistically significant: The effect of age declines with time
 
-```{r}
+```{r cache=F}
 Rossi$agecat <- recode(Rossi$age, " lo:19=1; 20:25=2; 26:30=3; 31:hi=4 ")
 table(Rossi$agecat)
 modallison5 <- coxph(Surv(week,arrest)~fin+prio+strata(agecat),data = Rossi)
