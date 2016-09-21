@@ -1,6 +1,6 @@
 # 贝叶斯统计
 
-```{r setup, include=FALSE}
+```{r include=FALSE}
 library(knitr)
 opts_chunk$set(echo=T,cache = TRUE, warning = FALSE, message = FALSE)
 options(digits = 3)

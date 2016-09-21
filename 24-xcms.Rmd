@@ -1,6 +1,6 @@
 # XCMS
 
-```{r setup, include=FALSE}
+```{r include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = T,warning = F,message = F)
 ```
 

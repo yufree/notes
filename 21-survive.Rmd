@@ -1,6 +1,8 @@
 # 生存分析
 
-```{r echo=FALSE,message=FALSE,warning=FALSE}
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(echo=T, warning = FALSE, message = FALSE)
 library(survival)
 library(car)
 ```
@@ -32,7 +34,7 @@ library(car)
 - 52 weeks
 - factors: financial aid after release from prison, affected，release ages，race，work experience，marriage，parole，prior convictions, education
 
-```{r cache = TRUE}
+```{r}
 # perform survival analysis
 Rossi <- read.table('http://ftp.auckland.ac.nz/software/CRAN/doc/contrib/Fox-Companion/Rossi.txt', header=T)
 Rossi[1:5, 1:10]
@@ -53,7 +55,7 @@ plot(survfit(mod.allison), ylim=c(.7, 1), xlab='Weeks', ylab='Proportion Not Rea
 - assess the impact of financial aid on rearrest
 - new data frame with two rows, one for each value of fin; the other covariates are fixed to their average values
 
-```{r cache = T}
+```{r}
 attach(Rossi)
 Rossi.fin <- data.frame(fin=c(0,1), age=rep(mean(age),2), race=rep(mean(race),2), wexp=rep(mean(wexp),2), mar=rep(mean(mar),2), paro=rep(mean(paro),2), prio=rep(mean(prio),2))
 detach()
@@ -67,7 +69,7 @@ legend("bottomleft", legend=c('fin = 0', 'fin = 1'), lty=c(1,2))
 
 - treat the employed variable as a tim-dependent covariates with 52 weeks' record
 
-```{r cache = T}
+```{r}
 sum(!is.na(Rossi[,11:62])) # record count
 Rossi2 <- matrix(0, 19809, 14) # to hold new data set
 colnames(Rossi2) <- c('start', 'stop', 'arresttime', names(Rossi)[1:10], 'employed')
@@ -95,7 +97,7 @@ summary(modallison2)
 
 - Checking Proportional Hazards
 
-```{r cache=TRUE}
+```{r}
 modallison3 <- coxph(Surv(week, arrest) ~ fin + age + prio, data=Rossi)
 modallison3
 cox.zph(modallison3)
