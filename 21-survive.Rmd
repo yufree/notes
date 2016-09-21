@@ -2,7 +2,7 @@
 
 ```{r include=FALSE}
 library(knitr)
-opts_chunk$set(echo=T, warning = FALSE, message = FALSE)
+opts_chunk$set(echo=T,cache = F, warning = FALSE, message = FALSE)
 library(survival)
 library(car)
 ```
