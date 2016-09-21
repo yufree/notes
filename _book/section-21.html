@@ -381,32 +381,8 @@ modallison4</code></pre></div>
 ## Likelihood ratio test=36  on 4 df, p=2.85e-07
 ## n= 19809, number of events= 114</code></pre>
 <ul>
-<li>the coefficient for the interaction is negative and highly statistically significant: The effect of age declines with time</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Rossi$agecat &lt;-<span class="st"> </span><span class="kw">recode</span>(Rossi$age, <span class="st">&quot; lo:19=1; 20:25=2; 26:30=3; 31:hi=4 &quot;</span>)
-<span class="kw">table</span>(Rossi$agecat)</code></pre></div>
-<pre><code>## 
-##   1   2   3   4 
-##  66 236  66  64</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modallison5 &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(week,arrest)~fin+prio+<span class="kw">strata</span>(agecat),<span class="dt">data =</span> Rossi)
-modallison5</code></pre></div>
-<pre><code>## Call:
-## coxph(formula = Surv(week, arrest) ~ fin + prio + strata(agecat), 
-##     data = Rossi)
-## 
-##         coef exp(coef) se(coef)     z      p
-## fin  -0.3408    0.7112   0.1902 -1.79 0.0732
-## prio  0.0941    1.0986   0.0270  3.48 0.0005
-## 
-## Likelihood ratio test=13.4  on 2 df, p=0.00122
-## n= 432, number of events= 114</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cox.zph</span>(modallison5)</code></pre></div>
-<pre><code>##            rho  chisq     p
-## fin    -0.0183 0.0392 0.843
-## prio   -0.0771 0.6859 0.408
-## GLOBAL      NA 0.7299 0.694</code></pre>
-<ul>
-<li>use residual to find influential observations</li>
+<li><p>the coefficient for the interaction is negative and highly statistically significant: The effect of age declines with time</p></li>
+<li><p>use residual to find influential observations</p></li>
 </ul>
 </div>
 <div id="reference" class="section level2">
