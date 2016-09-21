@@ -1,6 +1,5 @@
 # 心理学导论笔记
-
-```{r setup, include=FALSE}
+```{r include=FALSE}
 knitr::opts_chunk$set(echo = F)
 ```
 

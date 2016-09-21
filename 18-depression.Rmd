@@ -154,8 +154,8 @@
 - Stress and Diathesis
   - Diathesis Stress Model
 
-```{r}
-knitr::include_graphics('images/DSM.png')
+```{r echo=F}
+knitr::include_graphics('http://yufree.github.io/blogcn/figure/DSM.png')
 ```
 
 - Social Supports

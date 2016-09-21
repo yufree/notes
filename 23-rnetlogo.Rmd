@@ -36,7 +36,9 @@
 
 - 连接R与NetLogo的工具
 
-![](pic/rnetlogo.png)
+```{r echo=F}
+knitr::include_graphics('http://yufree.github.io/blogcn/figure/rnetlogo.png')
+```
 
 ## 安装与启动
 
