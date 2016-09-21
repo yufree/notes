@@ -3,8 +3,6 @@
 ```{r include=FALSE}
 library(knitr)
 opts_chunk$set(echo=T,cache = T, warning = FALSE, message = FALSE)
-library(survival)
-library(car)
 ```
 
 ## Concepts
@@ -35,6 +33,8 @@ library(car)
 - factors: financial aid after release from prison, affected，release ages，race，work experience，marriage，parole，prior convictions, education
 
 ```{r}
+library(survival)
+library(car)
 # perform survival analysis
 Rossi <- read.table('http://ftp.auckland.ac.nz/software/CRAN/doc/contrib/Fox-Companion/Rossi.txt', header=T)
 Rossi[1:5, 1:10]
