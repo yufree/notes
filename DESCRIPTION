@@ -1,5 +1,5 @@
 Package: placeholder
 Title: Notes
 Version: 0.0.1
-Imports: bookdown, RColorBrewer, survival, car, knitr, dplyr, tidyr, Lahman, broom, gamlss, ggplot2, purrr, MASS, xcms, faahKO
+Imports: bookdown, RColorBrewer, survival, car, knitr, dplyr, tidyr, Lahman, broom, gamlss, ggplot2, purrr, MASS, xcms, faahKO,multtest
 Remotes: rstudio/bookdown
