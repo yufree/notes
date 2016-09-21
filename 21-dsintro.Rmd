@@ -1,0 +1,76 @@
+# 数据科学与python简介
+
+## 数据科学
+
+- 核心：数据处理
+- 研究对象：实际问题（跨学科）
+- 方法：统计学 计算机科学 专业领域
+- 数据科学家：
+    - 统计学水平高的程序员
+    - 编程水平高的统计学家
+    - 学术好奇心
+    - 沟通交流能力
+    - 产品经理
+
+## 工作流程
+  
+- 数据收集
+- 数据整理
+- 数据探索
+- 数据建模
+- 模型评价
+- 结果交流
+
+## PYTHON 入门
+
+- 基础数据类型 NULL
+- 数值类型
+    - int
+    - float
+    - bool(逻辑运算)
+- 列表
+    - 从0开始
+    - 元素可变
+    - ()赋值为Tuples类型 元素不可变 
+- 字符串
+    - 文本处理
+    - python专长
+- 字典
+    - {}包含
+    - : 指定属性值
+- python中对象均有类型 可自定义
+
+## Python 工具包
+
+- Numpy 数值计算包
+- Pandas 数据清洗 缺失值 切分
+- MatPlotLib 数据可视化
+- sklearn 机器学习包
+
+## 探索性数据分析
+
+- ACES model
+
+Letter | Step | Notes
+------ | ---- | -----------
+A | Acquire the data and Assemble the data frame | Find data, import into Pandas
+C | Clean the data frame | Identify and limit columns, rows, indices, dates, etc.
+E | Explore global properties | Visualize!  Basic plots and stats appropriate to the data set
+S | Subset comparisons | Look at (visualize!) initial emergenet variable relationships and subsets
+
+## 常见模型
+
+- 线性模型
+- 分类问题：logistic模型与朴素贝叶斯模型
+- 无监督主成分分析
+- 无监督聚类
+
+### 高级模型
+
+- 模型打包组合技术：bagging boosting 随机森林
+- 支持向量机
+- 深度神经网络
+
+## 参考
+
+- [课程](https://github.com/datadave/GADS9-NYC-Spring2014-Lectures)
