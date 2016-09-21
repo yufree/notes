@@ -8,11 +8,11 @@ knitr::opts_chunk$set(echo = TRUE, cache = T,warning = F,message = F)
 
 ```{r eval=FALSE}
 # XCMS使用bioconductor安装
-source("http://bioconductor.org/biocLite.R")
+# source("http://bioconductor.org/biocLite.R")
 # 安装xcms包
-biocLite("xcms")
+# biocLite("xcms")
 # 安装示例数据集
-biocLite("faahKO")
+# biocLite("faahKO")
 ```
 
 ## 读取数据
