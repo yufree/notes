@@ -204,7 +204,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>52 weeks</li>
 <li>factors: financial aid after release from prison, affected，release ages，race，work experience，marriage，parole，prior convictions, education</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># perform survival analysis</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(survival)
+<span class="kw">library</span>(car)
+<span class="co"># perform survival analysis</span>
 Rossi &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&#39;http://ftp.auckland.ac.nz/software/CRAN/doc/contrib/Fox-Companion/Rossi.txt&#39;</span>, <span class="dt">header=</span>T)
 Rossi[<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">10</span>]</code></pre></div>
 <pre><code>##   week arrest fin age race wexp mar paro prio educ
