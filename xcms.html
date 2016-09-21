@@ -229,7 +229,7 @@ xset &lt;-<span class="st"> </span><span class="kw">xcmsSet</span>(cdffiles) </c
 <p>保留时间的矫正主要利用了高质量的分组峰，也就是出现在所有样本中并有响应的离子峰色谱数据进行保留时间的矫正。软件会首先计算得到保留时间的中位数，然后计算样本保留时间在该位置的偏差，对偏差与原有保留时间进行回归。对单一样本而言，用该回归模型所得到的预测偏差来矫正保留时间。经过矫正，先前的分组信息会失效，这样需要重新分组，此时我们可以调小分组所需的偏差（默认30）来提高精度。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xset2 &lt;-<span class="st"> </span><span class="kw">retcor</span>(xset, <span class="dt">family =</span> <span class="st">&quot;symmetric&quot;</span>, <span class="dt">plottype =</span> <span class="st">&quot;mdevden&quot;</span>)</code></pre></div>
 <pre><code>## Retention Time Correction Groups: 133</code></pre>
-<p><img src="Notes_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="Notes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xset2 &lt;-<span class="st"> </span><span class="kw">group</span>(xset2, <span class="dt">bw =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>## 262 325 387 450 512 575</code></pre>
 </div>
