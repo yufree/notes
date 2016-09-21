@@ -114,14 +114,6 @@ modallison4
 
 - the coefficient for the interaction is negative and highly statistically significant: The effect of age declines with time
 
-```{r}
-Rossi$agecat <- recode(Rossi$age, " lo:19=1; 20:25=2; 26:30=3; 31:hi=4 ")
-table(Rossi$agecat)
-modallison5 <- coxph(Surv(week,arrest)~fin+prio+strata(agecat),data = Rossi)
-modallison5
-cox.zph(modallison5)
-```
-
 - use residual to find influential observations
 
 ## Reference
