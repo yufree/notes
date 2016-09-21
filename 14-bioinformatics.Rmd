@@ -1,0 +1,150 @@
+# 生物信息学数据库
+
+## 数据结构
+
+- 列代表特征 行代表条目
+- 每个条目有一个唯一性特征
+- 数据表可通过列链接成为关系数据库
+
+## Pubmed 搜索
+
+- PubMed search tags
+    - [AD] – Affiliation (company or school)
+    - [ALL] – All fields (eliminates defaults)
+    - [AU] or [AUTH] – Author
+    - [1AU] – First author
+    - [ECNO] – Enzyme Commission Numbers
+    - [EDAT] – Entry date (YYYY/MM/DD)
+    - [ISS] - Issue # of journal
+    - [JOUR] - Journal (Title, Abbreviation , ISSN)
+    - [LA] – Language
+    - [PDAT] – Publication date (YYYY/MM/DD)
+    - [PT] – Publication type
+    - [SUBS] – Substance name
+    - [TIAB] – Title/Abstract
+    - [TW] – Text words
+    - [UID] – Unique identifiers (primary keys)
+    - [VOL] or [VI] – Volume of journal
+
+- MeSH terms [MH][MAJR][SH]
+    - 被 MeSH 索引的关系数据库
+    - 保守性检索 有层级关系
+- 时间段搜索 冒号分割 YYYY/MM/DD:YYYY/MM/DD
+- 序列长度搜索 [SLEN] 可以是蛋白 可以是核酸
+- 蛋白分子量搜索 [MOLWT]
+- 物种搜索 [ORGN]
+- Nucleotide 序列蛋白数据库
+- [MMDB](http://www.ncbi.nlm.nih.gov/structure/) 3D结构数据库
+- [Genome](http://www.ncbi.nlm.nih.gov/genome/) 基因组数据库
+- [OMIM](http://omim.org/) 人类孟德尔遗传数据库 用来探索等位基因问题
+- [分类数据库](http://www.ncbi.nlm.nih.gov/taxonomy) 用来界定分类
+- [GEO](http://www.ncbi.nlm.nih.gov/geo/) 基因芯片的实验数据
+- [SNP](http://www.ncbi.nlm.nih.gov/snp/) 基因指纹数据库
+
+## 动态规划
+
+- 用于序列比对
+- 对角线得分 按总分评价比对结果
+- 可全局 可局部
+- 序列比对指标是特异性与相似性
+- 特异性指精确匹配比率
+- 相似性指精确匹配加化学相似性比率 结构相近则相似
+- FASTA 慢准 BLAST 快
+- 三种情况 匹配 不匹配 间隔
+- 间隔罚分
+
+## 得分矩阵
+
+- 考虑突变的比对
+- 蛋白的自然突变率矩阵PM1
+- 矩阵自相乘得到外推矩阵 PM10 PM250 取对数为打分矩阵
+- 取不同矩阵源于研究目的对多样性的判断
+
+## E 值
+
+- 表示序列的同源性 比对得分的稀有性
+- 两个参数 数据库大小(N) 比对得分(S) E = N/S 
+- 数据库越大越可能随机碰到相同序列 得分越高越可能同源
+- E值很小说明同源性很高 E值很大什么说明不了
+- 一般阈值1e-04
+
+## PSI-BLAST
+
+- 先用BLAST在一定E值上建库
+- 计算新库的氨基酸概率 再与全库比对得分 得到统计显著性
+- 可以发现BLAST未发现的序列 建立蛋白家族
+
+## 蛋白
+
+- Profiles 定量描述 
+- Patterns 定性描述
+- Signature 蛋白保守序列
+- motif 少于20个氨基酸 指示二级结构
+- Domains 超过40个氨基酸 蛋白的球状区
+- 共同点 保守
+- 正则表达式表示保守区
+    - E-X(2,4)-[FHM]-X(4)-{P}-L
+    - E后随意两个，三个，四个然后FHM其中一个，然后随意四个，然后一个不是P，最后为L
+    - 可以精确可以模糊
+    - 没有E值
+
+## 蛋白结构预测
+
+- 分子量 道尔顿（Da）描述质量
+- 等电点 蛋白不带电的pH值
+    - 小于7 酸性 中性带负电
+    - 大于7 碱性 中性带正点
+- 网站[计算](http://web.expasy.org/compute_pi/)
+- 蛋白定位 分泌 胞内 核内
+    - MITOPRED 预测线粒体蛋白
+
+## 细菌基因组
+
+- 细菌是环形DNA 真核是线性染色体
+- 细菌不加工mRNA
+- 细菌一段mRNA上有多个顺反子 也就是多个编码DNA序列
+- 操纵子在mRNA编码的上游或下游调控转录
+- [GLIMMER](http://www.ncbi.nlm.nih.gov/genomes/MICROBES/glimmer_3.cgi)与[FGENESB](http://www.softberry.com/berry.phtml?topic=fgenesb&group=programs&subgroup=gfindb)用来预测一段序列的转录情况
+
+## 病毒
+
+- 三种 RNA DNA 逆转录病毒 突变快
+- RNA病毒三种 双链 正链 负链
+- 逆转录基因组简单 Gag Pol Env
+- 凝集素等决定病毒亚型
+
+## 单核苷酸多态性（SNP）
+
+- 至少1%种群中存在的DNA单核苷酸变化
+- 后果
+    - 编码区改变影响表型
+    - 不改变蛋白序列的编码区可能影响mRNA加工
+    - 启动子或调控区可能影响表达
+    - 其他区没有影响 可作为染色体标记- 类型
+    - 不改变氨基酸
+    - 改变氨基酸
+    - 非编码区
+- 数据库
+    - [dbSNP](http://www.ncbi.nlm.nih.gov/SNP/)
+    - [SNPEffect](http://snpeffect.switchlab.org/) SNPs对蛋白的影响
+    - [SNPedia](http://www.snpedia.com/index.php/SNPedia) SNPs的临床效应
+    - [1000 基因组外显子计划](http://www.ncbi.nlm.nih.gov/pubmed/23128226) 第二代测序的发展
+
+## 真核基因预测
+
+- CDS是mRNA的子集
+- CDS可能比mRNA外显子少
+- 基因预测只能发现编码区外显子
+- 有些转录变化不改变蛋白序列：UTR区与同义密码子
+
+## DNA指纹
+
+- 重复 突变会影响限制性片段长度
+- VNTR 用来排除嫌犯
+- PCR 用来扩增相关片段
+- [CODIS](http://www.fbi.gov/about-us/lab/biometric-analysis/codis) 区域在美国用来鉴定身份
+
+## Ensembl
+
+- 外显子基因组学[数据库](ensembl.org)
+- 可选择人类 鼠 斑马鱼等常见物种

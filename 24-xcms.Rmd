@@ -1,0 +1,80 @@
+# XCMS
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = T,warning = F,message = F)
+```
+
+## XCMS安装
+
+```{r eval=FALSE}
+# XCMS使用bioconductor安装
+source("http://bioconductor.org/biocLite.R")
+# 安装xcms包
+biocLite("xcms")
+# 安装示例数据集
+biocLite("faahKO")
+```
+
+## 读取数据
+
+xcms包支持多种数据格式，例如“CDF” 或 “AIA” 为NetCDF格式，mzXML格式及mzData格式。上述格式可通过仪器软件导出或使用该[列表](https://en.wikipedia.org/wiki/Mass_spectrometry_data_format)提及的文件格式转换工具进行转换。
+
+数据文件要放到统一数据目录下，同时，如果有分组可以用子文件夹分割，xcms在读取时会按照子文件夹进行分组，这对有对照组的实验比较重要。同样，我们可以根据需要修改路径文件来选择性读取一部分数据文件。
+
+xcmsSet数据集是xcms处理数据的类型（S4）。该类型对象可通过`xcmsSet`命令构建，通过直接调用对象名称观察数据信息。其中参数可根据自己需求设定。
+
+```{r}
+# 读入xcms包
+library(xcms)
+# 从faahKO包里读取cdf目录
+cdfpath <- system.file("cdf", package = "faahKO")
+cdfpath
+# 读取具体的cdf文件路径
+cdffiles <- list.files(cdfpath, recursive = TRUE, full.names = TRUE)
+cdffiles
+# 构建xcmsSet数据集
+xset <- xcmsSet(cdffiles) 
+xset
+```
+
+## 数据分组与保留时间矫正
+
+原始色谱质谱联用数据一般会包含全扫描质谱图与色谱图，在导入数据后需要进行提取。总离子流数据对于我们分析未知物意义不大，因此需要对总离子流里的离子进行分组，分子量相似的作为一组。这个分组是建立在多组数据中特定质量数变化规律一致上的，并不涉及不同离子数质量的接近。分组信息单独存储在xcmsSet对象中，不用担心对原有数据产生破坏。
+
+```{r}
+xset <- group(xset)
+```
+
+保留时间的矫正主要利用了高质量的分组峰，也就是出现在所有样本中并有响应的离子峰色谱数据进行保留时间的矫正。软件会首先计算得到保留时间的中位数，然后计算样本保留时间在该位置的偏差，对偏差与原有保留时间进行回归。对单一样本而言，用该回归模型所得到的预测偏差来矫正保留时间。经过矫正，先前的分组信息会失效，这样需要重新分组，此时我们可以调小分组所需的偏差（默认30）来提高精度。
+
+```{r}
+xset2 <- retcor(xset, family = "symmetric", plottype = "mdevden")
+xset2 <- group(xset2, bw = 10)
+```
+
+## 缺失值填充
+
+进行了保留时间矫正后会出现某些时间点的数据缺失，这样需要从原始数据中读入这些缺失值。
+
+```{r}
+xset3 <- fillPeaks(xset2) 
+```
+
+## 生成报告
+
+处理完的数据可进行下一步的探索分析或建模，但常常这一步就可以用`diffreport`生成比较直观的分组对比报告与数据可视化了。
+
+```{r}
+reporttab <- diffreport(xset3, "WT", "KO", "example", 10,metlin = 0.15, h=480, w=640)
+reporttab[1:3,]
+```
+
+## 进一步
+
+如果要进行进一步的数据分析，需要考虑下面几个影响因素：
+
+- 错误发现率（FDR）的控制
+- 质谱峰的聚类
+- 质谱峰的注释与数据库检索定性
+- 代谢通路分析
+- 不同组学的耦合

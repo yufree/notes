@@ -1,0 +1,131 @@
+# 生存分析
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+library(survival)
+library(car)
+```
+
+## Concepts
+
+- examines and models the time it takes for events to occur
+- the distribution of survival times
+- Popular: Cox proportional-hazards regression model
+
+## Notation
+
+- T as a random variable with cumulative distribution function $P (t) = Pr(T ≤ t)$ and probability density function $p(t) = \frac{dP (t)}{dt}$
+- survival function S(t) is the complement of the distribution function, $S(t) = Pr(T > t) = 1 − P (t)$
+- hazard function $log h(t) = ν + ρt$
+
+## Cox proportional-hazards regression model
+
+- $log h_i(t)=α+_1x_{i1} +β_2x_{ik} +···+β_kx_{ik}$
+- Cox model 
+    - $log h_i(t)=α(t)+β_1x_{i1} +β_2x_{ik} +···+β_kx_{ik}$
+- the Cox model is a proportional-hazards model
+    - $\frac{h_i(t)}{h_{i'}(t)} = \frac{e^{\eta_i}}{e^{\eta'}}$
+    
+## Case: Recidivism
+
+- Target: recidivism of 432 male prisoners, who were observed for a year after being released from prison
+- arrest means the male prisoners who rearrested
+- 52 weeks
+- factors: financial aid after release from prison, affected，release ages，race，work experience，marriage，parole，prior convictions, education
+
+```{r cache = TRUE}
+# perform survival analysis
+Rossi <- read.table('http://ftp.auckland.ac.nz/software/CRAN/doc/contrib/Fox-Companion/Rossi.txt', header=T)
+Rossi[1:5, 1:10]
+mod.allison <- coxph(Surv(week, arrest) ~ fin + age + race + wexp + mar + paro + prio, data=Rossi)
+summary(mod.allison)
+# plot time vs survival prob
+plot(survfit(mod.allison), ylim=c(.7, 1), xlab='Weeks', ylab='Proportion Not Rearrested')
+```
+
+### result
+
+- The covariates age and prio (prior convictions) have highly statistically significant coefficients, while the coefficient for fin (financial aid) is marginally significant
+- holding the other covariates constant, an additional year of age reduces the weekly hazard of rearrest by a factor of $e^b = 0.944$ on average – that is, by 5.6 
+- likelihood-ratio, Wald, and score chi-square statistics: null hypothesis all of the β’s are zero.
+
+## further
+
+- assess the impact of financial aid on rearrest
+- new data frame with two rows, one for each value of fin; the other covariates are fixed to their average values
+
+```{r cache = T}
+attach(Rossi)
+Rossi.fin <- data.frame(fin=c(0,1), age=rep(mean(age),2), race=rep(mean(race),2), wexp=rep(mean(wexp),2), mar=rep(mean(mar),2), paro=rep(mean(paro),2), prio=rep(mean(prio),2))
+detach()
+plot(survfit(mod.allison, newdata=Rossi.fin), conf.int=T, lty=c(1,2), ylim=c(.6, 1))
+legend("bottomleft", legend=c('fin = 0', 'fin = 1'), lty=c(1,2))
+```
+
+- the higher estimated ‘survival’ of those receiving financial aid, but the two confidence envelopes overlap substantially, even after 52 weeks
+
+## Time-Dependent Covariates
+
+- treat the employed variable as a tim-dependent covariates with 52 weeks' record
+
+```{r cache = T}
+sum(!is.na(Rossi[,11:62])) # record count
+Rossi2 <- matrix(0, 19809, 14) # to hold new data set
+colnames(Rossi2) <- c('start', 'stop', 'arresttime', names(Rossi)[1:10], 'employed')
+
+row<-0
+for (i in 1:nrow(Rossi)) { 
+    for (j in 11:62) { 
+        if (is.na(Rossi[i, j])) next
+        else {
+            row <- row + 1 # increment row counter
+            start <- j - 11 # start time (previous week)
+            stop <- start + 1 # stop time (current week)
+            arresttime <- if (stop == Rossi[i, 1] && Rossi[i, 2] ==1) 1 else 0
+            Rossi2[row,] <- c(start, stop, arresttime, unlist(Rossi[i, c(1:10, j)]))
+            }
+        }
+}
+Rossi2 <- as.data.frame(Rossi2)
+remove(i, j, row, start, stop, arresttime)
+modallison2 <- coxph(Surv(start, stop, arresttime) ~ fin + age + race + wexp + mar + paro + prio + employed, data=Rossi2)
+summary(modallison2)
+```
+
+## Model Diagnostics
+
+- Checking Proportional Hazards
+
+```{r cache=TRUE}
+modallison3 <- coxph(Surv(week, arrest) ~ fin + age + prio, data=Rossi)
+modallison3
+cox.zph(modallison3)
+par(mfrow=c(2,2))
+plot(cox.zph(modallison3))
+```
+
+- there appears to be a trend in the plot for age, with the age effect declining with time
+
+```{r}
+modallison4 <- coxph(Surv(start,stop,arresttime)~fin+age+age:stop:stop+prio, data = Rossi2)
+modallison4
+```
+
+- the coefficient for the interaction is negative and highly statistically significant: The effect of age declines with time
+
+```{r}
+Rossi$agecat <- recode(Rossi$age, " lo:19=1; 20:25=2; 26:30=3; 31:hi=4 ")
+table(Rossi$agecat)
+modallison5 <- coxph(Surv(week,arrest)~fin+prio+strata(agecat),data = Rossi)
+modallison5
+cox.zph(modallison5)
+```
+
+- use residual to find influential observations
+
+## Reference
+
+- [Cox Proportional-Hazards Regression for Survival Data](http://cran.r-project.org/doc/contrib/Fox-Companion/appendix-cox-regression.pdf)
+- [Real Cases](http://ehp.niehs.nih.gov/1104049/)
+
+
+

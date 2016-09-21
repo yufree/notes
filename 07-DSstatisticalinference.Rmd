@@ -156,7 +156,9 @@ $$
 
 - 2*2 列联表 - 诊断测试
 
-![示意图](http://yufree.github.io/blogcn/figure/error.png)
+```{r echo=F}
+knitr::include_graphics("http://yufree.github.io/blogcn/figure/error.png")
+```
 
 ## 常见分布
 
