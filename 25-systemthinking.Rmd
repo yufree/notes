@@ -1,4 +1,9 @@
-# 系统思维
+# 系统思维与公共健康
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = F)
+```
+
+## 导论
 
 系统思考来源广泛，并非单一理论而是复合理论，是关注自调控与涌现的跨学科方法。
 
@@ -41,6 +46,106 @@ CAS路径
 
 - 利益相关者分析：按照兴趣与能力还有同意度等几个维度分析参与者，对不同参与者使用不同策略
 
+```{r}
+knitr::include_graphics('http://yufree.cn/blogcn/figure/sh.png')
+```
+
 - 网络分析：包括节点、边、属性及方向，探索节点人物、网络密度、分离程度、相似性及交互性
 
 - 参与影响通路分析：项目设计管理评价方法，找到关键利益相关者，展示，找出属性关系并给出现在与未来的映射，找出阻断通路的地方
+
+## 系统抽象与映射－因果环路图
+
+系统动态方法用来开发定性的系统描述
+
+因果环路图：
+
+- 因果关系 A -> B A导致了B
+- 极性 ＋／－ 两者变化方向一致为正，反之为负
+- 反馈环路 A 变化引起其它变化，最终又形成对A的增强或制衡
+- 延迟 A对B的影响有延迟|| 制衡状态通常有延迟
+- 环形符号 R表示增强 B表示制衡
+
+```{r}
+knitr::include_graphics('http://yufree.cn/blogcn/figure/cld.png')
+```
+
+group-based causal mapping workshop
+
+- Elicit variables for a causal map from stakeholders 
+- Use these variables to build a causal map with stakeholders 
+
+Size of stakeholder group:
+- At least 3–5 people
+- A group size of 5–12 is ideal
+- Any group bigger than 20 people is best split up into separate workshops
+
+The session is planned by the core modeling team that is made up of 3–5 staff members and stakeholders
+
+The facilitator team may overlap with your core modeling team—for the causal mapping session we will need:
+- Head facilitator
+- Wall builder
+- Recorder 
+
+Steps:
+
+Problem scoping
+- Identify problem and assess if problem is suitable for causal mapping
+- Develop one-pager that describes project, purpose, audience, and resources needed
+- Time necessary for this stage ranges from 1–3 hours to several meetings
+
+Core modeling team planning and capacity building
+
+- Design group model building workshop including the process and agenda
+- Prepare recruitment and training of additional facilitation team members if needed
+- Time necessary for this stage several 1- to 2-hour meetings
+
+Actual group modeling workshop
+
+- Session length varies from one or two 90 minute sessions
+to five-day workshops
+
+Evaluation and reporting 
+
+Scripts: “playbooks” that outline the process of a particular group modeling activity step-by-step 
+
+- [Peter Hovmand’s “Scriptapedia”](https://en.wikibooks.org/wiki/Scriptapedia/Creating_a_Shared_Vision_of_Modeling_Project)
+
+## 系统抽象与映射－汇流图
+
+展示变化的累计状态，所有动态过程都源于累积，状态都有记忆，可以中断过程，可以产生延迟
+
+```{r}
+knitr::include_graphics('http://yufree.cn/blogcn/figure/sf.png')
+```
+
+因果环路图表明事物是联系的，汇流图说明如何联系
+
+```{r}
+knitr::include_graphics('http://yufree.cn/blogcn/figure/cldsf.png')
+```
+
+## 系统思维与决策
+
+Ecostructure 包括所有利益相关者
+
+找到关键的人，政策有利益得失，让大赢家赢得比大输家多
+
+解释的时候用他们的话，让他们自己得到结论
+
+从上到下的决策
+
+- 明智的决策者拯救世界
+- 解决大问题
+- 用复杂科学解释决策
+
+公共健康铁三角：技术专家 政治家 公民权利领导者
+
+技术专家的角色类似权威的父母：我喜欢你，让我们阐释问题
+
+从下到上的决策
+
+- 设立规范自动转换的系统
+- 使用agent-based models
+
+根据规模，规模越大，越需要自上而下的系统设计
