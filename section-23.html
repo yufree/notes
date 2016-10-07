@@ -39,8 +39,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="section-21.html">
-<link rel="next" href="section-23.html">
+<link rel="prev" href="section-22.html">
+
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -657,124 +657,116 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="section-22" class="section level1">
-<h1><span class="header-section-number">笔记 22</span> 因果分析</h1>
-<div id="introduction-1" class="section level2">
-<h2><span class="header-section-number">22.1</span> Introduction</h2>
-<blockquote>
-<p>“Impact assessment, simply defined, is the process of identifying the future consequences of a current or proposed action.” (IAIA, 2009)</p>
-</blockquote>
-<blockquote>
-<p>“Policy assessment seeks to inform decision-makers by predicting and evaluating the potential impacts of policy options.” (Adelle and Weiland, 2012)</p>
-</blockquote>
-<blockquote>
-<p>“… I see no greater impediment to scientific progress than the prevailing practice of focusing all our mathematical resources on probabilistic and statistical inferences while leaving causal considerations to the mercy of intuition and good judgment.” (Pearl, 1999)</p>
-</blockquote>
-</div>
-<div id="causal-information" class="section level2">
-<h2><span class="header-section-number">22.2</span> Causal Information</h2>
-<div id="target" class="section level3">
-<h3><span class="header-section-number">22.2.1</span> Target</h3>
-<blockquote>
-<p>practical framework for causal effect estimation in the context of policy assessment and impact analysis, and in the absence of experimental data</p>
-</blockquote>
-</div>
-<div id="causal-sources" class="section level3">
-<h3><span class="header-section-number">22.2.2</span> Causal sources</h3>
+<div id="section-23" class="section level1">
+<h1><span class="header-section-number">笔记 23</span> 系统思维与公共健康</h1>
+<div id="-3" class="section level2">
+<h2><span class="header-section-number">23.1</span> 导论</h2>
+<p>系统思考来源广泛，并非单一理论而是复合理论，是关注自调控与涌现的跨学科方法。</p>
+<p>系统是有单一目的相互作用的各部分与之间联系的总和。</p>
+<p>健康系统是目的为健康的系统。</p>
+<p>简单系统元素少，关系明确，有理论机制或精细的统计模式</p>
+<p>复杂系统元素多，关系不明或不稳，不能适应，无法统计预测</p>
+<p>混沌系统元素多，存在动态关系，对初始值敏感，不能适应，表面无序，可用数学函数预测</p>
+<p>复杂适应性系统（CAS）元素多，复合关系，可预测不可描述，存在涌现（例如适应、学习、自组织），非线性，多样性（同一输入多个输出），收敛（多个途径出现一个结果）</p>
+<p>传统公共健康改善方法：</p>
 <ul>
-<li>Causal Inference by Experiment: Randomized experiments</li>
-<li>Causal Inference from Observational Data and Theory: Existing data or Big data</li>
+<li>选择健康干预方法</li>
+<li>设定目标</li>
+<li>资助</li>
+<li>实施设计好的干预方法</li>
+</ul>
+<p>问题：</p>
+<ul>
+<li>干预不符合实情</li>
+<li>很多策略无法重复</li>
+<li>策略影响有限</li>
+<li>策略结果不可预期</li>
+<li>结果不好评价改善</li>
+</ul>
+<p>CAS路径</p>
+<ul>
+<li>反馈，可能是加强，可能是制衡</li>
+<li>路径依赖，方向单一，不会盘根错节</li>
+<li>无量纲网络，非线性，临界点</li>
+<li>涌现</li>
+<li>相变</li>
+</ul>
+<p>利益相关者（stakeholder）</p>
+<ul>
+<li>利益相关者分析：按照兴趣与能力还有同意度等几个维度分析参与者，对不同参与者使用不同策略</li>
+</ul>
+<p><img src="http://yufree.cn/blogcn/figure/sh.png" alt="" /><!-- --></p>
+<ul>
+<li><p>网络分析：包括节点、边、属性及方向，探索节点人物、网络密度、分离程度、相似性及交互性</p></li>
+<li><p>参与影响通路分析：项目设计管理评价方法，找到关键利益相关者，展示，找出属性关系并给出现在与未来的映射，找出阻断通路的地方</p></li>
 </ul>
 </div>
-<div id="identification-and-estimation-process" class="section level3">
-<h3><span class="header-section-number">22.2.3</span> Identification and Estimation Process</h3>
+<div id="section-23.2" class="section level2">
+<h2><span class="header-section-number">23.2</span> 系统抽象与映射－因果环路图</h2>
+<p>系统动态方法用来开发定性的系统描述</p>
+<p>因果环路图：</p>
 <ul>
-<li>Causal Identification: domain knowledge based</li>
-<li>Computing the Effect Size: Bayesian networks</li>
+<li>因果关系 A -&gt; B A导致了B</li>
+<li>极性 ＋／－ 两者变化方向一致为正，反之为负</li>
+<li>反馈环路 A 变化引起其它变化，最终又形成对A的增强或制衡</li>
+<li>延迟 A对B的影响有延迟|| 制衡状态通常有延迟</li>
+<li>环形符号 R表示增强 B表示制衡</li>
+</ul>
+<p><img src="http://yufree.cn/blogcn/figure/cld.png" alt="" /><!-- --></p>
+<p>group-based causal mapping workshop</p>
+<ul>
+<li>Elicit variables for a causal map from stakeholders</li>
+<li>Use these variables to build a causal map with stakeholders</li>
+</ul>
+<p>Size of stakeholder group: - At least 3–5 people - A group size of 5–12 is ideal - Any group bigger than 20 people is best split up into separate workshops</p>
+<p>The session is planned by the core modeling team that is made up of 3–5 staff members and stakeholders</p>
+<p>The facilitator team may overlap with your core modeling team—for the causal mapping session we will need: - Head facilitator - Wall builder - Recorder</p>
+<p>Steps:</p>
+<p>Problem scoping - Identify problem and assess if problem is suitable for causal mapping - Develop one-pager that describes project, purpose, audience, and resources needed - Time necessary for this stage ranges from 1–3 hours to several meetings</p>
+<p>Core modeling team planning and capacity building</p>
+<ul>
+<li>Design group model building workshop including the process and agenda</li>
+<li>Prepare recruitment and training of additional facilitation team members if needed</li>
+<li>Time necessary for this stage several 1- to 2-hour meetings</li>
+</ul>
+<p>Actual group modeling workshop</p>
+<ul>
+<li>Session length varies from one or two 90 minute sessions to five-day workshops</li>
+</ul>
+<p>Evaluation and reporting</p>
+<p>Scripts: “playbooks” that outline the process of a particular group modeling activity step-by-step</p>
+<ul>
+<li><a href="https://en.wikibooks.org/wiki/Scriptapedia/Creating_a_Shared_Vision_of_Modeling_Project">Peter Hovmand’s “Scriptapedia”</a></li>
 </ul>
 </div>
+<div id="section-23.3" class="section level2">
+<h2><span class="header-section-number">23.3</span> 系统抽象与映射－汇流图</h2>
+<p>展示变化的累计状态，所有动态过程都源于累积，状态都有记忆，可以中断过程，可以产生延迟</p>
+<p><img src="http://yufree.cn/blogcn/figure/sf.png" alt="" /><!-- --></p>
+<p>因果环路图表明事物是联系的，汇流图说明如何联系</p>
+<p><img src="http://yufree.cn/blogcn/figure/cldsf.png" alt="" /><!-- --></p>
 </div>
-<div id="theoretical-background" class="section level2">
-<h2><span class="header-section-number">22.3</span> Theoretical Background</h2>
-<div id="potential-outcomes-framework" class="section level3">
-<h3><span class="header-section-number">22.3.1</span> Potential Outcomes Framework</h3>
+<div id="section-23.4" class="section level2">
+<h2><span class="header-section-number">23.4</span> 系统思维与决策</h2>
+<p>Ecostructure 包括所有利益相关者</p>
+<p>找到关键的人，政策有利益得失，让大赢家赢得比大输家多</p>
+<p>解释的时候用他们的话，让他们自己得到结论</p>
+<p>从上到下的决策</p>
 <ul>
-<li><span class="math inline">\(Y_{i,1}\)</span> Potential outcome of individual i given treatment T=1 (e.g. taking two Aspirins)</li>
-<li><span class="math inline">\(Y_{i,0}\)</span> Potential outcome of individual i given treatment T=0 (e.g. drinking a glass of water)</li>
-<li>individual-level causal effect (ICE)
-<ul>
-<li><span class="math inline">\(ICE=Y_{i,1} −Y_{i,0}\)</span></li>
-</ul></li>
-<li>average causal effect (ACE)
-<ul>
-<li><span class="math inline">\(ACE = E[Y_{i,1}] −E[Y_{i,0}]\)</span></li>
-</ul></li>
+<li>明智的决策者拯救世界</li>
+<li>解决大问题</li>
+<li>用复杂科学解释决策</li>
 </ul>
-</div>
-<div id="causal-identification" class="section level3">
-<h3><span class="header-section-number">22.3.2</span> Causal Identification</h3>
+<p>公共健康铁三角：技术专家 政治家 公民权利领导者</p>
+<p>技术专家的角色类似权威的父母：我喜欢你，让我们阐释问题</p>
+<p>从下到上的决策</p>
 <ul>
-<li><span class="math inline">\(Y_{i,1}\)</span> (treatment) and <span class="math inline">\(Y_{i,0}\)</span> (non-treatment) can never be both observed for the same individual at the same time</li>
-<li>Association S
-<ul>
-<li><span class="math inline">\(S = E[Y_1|T = 1] - E[Y_0|T = 0]\)</span></li>
-</ul></li>
-<li>S is not the <strong>same</strong> with ACE
-<ul>
-<li>association does not imply causation</li>
-<li>randomized experiment</li>
-</ul></li>
+<li>设立规范自动转换的系统</li>
+<li>使用agent-based models</li>
 </ul>
-<div id="ignorability" class="section level4">
-<h4><span class="header-section-number">22.3.2.1</span> Ignorability</h4>
-<ul>
-<li><span class="math inline">\((Y_1,Y_0) \upmodels T\)</span> <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_0\)</span> must be jointly independent of the treatment assignment</li>
-<li><span class="math inline">\((Y_1,Y_0) \upmodels T|X\)</span> for realobservational studies, conditional on variables X, <span class="math inline">\(Y_1\)</span>, and <span class="math inline">\(Y_0\)</span> are jointly independent of T, the assignment mechanism</li>
-<li><span class="math inline">\(ACE|X = E[Y_1|X] - E[Y_0|X] = E[Y_1|T=1,X] - E[Y_0|􏰀T = 0,X] = E[Y|􏰀T = 1,X] - E[Y|􏰀T =0,X] = S|􏰀X\)</span></li>
-</ul>
-</div>
-<div id="assumptions" class="section level4">
-<h4><span class="header-section-number">22.3.2.2</span> Assumptions</h4>
-<ul>
-<li>Causal inference requires causal assumptions</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="methods-for-identification-and-estimation" class="section level2">
-<h2><span class="header-section-number">22.4</span> Methods for Identification and Estimation</h2>
-<div id="directed-acyclic-graphsdag-for-identification" class="section level3">
-<h3><span class="header-section-number">22.4.1</span> Directed Acyclic Graphs(DAG) for Identification</h3>
-<ul>
-<li>DAGs Are Nonparametric</li>
-<li>A Node represents a variable in a domain, regardless of whether it is observable or unobservable</li>
-<li>A Directed Arc has the appearance of an arrow and represents a potential causal effect. The arc direction indicates the assumed causal direction, i.e. “A→B” means “A causes B.”</li>
-<li>A Missing Arc encodes the definitive absence of a direct causal effect, i.e. no arc between A and B means that there exists no direct causal relationship between A and B and vice versa. As such, a missing arc repre- sents an assumption</li>
-</ul>
-</div>
-<div id="indirect-connection" class="section level3">
-<h3><span class="header-section-number">22.4.2</span> Indirect Connection</h3>
-<ul>
-<li>A causes B via node C</li>
-<li><span class="math inline">\(A \nupmodels B\)</span> and <span class="math inline">\(A \upmodels B|C\)</span></li>
-</ul>
-</div>
-<div id="common-cause" class="section level3">
-<h3><span class="header-section-number">22.4.3</span> Common Cause</h3>
-<ul>
-<li>C causes both A and B</li>
-<li><span class="math inline">\(A \nupmodels B\)</span> and <span class="math inline">\(A \upmodels B|C\)</span></li>
-</ul>
-</div>
-<div id="common-effect" class="section level3">
-<h3><span class="header-section-number">22.4.4</span> Common Effect</h3>
-<ul>
-<li>C is the common effect of A and B</li>
-<li><span class="math inline">\(A \upmodels B\)</span> and <span class="math inline">\(A \nupmodels B|C\)</span></li>
-</ul>
-</div>
-<div id="example-simpsons-paradox" class="section level3">
-<h3><span class="header-section-number">22.4.5</span> Example: Simpson’s Paradox</h3>
+<p>根据规模，规模越大，越需要自上而下的系统设计</p>
+
+<div id="refs" class="references">
 
 </div>
 </div>
@@ -784,8 +776,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="section-21.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="section-23.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="section-22.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -812,7 +804,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/yufree/notes/edit/master/22-causal.Rmd",
+"link": "https://github.com/yufree/notes/edit/master/23-systemthinking.Rmd",
 "text": "Edit"
 },
 "download": null,
