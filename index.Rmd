@@ -31,8 +31,7 @@ description: "This is notes from yufree"
 - 20 生存分析
 - 21 数据科学与python简介
 - 22 因果分析
-- 23 ABM仿真
-- 24 xcms
+- 23 系统思考
 
 ## 简明数据分析知识框架
 
