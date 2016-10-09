@@ -100,6 +100,21 @@ w <- rep(x, x) # puts c(1,2,2,3,3,3,4,4,4,4) into w
 - 整型变量后面加上L x<-10L
 - Inf代表1/0 同样1/Inf运算结果为0
 
+## 环境／文件操作
+
+- `getwd()` `setwd()` 设置工作目录
+- `ls()` 列举环境中bianliang
+- `list.files()` 或 `dir()` 列举当前目录下文件
+- `args()` 列举函数默认变量
+- `dir.create()` 创建文件目录 加上`recursive=T`可创建多级目录
+- `file.create()` 创建文件
+- `file.exists()` 检查文件是否存在
+- `file.info()` 检查文件信息
+- `file.rename()` 文件重命名
+- `file.copy()` 文件复制
+- `file.path()` 文件路径 多个文件组成多级路径
+- `unlink()` 删除文件
+
 ## 截取数据
 
 - `[]`截取数据
@@ -127,14 +142,6 @@ w <- rep(x, x) # puts c(1,2,2,3,3,3,4,4,4,4) into w
 - `dget` 读取多个R代码 反之`dput`
 - `load` 读取保存的工作区 反之`save`
 - `unserialize` 读取二进制R对象 反之`serialize`
-
-- 设置工作目录
-
-```{r,eval=FALSE}
-getwd()
-setwd()
-```
-
 - `?read.table` 
 - 大数据读取提速
   - 计算内存
