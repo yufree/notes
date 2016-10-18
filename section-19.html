@@ -26,7 +26,7 @@
 <meta name="author" content="Miao YU">
 
   
-<meta name="date" content="2016-10-09">
+<meta name="date" content="2016-10-18">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -588,6 +588,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="19.13" data-path="section-19.html"><a href="section-19.html#section-19.13"><i class="fa fa-check"></i><b>19.13</b> 影响因子</a><ul>
 <li class="chapter" data-level="19.13.1" data-path="section-19.html"><a href="section-19.html#section-19.13.1"><i class="fa fa-check"></i><b>19.13.1</b> 拟合模型</a></li>
 <li class="chapter" data-level="19.13.2" data-path="section-19.html"><a href="section-19.html#section-19.13.2"><i class="fa fa-check"></i><b>19.13.2</b> 求后验概率</a></li>
+<li class="chapter" data-level="19.13.3" data-path="section-19.html"><a href="section-19.html#section-19.13.3"><i class="fa fa-check"></i><b>19.13.3</b> 考虑更多因素</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>20</b> 数据科学与python简介</a><ul>
@@ -1028,9 +1029,23 @@ career &lt;-<span class="st"> </span>Batting %&gt;%
 
 career &lt;-<span class="st"> </span>Master %&gt;%
 <span class="st">  </span><span class="kw">tbl_df</span>() %&gt;%
-<span class="st">  </span><span class="kw">select</span>(playerID, nameFirst, nameLast) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(playerID, nameFirst, nameLast) %&gt;%
 <span class="st">  </span><span class="kw">unite</span>(name, nameFirst, nameLast, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">inner_join</span>(career, <span class="dt">by =</span> <span class="st">&quot;playerID&quot;</span>)
+
+career0 &lt;-<span class="st"> </span>Batting %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(AB &gt;<span class="st"> </span><span class="dv">0</span>) %&gt;%
+<span class="st">  </span><span class="kw">anti_join</span>(Pitching, <span class="dt">by =</span> <span class="st">&quot;playerID&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(playerID) %&gt;%
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">H =</span> <span class="kw">sum</span>(H), <span class="dt">AB =</span> <span class="kw">sum</span>(AB), <span class="dt">year =</span> <span class="kw">mean</span>(yearID)) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">average =</span> H /<span class="st"> </span>AB)
+
+career2 &lt;-<span class="st"> </span>Master %&gt;%
+<span class="st">  </span><span class="kw">tbl_df</span>() %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(playerID, nameFirst, nameLast, bats) %&gt;%
+<span class="st">  </span><span class="kw">unite</span>(name, nameFirst, nameLast, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">inner_join</span>(career0, <span class="dt">by =</span> <span class="st">&quot;playerID&quot;</span>)
+
 career_eb &lt;-<span class="st"> </span>career %&gt;%
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">eb_estimate =</span> (H +<span class="st"> </span>alpha0) /<span class="st"> </span>(AB +<span class="st"> </span>alpha0 +<span class="st"> </span>beta0))
 career_eb &lt;-<span class="st"> </span>career_eb %&gt;%
@@ -1059,7 +1074,7 @@ yankee_1998_career &lt;-<span class="st"> </span>yankee_1998_career %&gt;%
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">low  =</span> <span class="kw">qbeta</span>(.<span class="dv">025</span>, alpha1, beta1),
            <span class="dt">high =</span> <span class="kw">qbeta</span>(.<span class="dv">975</span>, alpha1, beta1))
 yankee_1998_career %&gt;%
-<span class="st">    </span><span class="kw">select</span>(-alpha1, -beta1, -eb_estimate) %&gt;%
+<span class="st">    </span>dplyr::<span class="kw">select</span>(-alpha1, -beta1, -eb_estimate) %&gt;%
 <span class="st">    </span>knitr::<span class="kw">kable</span>()</code></pre></div>
 <table>
 <thead>
@@ -1163,11 +1178,11 @@ some &lt;-<span class="st"> </span>career_eb %&gt;%
 frequentist &lt;-<span class="st"> </span>some %&gt;%
 <span class="st">    </span><span class="kw">group_by</span>(playerID, name, AB) %&gt;%
 <span class="st">    </span><span class="kw">do</span>(<span class="kw">tidy</span>(<span class="kw">binom.test</span>(.$H, .$AB))) %&gt;%
-<span class="st">    </span><span class="kw">select</span>(playerID, name, estimate, <span class="dt">low =</span> conf.low, <span class="dt">high =</span> conf.high) %&gt;%
+<span class="st">    </span>dplyr::<span class="kw">select</span>(playerID, name, estimate, <span class="dt">low =</span> conf.low, <span class="dt">high =</span> conf.high) %&gt;%
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="st">&quot;Confidence&quot;</span>)
 
 bayesian &lt;-<span class="st"> </span>some %&gt;%
-<span class="st">    </span><span class="kw">select</span>(playerID, name, AB, <span class="dt">estimate =</span> eb_estimate,
+<span class="st">    </span>dplyr::<span class="kw">select</span>(playerID, name, AB, <span class="dt">estimate =</span> eb_estimate,
            <span class="dt">low =</span> low, <span class="dt">high =</span> high) %&gt;%
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="st">&quot;Credible&quot;</span>)
 
@@ -1593,8 +1608,7 @@ fit &lt;-<span class="st"> </span><span class="kw">gamlss</span>(<span class="kw
 ## GAMLSS-RS iteration 3: Global Deviance = 68633 
 ## GAMLSS-RS iteration 4: Global Deviance = 68627 
 ## GAMLSS-RS iteration 5: Global Deviance = 68627</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
-<span class="co"># 展示拟合参数</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 展示拟合参数</span>
 td &lt;-<span class="st"> </span><span class="kw">tidy</span>(fit)
 td</code></pre></div>
 <pre><code>##   parameter        term estimate std.error statistic p.value
@@ -1661,6 +1675,181 @@ career_eb_wAB %&gt;%
 <p><img src="Notes_files/figure-html/fitpo-2.png" width="672" /></p>
 <ul>
 <li>矫正后我们的数据更复合现实了，其实这是贝叶斯分层模型的一个简单版本，通过考虑更多因素，我们可以构建更复杂的模型来挖掘出我们所需要的信息</li>
+</ul>
+</div>
+<div id="section-19.13.3" class="section level3">
+<h3><span class="header-section-number">19.13.3</span> 考虑更多因素</h3>
+<ul>
+<li>现在我们听说左利手跟右利手的表现可能不一样，所以我们要对模型进行完善，考虑把左右手参数加入模型</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 展示数据</span>
+career2 %&gt;%
+<span class="st">        </span><span class="kw">count</span>(bats)</code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+##     bats     n
+##   &lt;fctr&gt; &lt;int&gt;
+## 1      B   767
+## 2      L  2653
+## 3      R  5351
+## 4     NA   658</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 排除NA</span>
+career3 &lt;-<span class="st"> </span>career2 %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(!<span class="kw">is.na</span>(bats)) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bats =</span> <span class="kw">relevel</span>(bats, <span class="st">&quot;R&quot;</span>))
+<span class="co"># 重建模型</span>
+fit2 &lt;-<span class="st"> </span><span class="kw">gamlss</span>(<span class="kw">cbind</span>(H, AB -<span class="st"> </span>H) ~<span class="st"> </span><span class="kw">log</span>(AB) +<span class="st"> </span>bats,
+               <span class="dt">data =</span> career3,
+               <span class="dt">family =</span> <span class="kw">BB</span>(<span class="dt">mu.link =</span> <span class="st">&quot;identity&quot;</span>))</code></pre></div>
+<pre><code>## GAMLSS-RS iteration 1: Global Deviance = 88216 
+## GAMLSS-RS iteration 2: Global Deviance = 69532 
+## GAMLSS-RS iteration 3: Global Deviance = 65403 
+## GAMLSS-RS iteration 4: Global Deviance = 65397 
+## GAMLSS-RS iteration 5: Global Deviance = 65397</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 观察参数</span>
+<span class="kw">tidy</span>(fit2)</code></pre></div>
+<pre><code>##   parameter        term estimate std.error statistic  p.value
+## 1        mu (Intercept)  0.14288  0.001651     86.55 0.00e+00
+## 2        mu     log(AB)  0.01489  0.000223     66.79 0.00e+00
+## 3        mu       batsB -0.00129  0.000998     -1.29 1.98e-01
+## 4        mu       batsL  0.00987  0.000640     15.42 6.32e-53
+## 5     sigma (Intercept) -6.42525  0.025315   -253.82 0.00e+00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sigma &lt;-<span class="st"> </span><span class="kw">fitted</span>(fit2, <span class="st">&quot;sigma&quot;</span>)[<span class="dv">1</span>]
+<span class="kw">crossing</span>(<span class="dt">bats =</span> <span class="kw">c</span>(<span class="st">&quot;L&quot;</span>, <span class="st">&quot;R&quot;</span>),
+         <span class="dt">AB =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>)) %&gt;%
+<span class="st">  </span><span class="kw">augment</span>(fit2, <span class="dt">newdata =</span> .) %&gt;%
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">mu =</span> .fitted) %&gt;%
+<span class="st">  </span><span class="kw">crossing</span>(<span class="dt">x =</span> <span class="kw">seq</span>(.<span class="dv">1</span>, .<span class="dv">36</span>, .<span class="dv">0005</span>)) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">alpha =</span> mu /<span class="st"> </span>sigma,
+         <span class="dt">beta =</span> (<span class="dv">1</span> -<span class="st"> </span>mu) /<span class="st"> </span>sigma,
+         <span class="dt">density =</span> <span class="kw">dbeta</span>(x, alpha, beta)) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, density, <span class="dt">color =</span> <span class="kw">factor</span>(AB), <span class="dt">lty =</span> bats)) +
+<span class="st">  </span><span class="kw">geom_line</span>() +
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Batting average&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;Prior density&quot;</span>,
+       <span class="dt">color =</span> <span class="st">&quot;AB&quot;</span>,
+       <span class="dt">lty =</span> <span class="st">&quot;Batting hand&quot;</span>)</code></pre></div>
+<p><img src="Notes_files/figure-html/career2-1.png" width="672" /></p>
+<ul>
+<li>存在先验概率的情况下，可以考虑考察随着击球数增长左右手的不同</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">crossing</span>(<span class="dt">bats =</span> <span class="kw">c</span>(<span class="st">&quot;L&quot;</span>, <span class="st">&quot;R&quot;</span>),
+         <span class="dt">AB =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>)) %&gt;%
+<span class="st">  </span><span class="kw">augment</span>(fit2, <span class="dt">newdata =</span> .) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">H =</span> .<span class="dv">3</span> *<span class="st"> </span>AB,
+         <span class="dt">alpha0 =</span> .fitted /<span class="st"> </span>sigma,
+         <span class="dt">beta0 =</span> (<span class="dv">1</span> -<span class="st"> </span>.fitted) /<span class="st"> </span>sigma,
+         <span class="dt">alpha1 =</span> alpha0 +<span class="st"> </span>H,
+         <span class="dt">beta1 =</span> beta0 +<span class="st"> </span>AB -<span class="st"> </span>H,
+         <span class="dt">estimate =</span> alpha1 /<span class="st"> </span>(alpha1 +<span class="st"> </span>beta1),
+         <span class="dt">conf.low =</span> <span class="kw">qbeta</span>(.<span class="dv">025</span>, alpha1, beta1),
+         <span class="dt">conf.high =</span> <span class="kw">qbeta</span>(.<span class="dv">975</span>, alpha1, beta1),
+         <span class="dt">record =</span> <span class="kw">paste</span>(H, AB, <span class="dt">sep =</span> <span class="st">&quot; / &quot;</span>)) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(estimate, record, <span class="dt">color =</span> bats)) +
+<span class="st">  </span><span class="kw">geom_point</span>() +
+<span class="st">  </span><span class="kw">geom_errorbarh</span>(<span class="kw">aes</span>(<span class="dt">xmin =</span> conf.low, <span class="dt">xmax =</span> conf.high)) +
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Estimate w/ 95% credible interval&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;Batting record&quot;</span>,
+       <span class="dt">color =</span> <span class="st">&quot;Batting hand&quot;</span>)</code></pre></div>
+<p><img src="Notes_files/figure-html/lrcom-1.png" width="672" /></p>
+<ul>
+<li>另一个要考虑的因素是不同年份的平均击球率可能也有起伏</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">career3 %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">decade =</span> <span class="kw">factor</span>(<span class="kw">round</span>(year -<span class="st"> </span><span class="dv">5</span>, -<span class="dv">1</span>))) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(AB &gt;=<span class="st"> </span><span class="dv">500</span>) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(decade, average)) +
+<span class="st">  </span><span class="kw">geom_boxplot</span>() +
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) +
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Batting average&quot;</span>)</code></pre></div>
+<p><img src="Notes_files/figure-html/batyear-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 用样条插值来进行拟合</span>
+<span class="kw">library</span>(splines)
+fit3 &lt;-<span class="st"> </span><span class="kw">gamlss</span>(<span class="kw">cbind</span>(H, AB -<span class="st"> </span>H) ~<span class="st"> </span><span class="dv">0</span> +<span class="st"> </span><span class="kw">ns</span>(year, <span class="dt">df =</span> <span class="dv">5</span>) +<span class="st"> </span>bats +<span class="st"> </span><span class="kw">log</span>(AB),
+               <span class="dt">data =</span> career3,
+               <span class="dt">family =</span> <span class="kw">BB</span>(<span class="dt">mu.link =</span> <span class="st">&quot;identity&quot;</span>))</code></pre></div>
+<pre><code>## GAMLSS-RS iteration 1: Global Deviance = 88204 
+## GAMLSS-RS iteration 2: Global Deviance = 69289 
+## GAMLSS-RS iteration 3: Global Deviance = 64841 
+## GAMLSS-RS iteration 4: Global Deviance = 64832 
+## GAMLSS-RS iteration 5: Global Deviance = 64832</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 观察在击球数1000上先验概率的变化</span>
+plot_gamlss_fit &lt;-<span class="st"> </span>function(f) {
+  career3 %&gt;%
+<span class="st">    </span>dplyr::<span class="kw">select</span>(year, bats) %&gt;%
+<span class="st">    </span><span class="kw">distinct</span>() %&gt;%
+<span class="st">    </span><span class="kw">filter</span>(bats !=<span class="st"> &quot;B&quot;</span>) %&gt;%
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">AB =</span> <span class="dv">1000</span>) %&gt;%
+<span class="st">    </span><span class="kw">augment</span>(f, <span class="dt">newdata =</span> .) %&gt;%
+<span class="st">    </span><span class="kw">rename</span>(<span class="dt">mu =</span> .fitted) %&gt;%
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">sigma =</span> <span class="kw">fitted</span>(fit3, <span class="st">&quot;sigma&quot;</span>)[<span class="dv">1</span>],
+           <span class="dt">alpha0 =</span> mu /<span class="st"> </span>sigma,
+           <span class="dt">beta0 =</span> (<span class="dv">1</span> -<span class="st"> </span>mu) /<span class="st"> </span>sigma,
+           <span class="dt">conf_low =</span> <span class="kw">qbeta</span>(.<span class="dv">025</span>, alpha0, beta0),
+           <span class="dt">conf_high =</span> <span class="kw">qbeta</span>(.<span class="dv">975</span>, alpha0, beta0)) %&gt;%
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, mu, <span class="dt">color =</span> bats, <span class="dt">group =</span> bats)) +
+<span class="st">    </span><span class="kw">geom_line</span>() +
+<span class="st">    </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> conf_low, <span class="dt">ymax =</span> conf_high), <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> .<span class="dv">1</span>) +
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>,
+         <span class="dt">y =</span> <span class="st">&quot;Prior distribution (median + 95% quantiles)&quot;</span>,
+         <span class="dt">color =</span> <span class="st">&quot;Batting hand&quot;</span>)
+}
+<span class="kw">plot_gamlss_fit</span>(fit3)</code></pre></div>
+<p><img src="Notes_files/figure-html/batyear-2.png" width="672" /></p>
+<ul>
+<li>同时另一个问题是这些因素会交互影响</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit4 &lt;-<span class="st"> </span><span class="kw">gamlss</span>(<span class="kw">cbind</span>(H, AB -<span class="st"> </span>H) ~<span class="st"> </span><span class="dv">0</span> +<span class="st"> </span><span class="kw">ns</span>(year, <span class="dv">5</span>) *<span class="st"> </span>bats +<span class="st"> </span><span class="kw">log</span>(AB),
+               <span class="dt">data =</span> career3,
+               <span class="dt">family =</span> <span class="kw">BB</span>(<span class="dt">mu.link =</span> <span class="st">&quot;identity&quot;</span>))</code></pre></div>
+<pre><code>## GAMLSS-RS iteration 1: Global Deviance = 88201 
+## GAMLSS-RS iteration 2: Global Deviance = 69241 
+## GAMLSS-RS iteration 3: Global Deviance = 64708 
+## GAMLSS-RS iteration 4: Global Deviance = 64698 
+## GAMLSS-RS iteration 5: Global Deviance = 64698</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_gamlss_fit</span>(fit4)</code></pre></div>
+<p><img src="Notes_files/figure-html/interact-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Pitching %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(playerID, yearID, GS) %&gt;%
+<span class="st">  </span><span class="kw">distinct</span>() %&gt;%
+<span class="st">  </span><span class="kw">inner_join</span>(dplyr::<span class="kw">select</span>(Master, playerID, throws)) %&gt;%
+<span class="st">  </span><span class="kw">count</span>(yearID, throws, <span class="dt">wt =</span> GS) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(!<span class="kw">is.na</span>(throws)) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">percent =</span> n /<span class="st"> </span><span class="kw">sum</span>(n)) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(throws ==<span class="st"> &quot;L&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(yearID, percent)) +
+<span class="st">  </span><span class="kw">geom_line</span>() +
+<span class="st">  </span><span class="kw">geom_smooth</span>() +
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales::<span class="kw">percent_format</span>()) +
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Year&quot;</span>) +
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;% of games with left-handed pitcher&quot;</span>)</code></pre></div>
+<p><img src="Notes_files/figure-html/interact-2.png" width="672" /></p>
+<ul>
+<li>左右手之间的差距伴随年份在逐渐减少</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">players &lt;-<span class="st"> </span><span class="kw">crossing</span>(<span class="dt">year =</span> <span class="kw">c</span>(<span class="dv">1915</span>, <span class="dv">1965</span>, <span class="dv">2015</span>),
+                    <span class="dt">bats =</span> <span class="kw">c</span>(<span class="st">&quot;L&quot;</span>, <span class="st">&quot;R&quot;</span>),
+                    <span class="dt">H =</span> <span class="dv">30</span>,
+                    <span class="dt">AB =</span> <span class="dv">100</span>)
+
+players_posterior &lt;-<span class="st"> </span>players %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mu =</span> <span class="kw">predict</span>(fit4, <span class="dt">what =</span> <span class="st">&quot;mu&quot;</span>, <span class="dt">newdata =</span> players),
+         <span class="dt">sigma =</span> <span class="kw">predict</span>(fit4, <span class="dt">what =</span> <span class="st">&quot;sigma&quot;</span>, <span class="dt">newdata =</span> players, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>),
+         <span class="dt">alpha0 =</span> mu /<span class="st"> </span>sigma,
+         <span class="dt">beta0 =</span> (<span class="dv">1</span> -<span class="st"> </span>mu) /<span class="st"> </span>sigma,
+         <span class="dt">alpha1 =</span> alpha0 +<span class="st"> </span>H,
+         <span class="dt">beta1 =</span> beta0 +<span class="st"> </span>AB -<span class="st"> </span>H)
+players_posterior %&gt;%
+<span class="st">  </span><span class="kw">crossing</span>(<span class="dt">x =</span> <span class="kw">seq</span>(.<span class="dv">15</span>, .<span class="dv">3</span>, .<span class="dv">001</span>)) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">density =</span> <span class="kw">dbeta</span>(x, alpha1, beta1)) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, density, <span class="dt">color =</span> bats)) +
+<span class="st">  </span><span class="kw">geom_line</span>() +
+<span class="st">  </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>year) +
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Batting average&quot;</span>) +
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Posterior density&quot;</span>) +
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Posterior distributions for batters with 30 / 100&quot;</span>)</code></pre></div>
+<p><img src="Notes_files/figure-html/yearcompare-1.png" width="672" /></p>
+<ul>
+<li>经验贝叶斯对先验概率的估计类似频率学派，但进行的又是贝叶斯分析</li>
 </ul>
 
 </div>
