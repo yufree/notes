@@ -184,7 +184,7 @@ ggplot(career_eb, aes(average, eb_estimate, color = AB)) +
 
 - 经验贝叶斯会给出一个后验分布，这个分布可以用来求可信区间
 
-```{r ci, cache=TRUE}
+```{r ci}
 # 给出后验分布
 career <- Batting %>%
   filter(AB > 0) %>%
@@ -195,9 +195,23 @@ career <- Batting %>%
 
 career <- Master %>%
   tbl_df() %>%
-  select(playerID, nameFirst, nameLast) %>%
+  dplyr::select(playerID, nameFirst, nameLast) %>%
   unite(name, nameFirst, nameLast, sep = " ") %>%
   inner_join(career, by = "playerID")
+
+career0 <- Batting %>%
+  filter(AB > 0) %>%
+  anti_join(Pitching, by = "playerID") %>%
+  group_by(playerID) %>%
+  summarize(H = sum(H), AB = sum(AB), year = mean(yearID)) %>%
+  mutate(average = H / AB)
+
+career2 <- Master %>%
+  tbl_df() %>%
+  dplyr::select(playerID, nameFirst, nameLast, bats) %>%
+  unite(name, nameFirst, nameLast, sep = " ") %>%
+  inner_join(career0, by = "playerID")
+
 career_eb <- career %>%
     mutate(eb_estimate = (H + alpha0) / (AB + alpha0 + beta0))
 career_eb <- career_eb %>%
@@ -226,7 +240,7 @@ yankee_1998_career <- yankee_1998_career %>%
     mutate(low  = qbeta(.025, alpha1, beta1),
            high = qbeta(.975, alpha1, beta1))
 yankee_1998_career %>%
-    select(-alpha1, -beta1, -eb_estimate) %>%
+    dplyr::select(-alpha1, -beta1, -eb_estimate) %>%
     knitr::kable()
 
 # 绘制可信区间
@@ -253,11 +267,11 @@ some <- career_eb %>%
 frequentist <- some %>%
     group_by(playerID, name, AB) %>%
     do(tidy(binom.test(.$H, .$AB))) %>%
-    select(playerID, name, estimate, low = conf.low, high = conf.high) %>%
+    dplyr::select(playerID, name, estimate, low = conf.low, high = conf.high) %>%
     mutate(method = "Confidence")
 
 bayesian <- some %>%
-    select(playerID, name, AB, estimate = eb_estimate,
+    dplyr::select(playerID, name, AB, estimate = eb_estimate,
            low = low, high = high) %>%
     mutate(method = "Credible")
 
@@ -622,7 +636,6 @@ fit <- gamlss(cbind(H, AB - H) ~ log(AB),
               data = career_eb,
               family = BB(mu.link = "identity"))
 
-library(broom)
 # 展示拟合参数
 td <- tidy(fit)
 td
@@ -687,3 +700,153 @@ career_eb_wAB %>%
 ```
 
 - 矫正后我们的数据更复合现实了，其实这是贝叶斯分层模型的一个简单版本，通过考虑更多因素，我们可以构建更复杂的模型来挖掘出我们所需要的信息
+
+### 考虑更多因素
+
+- 现在我们听说左利手跟右利手的表现可能不一样，所以我们要对模型进行完善，考虑把左右手参数加入模型
+
+```{r career2}
+# 展示数据
+career2 %>%
+        count(bats)
+# 排除NA
+career3 <- career2 %>%
+  filter(!is.na(bats)) %>%
+  mutate(bats = relevel(bats, "R"))
+# 重建模型
+fit2 <- gamlss(cbind(H, AB - H) ~ log(AB) + bats,
+               data = career3,
+               family = BB(mu.link = "identity"))
+# 观察参数
+tidy(fit2)
+sigma <- fitted(fit2, "sigma")[1]
+crossing(bats = c("L", "R"),
+         AB = c(1, 10, 100, 1000, 10000)) %>%
+  augment(fit2, newdata = .) %>%
+  rename(mu = .fitted) %>%
+  crossing(x = seq(.1, .36, .0005)) %>%
+  mutate(alpha = mu / sigma,
+         beta = (1 - mu) / sigma,
+         density = dbeta(x, alpha, beta)) %>%
+  ggplot(aes(x, density, color = factor(AB), lty = bats)) +
+  geom_line() +
+  labs(x = "Batting average",
+       y = "Prior density",
+       color = "AB",
+       lty = "Batting hand")
+```
+
+- 存在先验概率的情况下，可以考虑考察随着击球数增长左右手的不同
+
+```{r lrcom}
+crossing(bats = c("L", "R"),
+         AB = c(10, 100, 1000, 10000)) %>%
+  augment(fit2, newdata = .) %>%
+  mutate(H = .3 * AB,
+         alpha0 = .fitted / sigma,
+         beta0 = (1 - .fitted) / sigma,
+         alpha1 = alpha0 + H,
+         beta1 = beta0 + AB - H,
+         estimate = alpha1 / (alpha1 + beta1),
+         conf.low = qbeta(.025, alpha1, beta1),
+         conf.high = qbeta(.975, alpha1, beta1),
+         record = paste(H, AB, sep = " / ")) %>%
+  ggplot(aes(estimate, record, color = bats)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  labs(x = "Estimate w/ 95% credible interval",
+       y = "Batting record",
+       color = "Batting hand")
+```
+
+- 另一个要考虑的因素是不同年份的平均击球率可能也有起伏
+
+```{r batyear}
+career3 %>%
+  mutate(decade = factor(round(year - 5, -1))) %>%
+  filter(AB >= 500) %>%
+  ggplot(aes(decade, average)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ylab("Batting average")
+# 用样条插值来进行拟合
+library(splines)
+fit3 <- gamlss(cbind(H, AB - H) ~ 0 + ns(year, df = 5) + bats + log(AB),
+               data = career3,
+               family = BB(mu.link = "identity"))
+
+# 观察在击球数1000上先验概率的变化
+plot_gamlss_fit <- function(f) {
+  career3 %>%
+    dplyr::select(year, bats) %>%
+    distinct() %>%
+    filter(bats != "B") %>%
+    mutate(AB = 1000) %>%
+    augment(f, newdata = .) %>%
+    rename(mu = .fitted) %>%
+    mutate(sigma = fitted(fit3, "sigma")[1],
+           alpha0 = mu / sigma,
+           beta0 = (1 - mu) / sigma,
+           conf_low = qbeta(.025, alpha0, beta0),
+           conf_high = qbeta(.975, alpha0, beta0)) %>%
+    ggplot(aes(year, mu, color = bats, group = bats)) +
+    geom_line() +
+    geom_ribbon(aes(ymin = conf_low, ymax = conf_high), linetype = 2, alpha = .1) +
+    labs(x = "Year",
+         y = "Prior distribution (median + 95% quantiles)",
+         color = "Batting hand")
+}
+plot_gamlss_fit(fit3)
+```
+
+- 同时另一个问题是这些因素会交互影响
+
+```{r interact}
+fit4 <- gamlss(cbind(H, AB - H) ~ 0 + ns(year, 5) * bats + log(AB),
+               data = career3,
+               family = BB(mu.link = "identity"))
+plot_gamlss_fit(fit4)
+
+Pitching %>%
+  dplyr::select(playerID, yearID, GS) %>%
+  distinct() %>%
+  inner_join(dplyr::select(Master, playerID, throws)) %>%
+  count(yearID, throws, wt = GS) %>%
+  filter(!is.na(throws)) %>%
+  mutate(percent = n / sum(n)) %>%
+  filter(throws == "L") %>%
+  ggplot(aes(yearID, percent)) +
+  geom_line() +
+  geom_smooth() +
+  scale_y_continuous(labels = scales::percent_format()) +
+  xlab("Year") +
+  ylab("% of games with left-handed pitcher")
+```
+
+- 左右手之间的差距伴随年份在逐渐减少
+
+```{r yearcompare}
+players <- crossing(year = c(1915, 1965, 2015),
+                    bats = c("L", "R"),
+                    H = 30,
+                    AB = 100)
+
+players_posterior <- players %>%
+  mutate(mu = predict(fit4, what = "mu", newdata = players),
+         sigma = predict(fit4, what = "sigma", newdata = players, type = "response"),
+         alpha0 = mu / sigma,
+         beta0 = (1 - mu) / sigma,
+         alpha1 = alpha0 + H,
+         beta1 = beta0 + AB - H)
+players_posterior %>%
+  crossing(x = seq(.15, .3, .001)) %>%
+  mutate(density = dbeta(x, alpha1, beta1)) %>%
+  ggplot(aes(x, density, color = bats)) +
+  geom_line() +
+  facet_wrap(~ year) +
+  xlab("Batting average") +
+  ylab("Posterior density") +
+  ggtitle("Posterior distributions for batters with 30 / 100")
+```
+
+- 经验贝叶斯对先验概率的估计类似频率学派，但进行的又是贝叶斯分析
