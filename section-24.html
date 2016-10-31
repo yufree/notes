@@ -8,7 +8,7 @@
   <title>Notes</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="This is notes from yufree">
-  <meta name="generator" content="bookdown 0.1.16 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.1.18 and GitBook 2.6.7">
 
   <meta property="og:title" content="Notes" />
   <meta property="og:type" content="book" />
@@ -25,8 +25,8 @@
 
 <meta name="author" content="Miao YU">
 
-  
-<meta name="date" content="2016-10-20">
+
+<meta name="date" content="2016-10-31">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -40,7 +40,7 @@ MathJax.Hub.Config({
   
   
 <link rel="prev" href="section-23.html">
-
+<link rel="next" href="section-25.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -641,10 +641,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="24" data-path="section-24.html"><a href="section-24.html"><i class="fa fa-check"></i><b>24</b> 博弈论</a><ul>
 <li class="chapter" data-level="24.1" data-path="-1.html"><a href="-1.html#-1"><i class="fa fa-check"></i><b>24.1</b> 术语</a></li>
-<li class="chapter" data-level="24.2" data-path="section-24.html"><a href="section-24.html#section-24.2"><i class="fa fa-check"></i><b>24.2</b> 支配策略</a></li>
-<li class="chapter" data-level="24.3" data-path="section-24.html"><a href="section-24.html#section-24.3"><i class="fa fa-check"></i><b>24.3</b> 最佳回应</a></li>
-<li class="chapter" data-level="24.4" data-path="section-24.html"><a href="section-24.html#section-24.4"><i class="fa fa-check"></i><b>24.4</b> 纳什均衡</a></li>
-<li class="chapter" data-level="24.5" data-path="section-24.html"><a href="section-24.html#section-24.5"><i class="fa fa-check"></i><b>24.5</b> 帕累托最优</a></li>
+<li class="chapter" data-level="24.2" data-path="section-24.html"><a href="section-24.html#dominate-strategy"><i class="fa fa-check"></i><b>24.2</b> 支配策略（dominate strategy）</a></li>
+<li class="chapter" data-level="24.3" data-path="section-24.html"><a href="section-24.html#best-respinse"><i class="fa fa-check"></i><b>24.3</b> 最佳回应（Best respinse）</a></li>
+<li class="chapter" data-level="24.4" data-path="section-24.html"><a href="section-24.html#nash-equilibrium"><i class="fa fa-check"></i><b>24.4</b> 纳什均衡（Nash Equilibrium）</a></li>
+<li class="chapter" data-level="24.5" data-path="section-24.html"><a href="section-24.html#pareto-optimality"><i class="fa fa-check"></i><b>24.5</b> 帕累托最优（Pareto Optimality）</a></li>
+<li class="chapter" data-level="24.6" data-path="section-24.html"><a href="section-24.html#mixed-stratergies"><i class="fa fa-check"></i><b>24.6</b> 混合策略（Mixed stratergies）</a></li>
+<li class="chapter" data-level="24.7" data-path="section-24.html"><a href="section-24.html#section-24.7"><i class="fa fa-check"></i><b>24.7</b> 寻找纳什均衡</a></li>
+<li class="chapter" data-level="24.8" data-path="section-24.html"><a href="section-24.html#dominated-strategy"><i class="fa fa-check"></i><b>24.8</b> 被支配策略（dominated strategy）</a></li>
+<li class="chapter" data-level="24.9" data-path="section-24.html"><a href="section-24.html#maxmin-strategies"><i class="fa fa-check"></i><b>24.9</b> 最大最小策略（Maxmin strategies）</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="section-25.html"><a href="section-25.html"><i class="fa fa-check"></i><b>25</b> 复杂系统</a><ul>
+<li class="chapter" data-level="25.1" data-path="section-25.html"><a href="section-25.html#section-25.1"><i class="fa fa-check"></i><b>25.1</b> 复杂系统的特征</a></li>
+<li class="chapter" data-level="25.2" data-path="section-25.html"><a href="section-25.html#section-25.2"><i class="fa fa-check"></i><b>25.2</b> 动力学</a></li>
+<li class="chapter" data-level="25.3" data-path="section-25.html"><a href="section-25.html#section-25.3"><i class="fa fa-check"></i><b>25.3</b> 分形</a></li>
+<li class="chapter" data-level="25.4" data-path="section-25.html"><a href="section-25.html#section-25.4"><i class="fa fa-check"></i><b>25.4</b> 信息论</a></li>
+<li class="chapter" data-level="25.5" data-path="-1.html"><a href="-1.html#-1"><i class="fa fa-check"></i><b>25.5</b> 进化</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/yufree/notes" target="blank">Published with bookdown</a></li>
@@ -671,42 +682,83 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="-1" class="section level2">
 <h2><span class="header-section-number">24.1</span> 术语</h2>
 <ul>
-<li>参与者 <span class="math inline">\(N= {1,...,n}\)</span></li>
-<li>参与者 <span class="math inline">\(i\)</span> 有一组行为 <span class="math inline">\(a_i\)</span> 称为纯策略（pure strategies）</li>
-<li>策略的集合 <span class="math inline">\(a=(a_1,...,a_n)\)</span></li>
-<li>参与者 <span class="math inline">\(i\)</span> 的每个行为的收益都可以用 <span class="math inline">\(u_i:A \rightarrow \Re\)</span> 这个函数表示 <span class="math inline">\(u_i(a)\)</span> 表示某个行为产生的收益</li>
+<li>参与者（players） <span class="math inline">\(N= {1,...,n}\)</span></li>
+<li>参与者 <span class="math inline">\(i\)</span> 有一组行动（Actions），行动的集合 <span class="math inline">\(a=(a_1,...,a_n) \in A=A_1 \times A_2 \times ... \times A_n\)</span></li>
+<li>参与者 <span class="math inline">\(i\)</span> 的每个行为的收益（Payoffs）都可以用 <span class="math inline">\(u_i:A \rightarrow \Re\)</span> 这个函数表示 <span class="math inline">\(u_i(a)\)</span> 表示某个行为产生的收益，<span class="math inline">\(u = (u_i,...,u_n)\)</span>是效用函数的集合</li>
+<li>n个参与者的标准博弈（normal form） <span class="math inline">\(\langle N,A,u \rangle\)</span></li>
+<li>两人博弈可以用矩阵（matrix）来描述，行代表选手1，列代表选手2，行对应选手1的行动 <span class="math inline">\(a_1 \in A_1\)</span>，列对应选手2的行动 <span class="math inline">\(a_2 \in A_2\)</span>，每个单元列出每个参与者的收益，先行选手，后列选手</li>
+<li>纯竞争博弈（Games of Pure competition）：两个参与者收益对立且对于所有行动集合 <span class="math inline">\(a \in A, u_1(a)+u_2(a) = c\)</span>，<span class="math inline">\(c\)</span>是常数，零和博弈是一个常数为0的纯竞争博弈，此时我们只用考虑一个参与者的收益函数就可以了</li>
 </ul>
 </div>
-<div id="section-24.2" class="section level2">
-<h2><span class="header-section-number">24.2</span> 支配策略</h2>
+<div id="dominate-strategy" class="section level2">
+<h2><span class="header-section-number">24.2</span> 支配策略（dominate strategy）</h2>
 <ul>
-<li><p>对于一个参与者，不论其它参与者采取任何策略，某策略都会得到最大的收益</p></li>
-<li><p><span class="math inline">\(a_i \in a_i\)</span> 为强支配策略当且仅当参与者<span class="math inline">\(i\)</span> 的收益 <span class="math inline">\(u_i(a_i,a_{-i}) &gt; u_i(a&#39;_i,a_{-i})\)</span>，如果 <span class="math inline">\(a&#39;_i = a_i\)</span>，那么为弱支配策略</p></li>
+<li>行动单一称为纯策略（pure strategies）有一定概率分布的行动策略称为混合策略（mixed strategies）</li>
+<li>对于一个参与者，不论其它参与者采取任何策略，某策略都会得到最大的收益</li>
+<li><span class="math inline">\(a_i \in a_i\)</span> 为强支配策略当且仅当参与者<span class="math inline">\(i\)</span> 的收益 <span class="math inline">\(u_i(a_i,a_{-i}) &gt; u_i(a&#39;_i,a_{-i})\)</span>，如果 <span class="math inline">\(a&#39;_i = a_i\)</span>，那么为弱支配策略</li>
 </ul>
 </div>
-<div id="section-24.3" class="section level2">
-<h2><span class="header-section-number">24.3</span> 最佳回应</h2>
+<div id="best-respinse" class="section level2">
+<h2><span class="header-section-number">24.3</span> 最佳回应（Best respinse）</h2>
 <ul>
-<li><p>对于一个参与者，当已知其他参与者的行为后，收益最大的策略</p></li>
-<li><p>参与者<span class="math inline">\(i\)</span>，对于其它参与者的策略<span class="math inline">\(a_{-i} \in a_{-i}\)</span> 的策略如果<span class="math inline">\(u_i(a_i,a_{-i}) \geqslant u_i(a&#39;_i,a_{-i})\)</span></p></li>
+<li>对于一个参与者，当已知其他参与者的行为后，收益最大的策略</li>
+<li>参与者<span class="math inline">\(i\)</span>，对于其它参与者的策略<span class="math inline">\(a_{-i} \in a_{-i}\)</span> 的策略如果<span class="math inline">\(u_i(a_i,a_{-i}) \geqslant u_i(a&#39;_i,a_{-i})\)</span></li>
 </ul>
 </div>
-<div id="section-24.4" class="section level2">
-<h2><span class="header-section-number">24.4</span> 纳什均衡</h2>
+<div id="nash-equilibrium" class="section level2">
+<h2><span class="header-section-number">24.4</span> 纳什均衡（Nash Equilibrium）</h2>
 <ul>
-<li><p>如果任何参与者改变行为的收益都不会增加，那么此时进入纳什均衡</p></li>
-<li><p>支配策略是纳什均衡但反过来不一定对</p></li>
+<li><span class="math inline">\(a = \langle a_1,...,a_n\rangle\)</span> 是一个纯策略纳什均衡当且仅当对于任何一个行为i，有<span class="math inline">\(a_i \in BR(a_{-i})\)</span></li>
+<li>如果任何参与者改变行为的收益都不会增加，那么此时进入纳什均衡</li>
+<li>纳什均衡是一系列行为的列表，这些行为都是稳定的</li>
+<li>支配策略是纳什均衡但反过来不一定对</li>
+<li>任何有限博弈都存在一个纳什均衡（纳什1950年提出）</li>
 </ul>
 </div>
-<div id="section-24.5" class="section level2">
-<h2><span class="header-section-number">24.5</span> 帕累托最优</h2>
+<div id="pareto-optimality" class="section level2">
+<h2><span class="header-section-number">24.5</span> 帕累托最优（Pareto Optimality）</h2>
 <ul>
-<li>某个结果是帕累托最优当且仅当没有其他结果可以帕累托支配这个结果</li>
+<li>某个结果是帕累托最优当且仅当没有其他结果可以全局帕累托支配这个结果</li>
+<li>帕累托最优表示某个博弈结果不差于其他博弈结果</li>
+<li>纳什均衡不一定是帕累托最优（囚徒困境）</li>
+</ul>
+</div>
+<div id="mixed-stratergies" class="section level2">
+<h2><span class="header-section-number">24.6</span> 混合策略（Mixed stratergies）</h2>
+<ul>
+<li>策略<span class="math inline">\(S_i\)</span>指对于每个参与者行动的概率分布集合</li>
+<li>概率 <span class="math inline">\(Pr(a|s) = \prod_{j \in N}s_j(a_j)\)</span></li>
+<li>期望收益函数 <span class="math inline">\(u_i(s) = \sum_{a \in A} u_i(a)Pr(a|s)\)</span></li>
+<li>随机策略会使对手混乱进入动态，很多博弈只存在混合策略纳什均衡而没有纯策略纳什均衡（石头剪子布）</li>
+</ul>
+</div>
+<div id="section-24.7" class="section level2">
+<h2><span class="header-section-number">24.7</span> 寻找纳什均衡</h2>
+<ul>
+<li>两人博弈可以用线性互补算法（Linear Complementarity）求解</li>
+<li>严格说因为一定存在纳什均衡，寻找它不是NPC问题，但是是PPAD问题，后来人证明纳什均衡是PPAD问题</li>
+<li>PPAD问题包括P问题的同时属于NP问题，指存在多项式的解，但不好找</li>
+<li>P问题指多项式时间可解决的问题</li>
+<li>NP问题指多项式时间可验证一个解的问题</li>
+<li>NPC问题指NP问题的归约问题，同时也是NP问题，复杂度不断提高，NPC问题的存在让<span class="math inline">\(P = NP\)</span> 问题很难有答案</li>
+<li>NP-hard问题指NP问题的归约问题，但不一定是NP问题</li>
+</ul>
+</div>
+<div id="dominated-strategy" class="section level2">
+<h2><span class="header-section-number">24.8</span> 被支配策略（dominated strategy）</h2>
+<ul>
+<li>指不论其他参与者采取任何策略，该策略劣于其他策略</li>
+<li>被支配策略永远不会是最佳回应</li>
+<li>可以交互地去除掉每个选手的被支配策略</li>
+</ul>
+</div>
+<div id="maxmin-strategies" class="section level2">
+<h2><span class="header-section-number">24.9</span> 最大最小策略（Maxmin strategies）</h2>
+<ul>
+<li>指其他参与者对某参与者最小收益策略下的最大收益策略<span class="math inline">\(arg max_{s_i}min_{s_{-i}}u_i(s_1,s_2)\)</span></li>
+<li>最小最大策略指让对方收益最大而自己收益最小的策略<span class="math inline">\(arg min_{s_i}max_{s_{-i}}u_{-i}i(s_1,s_2)\)</span></li>
 </ul>
 
-<div id="refs" class="references">
-
-</div>
 </div>
 </div>
             </section>
@@ -714,8 +766,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="section-23.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="section-23.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="section-25.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
