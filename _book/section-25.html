@@ -25,15 +25,20 @@
 
 <meta name="author" content="Miao YU">
 
-<meta name="date" content="2016-10-03">
+<meta name="date" content="2016-10-31">
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="xcms.html">
+<link rel="prev" href="section-24.html">
 
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -89,13 +94,14 @@
 <li class="chapter" data-level="20" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>20</b> 数据科学与python简介</a></li>
 <li class="chapter" data-level="21" data-path="section-21.html"><a href="section-21.html"><i class="fa fa-check"></i><b>21</b> 生存分析</a></li>
 <li class="chapter" data-level="22" data-path="section-22.html"><a href="section-22.html"><i class="fa fa-check"></i><b>22</b> 因果分析</a></li>
-<li class="chapter" data-level="23" data-path="rnetlogo-.html"><a href="rnetlogo-.html"><i class="fa fa-check"></i><b>23</b> RNetLogo 试用</a></li>
-<li class="chapter" data-level="24" data-path="xcms.html"><a href="xcms.html"><i class="fa fa-check"></i><b>24</b> XCMS</a></li>
-<li class="chapter" data-level="25" data-path="section-25.html"><a href="section-25.html"><i class="fa fa-check"></i><b>25</b> 系统思维与公共健康</a><ul>
-<li class="chapter" data-level="25.1" data-path="section-25.html"><a href="section-25.html#section-25.1"><i class="fa fa-check"></i><b>25.1</b> 导论</a></li>
-<li class="chapter" data-level="25.2" data-path="section-25.html"><a href="section-25.html#section-25.2"><i class="fa fa-check"></i><b>25.2</b> 系统抽象与映射－因果环路图</a></li>
-<li class="chapter" data-level="25.3" data-path="section-25.html"><a href="section-25.html#section-25.3"><i class="fa fa-check"></i><b>25.3</b> 系统抽象与映射－汇流图</a></li>
-<li class="chapter" data-level="25.4" data-path="section-25.html"><a href="section-25.html#section-25.4"><i class="fa fa-check"></i><b>25.4</b> 系统思维与决策</a></li>
+<li class="chapter" data-level="23" data-path="section-23.html"><a href="section-23.html"><i class="fa fa-check"></i><b>23</b> 系统思维与公共健康</a></li>
+<li class="chapter" data-level="24" data-path="section-24.html"><a href="section-24.html"><i class="fa fa-check"></i><b>24</b> 博弈论</a></li>
+<li class="chapter" data-level="25" data-path="section-25.html"><a href="section-25.html"><i class="fa fa-check"></i><b>25</b> 复杂系统</a><ul>
+<li class="chapter" data-level="25.1" data-path="section-25.html"><a href="section-25.html#section-25.1"><i class="fa fa-check"></i><b>25.1</b> 复杂系统的特征</a></li>
+<li class="chapter" data-level="25.2" data-path="section-25.html"><a href="section-25.html#section-25.2"><i class="fa fa-check"></i><b>25.2</b> 动力学</a></li>
+<li class="chapter" data-level="25.3" data-path="section-25.html"><a href="section-25.html#section-25.3"><i class="fa fa-check"></i><b>25.3</b> 分形</a></li>
+<li class="chapter" data-level="25.4" data-path="section-25.html"><a href="section-25.html#section-25.4"><i class="fa fa-check"></i><b>25.4</b> 信息论</a></li>
+<li class="chapter" data-level="25.5" data-path="section-25.html"><a href="section-25.html#section-25.5"><i class="fa fa-check"></i><b>25.5</b> 进化</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/yufree/notes" target="blank">Published with bookdown</a></li>
@@ -118,113 +124,51 @@
 
             <section class="normal" id="section-">
 <div id="section-25" class="section level1">
-<h1><span class="header-section-number">笔记 25</span> 系统思维与公共健康</h1>
+<h1><span class="header-section-number">笔记 25</span> 复杂系统</h1>
 <div id="section-25.1" class="section level2">
-<h2><span class="header-section-number">25.1</span> 导论</h2>
-<p>系统思考来源广泛，并非单一理论而是复合理论，是关注自调控与涌现的跨学科方法。</p>
-<p>系统是有单一目的相互作用的各部分与之间联系的总和。</p>
-<p>健康系统是目的为健康的系统。</p>
-<p>简单系统元素少，关系明确，有理论机制或精细的统计模式</p>
-<p>复杂系统元素多，关系不明或不稳，不能适应，无法统计预测</p>
-<p>混沌系统元素多，存在动态关系，对初始值敏感，不能适应，表面无序，可用数学函数预测</p>
-<p>复杂适应性系统（CAS）元素多，复合关系，可预测不可描述，存在涌现（例如适应、学习、自组织），非线性，多样性（同一输入多个输出），收敛（多个途径出现一个结果）</p>
-<p>传统公共健康改善方法：</p>
+<h2><span class="header-section-number">25.1</span> 复杂系统的特征</h2>
 <ul>
-<li>选择健康干预方法</li>
-<li>设定目标</li>
-<li>资助</li>
-<li>实施设计好的干预方法</li>
-</ul>
-<p>问题：</p>
-<ul>
-<li>干预不符合实情</li>
-<li>很多策略无法重复</li>
-<li>策略影响有限</li>
-<li>策略结果不可预期</li>
-<li>结果不好评价改善</li>
-</ul>
-<p>CAS路径</p>
-<ul>
-<li>反馈，可能是加强，可能是制衡</li>
-<li>路径依赖，方向单一，不会盘根错节</li>
-<li>无量纲网络，非线性，临界点</li>
-<li>涌现</li>
-<li>相变</li>
-</ul>
-<p>利益相关者（stakeholder）</p>
-<ul>
-<li>利益相关者分析：按照兴趣与能力还有同意度等几个维度分析参与者，对不同参与者使用不同策略</li>
-</ul>
-<p><img src="http://yufree.cn/blogcn/figure/sh.png" /><!-- --></p>
-<ul>
-<li><p>网络分析：包括节点、边、属性及方向，探索节点人物、网络密度、分离程度、相似性及交互性</p></li>
-<li><p>参与影响通路分析：项目设计管理评价方法，找到关键利益相关者，展示，找出属性关系并给出现在与未来的映射，找出阻断通路的地方</p></li>
+<li>组成部分或个体相对简单</li>
+<li>各部分非线性相互作用</li>
+<li>没有中心控制</li>
+<li>涌现行为，例如层级结构、信息处理、动态、进化学习</li>
 </ul>
 </div>
 <div id="section-25.2" class="section level2">
-<h2><span class="header-section-number">25.2</span> 系统抽象与映射－因果环路图</h2>
-<p>系统动态方法用来开发定性的系统描述</p>
-<p>因果环路图：</p>
+<h2><span class="header-section-number">25.2</span> 动力学</h2>
 <ul>
-<li>因果关系 A -&gt; B A导致了B</li>
-<li>极性 ＋／－ 两者变化方向一致为正，反之为负</li>
-<li>反馈环路 A 变化引起其它变化，最终又形成对A的增强或制衡</li>
-<li>延迟 A对B的影响有延迟|| 制衡状态通常有延迟</li>
-<li>环形符号 R表示增强 B表示制衡</li>
-</ul>
-<p><img src="http://yufree.cn/blogcn/figure/cld.png" /><!-- --></p>
-<p>group-based causal mapping workshop</p>
-<ul>
-<li>Elicit variables for a causal map from stakeholders</li>
-<li>Use these variables to build a causal map with stakeholders</li>
-</ul>
-<p>Size of stakeholder group: - At least 3–5 people - A group size of 5–12 is ideal - Any group bigger than 20 people is best split up into separate workshops</p>
-<p>The session is planned by the core modeling team that is made up of 3–5 staff members and stakeholders</p>
-<p>The facilitator team may overlap with your core modeling team—for the causal mapping session we will need: - Head facilitator - Wall builder - Recorder</p>
-<p>Steps:</p>
-<p>Problem scoping - Identify problem and assess if problem is suitable for causal mapping - Develop one-pager that describes project, purpose, audience, and resources needed - Time necessary for this stage ranges from 1–3 hours to several meetings</p>
-<p>Core modeling team planning and capacity building</p>
-<ul>
-<li>Design group model building workshop including the process and agenda</li>
-<li>Prepare recruitment and training of additional facilitation team members if needed</li>
-<li>Time necessary for this stage several 1- to 2-hour meetings</li>
-</ul>
-<p>Actual group modeling workshop</p>
-<ul>
-<li>Session length varies from one or two 90 minute sessions to five-day workshops</li>
-</ul>
-<p>Evaluation and reporting</p>
-<p>Scripts: “playbooks” that outline the process of a particular group modeling activity step-by-step</p>
-<ul>
-<li><a href="https://en.wikibooks.org/wiki/Scriptapedia/Creating_a_Shared_Vision_of_Modeling_Project">Peter Hovmand’s “Scriptapedia”</a></li>
+<li>系统随时间的变化</li>
+<li>混沌系统，初始条件与运行规则已知，长期预测不可知，对初始值敏感但存在可预测的全局特性</li>
+<li>Logistic Map</li>
 </ul>
 </div>
 <div id="section-25.3" class="section level2">
-<h2><span class="header-section-number">25.3</span> 系统抽象与映射－汇流图</h2>
-<p>展示变化的累计状态，所有动态过程都源于累积，状态都有记忆，可以中断过程，可以产生延迟</p>
-<p><img src="http://yufree.cn/blogcn/figure/sf.png" /><!-- --></p>
-<p>因果环路图表明事物是联系的，汇流图说明如何联系</p>
-<p><img src="http://yufree.cn/blogcn/figure/cldsf.png" /><!-- --></p>
+<h2><span class="header-section-number">25.3</span> 分形</h2>
+<ul>
+<li>自我相似性，整体与局部相似</li>
+<li>分形的维度，D维对象的边被反复切割为M个部分，每一切割水平有<span class="math inline">\(M^D\)</span>个副本，假如副本个数为N，也就是说<span class="math inline">\(N=M^D\)</span>，其维度<span class="math inline">\(D = logN/logM\)</span></li>
+<li>数盒子测维度，计算有多少盒子与盒子的边长，改变盒子的边长，计算盒子的个数 <span class="math inline">\(log[NumberOfBoxes] = D log[1/BoxSize]\)</span></li>
+</ul>
 </div>
 <div id="section-25.4" class="section level2">
-<h2><span class="header-section-number">25.4</span> 系统思维与决策</h2>
-<p>Ecostructure 包括所有利益相关者</p>
-<p>找到关键的人，政策有利益得失，让大赢家赢得比大输家多</p>
-<p>解释的时候用他们的话，让他们自己得到结论</p>
-<p>从上到下的决策</p>
+<h2><span class="header-section-number">25.4</span> 信息论</h2>
 <ul>
-<li>明智的决策者拯救世界</li>
-<li>解决大问题</li>
-<li>用复杂科学解释决策</li>
+<li>麦克斯韦妖</li>
+<li>热动力学的墒测量做功时的热损失，热损失就是无序；统计学的墒测量能出现宏观状态的微观状态的数量，微观状态越少墒越低，越混合越无序。统计意义上热力学第二定律本质是宏观状态下微观状态数目趋向于最大</li>
+<li>玻尔兹曼认为宏观状态的墒S是微观状态数W的自然对数的k倍，k是玻尔兹曼常数。更多的微观状态会提高宏观状态出现的可能，墒提高。</li>
+<li>香农认为信息含量表示让人吃惊的程度</li>
+<li>信息量<span class="math inline">\(H = log_2 M\)</span> M 表示以字节传递信息的可能性</li>
+<li>信息整体<span class="math inline">\(H = - \sum_{i=1}^{M}p_ilog_{2}p_i\)</span> p 表示出现的概率</li>
+<li>Hffman编码可节省信息传递字节，进行压缩</li>
 </ul>
-<p>公共健康铁三角：技术专家 政治家 公民权利领导者</p>
-<p>技术专家的角色类似权威的父母：我喜欢你，让我们阐释问题</p>
-<p>从下到上的决策</p>
+</div>
+<div id="section-25.5" class="section level2">
+<h2><span class="header-section-number">25.5</span> 进化</h2>
 <ul>
-<li>设立规范自动转换的系统</li>
-<li>使用agent-based models</li>
+<li>遗传算法，首先生成随机策略，对于随机策略计算适应性，然后对策略进行杂交与突变，重复这个过程直到足够好的策略产生</li>
+<li>难预测，会产生过度适应，但会有新东西产生</li>
+<li>编程上用if-else生成的树来进行突变</li>
 </ul>
-<p>根据规模，规模越大，越需要自上而下的系统设计</p>
 
 </div>
 </div>
@@ -233,7 +177,7 @@
           </div>
         </div>
       </div>
-<a href="xcms.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="section-24.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -261,7 +205,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/yufree/notes/edit/master/25-systemthinking.Rmd",
+"link": "https://github.com/yufree/notes/edit/master/25-complextheroy.Rmd",
 "text": null
 },
 "download": null,
@@ -272,6 +216,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

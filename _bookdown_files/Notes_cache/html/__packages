@@ -1,0 +1,12 @@
+base
+knitr
+ggplot2
+dplyr
+tidyr
+Lahman
+broom
+gamlss.data
+MASS
+gamlss.dist
+nlme
+gamlss
