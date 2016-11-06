@@ -26,13 +26,7 @@
 <meta name="author" content="Miao YU">
 
 
-<meta name="date" content="2016-10-31">
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
+<meta name="date" content="2016-11-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -649,6 +643,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="24.7" data-path="section-24.html"><a href="section-24.html#section-24.7"><i class="fa fa-check"></i><b>24.7</b> 寻找纳什均衡</a></li>
 <li class="chapter" data-level="24.8" data-path="section-24.html"><a href="section-24.html#dominated-strategy"><i class="fa fa-check"></i><b>24.8</b> 被支配策略（dominated strategy）</a></li>
 <li class="chapter" data-level="24.9" data-path="section-24.html"><a href="section-24.html#maxmin-strategies"><i class="fa fa-check"></i><b>24.9</b> 最大最小策略（Maxmin strategies）</a></li>
+<li class="chapter" data-level="24.10" data-path="section-24.html"><a href="section-24.html#section-24.10"><i class="fa fa-check"></i><b>24.10</b> 扩展形式博弈</a></li>
+<li class="chapter" data-level="24.11" data-path="section-24.html"><a href="section-24.html#section-24.11"><i class="fa fa-check"></i><b>24.11</b> 完美子博弈</a></li>
+<li class="chapter" data-level="24.12" data-path="section-24.html"><a href="section-24.html#section-24.12"><i class="fa fa-check"></i><b>24.12</b> 信息不对称扩展形式博弈</a></li>
+<li class="chapter" data-level="24.13" data-path="section-24.html"><a href="section-24.html#section-24.13"><i class="fa fa-check"></i><b>24.13</b> 混合与行为策略</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="section-25.html"><a href="section-25.html"><i class="fa fa-check"></i><b>25</b> 复杂系统</a><ul>
 <li class="chapter" data-level="25.1" data-path="section-25.html"><a href="section-25.html#section-25.1"><i class="fa fa-check"></i><b>25.1</b> 复杂系统的特征</a></li>
@@ -656,6 +654,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="25.3" data-path="section-25.html"><a href="section-25.html#section-25.3"><i class="fa fa-check"></i><b>25.3</b> 分形</a></li>
 <li class="chapter" data-level="25.4" data-path="section-25.html"><a href="section-25.html#section-25.4"><i class="fa fa-check"></i><b>25.4</b> 信息论</a></li>
 <li class="chapter" data-level="25.5" data-path="-1.html"><a href="-1.html#-1"><i class="fa fa-check"></i><b>25.5</b> 进化</a></li>
+<li class="chapter" data-level="25.6" data-path="section-25.html"><a href="section-25.html#section-25.6"><i class="fa fa-check"></i><b>25.6</b> 细胞自动机</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/yufree/notes" target="blank">Published with bookdown</a></li>
@@ -960,20 +959,20 @@ while(count &lt;<span class="st"> </span><span class="dv">10</span>) {
 ## [1] 3
 ## 
 ## $b
-## [1] -0.02567762</code></pre>
+## [1] 0.06194773</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">4</span>
 <span class="kw">lapply</span>(x, runif, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>## [[1]]
-## [1] 8.621792
+## [1] 2.920496
 ## 
 ## [[2]]
-## [1] 1.971011 9.865124
+## [1] 3.975285 1.693994
 ## 
 ## [[3]]
-## [1] 4.594224 4.495432 3.568285
+## [1] 6.0063808 0.8847367 3.5350798
 ## 
 ## [[4]]
-## [1] 9.650897 7.357449 8.794043 3.768558</code></pre>
+## [1] 8.4660748 4.0200995 3.6217111 0.5846643</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">b =</span> <span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">2</span>))
 <span class="kw">lapply</span>(x, function(elt) elt[,<span class="dv">1</span>])</code></pre></div>
 <pre><code>## $a
@@ -992,8 +991,8 @@ while(count &lt;<span class="st"> </span><span class="dv">10</span>) {
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span>:<span class="dv">4</span>, <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">20</span>, <span class="dv">1</span>), <span class="dt">d =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">5</span>))
 <span class="kw">sapply</span>(x, mean)</code></pre></div>
-<pre><code>##         a         b         c         d 
-## 2.5000000 0.3600341 0.9417290 5.0545552</code></pre>
+<pre><code>##          a          b          c          d 
+##  2.5000000 -0.2035756  1.0362534  5.0089183</code></pre>
 </div>
 <div id="vapply" class="section level3">
 <h3><span class="header-section-number">3.13.3</span> <code>vapply</code></h3>
@@ -1022,17 +1021,17 @@ while(count &lt;<span class="st"> </span><span class="dv">10</span>) {
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">50</span>), <span class="dv">10</span>, <span class="dv">5</span>)
 <span class="kw">apply</span>(x, <span class="dv">1</span>, quantile, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))</code></pre></div>
-<pre><code>##           [,1]       [,2]       [,3]      [,4]       [,5]      [,6]
-## 25% -0.7443501 -0.9790964 -1.2278637 0.3743126 -0.1316212 0.6895388
-## 75%  0.1997884  0.4220296  0.4553929 0.5246502  1.0028623 1.1681885
+<pre><code>##          [,1]      [,2]        [,3]       [,4]        [,5]       [,6]
+## 25% -1.010457 0.0366605 -0.47043197 -0.2937195 -0.66178477 -0.6596748
+## 75%  1.044180 0.6276970  0.02978444  0.7025251  0.07599273  0.1721122
 ##           [,7]       [,8]       [,9]      [,10]
-## 25% -0.1997078 -0.5883718 -0.2584052 -0.4575411
-## 75%  1.3273729  0.9030888  0.1496655  0.9862513</code></pre>
+## 25% -1.2381901 -0.4969314 0.08993487 -0.4279627
+## 75% -0.3148219  0.8712061 1.61961195  0.6882186</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">rnorm</span>(<span class="dv">2</span> *<span class="st"> </span><span class="dv">2</span> *<span class="st"> </span><span class="dv">10</span>), <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">10</span>))
 <span class="kw">apply</span>(a, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), mean)</code></pre></div>
-<pre><code>##            [,1]        [,2]
-## [1,] -0.1164304 -0.07164853
-## [2,] -0.1625730 -0.27679235</code></pre>
+<pre><code>##             [,1]       [,2]
+## [1,] 0.006249604 -0.1862540
+## [2,] 0.205687847  0.4388543</code></pre>
 </div>
 <div id="tapply" class="section level3">
 <h3><span class="header-section-number">3.13.7</span> <code>tapply</code></h3>
@@ -1042,8 +1041,8 @@ while(count &lt;<span class="st"> </span><span class="dv">10</span>) {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="kw">runif</span>(<span class="dv">10</span>), <span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">1</span>))
 f &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dv">3</span>, <span class="dv">10</span>)
 <span class="kw">tapply</span>(x, f, mean)</code></pre></div>
-<pre><code>##          1          2          3 
-## -0.1367253  0.4967635  0.6833616</code></pre>
+<pre><code>##         1         2         3 
+## 0.1671531 0.5143820 0.9323768</code></pre>
 </div>
 <div id="by" class="section level3">
 <h3><span class="header-section-number">3.13.8</span> <code>by</code></h3>
@@ -1063,24 +1062,24 @@ f &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dv">3</s
 f &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dv">3</span>, <span class="dv">10</span>)
 <span class="kw">lapply</span>(<span class="kw">split</span>(x, f), mean)</code></pre></div>
 <pre><code>## $`1`
-## [1] -0.34084
+## [1] -0.03484329
 ## 
 ## $`2`
-## [1] 0.5703063
+## [1] 0.5462775
 ## 
 ## $`3`
-## [1] 1.105975</code></pre>
+## [1] 1.285847</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>)
 f1 &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dv">2</span>, <span class="dv">5</span>)
 f2 &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dv">5</span>, <span class="dv">2</span>)
 <span class="kw">str</span>(<span class="kw">split</span>(x, <span class="kw">list</span>(f1, f2), <span class="dt">drop =</span> <span class="ot">TRUE</span>))</code></pre></div>
 <pre><code>## List of 6
-##  $ 1.1: num [1:2] 0.321 -1.891
-##  $ 1.2: num [1:2] 0.118 -0.389
-##  $ 1.3: num -2.15
-##  $ 2.3: num 1.65
-##  $ 2.4: num [1:2] -1.96 2.15
-##  $ 2.5: num [1:2] 0.56 1.45</code></pre>
+##  $ 1.1: num [1:2] -1.13 -1.62
+##  $ 1.2: num [1:2] -0.558 0.304
+##  $ 1.3: num 1.79
+##  $ 2.3: num 1.6
+##  $ 2.4: num [1:2] 0.38 -2.23
+##  $ 2.5: num [1:2] 0.062 -1.224</code></pre>
 </div>
 <div id="mapply" class="section level3">
 <h3><span class="header-section-number">3.13.10</span> <code>mapply</code></h3>
@@ -1092,19 +1091,19 @@ f2 &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dv">5</
 }
 <span class="kw">mapply</span>(noise, <span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">2</span>)</code></pre></div>
 <pre><code>## [[1]]
-## [1] 1.26914
+## [1] 0.1624047
 ## 
 ## [[2]]
-## [1] 2.791659 1.980066
+## [1] 2.926102 3.819220
 ## 
 ## [[3]]
-## [1] 3.0139451 3.6324779 0.3033223
+## [1] 0.4882898 6.9192720 5.2397637
 ## 
 ## [[4]]
-## [1] 5.256648 5.366346 5.423715 3.289810
+## [1] 2.689811 6.029714 3.414979 5.614211
 ## 
 ## [[5]]
-## [1] 5.638195 5.770881 2.104669 2.531593 6.210630</code></pre>
+## [1] 3.3175016 4.7444813 0.8052676 0.8362144 4.6180369</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#等同于如下循环</span>
 
 <span class="co">#list(noise(1, 1, 2), noise(2, 2, 2),</span>

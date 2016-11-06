@@ -26,13 +26,7 @@
 <meta name="author" content="Miao YU">
 
 
-<meta name="date" content="2016-10-31">
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
+<meta name="date" content="2016-11-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -649,6 +643,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="24.7" data-path="section-24.html"><a href="section-24.html#section-24.7"><i class="fa fa-check"></i><b>24.7</b> 寻找纳什均衡</a></li>
 <li class="chapter" data-level="24.8" data-path="section-24.html"><a href="section-24.html#dominated-strategy"><i class="fa fa-check"></i><b>24.8</b> 被支配策略（dominated strategy）</a></li>
 <li class="chapter" data-level="24.9" data-path="section-24.html"><a href="section-24.html#maxmin-strategies"><i class="fa fa-check"></i><b>24.9</b> 最大最小策略（Maxmin strategies）</a></li>
+<li class="chapter" data-level="24.10" data-path="section-24.html"><a href="section-24.html#section-24.10"><i class="fa fa-check"></i><b>24.10</b> 扩展形式博弈</a></li>
+<li class="chapter" data-level="24.11" data-path="section-24.html"><a href="section-24.html#section-24.11"><i class="fa fa-check"></i><b>24.11</b> 完美子博弈</a></li>
+<li class="chapter" data-level="24.12" data-path="section-24.html"><a href="section-24.html#section-24.12"><i class="fa fa-check"></i><b>24.12</b> 信息不对称扩展形式博弈</a></li>
+<li class="chapter" data-level="24.13" data-path="section-24.html"><a href="section-24.html#section-24.13"><i class="fa fa-check"></i><b>24.13</b> 混合与行为策略</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="section-25.html"><a href="section-25.html"><i class="fa fa-check"></i><b>25</b> 复杂系统</a><ul>
 <li class="chapter" data-level="25.1" data-path="section-25.html"><a href="section-25.html#section-25.1"><i class="fa fa-check"></i><b>25.1</b> 复杂系统的特征</a></li>
@@ -656,6 +654,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="25.3" data-path="section-25.html"><a href="section-25.html#section-25.3"><i class="fa fa-check"></i><b>25.3</b> 分形</a></li>
 <li class="chapter" data-level="25.4" data-path="section-25.html"><a href="section-25.html#section-25.4"><i class="fa fa-check"></i><b>25.4</b> 信息论</a></li>
 <li class="chapter" data-level="25.5" data-path="-1.html"><a href="-1.html#-1"><i class="fa fa-check"></i><b>25.5</b> 进化</a></li>
+<li class="chapter" data-level="25.6" data-path="section-25.html"><a href="section-25.html#section-25.6"><i class="fa fa-check"></i><b>25.6</b> 细胞自动机</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/yufree/notes" target="blank">Published with bookdown</a></li>
@@ -757,6 +756,49 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>指其他参与者对某参与者最小收益策略下的最大收益策略<span class="math inline">\(arg max_{s_i}min_{s_{-i}}u_i(s_1,s_2)\)</span></li>
 <li>最小最大策略指让对方收益最大而自己收益最小的策略<span class="math inline">\(arg min_{s_i}max_{s_{-i}}u_{-i}i(s_1,s_2)\)</span></li>
+</ul>
+</div>
+<div id="section-24.10" class="section level2">
+<h2><span class="header-section-number">24.10</span> 扩展形式博弈</h2>
+<ul>
+<li>正常形式博弈不涉及行动顺序与时间</li>
+<li>扩展形式博弈考虑时序影响，包括信息对称与不对称两种</li>
+<li>有限信息对称博弈用（N, A, H, Z, χ, ρ, σ, u）来表示</li>
+<li>N代表n个参与者</li>
+<li>A代表一组行动</li>
+<li>H代表一组非终点的选择节点</li>
+<li>行动函数 $:H 2^A $ 表示每个选择节点的可能行动</li>
+<li>参与者函数 <span class="math inline">\(\rho:H \rightarrow N\)</span> 表示在节点h上采取行动的选手 <span class="math inline">\(i\in N\)</span></li>
+<li>Z代表终止节点</li>
+<li>后继者函数 <span class="math inline">\(\sigma:H\times A\rightarrow H \cup Z\)</span>映射一个选择节点和一个行动对于所有的节点与行动，如果后继者函数相同，那么节点与行动相同</li>
+<li>效用函数<span class="math inline">\(u=(u_1,...,u_n);u_i:Z\rightarrow R\)</span> 表示在终止节点上参与者的效用</li>
+<li>信息对称扩展形式博弈里参与者的纯策略是行动函数的乘积<span class="math inline">\(\prod_{h\in H,\rho(h)=i}\chi(h)\)</span></li>
+<li>扩展形式博弈可以转为正常形式博弈，但是有大量冗余，正常形式博弈不一定可转化为扩展形式博弈</li>
+<li>信息对称扩展形式博弈都有纯策略纳什均衡</li>
+</ul>
+</div>
+<div id="section-24.11" class="section level2">
+<h2><span class="header-section-number">24.11</span> 完美子博弈</h2>
+<ul>
+<li>在节点h的子博弈G是节点集合H对博弈G的限制</li>
+<li>完美子博弈均衡也是纳什均衡，但不考虑无信用恐吓</li>
+<li>倒推法：从最低层寻找纳什均衡，逐层反推排除掉其他选择得到策略</li>
+<li>对于零和博弈，倒推法实际就是最小最大算法</li>
+</ul>
+</div>
+<div id="section-24.12" class="section level2">
+<h2><span class="header-section-number">24.12</span> 信息不对称扩展形式博弈</h2>
+<ul>
+<li>参与者选择节点被分配到不同信息集合里，个体无法区分选择节点</li>
+<li>信息不对称博弈用（N, A, H, Z, χ, ρ, σ, u, I）来表示</li>
+<li>对于<span class="math inline">\(I = (I_1,...,I_n)\)</span>，<span class="math inline">\(I_i = (I_{i,1},...,I_{i,k_i})\)</span>是依赖于<span class="math inline">\({h\in H: \pho (h) = i}\)</span>的平衡，具有当存在j在节点<span class="math inline">\(h\in I_{i,j}\)</span>与<span class="math inline">\(h&#39;\in I_{i,j}\)</span>时，有<span class="math inline">\(\chi(h) = \chi(h&#39;)\)</span>与<span class="math inline">\(\rho(h) = \rho(h&#39;)\)</span>的属性</li>
+</ul>
+</div>
+<div id="section-24.13" class="section level2">
+<h2><span class="header-section-number">24.13</span> 混合与行为策略</h2>
+<ul>
+<li>混合策略随机化纯策略</li>
+<li>行为策略是遇到每个信息集后的抛硬币</li>
 </ul>
 
 </div>
