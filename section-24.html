@@ -8,7 +8,7 @@
   <title>Notes</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="This is notes from yufree">
-  <meta name="generator" content="bookdown 0.2 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.2.3 and GitBook 2.6.7">
 
   <meta property="og:title" content="Notes" />
   <meta property="og:type" content="book" />
@@ -26,7 +26,7 @@
 <meta name="author" content="Miao YU">
 
 
-<meta name="date" content="2016-11-15">
+<meta name="date" content="2016-11-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -652,6 +652,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="24.16" data-path="section-24.html"><a href="section-24.html#fictitious-play"><i class="fa fa-check"></i><b>24.16</b> 虚拟行动（fictitious play）</a></li>
 <li class="chapter" data-level="24.17" data-path="section-24.html"><a href="section-24.html#no-regret-learning"><i class="fa fa-check"></i><b>24.17</b> 无悔学习（No-regret learning）</a></li>
 <li class="chapter" data-level="24.18" data-path="section-24.html"><a href="section-24.html#section-24.18"><i class="fa fa-check"></i><b>24.18</b> 无限重复博弈的平衡</a></li>
+<li class="chapter" data-level="24.19" data-path="section-24.html"><a href="section-24.html#section-24.19"><i class="fa fa-check"></i><b>24.19</b> 贝叶斯博弈</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="section-25.html"><a href="section-25.html"><i class="fa fa-check"></i><b>25</b> 复杂系统</a><ul>
 <li class="chapter" data-level="25.1" data-path="section-25.html"><a href="section-25.html#section-25.1"><i class="fa fa-check"></i><b>25.1</b> 复杂系统的特征</a></li>
@@ -660,6 +661,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="25.4" data-path="section-25.html"><a href="section-25.html#section-25.4"><i class="fa fa-check"></i><b>25.4</b> 信息论</a></li>
 <li class="chapter" data-level="25.5" data-path="-1.html"><a href="-1.html#-1"><i class="fa fa-check"></i><b>25.5</b> 进化</a></li>
 <li class="chapter" data-level="25.6" data-path="section-25.html"><a href="section-25.html#section-25.6"><i class="fa fa-check"></i><b>25.6</b> 细胞自动机</a></li>
+<li class="chapter" data-level="25.7" data-path="section-25.html"><a href="section-25.html#section-25.7"><i class="fa fa-check"></i><b>25.7</b> 自组织</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/yufree/notes" target="blank">Published with bookdown</a></li>
@@ -853,6 +855,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>一个收益向量是可行的当存在非负值<span class="math inline">\(\alpha_a\)</span>对于所有i，有<span class="math inline">\(\sum_{a\in A}\alpha_au_i(a)\)</span>且<span class="math inline">\(\sum_{a\in A}\alpha_a = 1\)</span></li>
 <li>无名氏定理（folk theorem）：如果收益向量对无限博弈的纳什均衡是平均回报，那么对每个参与者都是增强的，如果可行且增强，收益向量就是有平均回报的无限纳什均衡</li>
 </ul>
+</div>
+<div id="section-24.19" class="section level2">
+<h2><span class="header-section-number">24.19</span> 贝叶斯博弈</h2>
+<ul>
+<li>贝叶斯博弈<span class="math inline">\((N,G,P,I)\)</span>里，N代表参与者集合，G代表博弈集合，P代表对某个博弈集合的先验概率，I代表G里面对每个参与者的组成部分</li>
+<li>也可以用认知类型来定义<span class="math inline">\(N,A,\Theta,p,u\)</span>，A表示行为集合，<span class="math inline">\(\Theta\)</span>表示对参与者i的类型空间，p表示没中类型的先验概率，u表示某类型某行动对参与者i的收益</li>
+<li>贝叶斯纳什均衡：最大化每个参与者每种行动类型收益的策略，可以是纯策略，也可以是混合策略</li>
+<li>三种类型：对自己对方都不知道（现存），知道自己不知道对方(过渡)，都知道（过后）</li>
+<li>过渡态期望收益：<span class="math inline">\(EU_i(s|\theta_i) = \sum_{\theta_{-i}\in\Theta_{-i}}p(\theta_{-i}|\theta_i)\sum_{a\in A}(\prod_{j\in N}s_j(a_j|\theta_j))u_i(a,\theta_i,\theta_{-i})\)</span></li>
+<li>现存期望收益：<span class="math inline">\(EU_i(s) = \sum_{\theta_i\in \Theta_i}p(\theta_i)EU_i(s|\theta_i)\)</span></li>
+<li>贝叶斯均衡混合策略<span class="math inline">\(s_i\in arg max_{s&#39;_i}EU_i(s&#39;_i,s_{-i}|\theta_i)\)</span></li>
+<li>给定一方行为，考虑先验概率另一方收益最大时的博弈平衡</li>
+</ul>
 
 </div>
 </div>
@@ -875,6 +890,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
+"github": false,
 "facebook": true,
 "twitter": true,
 "google": false,
