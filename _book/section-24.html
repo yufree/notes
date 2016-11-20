@@ -25,7 +25,7 @@
 
 <meta name="author" content="Miao YU">
 
-<meta name="date" content="2016-11-06">
+<meta name="date" content="2016-11-19">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -109,6 +109,15 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="24.11" data-path="section-24.html"><a href="section-24.html#section-24.11"><i class="fa fa-check"></i><b>24.11</b> 完美子博弈</a></li>
 <li class="chapter" data-level="24.12" data-path="section-24.html"><a href="section-24.html#section-24.12"><i class="fa fa-check"></i><b>24.12</b> 信息不对称扩展形式博弈</a></li>
 <li class="chapter" data-level="24.13" data-path="section-24.html"><a href="section-24.html#section-24.13"><i class="fa fa-check"></i><b>24.13</b> 混合与行为策略</a></li>
+<li class="chapter" data-level="24.14" data-path="section-24.html"><a href="section-24.html#section-24.14"><i class="fa fa-check"></i><b>24.14</b> 重复博弈</a></li>
+<li class="chapter" data-level="24.15" data-path="section-24.html"><a href="section-24.html#stochastic-game"><i class="fa fa-check"></i><b>24.15</b> 随机博弈（stochastic game）</a></li>
+<li class="chapter" data-level="24.16" data-path="section-24.html"><a href="section-24.html#fictitious-play"><i class="fa fa-check"></i><b>24.16</b> 虚拟行动（fictitious play）</a></li>
+<li class="chapter" data-level="24.17" data-path="section-24.html"><a href="section-24.html#no-regret-learning"><i class="fa fa-check"></i><b>24.17</b> 无悔学习（No-regret learning）</a></li>
+<li class="chapter" data-level="24.18" data-path="section-24.html"><a href="section-24.html#section-24.18"><i class="fa fa-check"></i><b>24.18</b> 无限重复博弈的平衡</a></li>
+<li class="chapter" data-level="24.19" data-path="section-24.html"><a href="section-24.html#section-24.19"><i class="fa fa-check"></i><b>24.19</b> 贝叶斯博弈</a></li>
+<li class="chapter" data-level="24.20" data-path="section-24.html"><a href="section-24.html#section-24.20"><i class="fa fa-check"></i><b>24.20</b> 联盟博弈</a></li>
+<li class="chapter" data-level="24.21" data-path="section-24.html"><a href="section-24.html#shapley-value"><i class="fa fa-check"></i><b>24.21</b> 夏普利值（Shapley Value）</a></li>
+<li class="chapter" data-level="24.22" data-path="section-24.html"><a href="section-24.html#section-24.22"><i class="fa fa-check"></i><b>24.22</b> 核心</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="section-25.html"><a href="section-25.html"><i class="fa fa-check"></i><b>25</b> 复杂系统</a></li>
 <li class="divider"></li>
@@ -254,6 +263,93 @@ MathJax.Hub.Config({
 <ul>
 <li>混合策略随机化纯策略</li>
 <li>行为策略是遇到每个信息集后的抛硬币</li>
+</ul>
+</div>
+<div id="section-24.14" class="section level2">
+<h2><span class="header-section-number">24.14</span> 重复博弈</h2>
+<ul>
+<li>参与者<span class="math inline">\(i\)</span>给定一个无限序列<span class="math inline">\(r_1,r_2,...\)</span>，其平均回报是<span class="math inline">\(\lim_{k\rightarrow\infty}\sum_{j=1}^k\frac{r_j}{k}\)</span></li>
+<li>考虑折扣因子<span class="math inline">\(\beta\)</span>，未来折扣回报是<span class="math inline">\(\sum_{j=1}^{\infty}\beta^jr_j\)</span>，一般人会更关注当下，对未来关注不会超过当下，但以<span class="math inline">\(1-\beta\)</span>的概率终止博弈</li>
+</ul>
+</div>
+<div id="stochastic-game" class="section level2">
+<h2><span class="header-section-number">24.15</span> 随机博弈（stochastic game）</h2>
+<ul>
+<li>随机博弈是重复博弈的泛化，每一次都取决于上一次博弈结果</li>
+<li>用(Q, N, A, P, R)来表示</li>
+<li>Q代表有限状态集</li>
+<li>N代表有限参与者集合</li>
+<li><span class="math inline">\(A = A_1 \times ... \times A_n\)</span> 其中<span class="math inline">\(A_i\)</span>是参与者i的有限行动集</li>
+<li><span class="math inline">\(P:Q \times A \times Q \rightarrow[0,1]\)</span>表示转移概率函数，从状态Q采取行动A变化另一个状态Q</li>
+<li><span class="math inline">\(R = r_1,...,r_n\)</span>中<span class="math inline">\(r_i:Q\times A\rightarrow R\)</span> 表示参与者i的效用函数</li>
+</ul>
+</div>
+<div id="fictitious-play" class="section level2">
+<h2><span class="header-section-number">24.16</span> 虚拟行动（fictitious play）</h2>
+<ul>
+<li>对于行动<span class="math inline">\(a\in A\)</span>，用<span class="math inline">\(w(a)\)</span>表示对手行动次数，可以非零初始化</li>
+<li>用这个数字评价对手策略 <span class="math inline">\(\sigma(a) = \frac{w(a)}{\sum_{a&#39; \in A}w(a&#39;)}\)</span></li>
+<li>在虚拟行动中每一个参与者的策略经验分布收敛，那么一定收敛到纳什均衡</li>
+</ul>
+</div>
+<div id="no-regret-learning" class="section level2">
+<h2><span class="header-section-number">24.17</span> 无悔学习（No-regret learning）</h2>
+<ul>
+<li>后悔表示参与者在时间t上没有采用策略s<span class="math inline">\(R^t(s) = max(\alpha^t(s)-\alpha^t,0)\)</span></li>
+<li>无悔学习表现出对任何纯策略有<span class="math inline">\(Pr([\lim \inf R^t(s)]\leq0)\)</span></li>
+<li>在每一步每个行为正比于其后悔<span class="math inline">\(\sigma_i^{t+1}(s) = \frac{R^t(s)}{\sum_{s&#39;\in S_i}R^t(s&#39;)}\)</span></li>
+<li>对有限博弈收敛到均衡</li>
+</ul>
+</div>
+<div id="section-24.18" class="section level2">
+<h2><span class="header-section-number">24.18</span> 无限重复博弈的平衡</h2>
+<ul>
+<li>著名的策略包括以牙还牙（tit-for-tat）跟扳机（trigger）</li>
+<li>纳什均衡只适用于有限博弈</li>
+<li>无限策略里有无限个纯策略均衡</li>
+<li>对于n个参与者的博弈<span class="math inline">\(G = (N,A,u)\)</span>其收益向量<span class="math inline">\(r = (r_1,r_2,...,r_n)\)</span>，让<span class="math inline">\(v_i = min_{s_{-i} \in S_{-i}max_{s_i \in S_i}} u_i(s_{-i},s_i)\)</span> i的最小最大值是对方使用最小最大策略时其收益</li>
+<li>一个收益向量r是增强的如果<span class="math inline">\(r_i\geq v_i\)</span></li>
+<li>一个收益向量是可行的当存在非负值<span class="math inline">\(\alpha_a\)</span>对于所有i，有<span class="math inline">\(\sum_{a\in A}\alpha_au_i(a)\)</span>且<span class="math inline">\(\sum_{a\in A}\alpha_a = 1\)</span></li>
+<li>无名氏定理（folk theorem）：如果收益向量对无限博弈的纳什均衡是平均回报，那么对每个参与者都是增强的，如果可行且增强，收益向量就是有平均回报的无限纳什均衡</li>
+</ul>
+</div>
+<div id="section-24.19" class="section level2">
+<h2><span class="header-section-number">24.19</span> 贝叶斯博弈</h2>
+<ul>
+<li>贝叶斯博弈<span class="math inline">\((N,G,P,I)\)</span>里，N代表参与者集合，G代表博弈集合，P代表对某个博弈集合的先验概率，I代表G里面对每个参与者的组成部分</li>
+<li>也可以用认知类型来定义<span class="math inline">\(N,A,\Theta,p,u\)</span>，A表示行为集合，<span class="math inline">\(\Theta\)</span>表示对参与者i的类型空间，p表示没中类型的先验概率，u表示某类型某行动对参与者i的收益</li>
+<li>贝叶斯纳什均衡：最大化每个参与者每种行动类型收益的策略，可以是纯策略，也可以是混合策略</li>
+<li>三种类型：对自己对方都不知道（现存），知道自己不知道对方(过渡)，都知道（过后）</li>
+<li>过渡态期望收益：<span class="math inline">\(EU_i(s|\theta_i) = \sum_{\theta_{-i}\in\Theta_{-i}}p(\theta_{-i}|\theta_i)\sum_{a\in A}(\prod_{j\in N}s_j(a_j|\theta_j))u_i(a,\theta_i,\theta_{-i})\)</span></li>
+<li>现存期望收益：<span class="math inline">\(EU_i(s) = \sum_{\theta_i\in \Theta_i}p(\theta_i)EU_i(s|\theta_i)\)</span></li>
+<li>贝叶斯均衡混合策略<span class="math inline">\(s_i\in arg max_{s&#39;_i}EU_i(s&#39;_i,s_{-i}|\theta_i)\)</span></li>
+<li>给定一方行为，考虑先验概率另一方收益最大时的博弈平衡</li>
+</ul>
+</div>
+<div id="section-24.20" class="section level2">
+<h2><span class="header-section-number">24.20</span> 联盟博弈</h2>
+<ul>
+<li>收益可转移的联盟博弈（N,v）N代表有限的参与者，<span class="math inline">\(v:2^N \rightarrow R\)</span> 里每个联盟 <span class="math inline">\(S\subseteq N\)</span> 里的能够分配的收益，假定<span class="math inline">\(v(\varnothing)=0\)</span></li>
+<li>联盟博弈解决的问题是哪些联盟会生成及收益如何分配</li>
+<li>超加性博弈<span class="math inline">\(G=(N,v)\)</span>表示对于所有的<span class="math inline">\(S,T\subset N\)</span>，如果<span class="math inline">\(S\cap T = \varnothing\)</span>，那么有<span class="math inline">\(v(S\cup T\geq v(S)+v(T))\)</span>，这种情况下整体绑定为一个联盟收益最高</li>
+</ul>
+</div>
+<div id="shapley-value" class="section level2">
+<h2><span class="header-section-number">24.21</span> 夏普利值（Shapley Value）</h2>
+<ul>
+<li>如何公平分割收益，Lloyd Shapley认为参与者要按照边际贡献的比例获得收益</li>
+<li><p>公理 - 对于每一种收益方法如果两个人可相互交换<span class="math inline">\(v(S\cup \{i\}) = v(S\cup \{j\}))\)</span>，那么其收益相等<span class="math inline">\(\psi_i(N,v)=\psi_j(N,v)\)</span> - 如果某个人不产生收益<span class="math inline">\(v(S\cup \{i\} = v(S))\)</span>，那么不分成<span class="math inline">\(\psi_i(N,v)=0\)</span> - 对于<span class="math inline">\(v_1\)</span>和<span class="math inline">\(v_2\)</span>，博弈<span class="math inline">\((N,v_1+v_2)\)</span>用<span class="math inline">\((v_1+v_2)(S)=v_1(S)+v_2(S)\)</span>定义，有<span class="math inline">\(\psi_i(N,v_1+v_2)=\psi_i(N,v_1)+\psi_i(N,v2)\)</span></p></li>
+<li><p>夏普利值按照$<em>i(N,v) = </em>{SN_i} |S|!(|N|-|S|-1[v(S{i})-v(S)]) $ 分配收益，也就是满足上面三个公理的分配方式</p></li>
+</ul>
+</div>
+<div id="section-24.22" class="section level2">
+<h2><span class="header-section-number">24.22</span> 核心</h2>
+<ul>
+<li>夏普利值分配比较公平，但不一定稳定，不容易形成大联盟</li>
+<li>核心指对于<span class="math inline">\(S\subseteq N\)</span>，有<span class="math inline">\(\sum_{i\in S} x_i \geq v(S)\)</span> ，总和收益至少不低于内部小联盟收益</li>
+<li>核心可能是空的且不唯一</li>
+<li>对于简单博弈核心是空的当且仅当没有否决参与者，如果有否决参与者，核心包括所有非否决参与者收益0的收益向量</li>
+<li>凸博弈：<span class="math inline">\(v(S\cup T)\geq v(S)+v(T)-v(S\cap T)\)</span>，每个凸博弈有一个非空核心且是夏普利值</li>
 </ul>
 
 </div>
