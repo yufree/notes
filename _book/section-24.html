@@ -25,7 +25,7 @@
 
 <meta name="author" content="Miao YU">
 
-<meta name="date" content="2016-11-20">
+<meta name="date" content="2016-12-01">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -147,6 +147,7 @@ MathJax.Hub.Config({
 <div id="section-24.1" class="section level2">
 <h2><span class="header-section-number">24.1</span> 术语</h2>
 <ul>
+<li>博弈论说白了就是讲两方势力在一件事上为了自己的最大利益所采取的行动或决策的理论</li>
 <li>参与者（players） <span class="math inline">\(N= {1,...,n}\)</span></li>
 <li>参与者 <span class="math inline">\(i\)</span> 有一组行动（Actions），行动的集合 <span class="math inline">\(a=(a_1,...,a_n) \in A=A_1 \times A_2 \times ... \times A_n\)</span></li>
 <li>参与者 <span class="math inline">\(i\)</span> 的每个行为的收益（Payoffs）都可以用 <span class="math inline">\(u_i:A \rightarrow \Re\)</span> 这个函数表示 <span class="math inline">\(u_i(a)\)</span> 表示某个行为产生的收益，<span class="math inline">\(u = (u_i,...,u_n)\)</span>是效用函数的集合</li>
@@ -195,7 +196,40 @@ MathJax.Hub.Config({
 <li>概率 <span class="math inline">\(Pr(a|s) = \prod_{j \in N}s_j(a_j)\)</span></li>
 <li>期望收益函数 <span class="math inline">\(u_i(s) = \sum_{a \in A} u_i(a)Pr(a|s)\)</span></li>
 <li>随机策略会使对手混乱进入动态，很多博弈只存在混合策略纳什均衡而没有纯策略纳什均衡（石头剪子布）</li>
+<li>混合策略的目的在于不论你使用哪一种行动，对方的收益都不变</li>
 </ul>
+<table>
+<thead>
+<tr class="header">
+<th>选手</th>
+<th>甲</th>
+<th>乙</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>丙</td>
+<td>a,b</td>
+<td>c,d</td>
+</tr>
+<tr class="even">
+<td>丁</td>
+<td>e,f</td>
+<td>g,h</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>对于选手1而言，采取丙行动的收益是<span class="math inline">\(aq+c(1-q)\)</span>，采取丁行动的收益是<span class="math inline">\(eq+g(1-q)\)</span>，q代表选手2采取甲行动概率</li>
+<li>如果要达到双方均衡，那么不论采取什么行动收益应该一致，不会因为对方概率的变化而偏离，那么我们就可以求解均衡时选手2的行动概率：</li>
+</ul>
+<p><span class="math display">\[aq+c(1-q) = eq+g(1-q)\]</span></p>
+<p><span class="math display">\[q = \frac{g-c}{a+g-c-e}\]</span></p>
+<ul>
+<li>这个结果表明选手2采取行动主要要参考选手1的行动收益差</li>
+<li>同理，对选手2而言，采取甲行动收益是<span class="math inline">\(bp+f(1-p)\)</span>，采取乙行动收益是<span class="math inline">\(dp+h(1-p)\)</span>，p为选手1采取丙行动的概率，求解的到：</li>
+</ul>
+<p><span class="math display">\[p=\frac{h-f}{b+h-d-f}\]</span> - 要达到混合策略纳什均衡，博弈双方的行动概率主要参考对方的行动收益差；同时因为概率已知，我们也可以给出纳什均衡时双方的期望收益 - 应用：守门员博弈，当攻守双方达到纳什均衡时，其概率分布十分接近现实的统计数据，通过策略调整，博弈双方收益会逐渐收敛到纳什均衡，然后就不再变化</p>
 </div>
 <div id="section-24.7" class="section level2">
 <h2><span class="header-section-number">24.7</span> 寻找纳什均衡</h2>
@@ -214,7 +248,7 @@ MathJax.Hub.Config({
 <ul>
 <li>指不论其他参与者采取任何策略，该策略劣于其他策略</li>
 <li>被支配策略永远不会是最佳回应</li>
-<li>可以交互地去除掉每个选手的被支配策略</li>
+<li>排除法：把被支配策略删除，从剩下的行动方案中选择，交互地去除掉每个选手的被支配策略</li>
 </ul>
 </div>
 <div id="maxmin-strategies" class="section level2">
@@ -222,13 +256,15 @@ MathJax.Hub.Config({
 <ul>
 <li>指其他参与者对某参与者最小收益策略下的最大收益策略<span class="math inline">\(arg max_{s_i}min_{s_{-i}}u_i(s_1,s_2)\)</span></li>
 <li>最小最大策略指让对方收益最大而自己收益最小的策略<span class="math inline">\(arg min_{s_i}max_{s_{-i}}u_{-i}i(s_1,s_2)\)</span></li>
+<li>在有限两人零和博弈的纳什均衡中，参与者的最大最小值与最小最大值一致</li>
+<li>最大最小可用来线性求解纳什均衡</li>
 </ul>
 </div>
 <div id="section-24.10" class="section level2">
 <h2><span class="header-section-number">24.10</span> 扩展形式博弈</h2>
 <ul>
 <li>正常形式博弈不涉及行动顺序与时间</li>
-<li>扩展形式博弈考虑时序影响，包括信息对称与不对称两种</li>
+<li>扩展形式博弈考虑时序影响，是一个层级结构，双方根据对方已经使用的策略来使用自己的策略，包括信息对称与不对称两种</li>
 <li>有限信息对称博弈用（N, A, H, Z, χ, ρ, σ, u）来表示</li>
 <li>N代表n个参与者</li>
 <li>A代表一组行动</li>
@@ -241,6 +277,7 @@ MathJax.Hub.Config({
 <li>信息对称扩展形式博弈里参与者的纯策略是行动函数的乘积<span class="math inline">\(\prod_{h\in H,\rho(h)=i}\chi(h)\)</span></li>
 <li>扩展形式博弈可以转为正常形式博弈，但是有大量冗余，正常形式博弈不一定可转化为扩展形式博弈</li>
 <li>信息对称扩展形式博弈都有纯策略纳什均衡</li>
+<li>求解扩展形式博弈要从完美子博弈开始，从最小的分支倒推，记录策略，实际上也是最小最大值的求解</li>
 </ul>
 </div>
 <div id="section-24.11" class="section level2">
@@ -272,6 +309,10 @@ MathJax.Hub.Config({
 <ul>
 <li>参与者<span class="math inline">\(i\)</span>给定一个无限序列<span class="math inline">\(r_1,r_2,...\)</span>，其平均回报是<span class="math inline">\(\lim_{k\rightarrow\infty}\sum_{j=1}^k\frac{r_j}{k}\)</span></li>
 <li>考虑折扣因子<span class="math inline">\(\beta\)</span>，未来折扣回报是<span class="math inline">\(\sum_{j=1}^{\infty}\beta^jr_j\)</span>，一般人会更关注当下，对未来关注不会超过当下，但以<span class="math inline">\(1-\beta\)</span>的概率终止博弈</li>
+<li>重复博弈中，当前收益跟未来收益权重不一致，未来收益一般小于当前收益权重： <span class="math display">\[U = U_1 + \sigma U_2+ ...\]</span></li>
+<li><span class="math inline">\(\sigma\)</span>介于0，1之间</li>
+<li>有限重复博弈可以用倒推法得到解，基本收敛于子博弈均衡</li>
+<li>无限重复博弈要分别计算不同策略下收益，当无限重复博弈概率不断增加，有可能打破子博弈均衡，此时会发生偏移</li>
 </ul>
 </div>
 <div id="stochastic-game" class="section level2">
@@ -326,6 +367,8 @@ MathJax.Hub.Config({
 <li>现存期望收益：<span class="math inline">\(EU_i(s) = \sum_{\theta_i\in \Theta_i}p(\theta_i)EU_i(s|\theta_i)\)</span></li>
 <li>贝叶斯均衡混合策略<span class="math inline">\(s_i\in arg max_{s&#39;_i}EU_i(s&#39;_i,s_{-i}|\theta_i)\)</span></li>
 <li>给定一方行为，考虑先验概率另一方收益最大时的博弈平衡</li>
+<li>双方信息不对称，一方知道结果，另一方只能通过概率猜测是否对方是某种类型</li>
+<li>计算不同行动的收益期望，求解概率，如果认为概率高于某个值，则选择对应行动，此时达到收益与概率的均衡</li>
 </ul>
 </div>
 <div id="section-24.20" class="section level2">
