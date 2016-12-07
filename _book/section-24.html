@@ -25,7 +25,7 @@
 
 <meta name="author" content="Miao YU">
 
-<meta name="date" content="2016-12-01">
+<meta name="date" content="2016-12-04">
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -120,6 +120,7 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="24.21" data-path="section-24.html"><a href="section-24.html#shapley-value"><i class="fa fa-check"></i><b>24.21</b> 夏普利值（Shapley Value）</a></li>
 <li class="chapter" data-level="24.22" data-path="section-24.html"><a href="section-24.html#section-24.22"><i class="fa fa-check"></i><b>24.22</b> 核心</a></li>
 <li class="chapter" data-level="24.23" data-path="section-24.html"><a href="section-24.html#section-24.23"><i class="fa fa-check"></i><b>24.23</b> 选举</a></li>
+<li class="chapter" data-level="24.24" data-path="section-24.html"><a href="section-24.html#section-24.24"><i class="fa fa-check"></i><b>24.24</b> 机制设计</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="section-25.html"><a href="section-25.html"><i class="fa fa-check"></i><b>25</b> 复杂系统</a></li>
 <li class="divider"></li>
@@ -422,6 +423,25 @@ MathJax.Hub.Config({
 <li>独裁：存在某参与者的选择与总体选择顺序一致</li>
 <li>弱帕累托有效且单调的社会选择函数是独裁的</li>
 <li>单峰选择：每个投票的人都有最想选跟最不想选的候选人，选择上会避免极端</li>
+</ul>
+</div>
+<div id="section-24.24" class="section level2">
+<h2><span class="header-section-number">24.24</span> 机制设计</h2>
+<ul>
+<li>直接形式：参与者同时传递信息到中心</li>
+<li>间接形式：参与者传递一系列信息，这些信息前后相关</li>
+<li>启示原则（Revelation Principle）：任何社会选择函数都可以用真实直接的机制来实施</li>
+<li>Gibbard-Satterthwaite 理论：有限选择空间里三个元素以上的支配策略都是独裁的，非独裁策略需要转移函数</li>
+<li>转移函数：集体对个体的税收或补贴，个人私人收益与转移函数之和是个体的整体结果收益，个人私人收益不考虑其他人的选择</li>
+<li>真实性：对于每个参与者平衡策略里转移收益机制是真实的党是直接的且个体接受个人收益函数</li>
+<li>有效性：有效的机制会选择最大化个体的收益，转移函数的和小于等于0</li>
+<li>预算平衡：所有人转移函数的和为0，大于等于0是弱预算平衡</li>
+<li>个体理性：没有人会因为参与某个机制得到负收益</li>
+<li>可处理：收益与转移函数的计算可在多项式时间内完成</li>
+<li>税收最大化：满足所有限制条件下最大化转移函数总和期望的机制</li>
+<li>税收最小化：满足所有限制条件下最小化转移函数总和期望的机制</li>
+<li>公平性：让最不开心的参与者也开心最大化</li>
+<li>设计政策时要考虑支出补贴税收对所有人都无害或达到均衡</li>
 </ul>
 
 </div>
