@@ -47,6 +47,7 @@ description: "This is notes from yufree"
 - 21 数据科学与python简介
 - 22 因果分析
 - 23 系统思考
+- 24 博弈论
 - 25 复杂系统
 
 <script>
