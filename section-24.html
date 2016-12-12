@@ -8,7 +8,7 @@
   <title>Notes</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="This is notes from yufree">
-  <meta name="generator" content="bookdown 0.3.2 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.3.3 and GitBook 2.6.7">
 
   <meta property="og:title" content="Notes" />
   <meta property="og:type" content="book" />
@@ -26,7 +26,7 @@
 <meta name="author" content="Miao YU">
 
 
-<meta name="date" content="2016-12-07">
+<meta name="date" content="2016-12-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -658,6 +658,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="24.22" data-path="section-24.html"><a href="section-24.html#section-24.22"><i class="fa fa-check"></i><b>24.22</b> 核心</a></li>
 <li class="chapter" data-level="24.23" data-path="section-24.html"><a href="section-24.html#section-24.23"><i class="fa fa-check"></i><b>24.23</b> 选举</a></li>
 <li class="chapter" data-level="24.24" data-path="section-24.html"><a href="section-24.html#section-24.24"><i class="fa fa-check"></i><b>24.24</b> 机制设计</a></li>
+<li class="chapter" data-level="24.25" data-path="section-24.html"><a href="section-24.html#vcg"><i class="fa fa-check"></i><b>24.25</b> VCG机制</a></li>
+<li class="chapter" data-level="24.26" data-path="section-24.html"><a href="section-24.html#section-24.26"><i class="fa fa-check"></i><b>24.26</b> 拍卖</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="section-25.html"><a href="section-25.html"><i class="fa fa-check"></i><b>25</b> 复杂系统</a><ul>
 <li class="chapter" data-level="25.1" data-path="section-25.html"><a href="section-25.html#section-25.1"><i class="fa fa-check"></i><b>25.1</b> 复杂系统的特征</a></li>
@@ -989,6 +991,46 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>税收最小化：满足所有限制条件下最小化转移函数总和期望的机制</li>
 <li>公平性：让最不开心的参与者也开心最大化</li>
 <li>设计政策时要考虑支出补贴税收对所有人都无害或达到均衡</li>
+</ul>
+</div>
+<div id="vcg" class="section level2">
+<h2><span class="header-section-number">24.25</span> VCG机制</h2>
+<ul>
+<li>存在货币补偿时自私参与者选择社会福利最大化的通用方法</li>
+<li>一个直接机制包括选择规则跟补偿规则，VCG作为支配策略是真实有效的，在额外假设下可以满足弱预算平衡跟个体理性</li>
+<li>Groves机制 <span class="math inline">\((\chi,p)\)</span> <span class="math display">\[\chi (\hat v) \in arg max_x \sum_i \hat v_i(x)\]</span></li>
+</ul>
+<p><span class="math display">\[p_i(\hat v) = h_i(\hat v_{-i}) - \sum_{j\neq i} \hat v_j(\chi(\hat v))\]</span></p>
+<ul>
+<li>VCG机制 <span class="math inline">\((\chi,p)\)</span> <span class="math display">\[\chi (\hat v) \in arg max_x \sum_i \hat v_i(x)\]</span></li>
+</ul>
+<p><span class="math display">\[p_i(\hat v) = max_x\sum_{j\neq i} \hat v_j(x) - \sum_{j\neq i} \hat v_j(\chi(\hat v))\]</span></p>
+<ul>
+<li>在VCG机制下，计算你自己存在时社会受益最大时其他人收益总和，然后计算没有你且社会收益最大时其他人收益总和，你的补偿是它们的差值</li>
+<li>不影响最后结果的人不需要补偿，其存在导致他人收益减少的要付出，其存在导致他人收益增加的要补偿</li>
+<li>其真实性有效性可以数学证明</li>
+<li>VCG需要个体真实汇报个人信息，但个体间的勾结可以消除补偿，同时VCG会导致开支暴涨，增加参与人也会增加财政支出，个人可能伪装多个人，同时返还机制也不允许所有人返还所有收益</li>
+<li>价值隐私信息需要损失效率，是动机效率的平衡</li>
+</ul>
+</div>
+<div id="section-24.26" class="section level2">
+<h2><span class="header-section-number">24.26</span> 拍卖</h2>
+<ul>
+<li>自私参与者分配资源的机制</li>
+<li>英国人拍卖：从保留值开始拍卖，参与人喊价，价高的得到物品并付出对应价格</li>
+<li>日本人拍卖：所有参与者先站着，价格提升，当价格不合适就坐下，最后一个站着的人得到物品</li>
+<li>荷兰人拍卖：设定一个高价然后开始逐渐降低，当有人说我接受时拍卖结束，价格就是当时价格</li>
+<li>第一价格拍卖：参与者将价格写好封装，然后拍卖人开封，价高的人得到物品，付对应价格</li>
+<li>第二价格拍卖：同上，但付第二高的价格</li>
+<li>付费拍卖：同上，但所有人都要支出自己写的价格，彩票？</li>
+<li>拍卖三种规则：竞拍规则，信息释放规则，清场规则</li>
+<li>在第二价格拍卖里，讲真话是支配策略，符合VCG机制，也可以直观证明</li>
+<li>在英国人日本人拍卖里，独立私有价值模型下的支配策略是用真实值</li>
+<li>在第一价格拍卖与荷兰人拍卖实质等同，前者可以异步进行，后者交流快，参与者竞拍价要低于价值，无支配策略</li>
+<li>两个中等风险的参与者参与第一价格竞拍，分布是均匀分布，贝叶斯纳什均衡是各自价格的一半</li>
+<li>更多的参与人参加后，价格会不断提升接近真实价格，如果是均匀分布，系数是<span class="math inline">\(\frac{n-1}{n}\)</span></li>
+<li>收益均等理论：n个风险中等的参与者对于单一物品有独立私有价值，参与竞拍时每个人都从风险分布F里报价，当均衡时分配总是一样的，价值为0其期望也是0，所有有效拍卖产生的收益是一样的</li>
+<li>最优化拍卖，参与人的虚拟价值<span class="math inline">\(\psi_i(v_i) = v_i - \frac{1-F_i(v_i)}{f_i(v_i)}\)</span>在保留价格处为0，并非VCG</li>
 </ul>
 
 </div>
