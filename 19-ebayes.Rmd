@@ -2,7 +2,7 @@
 
 ```{r include=FALSE}
 library(knitr)
-opts_chunk$set(echo=T, warning = FALSE, message = FALSE)
+opts_chunk$set(echo=T, cache = T, warning = FALSE, message = FALSE)
 options(digits = 3)
 ```
 
@@ -1097,5 +1097,325 @@ eb_shrinkage %>%
 ```
 - 收敛后的分布会朝向两个中心而不是一个，并非所有之前的方法（例如区间估计）都可以适用到混合模型里，需要根据实际情况进行分析
 
+## 模拟验证
 
+- 上面的经验贝叶斯推断大都是给出的结果，我们需要对其进行模拟验证
+```{r dtpre}
+pitchers <- Pitching %>%
+  group_by(playerID) %>%
+  summarize(gamesPitched = sum(G)) %>%
+  filter(gamesPitched > 3)
+career <- Batting %>%
+  filter(AB > 0) %>%
+  anti_join(pitchers, by = "playerID") %>%
+  group_by(playerID) %>%
+  summarize(H = sum(H), AB = sum(AB))
+# 从数据中找到贝塔分布的两个参数
+library(ebbr)
+prior <- career %>%
+  ebb_fit_prior(H, AB)
+
+prior
+
+# 用这两个参数生成球员的击球概率
+alpha0 <- tidy(prior)$alpha
+beta0 <- tidy(prior)$beta
+
+qplot(rbeta(10000, alpha0, beta0))
+
+# 击球数使用原始数据
+ggplot(career, aes(AB)) +
+  geom_histogram() +
+  scale_x_log10()
+
+# 构建仿真数据
+set.seed(2017)
+
+career_sim <- career %>%
+  mutate(p = rbeta(n(), alpha0, beta0),
+         H = rbinom(n(), AB, p))
+
+career_sim
+```
+
+### 模拟对分布参数的估计
+
+- 生产数据后我们可以估计分布参数，看能否与模拟值对应
+
+```{r simhpara}
+career_sim_eb <- career_sim %>%
+  add_ebb_estimate(H, AB)
+
+career_sim_gathered <- career_sim_eb %>%
+  rename(Shrunken = .fitted, Raw = .raw) %>%
+  gather(type, estimate, Shrunken, Raw)
+# 观察是否能收敛数据
+career_sim_gathered %>%
+  filter(AB >= 10) %>%
+  ggplot(aes(p, estimate, color = AB)) +
+  geom_point() +
+  geom_abline(color = "red") +
+  geom_smooth(method = "lm", color = "white", lty = 2, se = FALSE) +
+  scale_color_continuous(trans = "log", breaks = c(10, 100, 1000, 10000)) +
+  facet_wrap(~ type) +
+  labs(x = "True batting average (p)",
+       y = "Raw or shrunken batting average",
+       title = "Empirical Bayes shrinkage reduces variance, but causes bias",
+       subtitle = "Red line is x = y; dashed white line is a linear fit")
+```
+
+- 我们可以看到，估计方差有了一定收敛，但出现了一定偏差，可参考统计学习中方差-偏差权衡的描述
+
+- 可以用均方误来衡量，此处虽牺牲了偏差，但整体误差降低了
+
+$$\mbox{MSE}=\frac{1}{n}\sum_{1}^{n}(p-\hat{p})^2$$
+
+```{r simMSE}
+career_sim_gathered %>%
+  group_by(type) %>%
+  summarize(mse = mean((estimate - p) ^ 2))
+```
+
+- 注意到击球数可能影响收敛，所以可以探索其对均方误的影响
+
+```{r simAB}
+metric_by_bin <- career_sim_gathered %>%
+  group_by(type, AB = 10 ^ (round(log10(AB)))) %>%
+  summarize(mse = mean((estimate - p) ^ 2))
+
+ggplot(metric_by_bin, aes(AB, mse, color = type)) +
+  geom_line() +
+  scale_x_log10() +
+  scale_y_log10() +
+  labs(x = "Number of at-bats (AB)",
+       y = "Mean-squared-error within this bin (note log scale)",
+       title = "Mean squared error is higher with raw estimate, especially for low AB")
+```
+
+- 击球数越多，均方误越低，此时可进一步探索
+
+```{r simp}
+library(scales)
+# 观察斜率p值变化
+career_sim_gathered %>%
+  mutate(AB = 10 ^ (round(log10(AB)))) %>%
+  filter(AB > 1) %>%
+  nest(-type, -AB) %>%
+  unnest(map(data, ~ tidy(lm(estimate ~ p, .)))) %>%
+  filter(term == "p") %>%
+  ggplot(aes(AB, estimate, color = type)) +
+  geom_line() +
+  scale_x_log10(breaks = c(10, 100, 1000, 10000)) +
+  geom_hline(yintercept = 1, lty = 2) +
+  labs(x = "Number of at-bats (AB)",
+       y = "Slope of estimate/p within this bin",
+       title = "Shrunken estimates introduce bias for low AB",
+       subtitle = "Note that an unbiased estimate would have a slope of 0")
+# 分层
+career_sim_gathered %>%
+  mutate(ab_bin = cut(AB, c(0, 10, 100, 1000, Inf),
+                      labels = c("1-10", "11-100", "101-1000", "1000+"))) %>%
+  ggplot(aes(p, estimate, color = AB)) +
+  geom_point() +
+  geom_abline(color = "red") +
+  geom_smooth(method = "lm", color = "gray", lty = 2, se = FALSE) +
+  scale_color_continuous(trans = "log", breaks = c(10, 100, 1000, 10000)) +
+  facet_grid(ab_bin ~ type, scales = "free_y") +
+  labs(x = "True batting average (p)",
+       y = "Raw or shrunken estimate",
+       title = "Empirical Bayes shrinkage reduces variance, but introduces bias",
+       subtitle = "Red line is x = y; dashed white line is a linear fit")
+```
+
+- 击球数越多，越接近真相
+
+### 区间估计
+
+- 检验区间估计是否覆盖95%的真值
+
+```{r simint}
+career_sim_eb %>%
+  summarize(coverage = mean(.low <= p & p <= .high))
+```
+
+- 观察不同区间的覆盖范围
+
+```{r simmint}
+sim_prior <- ebb_fit_prior(career_sim, H, AB)
+estimate_by_cred_level <- data_frame(level = seq(.5, .98, .02)) %>%
+  unnest(map(level, ~ augment(sim_prior, career_sim, cred_level = .)))
+
+estimate_by_cred_level %>%
+  group_by(level) %>%
+  mutate(cover = .low <= p & p <= .high) %>%
+  summarize(coverage = mean(cover)) %>%
+  ggplot(aes(level, coverage)) +
+  geom_point() +
+  geom_abline(color = "red") +
+  labs(x = "Level of credible interval",
+       y = "Probability credible interval contains the true value")
+```
+
+- 结果基本吻合，说明区间估计也比较准
+
+### 错误发现率
+
+- 看一下进入名人堂的人
+
+```{r simfdr}
+pt <- career_sim_eb %>%
+  add_ebb_prop_test(.3, sort = TRUE)
+
+# 错误发现率控制为10%
+hall_of_fame <- pt %>%
+  filter(.qvalue <= .1)
+
+mean(hall_of_fame$p < .3)
+
+# 观察整体错误发现率的变动
+pt %>%
+  mutate(true_fdr = cummean(p < .3)) %>%
+  ggplot(aes(.qvalue, true_fdr)) +
+  geom_line() +
+  geom_abline(color = "red") +
+  labs(x = "q-value",
+       y = "True FDR at this q-value threshold")
+```
+
+### 贝塔-二项回归
+
+- 看下影响因素
+
+```{r simbbreg}
+# 回归值
+bb_reg <- career %>%
+  ebb_fit_prior(H, AB, method = "gamlss", mu_predictors = ~ log10(AB))
+
+tidy(bb_reg)
+
+set.seed(2017)
+
+career_sim_ab <- augment(bb_reg, career) %>%
+  select(playerID, AB, true_alpha0 = .alpha0, true_beta0 = .beta0) %>%
+  mutate(p = rbeta(n(), true_alpha0, true_beta0),
+         H = rbinom(n(), AB, p))
+# 真实值
+career_ab_prior <- career_sim_ab %>%
+  ebb_fit_prior(H, AB, method = "gamlss", mu_predictors = ~ log10(AB))
+
+# 对比
+tidy(career_ab_prior)
+
+# 观察击球数影响
+career_flat_prior <- career_sim_ab %>%
+  ebb_fit_prior(H, AB)
+
+data_frame(method = c("Flat prior", "Prior depending on AB"),
+           model = list(career_flat_prior, career_ab_prior)) %>%
+  unnest(map(model, augment, data = career_sim_ab)) %>%
+  ggplot(aes(p, .fitted, color = AB)) +
+  geom_point() +
+  scale_color_continuous(trans = "log") +
+  geom_abline(color = "red") +
+  facet_wrap(~ method) +
+  labs(x = "True batting average (p)",
+       y = "Shrunken batting average estimate")
+```
+
+### 重复模拟
+
+- 为防止意外或运气可以重复模拟看看
+
+```{r simrep}
+set.seed(2017)
+
+sim_replications <- career %>%
+  crossing(replication = 1:50) %>%
+  mutate(p = rbeta(n(), alpha0, beta0),
+         H = rbinom(n(), AB, p))
+
+sim_replications
+
+sim_replication_models <- sim_replications %>%
+  nest(-replication) %>%
+  mutate(prior = map(data, ~ ebb_fit_prior(., H, AB)))
+
+# 估计参数
+sim_replication_priors <- sim_replication_models %>%
+  unnest(map(prior, tidy), .drop = TRUE)
+
+sim_replication_priors
+
+true_values <- data_frame(parameter = c("alpha", "beta", "mean"),
+                          true = c(alpha0, beta0, alpha0 / (alpha0 + beta0)))
+
+sim_replication_priors %>%
+  gather(parameter, value, -replication) %>%
+  inner_join(true_values, by = "parameter") %>%
+  ggplot(aes(1, value)) +
+  geom_boxplot() +
+  geom_hline(aes(yintercept = true), color = "red", lty = 2) +
+  facet_wrap(~ parameter, scales = "free_y") +
+  labs(x = "",
+       y = "Estimated parameter (true value shown as red line)",
+       title = "Estimated hyperparameters across 50 replications")
+
+# 估计区间与假设检验
+
+## 估计均方误
+sim_replication_au <- sim_replication_models %>%
+  unnest(map2(prior, data, augment))
+
+sim_replication_mse <- sim_replication_au %>%
+  rename(Raw = .raw, Shrunken = .fitted) %>%
+  gather(type, estimate, Raw, Shrunken) %>%
+  group_by(type, replication) %>%
+  summarize(mse = mean((estimate - p) ^ 2))
+
+ggplot(sim_replication_mse, aes(type, mse)) +
+  geom_boxplot() +
+  ylab("Mean squared error across 50 replications")
+## 估计区间
+sim_replication_au %>%
+  mutate(cover = .low <= p & p <= .high) %>%
+  group_by(replication) %>%
+  summarize(coverage = mean(cover)) %>%
+  ggplot(aes(coverage)) +
+  geom_histogram(binwidth = .001) +
+  labs(x = "% of time true value was in a 95% confidence interval",
+       title = "95% credible interval is well calibrated across replications")
+
+sim_replication_intervals <- sim_replication_models %>%
+  crossing(cred_level = c(seq(.5, .9, .05), .95)) %>%
+  unnest(pmap(list(prior, data, cred_level = cred_level), augment)) %>%
+  select(replication, cred_level, p, .low, .high)
+
+sim_replication_intervals %>%
+  mutate(cover = .low <= p & p <= .high) %>%
+  group_by(replication, cred_level) %>%
+  summarize(coverage = mean(cover)) %>%
+  ggplot(aes(cred_level, coverage, group = replication)) +
+  geom_line(alpha = .3) +
+  geom_abline(color = "red") +
+  labs(x = "Credibility level",
+       y = "% of credible intervals in this replication that contain the true parameter",
+       title = "Credible intervals are well calibrated across 50 replications",
+       subtitle = "Red line is x = y")
+
+## q值的稳定性
+
+sim_replication_prop_tests <- sim_replication_au %>%
+  nest(-replication) %>%
+  unnest(map(data, add_ebb_prop_test, threshold = .3, sort = TRUE))
+
+sim_replication_prop_tests %>%
+  group_by(replication) %>%
+  mutate(fdr = cummean(p < .3)) %>%
+  ggplot(aes(.qvalue, fdr, group = replication)) +
+  geom_line(alpha = .3) +
+  geom_abline(color = "red") +
+  labs(x = "Q-value threshold",
+       y = "Proportion of false discoveries below this threshold",
+       title = "Q-value successfully controls FDR across 50 replications")
+```
 
