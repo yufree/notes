@@ -9,6 +9,8 @@ script:
 - ./_build.sh
 - ./_deploy.sh
 sudo: true
+r_github_packages:
+  - dgrtwo/ebbr
 cache:
   packages: yes
   directories:
