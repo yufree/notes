@@ -2,7 +2,7 @@
 
 ```{r include=FALSE}
 library(knitr)
-opts_chunk$set(echo=T,cache = TRUE, warning = FALSE, message = FALSE)
+opts_chunk$set(echo=T, warning = FALSE, message = FALSE)
 options(digits = 3)
 ```
 
@@ -149,7 +149,7 @@ ggplot(career_filtered) +
 
 - 这事实上是一个分层结构，经验贝叶斯推断里隐含了这么一个从整体到个人的过程
 
-```{r ebayes2,cache=T}
+```{r ebayes2}
 career_eb <- career %>%
     mutate(eb_estimate = (H + alpha0) / (AB + alpha0 + beta0))
 # 击球率高
@@ -294,7 +294,7 @@ combined %>%
 
 - 现实问题经常不局限于估计，而是侧重决策，例如如果一个球员的击球率高于某个值，他就可以进入名人堂（击球率大于0.3），这个决策常常伴随区间估计而不是简单的点估计
 
-```{r lp, cache=T}
+```{r lp}
 # 以 Hank Aaron 为例
 career_eb %>%
     filter(name == "Hank Aaron") %>%
@@ -315,7 +315,7 @@ pbeta(.3, 3850, 8818)
 
 - 后验包括率（Posterior Inclusion Probability）可类比经典假设检验中的置信水平$1-\alpha$
 
-```{r ap,cache=TRUE}
+```{r ap}
 # 所有球员的后验错误率分布，大部分不超过0.3
 career_eb <- career_eb %>%
     mutate(PEP = pbeta(.3, alpha1, beta1))
@@ -341,7 +341,7 @@ career_eb %>%
 
 - 假如我们把进入名人堂的决策作为一个整体，则可允许一定的整体错误率，因为每个人的后验错误率可以计算且期望值线性可加和，我们可以得到一个整体的错误率
 
-```{r FDR,cache=TRUE}
+```{r FDR}
 # 取前100个球员
 top_players <- career_eb %>%
     arrange(PEP) %>%
@@ -364,7 +364,7 @@ mean(head(sorted_PEP$PEP, 200))
 
 - q值定义为排序后累积到某个样本的整体平均错误率，类似多重比较中对整体错误率控制的p值
 
-```{r qvalue, cache=TRUE}
+```{r qvalue}
 # 生成每个球员的q值
 career_eb <- career_eb %>%
     arrange(PEP) %>%
@@ -396,7 +396,7 @@ career_eb %>%
 
 - 设想多个球员，我们考虑如何去比较他们击球率
 
-```{r ht, cache=TRUE}
+```{r ht}
 # 选三个球员
 career_eb %>%
   filter(name %in% c("Hank Aaron", "Mike Piazza", "Hideki Matsui")) %>%
@@ -415,7 +415,7 @@ career_eb %>%
 
 - 单纯取样比大小然后计算比例
 
-```{r sim,cache=TRUE}
+```{r sim}
 # 提取两人数据
 aaron <- career_eb %>% filter(name == "Hank Aaron")
 piazza <- career_eb %>% filter(name == "Mike Piazza")
@@ -431,7 +431,7 @@ sim
 
 - 两个概率的联合概率分布，然后积分一个队员大于另一个的概率
 
-```{r int,cache=TRUE}
+```{r int}
 d <- .00002
 limits <- seq(.29, .33, d)
 sum(outer(limits, limits, function(x, y) {
@@ -452,7 +452,7 @@ $$p_B \sim \mbox{Beta}(\alpha_B, \beta_B)$$
 
 $${\rm Pr}(p_B > p_A) = \sum_{i=0}^{\alpha_B-1}\frac{B(\alpha_A+i,\beta_A+\beta_B)}{(\beta_B+i) B(1+i, \beta_B) B(\alpha_A, \beta_A) }$$
 
-```{r betaa,cache=TRUE}
+```{r betaa}
 h <- function(alpha_a, beta_a,
               alpha_b, beta_b) {
   j <- seq.int(0, round(alpha_b) - 1)
@@ -469,7 +469,7 @@ h(piazza$alpha1, piazza$beta1,
 
 - 贝塔分布在$\alpha$与$\beta$比较大时接近正态分布，可以直接用正态分布的解析解求，速度快很多
 
-```{r betan,cache=TRUE}
+```{r betan}
 h_approx <- function(alpha_a, beta_a,
                      alpha_b, beta_b) {
   u1 <- alpha_a / (alpha_a + beta_a)
@@ -486,7 +486,7 @@ h_approx(piazza$alpha1, piazza$beta1, aaron$alpha1, aaron$beta1)
 
 - 这是个列联表问题，频率学派对比两个比例
 
-```{r fl,cache=TRUE}
+```{r fl}
 two_players <- bind_rows(aaron, piazza)
 
 two_players %>%
@@ -498,7 +498,7 @@ prop.test(two_players$H, two_players$AB)
 
 - 贝叶斯学派对比两个比例
 
-```{r bp,cache=TRUE}
+```{r bp}
 credible_interval_approx <- function(a, b, c, d) {
   u1 <- a / (a + b)
   u2 <- c / (c + d)
@@ -519,7 +519,7 @@ credible_interval_approx(piazza$alpha1, piazza$beta1, aaron$alpha1, aaron$beta1)
 
 - 多个球员对比一个
 
-```{r mp,cache=TRUE}
+```{r mp}
 set.seed(2016)
 
 intervals <- career_eb %>%
@@ -554,7 +554,7 @@ ggplot(all_intervals, aes(x = estimate, y = name, color = type)) +
 
 - 先选那些击球率更好的球员
 
-```{r fdre,cache=TRUE}
+```{r fdre}
 # 对比打算交易的球员与其他球员
 career_eb_vs_piazza <- bind_cols(
   career_eb,
@@ -595,7 +595,7 @@ career %>%
 
 - 直接使用经验贝叶斯方法会导致整体向均值收敛，这高估了新手的数据
 
-```{r ife,cache=T}
+```{r ife}
 prior_mu <- alpha0 / (alpha0 + beta0)
 career_eb %>%
   filter(AB >= 20) %>%
@@ -629,7 +629,7 @@ $$H_i \sim \mbox{Binom}(\mbox{AB}_i, p_i)$$
 
 - 寻找拟合后的模型参数，构建新的先验概率
 
-```{r fitbb,cache=TRUE}
+```{r fitbb}
 library(gamlss)
 # 拟合模型
 fit <- gamlss(cbind(H, AB - H) ~ log(AB),
@@ -658,7 +658,7 @@ crossing(x = seq(0.08, .35, .001), AB = c(1, 10, 100, 1000, 10000)) %>%
 
 ### 求后验概率
 
-```{r fitpo,cache=TRUE}
+```{r fitpo}
 # 计算所有拟合值
 mu <- fitted(fit, parameter = "mu")
 sigma <- fitted(fit, parameter = "sigma")
@@ -889,7 +889,7 @@ set.seed(2017)
 # 先随机分为两组
 starting_data <- career %>%
   filter(AB >= 20) %>%
-  select(-year, -bats, -isPitcher) %>%
+  dplyr::select(-year, -bats, -isPitcher) %>%
   mutate(cluster = factor(sample(c("A", "B"), n(), replace = TRUE)))
 
 # 观察效果
@@ -924,7 +924,7 @@ fits
 
 ```{r EMbayes}
 assignments <- starting_data %>%
-  select(-cluster) %>%
+  dplyr::select(-cluster) %>%
   crossing(fits) %>%
   mutate(likelihood = prior * VGAM::dbetabinom.ab(H, AB, alpha, beta)) %>%
   group_by(playerID) %>%
@@ -950,7 +950,7 @@ iterate_em <- function(state, ...) {
     mutate(prior = number / sum(number))
 
   assignments <- assignments %>%
-    select(playerID:average) %>%
+    dplyr::select(playerID:average) %>%
     crossing(fits) %>%
     mutate(likelihood = prior * VGAM::dbetabinom.ab(H, AB, alpha, beta)) %>%
     group_by(playerID) %>%
