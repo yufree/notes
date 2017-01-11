@@ -147,7 +147,7 @@ ggplot(career_filtered) +
 
 - 那么如果一个人数据少，我们倾向于认为他是平均水平；数据多则认为符合个人表现
 
-- 这事实上是一个分层结构，贝叶斯推断里隐含了这么一个从整体到个人的过程
+- 这事实上是一个分层结构，经验贝叶斯推断里隐含了这么一个从整体到个人的过程
 
 ```{r ebayes2,cache=T}
 career_eb <- career %>%
@@ -384,7 +384,7 @@ career_eb %>%
     ylab("Number of players included")
 ```
 
-- 200个人进入名人堂可能有1/4的球员不合适，如果是50个人进入名人堂那么基本不会犯错
+- 200个人进入名人堂可能有约1/4的球员不合适，如果是50个人进入名人堂那么基本不会犯错
 
 - q值是一个整体而非个体的平均错误率，具有累积性，不代表q值大的那一个就是错的
 
@@ -580,7 +580,7 @@ better
 
 ## 影响因子
 
-- 击球率高还有可能是因为得到的机会多或者光环效应，一开始凭运气打得好，后面给机会多，通过经验累积提高了击球率
+- 击球率高除了能力影响外还有可能是因为得到的机会多或者光环效应，例如一开始凭运气打得好，后面给机会多，通过经验累积提高了击球率
 
 ```{r if, echo=TRUE}
 career %>%
@@ -850,3 +850,252 @@ players_posterior %>%
 ```
 
 - 经验贝叶斯对先验概率的估计类似频率学派，但进行的又是贝叶斯分析
+
+## 混合概率模型
+
+- 用击球概率为例，击球手跟非击球手的概率分布是不一样的，那么实际看到的总体球员概率分布应该是一个混合在一起的两个独立分布
+
+```{r mixermodel1}
+# 找出投球3次以上的人
+pitchers <- Pitching %>%
+  group_by(playerID) %>%
+  summarize(gamesPitched = sum(G)) %>%
+  filter(gamesPitched > 3)
+
+# 参考上一章节的发现找出击球率稳定的选手 
+
+career <- Batting %>%
+  filter(AB > 0, lgID == "NL", yearID >= 1980) %>%
+  group_by(playerID) %>%
+  summarize(H = sum(H), AB = sum(AB), year = mean(yearID)) %>%
+  mutate(average = H / AB,
+         isPitcher = playerID %in% pitchers$playerID)
+
+# 链接上名字
+career <- Master %>%
+  tbl_df() %>%
+  dplyr::select(playerID, nameFirst, nameLast, bats) %>%
+  unite(name, nameFirst, nameLast, sep = " ") %>%
+  inner_join(career, by = "playerID")
+```
+
+### 期望最大算法
+
+- 将一个分布拆成两个，可以使用期望最大算法
+
+```{r EM}
+set.seed(2017)
+
+# 先随机分为两组
+starting_data <- career %>%
+  filter(AB >= 20) %>%
+  select(-year, -bats, -isPitcher) %>%
+  mutate(cluster = factor(sample(c("A", "B"), n(), replace = TRUE)))
+
+# 观察效果
+starting_data %>%
+  ggplot(aes(average, color = cluster)) +
+  geom_density()
+
+library(VGAM)
+fit_bb_mle <- function(x, n) {
+  # dbetabinom.ab 是用n、alpha与beta作为参数的二项贝塔分布的似然度函数
+  ll <- function(alpha, beta) {
+    -sum(dbetabinom.ab(x, n, alpha, beta, log = TRUE))
+  }
+  m <- stats4::mle(ll, start = list(alpha = 3, beta = 10), method = "L-BFGS-B",
+                   lower = c(0.001, .001))
+  ab <- stats4::coef(m)
+  data_frame(alpha = ab[1], beta = ab[2], number = length(x))
+}
+# 看下初始参数
+fit_bb_mle(starting_data$H, starting_data$AB)
+
+# 看下随机分拆后的参数并生成各分组样本数的先验概率
+fits <- starting_data %>%
+  group_by(cluster) %>%
+  do(fit_bb_mle(.$H, .$AB)) %>%
+  ungroup() %>%
+  mutate(prior = number / sum(number))
+
+fits
+```
+- 算法优化的期望是将这两个分布分拆开，前面一次分拆已经产生微弱差异，下面就通过贝叶斯思想对数据更新这个差异重新分组让两者分开
+
+```{r EMbayes}
+assignments <- starting_data %>%
+  select(-cluster) %>%
+  crossing(fits) %>%
+  mutate(likelihood = prior * VGAM::dbetabinom.ab(H, AB, alpha, beta)) %>%
+  group_by(playerID) %>%
+  top_n(1, likelihood) %>%
+  ungroup()
+# 去除掉原有分组，根据更新的后验概率重新分组
+assignments
+# 观察更新后概率分布
+ggplot(assignments, aes(average, fill = cluster)) +
+  geom_histogram()
+```
+
+- 不断重复这个过程，最终分拆数据（其实就是第一步分拆最重要，后面直接收敛了）
+
+```{r EMrepeat}
+set.seed(1987)
+
+iterate_em <- function(state, ...) {
+  fits <- state$assignments %>%
+    group_by(cluster) %>%
+    do(mutate(fit_bb_mle(.$H, .$AB), number = nrow(.))) %>%
+    ungroup() %>%
+    mutate(prior = number / sum(number))
+
+  assignments <- assignments %>%
+    select(playerID:average) %>%
+    crossing(fits) %>%
+    mutate(likelihood = prior * VGAM::dbetabinom.ab(H, AB, alpha, beta)) %>%
+    group_by(playerID) %>%
+    top_n(1, likelihood) %>%
+    ungroup()
+  
+  list(assignments = assignments,
+       fits = fits)
+}
+
+library(purrr)
+# 使用purrr包存储中间结果
+iterations <- accumulate(1:5, iterate_em, .init = list(assignments = starting_data))
+
+assignment_iterations <- iterations %>%
+  map_df("assignments", .id = "iteration")
+# 观察收敛过程
+assignment_iterations %>%
+  ggplot(aes(average, fill = cluster)) +
+  geom_histogram() +
+  facet_wrap(~ iteration)
+
+fit_iterations <- iterations %>%
+  map_df("fits", .id = "iteration")
+# 两个分布的收敛过程
+fit_iterations %>%
+  crossing(x = seq(.001, .4, .001)) %>%
+  mutate(density = prior * dbeta(x, alpha, beta)) %>%
+  ggplot(aes(x, density, color = iteration, group = iteration)) +
+  geom_line() +
+  facet_wrap(~ cluster)
+```
+
+### 分配
+
+- 得到每个选手在两个分布中后验概率后要对其进行分配，这里我们认为拆分出的两个分布其实就是是否是击球手的两个分组，由于两组重叠较多，直接分配会有困难
+
+```{r assign}
+# 找6个击球数100的选手进行分配
+batter_100 <- career %>%
+  filter(AB == 100) %>%
+  arrange(average)
+batter_100
+# 前面算法得到的最终结果
+final_parameters <- fit_iterations %>%
+  filter(iteration == max(iteration))
+
+final_parameters
+# 观察球员位置
+final_parameters %>%
+  crossing(x = 0:45) %>%
+  mutate(density = prior * VGAM::dbetabinom.ab(x, 100, alpha, beta)) %>%
+  ggplot(aes(x, density)) +
+  geom_line(aes(color = cluster)) +
+  geom_vline(aes(xintercept = H), data = batter_100, lty = 2) +
+  geom_text(aes(x = H, y = -.022, label = name), data = batter_100, hjust = 1, vjust = 1, angle = 270) +
+  labs(x = "H (out of 100 at-bats)",
+       y = "Likelihood of this H out of 100 hits")
+
+# 根据贝叶斯理论，我们可以用在A分组的似然度比上两个分组似然度的和得到后验概率
+
+final_parameters %>%
+  crossing(H = 1:40) %>%
+  transmute(H, cluster, likelihood = prior * VGAM::dbetabinom.ab(H, 100, alpha, beta)) %>%
+  spread(cluster, likelihood) %>%
+  mutate(probability_A = A / (A + B)) %>%
+  ggplot(aes(H, probability_A)) +
+  geom_line() +
+  geom_vline(aes(xintercept = H), data = batter_100, lty = 2) +
+  geom_text(aes(x = H, y = 0, label = name), data = batter_100, hjust = 1, vjust = 1, angle = 270) +
+  labs(x = "H (out of 100 at-bats)",
+       y = "(Likelihood if pitcher) / (Likelihood if pitcher + Likelihood if not)",
+       title = "Posterior probability a player is in the pitcher cluster")
+```
+
+- 通过构建后验概率，我们可以直接对结果基于概率进行分组
+
+```{r groupbayes}
+career_likelihoods <- career %>%
+  filter(AB > 20) %>%
+  crossing(final_parameters) %>%
+  mutate(likelihood = prior * VGAM::dbetabinom.ab(H, AB, alpha, beta)) %>%
+  group_by(playerID) %>%
+  mutate(posterior = likelihood / sum(likelihood))
+
+career_assignments <- career_likelihoods %>%
+  top_n(1, posterior) %>%
+  ungroup()
+# 对比这种分组与实际数据的结果
+career_assignments %>%
+  filter(posterior > .8) %>%
+  count(isPitcher, cluster) %>%
+  spread(cluster, n)
+```
+
+- 这样基于对概率分布的观察，我们可以实现有现实意义的分组，对分组的改进则需要对数据的进一步理解
+
+### 经验贝叶斯收缩
+
+- 混合模型下前面所做的工作都需要重新考虑
+
+```{r ebayesem}
+# 观察击球数100选手的后验概率分布
+batting_data <- career_likelihoods %>%
+  ungroup() %>%
+  filter(AB == 100) %>%
+  mutate(name = paste0(name, " (", H, "/", AB, ")"),
+         name = reorder(name, H),
+         alpha1 = H + alpha,
+         beta1 = AB - H + beta)
+
+batting_data %>%
+  crossing(x = seq(0, .4, .001)) %>%
+  mutate(posterior_density = posterior * dbeta(x, alpha1, beta1)) %>%
+  group_by(name, x) %>%
+  summarize(posterior_density = sum(posterior_density)) %>%
+  ggplot(aes(x, posterior_density, color = name)) +
+  geom_line(show.legend = FALSE) +
+  geom_vline(aes(xintercept = average), data = batting_data, lty = 2) +
+  facet_wrap(~ name) +
+  labs(x = "Batting average (actual average shown as dashed line)",
+       y = "Posterior density after updating")
+```
+
+- 此时不太好判断属于哪一分布，可采用后验概率对平均分布进行加权
+
+```{r weightdist}
+eb_shrinkage <- career_likelihoods %>%
+  mutate(shrunken_average = (H + alpha) / (AB + alpha + beta)) %>%
+  group_by(playerID) %>%
+  summarize(shrunken_average = sum(posterior * shrunken_average))
+# 观察加权分布
+eb_shrinkage %>%
+  inner_join(career) %>%
+  filter(AB > 50) %>%
+  gather(type, value, average, shrunken_average) %>%
+  mutate(type = ifelse(type == "average", "Raw batting average", "Average posterior"),
+         type = relevel(factor(type), "Raw batting average")) %>%
+  ggplot(aes(AB, value)) +
+  geom_point() +
+  facet_wrap(~ type) +
+  scale_x_log10() +
+  ylab("Estimate")
+```
+- 收敛后的分布会朝向两个中心而不是一个，并非所有之前的方法（例如区间估计）都可以适用到混合模型里，需要根据实际情况进行分析
+
+
+
