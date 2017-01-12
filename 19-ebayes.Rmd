@@ -560,7 +560,7 @@ career_eb_vs_piazza <- bind_cols(
   career_eb,
   credible_interval_approx(piazza$alpha1, piazza$beta1,
                            career_eb$alpha1, career_eb$beta1)) %>%
-  select(name, posterior, conf.low, conf.high)
+  dplyr::select(name, posterior, conf.low, conf.high)
 
 career_eb_vs_piazza
 
@@ -1296,7 +1296,7 @@ tidy(bb_reg)
 set.seed(2017)
 
 career_sim_ab <- augment(bb_reg, career) %>%
-  select(playerID, AB, true_alpha0 = .alpha0, true_beta0 = .beta0) %>%
+  dplyr::select(playerID, AB, true_alpha0 = .alpha0, true_beta0 = .beta0) %>%
   mutate(p = rbeta(n(), true_alpha0, true_beta0),
          H = rbinom(n(), AB, p))
 # 真实值
@@ -1388,7 +1388,7 @@ sim_replication_au %>%
 sim_replication_intervals <- sim_replication_models %>%
   crossing(cred_level = c(seq(.5, .9, .05), .95)) %>%
   unnest(pmap(list(prior, data, cred_level = cred_level), augment)) %>%
-  select(replication, cred_level, p, .low, .high)
+  dplyr::select(replication, cred_level, p, .low, .high)
 
 sim_replication_intervals %>%
   mutate(cover = .low <= p & p <= .high) %>%
