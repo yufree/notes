@@ -10,11 +10,22 @@ script:
 - ./_deploy.sh
 sudo: true
 r_github_packages:
+<<<<<<< HEAD
 - dgrtwo/ebbr
+=======
+  - dgrtwo/ebbr
+>>>>>>> 85bfe75bfde0bde13a3b8081260bf0b2c55e3168
 cache:
-  packages: true
+  packages: yes
   directories:
+<<<<<<< HEAD
   - $TRAVIS_BUILD_DIR/_bookdown_files
 env:
   global:
   - secure: beIqioUvbzd5hX6yTcpom5VlF31g0f4H/zqUDZFS2Svn2Je9qu4BieHUY9nb5svv2OIplo+ptYCgP9XqJ3xczNSIely/2F+hE2+exXUYl+8b4vVR8kLYW/Aw20/u/LRMCxHmFUaxkAW5ykHrrJWVIv6TR3+03sUzmc4YRUDTV5HkaHW2b1RJPgZy225ySOQs3Oc9X8Bi/Tn3sXYanB+a75XHj1D/kLxu7qr3SAd2Cnb/SBWHq/IemAy2s4gAvnaKINPk/BH/Ijn9QHKVwFBUYjlP/JR6cwWasfwV+tU8Vu+gZ3Y8wycNSW2OsDR80umbH3/ipyK02QulBwt64hr3oJgoMs3sWj5gouIpexBRi3zZtChFAtWfLA+zpZJNtNoDP1K0q6s4ji/Rv671bx/URfTwVScH1DsFz4JLCM05BHST5YMXk7K2nNmR8ESzFNwvnKkQe5hB3Q1HEio+TQG/662kWNfACqmpgQrrmgTbA44llH+nEIO8/d/GmVpd5VzQ/C/p3HQx7BbmjPKzqZH1d10iORlSvjEjTaa9SVs9cdgbdehjDGnsKMDrFvFaFtyjaxhCn0RcpMIPcZiDhijagw+xdpLeg1EB1S6/0CIWoJszvw9rfkaSsug+Auv6Z2dNuMS5uyDPeB91RvFQi8rU+MJmQ1FfTYeVF/SRz4buB+I=
+=======
+    - $TRAVIS_BUILD_DIR/_bookdown_files
+env:
+  global:
+  - secure: zHTTW4R4xIwkkfPN+b+31iIJdGlC96GKKlr7GHx3hcxRsmtgfTv4piqeh/hG/XzyOUkBIb9tyBOONLtFLIxxYZcI93n7nlavZcVOz3uo+Mj+MMh8AUxqopfaxXrNf4GvYeLtZnkouUdm4fUOnMSuWWCh1ex0UkFSWqwKVzgB/NeokdupR+KqJDj8gMB76AMIFxYmr+Bl1OlIDNMQhEPJcO5GY7wGHE4PeIHpWKkRHHakxgXOhuaxFaFpVqtfrwHnDQyzyTB1HlMRJnuVaBGhbZ3POCIBP2ocMrwhSbpNES9SrpsNZnYpfCBy9CYxTjhpUQ+cDljriwGV4nNrEQdKgXUhsiWnK3TLsl8RN1reiwlyOJEwPAECa1nWnUeZPaFq+GDcr0Mfd/7LcuEm5FI4s0/88su27izGzqKQ9iqbkqebgd35Lg8wFoYnERqy8W37zbAkGwdoHTzaUdd1RaFNfVEOrmC+idDlZhoL1LWCnRsTxJIxDF8lDupGNvyd/YC5OoZ2ijK8TtBskKeAb4pw6LDNMApPqITo3YbK9vvcUXs4d6/rr7RjmUEvzdydTedEWAsHznUaIui43ZfPxEVRoA45n1A7/9tFm6X8OVP8tP+nzXji4uE7zrj3WPrkQmtQ6auyJk0hFPsYjN5hkQGGZ10h7Yugzx3cVeYyVp3FX+w=
+>>>>>>> 85bfe75bfde0bde13a3b8081260bf0b2c55e3168
