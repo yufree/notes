@@ -761,7 +761,7 @@ crossing(bats = c("L", "R"),
 
 - 另一个要考虑的因素是不同年份的平均击球率可能也有起伏
 
-```{r batyear}
+```{r batyear, eval=F}
 career3 %>%
   mutate(decade = factor(round(year - 5, -1))) %>%
   filter(AB >= 500) %>%
@@ -801,7 +801,7 @@ plot_gamlss_fit(fit3)
 
 - 同时另一个问题是这些因素会交互影响
 
-```{r interact}
+```{r interact, eval=F}
 fit4 <- gamlss(cbind(H, AB - H) ~ 0 + ns(year, 5) * bats + log(AB),
                data = career3,
                family = BB(mu.link = "identity"))
@@ -825,7 +825,7 @@ Pitching %>%
 
 - 左右手之间的差距伴随年份在逐渐减少
 
-```{r yearcompare}
+```{r yearcompare,eval=F}
 players <- crossing(year = c(1915, 1965, 2015),
                     bats = c("L", "R"),
                     H = 30,
