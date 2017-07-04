@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Notes</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="This is notes from yufree">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
 
   <meta property="og:title" content="Notes" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Miao YU">
 
 
-<meta name="date" content="2017-05-21">
+<meta name="date" content="2017-07-04">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="python.html">
 <link rel="next" href="section-22.html">
-
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -93,6 +91,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -796,7 +795,7 @@ Rossi[<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">1</s
 ## Score (logrank) test = 33.5  on 7 df,   p=2.11e-05</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot time vs survival prob</span>
 <span class="kw">plot</span>(<span class="kw">survfit</span>(mod.allison), <span class="dt">ylim=</span><span class="kw">c</span>(.<span class="dv">7</span>, <span class="dv">1</span>), <span class="dt">xlab=</span><span class="st">&#39;Weeks&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Proportion Not Rearrested&#39;</span>)</code></pre></div>
-<p><img src="Notes_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><img src="Notes_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <div id="result" class="section level3">
 <h3><span class="header-section-number">21.4.1</span> result</h3>
 <ul>
@@ -817,7 +816,7 @@ Rossi.fin &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span
 <span class="kw">detach</span>()
 <span class="kw">plot</span>(<span class="kw">survfit</span>(mod.allison, <span class="dt">newdata=</span>Rossi.fin), <span class="dt">conf.int=</span>T, <span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">ylim=</span><span class="kw">c</span>(.<span class="dv">6</span>, <span class="dv">1</span>))
 <span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;fin = 0&#39;</span>, <span class="st">&#39;fin = 1&#39;</span>), <span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</code></pre></div>
-<p><img src="Notes_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p><img src="Notes_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 <ul>
 <li>the higher estimated ‘survival’ of those receiving financial aid, but the two confidence envelopes overlap substantially, even after 52 weeks</li>
 </ul>
@@ -908,7 +907,7 @@ modallison3</code></pre></div>
 ## GLOBAL       NA 7.13046 0.0679</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))
 <span class="kw">plot</span>(<span class="kw">cox.zph</span>(modallison3))</code></pre></div>
-<p><img src="Notes_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p><img src="Notes_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <ul>
 <li>there appears to be a trend in the plot for age, with the age effect declining with time</li>
 </ul>
@@ -946,8 +945,9 @@ modallison4</code></pre></div>
         </div>
       </div>
 <a href="python.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="section-22.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="section-22.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
@@ -990,7 +990,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);

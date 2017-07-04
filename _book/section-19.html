@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Notes</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="This is notes from yufree">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
 
   <meta property="og:title" content="Notes" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Miao YU">
 
 
-<meta name="date" content="2017-05-21">
+<meta name="date" content="2017-07-04">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="section-18.html">
 <link rel="next" href="python.html">
-
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -93,6 +91,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -782,8 +781,7 @@ db &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="d
 <li><p>我们对于小样本量的统计推断会有天然的不信任，如何通过统计量来描述？</p></li>
 <li><p>下面用MLB的数据说明，首先提取出球员的击球数据：</p></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
-<span class="kw">library</span>(dplyr)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(tidyr)
 <span class="kw">library</span>(Lahman)
 <span class="co"># 拿到击球数据</span>
@@ -803,18 +801,18 @@ career &lt;-<span class="st"> </span>Master %&gt;%
 <span class="st">  </span><span class="kw">select</span>(-playerID)
 <span class="co"># 展示数据</span>
 career</code></pre></div>
-<pre><code>## # A tibble: 9,429 × 4
+<pre><code>## # A tibble: 9,429 x 4
 ##                 name     H    AB average
 ##                &lt;chr&gt; &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;
-## 1         Hank Aaron  3771 12364  0.3050
-## 2       Tommie Aaron   216   944  0.2288
-## 3          Andy Abad     2    21  0.0952
-## 4        John Abadie    11    49  0.2245
-## 5     Ed Abbaticchio   772  3044  0.2536
-## 6        Fred Abbott   107   513  0.2086
-## 7        Jeff Abbott   157   596  0.2634
-## 8        Kurt Abbott   523  2044  0.2559
-## 9         Ody Abbott    13    70  0.1857
+##  1        Hank Aaron  3771 12364  0.3050
+##  2      Tommie Aaron   216   944  0.2288
+##  3         Andy Abad     2    21  0.0952
+##  4       John Abadie    11    49  0.2245
+##  5    Ed Abbaticchio   772  3044  0.2536
+##  6       Fred Abbott   107   513  0.2086
+##  7       Jeff Abbott   157   596  0.2634
+##  8       Kurt Abbott   523  2044  0.2559
+##  9        Ody Abbott    13    70  0.1857
 ## 10 Frank Abercrombie     0     4  0.0000
 ## # ... with 9,419 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 击球前5</span>
@@ -1070,7 +1068,8 @@ career_eb %&gt;%
 <li><p>一般这类区间估计可以用二项式比例估计来进行，不过没有先验经验的限制置信区间大到没意义</p></li>
 <li><p>经验贝叶斯会给出一个后验分布，这个分布可以用来求可信区间</p></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 给出后验分布</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
+<span class="co"># 给出后验分布</span>
 career &lt;-<span class="st"> </span>Batting %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(AB &gt;<span class="st"> </span><span class="dv">0</span>) %&gt;%
 <span class="st">  </span><span class="kw">anti_join</span>(Pitching, <span class="dt">by =</span> <span class="st">&quot;playerID&quot;</span>) %&gt;%
@@ -1108,19 +1107,7 @@ yankee_1998 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class=
 yankee_1998_career &lt;-<span class="st"> </span>career_eb %&gt;%
 <span class="st">    </span><span class="kw">filter</span>(playerID %in%<span class="st"> </span>yankee_1998)
 
-<span class="co"># 展示球员的后验分布</span>
-<span class="kw">library</span>(broom)
-yankee_beta &lt;-<span class="st"> </span>yankee_1998_career %&gt;%
-<span class="st">    </span><span class="kw">inflate</span>(<span class="dt">x =</span> <span class="kw">seq</span>(.<span class="dv">18</span>, .<span class="dv">33</span>, .<span class="dv">0002</span>)) %&gt;%
-<span class="st">    </span><span class="kw">ungroup</span>() %&gt;%
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">density =</span> <span class="kw">dbeta</span>(x, alpha1, beta1))
-
-<span class="kw">ggplot</span>(yankee_beta, <span class="kw">aes</span>(x, density, <span class="dt">color =</span> name)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> function(x) <span class="kw">dbeta</span>(x, alpha0, beta0),
-                  <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)</code></pre></div>
-<p><img src="Notes_files/figure-html/ci-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 提取可信区间</span>
+<span class="co"># 提取可信区间</span>
 yankee_1998_career &lt;-<span class="st"> </span>yankee_1998_career %&gt;%
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">low  =</span> <span class="kw">qbeta</span>(.<span class="dv">025</span>, alpha1, beta1),
            <span class="dt">high =</span> <span class="kw">qbeta</span>(.<span class="dv">975</span>, alpha1, beta1))
@@ -1214,7 +1201,7 @@ yankee_1998_career %&gt;%
 <span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> alpha0 /<span class="st"> </span>(alpha0 +<span class="st"> </span>beta0), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>) +
 <span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;Estimated batting average (w/ 95% interval)&quot;</span>) +
 <span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Player&quot;</span>)</code></pre></div>
-<p><img src="Notes_files/figure-html/ci-2.png" width="672" /></p>
+<p><img src="Notes_files/figure-html/ci-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 对比置信区间与可信区间</span>
 career_eb &lt;-<span class="st"> </span>career_eb %&gt;%
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">low =</span> <span class="kw">qbeta</span>(.<span class="dv">025</span>, alpha1, beta1),
@@ -1248,7 +1235,7 @@ combined %&gt;%
 <span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;Estimated batting average&quot;</span>) +
 <span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Player&quot;</span>) +
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">color =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
-<p><img src="Notes_files/figure-html/ci-3.png" width="672" /></p>
+<p><img src="Notes_files/figure-html/ci-2.png" width="672" /></p>
 <ul>
 <li>可信区间与置信区间很大的区别在于前者考虑了先验概率进而实现了区间的收缩，后者则可看作无先验贝塔分布给出的区间估计，频率学派目前没有很好的收缩区间估计的方法</li>
 </ul>
@@ -1271,7 +1258,7 @@ career_eb %&gt;%
 <p><img src="Notes_files/figure-html/lp-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 提取该球员数据</span>
 career_eb %&gt;%<span class="st"> </span><span class="kw">filter</span>(name ==<span class="st"> &quot;Hank Aaron&quot;</span>)</code></pre></div>
-<pre><code>## # A tibble: 1 × 10
+<pre><code>## # A tibble: 1 x 10
 ##    playerID       name     H    AB average eb_estimate alpha1 beta1   low
 ##       &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 aaronha01 Hank Aaron  3771 12364   0.305       0.304   3850  8819 0.296
@@ -1366,19 +1353,7 @@ career_eb %&gt;%
 <h2><span class="header-section-number">19.10</span> 贝叶斯视角的假设检验</h2>
 <ul>
 <li><p>前面描述的是击球率如何求，如何进行区间估计与多个体的错误率控制，面向的个体或整体，那么如何解决比较问题</p></li>
-<li><p>设想多个球员，我们考虑如何去比较他们击球率</p></li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 选三个球员</span>
-career_eb %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(name %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Hank Aaron&quot;</span>, <span class="st">&quot;Mike Piazza&quot;</span>, <span class="st">&quot;Hideki Matsui&quot;</span>)) %&gt;%
-<span class="st">  </span><span class="kw">inflate</span>(<span class="dt">x =</span> <span class="kw">seq</span>(.<span class="dv">26</span>, .<span class="dv">33</span>, .<span class="dv">00025</span>)) %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">density =</span> <span class="kw">dbeta</span>(x, alpha1, beta1)) %&gt;%
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, density, <span class="dt">color =</span> name)) +
-<span class="st">  </span><span class="kw">geom_line</span>() +
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Batting average&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
-<p><img src="Notes_files/figure-html/ht-1.png" width="672" /></p>
-<ul>
-<li><p>如果两个球员击球率的概率密度曲线比较接近，那么即便均值有不同我们也无法进行区分；如果重叠比较少，那么我们有理由认为他们之间的差异显著</p></li>
+<li><p>设想多个球员，我们考虑如何去比较他们击球率。如果两个球员击球率的概率密度曲线比较接近，那么即便均值有不同我们也无法进行区分；如果重叠比较少，那么我们有理由认为他们之间的差异显著</p></li>
 <li><p>贝叶斯视角下如何定量描述这个差异是否显著？</p></li>
 </ul>
 <div id="-1" class="section level3">
@@ -1513,7 +1488,7 @@ two_players %&gt;%
 }
 
 <span class="kw">credible_interval_approx</span>(piazza$alpha1, piazza$beta1, aaron$alpha1, aaron$beta1)</code></pre></div>
-<pre><code>## # A tibble: 1 × 4
+<pre><code>## # A tibble: 1 x 4
 ##   posterior estimate conf.low conf.high
 ##       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
 ## 1     0.606 -0.00182  -0.0151    0.0115</code></pre>
@@ -1736,7 +1711,7 @@ career_eb_wAB %&gt;%
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 展示数据</span>
 career2 %&gt;%
 <span class="st">        </span><span class="kw">count</span>(bats)</code></pre></div>
-<pre><code>## # A tibble: 4 × 2
+<pre><code>## # A tibble: 4 x 2
 ##     bats     n
 ##   &lt;fctr&gt; &lt;int&gt;
 ## 1      B   767
@@ -2115,10 +2090,7 @@ career_assignments %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(posterior &gt;<span class="st"> </span>.<span class="dv">8</span>) %&gt;%
 <span class="st">  </span><span class="kw">count</span>(isPitcher, cluster) %&gt;%
 <span class="st">  </span><span class="kw">spread</span>(cluster, n)</code></pre></div>
-<pre><code>## Source: local data frame [2 x 3]
-## Groups: isPitcher [2]
-## 
-## # A tibble: 2 x 3
+<pre><code>## # A tibble: 2 x 3
 ##   isPitcher     A     B
 ## *     &lt;lgl&gt; &lt;int&gt; &lt;int&gt;
 ## 1     FALSE    30  2043
@@ -2565,8 +2537,9 @@ sim_replication_prop_tests %&gt;%
         </div>
       </div>
 <a href="section-18.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="python.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="python.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
@@ -2609,7 +2582,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);
