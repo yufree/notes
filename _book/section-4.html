@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Notes</title>
   <meta name="description" content="This is notes from yufree">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Notes" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Miao YU">
 
 
-<meta name="date" content="2017-07-04">
+<meta name="date" content="2018-01-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -753,7 +753,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>设定工作目录与数据存储目录</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (!<span class="kw">file.exists</span>(<span class="st">&quot;data&quot;</span>)) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(<span class="st">&quot;data&quot;</span>)) {
     <span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>)
 }</code></pre></div>
 <ul>
@@ -837,7 +837,7 @@ jsonData &lt;-<span class="st"> </span><span class="kw">fromJSON</span>(<span cl
 <span class="co"># 列出文件名</span>
 <span class="kw">names</span>(jsonData)
 <span class="co"># 可嵌套截取</span>
-jsonData$owner$login
+jsonData<span class="op">$</span>owner<span class="op">$</span>login
 <span class="co"># 可将R对象写成json文件</span>
 myjson &lt;-<span class="st"> </span><span class="kw">toJSON</span>(iris, <span class="dt">pretty=</span><span class="ot">TRUE</span>)</code></pre></div>
 </div>
@@ -867,7 +867,7 @@ allTables &lt;-<span class="st"> </span><span class="kw">dbListTables</span>(hg1
 <span class="kw">dbGetQuery</span>(hg19, <span class="st">&quot;select count(*) from affyU133Plus2&quot;</span>)
 <span class="co"># 选择子集</span>
 query &lt;-<span class="st"> </span><span class="kw">dbSendQuery</span>(hg19, <span class="st">&quot;select * from affyU133Plus2 where misMatches between 1 and 3&quot;</span>)
-affyMis &lt;-<span class="st"> </span><span class="kw">fetch</span>(query); <span class="kw">quantile</span>(affyMis$misMatches)</code></pre></div>
+affyMis &lt;-<span class="st"> </span><span class="kw">fetch</span>(query); <span class="kw">quantile</span>(affyMis<span class="op">$</span>misMatches)</code></pre></div>
 </div>
 <div id="hdf5" class="section level2">
 <h2><span class="header-section-number">4.8</span> 读取HDF5数据</h2>
@@ -881,13 +881,13 @@ created =<span class="st"> </span><span class="kw">h5createGroup</span>(<span cl
 created =<span class="st"> </span><span class="kw">h5createGroup</span>(<span class="st">&quot;example.h5&quot;</span>,<span class="st">&quot;baa&quot;</span>)
 created =<span class="st"> </span><span class="kw">h5createGroup</span>(<span class="st">&quot;example.h5&quot;</span>,<span class="st">&quot;foo/foobaa&quot;</span>)
 <span class="kw">h5ls</span>(<span class="st">&quot;example.h5&quot;</span>)
-A =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">10</span>,<span class="dt">nr=</span><span class="dv">5</span>,<span class="dt">nc=</span><span class="dv">2</span>)
+A =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">nr=</span><span class="dv">5</span>,<span class="dt">nc=</span><span class="dv">2</span>)
 <span class="kw">h5write</span>(A, <span class="st">&quot;example.h5&quot;</span>,<span class="st">&quot;foo/A&quot;</span>)
 B =<span class="st"> </span><span class="kw">array</span>(<span class="kw">seq</span>(<span class="fl">0.1</span>,<span class="fl">2.0</span>,<span class="dt">by=</span><span class="fl">0.1</span>),<span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">2</span>))
 <span class="kw">attr</span>(B, <span class="st">&quot;scale&quot;</span>) &lt;-<span class="st"> &quot;liter&quot;</span>
 <span class="kw">h5write</span>(B, <span class="st">&quot;example.h5&quot;</span>,<span class="st">&quot;foo/foobaa/B&quot;</span>)
 <span class="kw">h5ls</span>(<span class="st">&quot;example.h5&quot;</span>)
-df =<span class="st"> </span><span class="kw">data.frame</span>(1L:5L,<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">length.out=</span><span class="dv">5</span>),
+df =<span class="st"> </span><span class="kw">data.frame</span>(1L<span class="op">:</span>5L,<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">length.out=</span><span class="dv">5</span>),
   <span class="kw">c</span>(<span class="st">&quot;ab&quot;</span>,<span class="st">&quot;cde&quot;</span>,<span class="st">&quot;fghi&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;s&quot;</span>), <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
 <span class="kw">h5write</span>(df, <span class="st">&quot;example.h5&quot;</span>,<span class="st">&quot;df&quot;</span>)
 <span class="kw">h5ls</span>(<span class="st">&quot;example.h5&quot;</span>)
@@ -935,7 +935,7 @@ sig =<span class="st"> </span><span class="kw">sign_oauth1.0</span>(myapp,
                       <span class="dt">token_secret =</span> <span class="st">&quot;yourTokenSecretHere&quot;</span>)
 homeTL =<span class="st"> </span><span class="kw">GET</span>(<span class="st">&quot;https://api.twitter.com/1.1/statuses/home_timeline.json&quot;</span>, sig)
 json1 =<span class="st"> </span><span class="kw">content</span>(homeTL)
-json2 =<span class="st"> </span>jsonlite::<span class="kw">fromJSON</span>(<span class="kw">toJSON</span>(json1))</code></pre></div>
+json2 =<span class="st"> </span>jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">toJSON</span>(json1))</code></pre></div>
 </div>
 <div id="section-4.11" class="section level2">
 <h2><span class="header-section-number">4.11</span> 读取其他资源</h2>
@@ -985,12 +985,12 @@ json2 =<span class="st"> </span>jsonlite::<span class="kw">fromJSON</span>(<span
 <li>Hmisc包</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Hmisc)
-data$zipGroups =<span class="st"> </span><span class="kw">cut2</span>(data$zipCode,<span class="dt">g=</span><span class="dv">4</span>)
-<span class="kw">table</span>(data$zipGroups)
+data<span class="op">$</span>zipGroups =<span class="st"> </span><span class="kw">cut2</span>(data<span class="op">$</span>zipCode,<span class="dt">g=</span><span class="dv">4</span>)
+<span class="kw">table</span>(data<span class="op">$</span>zipGroups)
 <span class="kw">library</span>(plyr)
 <span class="co"># mutate进行数据替换或生成</span>
 data2 =<span class="st"> </span><span class="kw">mutate</span>(data,<span class="dt">zipGroups=</span><span class="kw">cut2</span>(zipCode,<span class="dt">g=</span><span class="dv">4</span>))
-<span class="kw">table</span>(data2$zipGroups)</code></pre></div>
+<span class="kw">table</span>(data2<span class="op">$</span>zipGroups)</code></pre></div>
 </div>
 <div id="section-4.14" class="section level2">
 <h2><span class="header-section-number">4.14</span> 数据整理</h2>
@@ -1020,17 +1020,17 @@ DT[,<span class="kw">table</span>(y)]</code></pre></div>
 <ul>
 <li>可用<code>:</code>生成新变量 进行简单计算</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DT[,w:<span class="er">=</span>z^<span class="dv">2</span>]
-DT[,m:<span class="er">=</span><span class="st"> </span>{tmp &lt;-<span class="st"> </span>(x+z); <span class="kw">log2</span>(tmp<span class="dv">+5</span>)}]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DT[,w<span class="op">:</span><span class="er">=</span>z<span class="op">^</span><span class="dv">2</span>]
+DT[,m<span class="op">:</span><span class="er">=</span><span class="st"> </span>{tmp &lt;-<span class="st"> </span>(x<span class="op">+</span>z); <span class="kw">log2</span>(tmp<span class="op">+</span><span class="dv">5</span>)}]</code></pre></div>
 <ul>
 <li>进行数据条件截取</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DT[,a:<span class="er">=</span>x&gt;<span class="dv">0</span>]
-DT[,b:<span class="er">=</span><span class="st"> </span><span class="kw">mean</span>(x+w),by=a]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DT[,a<span class="op">:</span><span class="er">=</span>x<span class="op">&gt;</span><span class="dv">0</span>]
+DT[,b<span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">mean</span>(x<span class="op">+</span>w),by=a]</code></pre></div>
 <ul>
 <li>进行计数</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DT &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">x=</span><span class="kw">sample</span>(letters[<span class="dv">1</span>:<span class="dv">3</span>], <span class="fl">1E5</span>, <span class="ot">TRUE</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DT &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">x=</span><span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="fl">1E5</span>, <span class="ot">TRUE</span>))
 DT[, .N, by=x]</code></pre></div>
 </div>
 <div id="section-4.16" class="section level2">
@@ -1039,7 +1039,7 @@ DT[, .N, by=x]</code></pre></div>
 <li>处理大小写<code>tolower</code> <code>toupper</code></li>
 <li>处理变量名<code>strsplit</code></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">firstElement &lt;-<span class="st"> </span>function(x){x[<span class="dv">1</span>]}
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">firstElement &lt;-<span class="st"> </span><span class="cf">function</span>(x){x[<span class="dv">1</span>]}
 <span class="kw">sapply</span>(splitNames,firstElement)</code></pre></div>
 <ul>
 <li>字符替换<code>sub</code> <code>gsub</code></li>
@@ -1110,7 +1110,7 @@ DT[, .N, by=x]</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,

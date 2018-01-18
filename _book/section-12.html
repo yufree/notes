@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Notes</title>
   <meta name="description" content="This is notes from yufree">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Notes" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Miao YU">
 
 
-<meta name="date" content="2017-07-04">
+<meta name="date" content="2018-01-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -960,7 +960,7 @@ biocLite()</code></pre>
 <h2><span class="header-section-number">12.5</span> 示例：甲基化数据分析</h2>
 <div id="-1" class="section level3">
 <h3><span class="header-section-number">12.5.1</span> 读取数据</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;coloncancermeth&quot;</span>,<span class="st">&quot;genomicsclass&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;coloncancermeth&quot;</span>,<span class="st">&quot;genomicsclass&quot;</span>)
 
 <span class="kw">library</span>(coloncancermeth)
 <span class="kw">data</span>(coloncancermeth)</code></pre></div>
@@ -973,8 +973,8 @@ biocLite()</code></pre>
 <span class="kw">length</span>(gr)</code></pre></div>
 <p>meth为测序数据，pd为样本信息，gr测序片段信息。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(pd)
-<span class="kw">table</span>(pd$Status)
-X =<span class="st"> </span><span class="kw">model.matrix</span>(~pd$Status)</code></pre></div>
+<span class="kw">table</span>(pd<span class="op">$</span>Status)
+X =<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span>pd<span class="op">$</span>Status)</code></pre></div>
 <p>查看病患与正常人的分组并构建模型。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chr =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">seqnames</span>(gr))
 pos =<span class="st"> </span><span class="kw">start</span>(gr)
@@ -983,16 +983,16 @@ pos =<span class="st"> </span><span class="kw">start</span>(gr)
 cl =<span class="st"> </span><span class="kw">clusterMaker</span>(chr,pos,<span class="dt">maxGap=</span><span class="dv">500</span>)
 res =<span class="st"> </span><span class="kw">bumphunter</span>(meth,X,<span class="dt">chr=</span>chr,<span class="dt">pos=</span>pos,<span class="dt">cluster=</span>cl,<span class="dt">cutoff=</span><span class="fl">0.1</span>,<span class="dt">B=</span><span class="dv">0</span>)</code></pre></div>
 <p>按染色体生成因子变量，找出基因起始位点，然后利用bumphunter包寻找甲基化数据中某个阈值（0.1）下甲基化基因聚类的后出现的位置，聚类号，聚类相关性等信息寻找问题基因，可从中提取相关信息</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cols=<span class="kw">ifelse</span>(pd$Status==<span class="st">&quot;normal&quot;</span>,<span class="dv">1</span>,<span class="dv">2</span>)
-Index=(res$table[<span class="dv">6</span>,<span class="dv">7</span>]-<span class="dv">3</span>):(res$table[<span class="dv">6</span>,<span class="dv">8</span>]+<span class="dv">3</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cols=<span class="kw">ifelse</span>(pd<span class="op">$</span>Status<span class="op">==</span><span class="st">&quot;normal&quot;</span>,<span class="dv">1</span>,<span class="dv">2</span>)
+Index=(res<span class="op">$</span>table[<span class="dv">6</span>,<span class="dv">7</span>]<span class="op">-</span><span class="dv">3</span>)<span class="op">:</span>(res<span class="op">$</span>table[<span class="dv">6</span>,<span class="dv">8</span>]<span class="op">+</span><span class="dv">3</span>)
 <span class="kw">matplot</span>(pos[Index],meth[Index,,<span class="dt">drop=</span><span class="ot">TRUE</span>],<span class="dt">col=</span>cols,<span class="dt">pch=</span><span class="dv">1</span>,<span class="dt">xlab=</span><span class="st">&quot;genomic location&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Methylation&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))
 
-Index=(res$table[<span class="dv">6</span>,<span class="dv">7</span>]):(res$table[<span class="dv">6</span>,<span class="dv">8</span>])
+Index=(res<span class="op">$</span>table[<span class="dv">6</span>,<span class="dv">7</span>])<span class="op">:</span>(res<span class="op">$</span>table[<span class="dv">6</span>,<span class="dv">8</span>])
 
 test &lt;-<span class="st"> </span>meth[Index,,drop=T]
-<span class="kw">colnames</span>(test) &lt;-<span class="st"> </span>pd$bcr_patient_barcode
-test1 &lt;-<span class="st"> </span>test[,cols==<span class="dv">1</span>]
-test2 &lt;-<span class="st"> </span>test[,cols==<span class="dv">2</span>]
+<span class="kw">colnames</span>(test) &lt;-<span class="st"> </span>pd<span class="op">$</span>bcr_patient_barcode
+test1 &lt;-<span class="st"> </span>test[,cols<span class="op">==</span><span class="dv">1</span>]
+test2 &lt;-<span class="st"> </span>test[,cols<span class="op">==</span><span class="dv">2</span>]
 
 test3 &lt;-<span class="st"> </span><span class="kw">apply</span>(test2, <span class="dv">2</span>, mean)
 <span class="kw">apply</span>(matrix, <span class="dv">1</span>, rank)</code></pre></div>
@@ -1009,13 +1009,13 @@ Hsapiens[[<span class="st">&quot;chr1&quot;</span>]]
 
 <span class="co"># 计算某染色体上特定序列比例 观察与期望出现的比例</span>
 
-CG &lt;-<span class="st"> </span><span class="kw">countPattern</span>(<span class="st">&#39;CG&#39;</span>,Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])/<span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])
-GC &lt;-<span class="st"> </span><span class="kw">countPattern</span>(<span class="st">&#39;GC&#39;</span>,Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])/<span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])
+CG &lt;-<span class="st"> </span><span class="kw">countPattern</span>(<span class="st">&#39;CG&#39;</span>,Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])<span class="op">/</span><span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])
+GC &lt;-<span class="st"> </span><span class="kw">countPattern</span>(<span class="st">&#39;GC&#39;</span>,Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])<span class="op">/</span><span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])
 
 table &lt;-<span class="st"> </span><span class="kw">alphabetFrequency</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]])
-expect &lt;-<span class="st"> </span>table[<span class="st">&#39;C&#39;</span>]%*%table[<span class="st">&#39;G&#39;</span>]/(<span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]]))^<span class="dv">2</span>
+expect &lt;-<span class="st"> </span>table[<span class="st">&#39;C&#39;</span>]<span class="op">%*%</span>table[<span class="st">&#39;G&#39;</span>]<span class="op">/</span>(<span class="kw">length</span>(Hsapiens[[<span class="st">&quot;chr1&quot;</span>]]))<span class="op">^</span><span class="dv">2</span>
 
-CG/expect</code></pre></div>
+CG<span class="op">/</span>expect</code></pre></div>
 
 </div>
 </div>
@@ -1037,7 +1037,7 @@ CG/expect</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
