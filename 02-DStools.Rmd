@@ -72,9 +72,46 @@ $ exit # 退出
 - 大数据依赖科学而不是数据
 - 实验设计 重视可重复性随机与分组 预测与推断不同 不要选数据
 
+## 基础知识
+
+- 层次：操作系统 - shell - 终端 - 命令行工具
+- 分类：可执行文件、shell 内置命令、脚本、shell 函数、宏
+
+## 数据获取
+
+- 复制：cp 或 scp（安全复制）
+> scp -i  mykey.pem ~/Desktop/logs.csv ubuntu@ec2-184-73-72-150.compute-1.amazonaws.com:data
+
+- 解压：unpack
+> unpack logs.tar.gz
+
+- 转化 excel 为csv：in2csv、csvcut、csvlook
+> in2csv data/imdb-250.xlsx | head | csvcut -c Title,Year,Rating | csvlook
+
+- 查询关系数据库：sql2csv
+> sql2csv --db 'sqlite:///data/iris.db' --query 'SELECT * FROM iris ' 'WHERE sepal_length > 7.5'
+
+- 互联网下载：curl -u 登录 -L 链接跳转 -I http头文件
+> curl -s http://www.gutenberg.org/cache/epub/76/pg76.txt | head -n 10
+> curl -u username:password ftp://host/file
+> curl -L j.mp/locatbbar 
+
+- API：curlicue 来进行认证
+
+## 可重复性工具
+
+- !! 可重复上次命令
+
+- chmod 增加权限
+
+- #!/usr/bin/env bash 增加状况说明
+
+- NUM_WORDS="$1" 增加参数                                
+
 ## 链接
 
 - [统计问题](https://stats.stackexchange.com/)
 - [R问题](http://stackoverflow.com/)
 - [R mailling ist](http://www.r-project.org/mail.html)
 - [数据分享](http://figshare.com/)
+- [命令行数据科学](https://www.datascienceatthecommandline.com)
