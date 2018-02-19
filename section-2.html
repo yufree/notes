@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Notes</title>
   <meta name="description" content="This is notes from yufree">
-  <meta name="generator" content="bookdown 0.5.15 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7.1 and GitBook 2.6.7">
 
   <meta property="og:title" content="Notes" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Miao YU">
 
 
-<meta name="date" content="2018-01-18">
+<meta name="date" content="2018-02-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -115,7 +115,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.6" data-path="section-1.html"><a href="section-1.html#section-1.6"><i class="fa fa-check"></i><b>1.6</b> 应用</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>2</b> 数据科学家工具箱</a><ul>
-<li class="chapter" data-level="2.1" data-path="section-2.html"><a href="section-2.html#section-2.1"><i class="fa fa-check"></i><b>2.1</b> 链接</a></li>
+<li class="chapter" data-level="2.1" data-path="section-2.html"><a href="section-2.html#section-2.1"><i class="fa fa-check"></i><b>2.1</b> 基础知识</a></li>
+<li class="chapter" data-level="2.2" data-path="section-2.html"><a href="section-2.html#section-2.2"><i class="fa fa-check"></i><b>2.2</b> 数据获取</a></li>
+<li class="chapter" data-level="2.3" data-path="section-2.html"><a href="section-2.html#section-2.3"><i class="fa fa-check"></i><b>2.3</b> 可重复性工具</a></li>
+<li class="chapter" data-level="2.4" data-path="section-2.html"><a href="section-2.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 链接</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i><b>3</b> R语言编程</a><ul>
 <li class="chapter" data-level="3.1" data-path="r.html"><a href="r.html#r"><i class="fa fa-check"></i><b>3.1</b> R语言概述</a></li>
@@ -768,12 +771,40 @@ $ exit # 退出</code></pre>
 <li>实验设计 重视可重复性随机与分组 预测与推断不同 不要选数据</li>
 </ul>
 <div id="section-2.1" class="section level2">
-<h2><span class="header-section-number">2.1</span> 链接</h2>
+<h2><span class="header-section-number">2.1</span> 基础知识</h2>
+<ul>
+<li>层次：操作系统 - shell - 终端 - 命令行工具</li>
+<li>分类：可执行文件、shell 内置命令、脚本、shell 函数、宏</li>
+</ul>
+</div>
+<div id="section-2.2" class="section level2">
+<h2><span class="header-section-number">2.2</span> 数据获取</h2>
+<ul>
+<li><p>复制：cp 或 scp（安全复制） &gt; scp -i mykey.pem ~/Desktop/logs.csv <a href="mailto:ubuntu@ec2-184-73-72-150.compute-1.amazonaws.com">ubuntu@ec2-184-73-72-150.compute-1.amazonaws.com</a>:data</p></li>
+<li><p>解压：unpack &gt; unpack logs.tar.gz</p></li>
+<li><p>转化 excel 为csv：in2csv、csvcut、csvlook &gt; in2csv data/imdb-250.xlsx | head | csvcut -c Title,Year,Rating | csvlook</p></li>
+<li><p>查询关系数据库：sql2csv &gt; sql2csv –db ‘sqlite:///data/iris.db’ –query ‘SELECT * FROM iris’ ‘WHERE sepal_length &gt; 7.5’</p></li>
+<li><p>互联网下载：curl -u 登录 -L 链接跳转 -I http头文件 &gt; curl -s <a href="http://www.gutenberg.org/cache/epub/76/pg76.txt" class="uri">http://www.gutenberg.org/cache/epub/76/pg76.txt</a> | head -n 10 &gt; curl -u username:password <a href="ftp://host/file" class="uri">ftp://host/file</a> &gt; curl -L j.mp/locatbbar</p></li>
+<li><p>API：curlicue 来进行认证</p></li>
+</ul>
+</div>
+<div id="section-2.3" class="section level2">
+<h2><span class="header-section-number">2.3</span> 可重复性工具</h2>
+<ul>
+<li><p>!! 可重复上次命令</p></li>
+<li><p>chmod 增加权限</p></li>
+<li><h1 id="usrbinenv-bash-"><span class="header-section-number">2.3</span> !/usr/bin/env bash 增加状况说明</h1></li>
+<li><p>NUM_WORDS=“$1” 增加参数</p></li>
+</ul>
+</div>
+<div id="section-2.4" class="section level2">
+<h2><span class="header-section-number">2.4</span> 链接</h2>
 <ul>
 <li><a href="https://stats.stackexchange.com/">统计问题</a></li>
 <li><a href="http://stackoverflow.com/">R问题</a></li>
 <li><a href="http://www.r-project.org/mail.html">R mailling ist</a></li>
 <li><a href="http://figshare.com/">数据分享</a></li>
+<li><a href="https://www.datascienceatthecommandline.com">命令行数据科学</a></li>
 </ul>
 
 </div>
@@ -802,10 +833,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
